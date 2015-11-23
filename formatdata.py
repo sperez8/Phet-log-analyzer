@@ -50,10 +50,9 @@ def create_sequence(labels, data):
 	selectionCol = labels.index('Selection')
 	durationCol = labels.index('Duration after action')
 	valueCol = labels.index('Value')
-	problem_no = 0
-	previous = ""
+	previousmassaction = None
+	previousmass = (None,None)
 	buildfeedback = False	#by default the columns supporting the balance are present
-	seq = []
 
 	#for each action we add the event to the correct sequence organized by students
 	for i,row in enumerate(data):
@@ -66,22 +65,22 @@ def create_sequence(labels, data):
 		if student not in students:		#check if new student
 			students.append(student) 
 			sequences[student] = [] #Add blank list of simulation sequences
-			seq = []
 			buildfeedback = False
 		if action in NEWSIMACTION: 
 			#if new simulation, we append the current seq
 			# and initialize a new seq of events
+			sequences[student].append([action])
 
 			#We reset the columns and buildfeedback:
 			buildfeedback = False
 
-			if len(seq)>1:
-				sequences[student].append(seq)	#append seq
-			seq = [action] 	#create new seq
-
 		else:
 			#parsing action and creating seq
 			event = None
+
+			if "mass" not in action:
+				previousmassaction = None
+				previousmass = (None,None)
 
 			#check if change in status
 			if action == "ABSwitch":
@@ -90,12 +89,24 @@ def create_sequence(labels, data):
 
 			#Check if building
 			if "mass" in action:
-				#if building, check if tweaking
-				#FILL ME
-				if buildfeedback:
+				currentmass = (selection,value)
+				#if revising (ex: removing and readding mass)
+				if currentmass == previousmass and action != previousmassaction:
+					if buildfeedback:
+						event = "revisingfeedback"
+					else:
+						event = "revising"
+
+
+				#If building, note the type f building
+				elif buildfeedback:
 					event = "buildfeedback"
 				else:
 					event = "build"
+
+				previousmassaction = action
+				previousmass = currentmass
+
 
 			#else then check if change info display
 			elif action in INFOACTIONS:
@@ -110,7 +121,7 @@ def create_sequence(labels, data):
 				event = "reset"
 				buildfeedback = False
 
-			elif action in NEWSIMACTION or action == "plankIsMoving":
+			elif action == "plankIsMoving":
 				continue
 
 			#else print action because then we need to figure out how to encode it!!
@@ -118,12 +129,12 @@ def create_sequence(labels, data):
 				print "Uncategorized action:", action
 				continue
 
-			seq.append(event)	#add parsed action to latest sequence
+			sequences[student][-1].append(event)	#add parsed action to latest sequence
 
-			#Finally, check if pause after action
-			if duration > LOWER_BOUND_PAUSE and duration < UPPER_BOUND_PAUSE:
-				event = "pause"
-				seq.append(event)
+		#Check if pause after action
+		if duration > LOWER_BOUND_PAUSE and duration < UPPER_BOUND_PAUSE:
+			event = "pause"
+			sequences[student][-1].append(event)
 
 	#Row of last seq won't be added:
 	if len(seq)>3:
@@ -159,18 +170,27 @@ def check_info_display(value):
 
 
 
-def clean(seq):
-	'''clean sequence to remove uninteresting information'''
-	newseq = []
+# def clean_sequence(seqs):
+# 	'''clean sequences to remove uninteresting information'''
+# 	for student, sequences in seqs:
+# 		siii = ""
+# 		sii = ""
+# 		si = ""
+# 		for seq in sequences:
+# 			for event in seq:
+# 				#update
+# 				siii = sii
+# 				sii = si
+# 				si = event
+
+
+
 	return newseq
 
 labels, data = get_event_data()
 seqs = create_sequence(labels, data)
-print seqs["4986065"]
-# for k,v in seqs.iteritems():
-# 	if len(v)> 1:
-# 		print k
-# 		print v
-# 		sys.exit()
+# behaviours = clean_sequence(seqs)
 
+
+print seqs["4986065"]
 
