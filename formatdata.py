@@ -9,12 +9,16 @@ Loads log event file and massages it.
 import os
 import sys
 import numpy as np
+from datetime import datetime
+from datetime import timedelta
 
 PATH = "C:\Users\Sarah\Google Drive\Ido_Sarah phet project\data"
 SIMFOLDER = 'balance'
 RAWDATA = 'raw_data.txt'
+OUTPUTDATA = 'eventflow_data.txt'
 
 DATA = os.path.join(PATH, SIMFOLDER, RAWDATA)
+OUTPUT = os.path.join(PATH, SIMFOLDER, OUTPUTDATA)
 
 #EVENTS = ["simStarted", "ABSwitch", "massAddedToPlank", "plankIsMoving", "massRemovedFromPlank", "forceVectorsFromObjectsVisible", "levelIndicatorVisible", "positionMarkerState change", "resetAllButton", "modeChange", "presentingChallenge", "CheckButton.down", "NextButton.down", "tiltPrediction", "TryAgainButton.down", "ShowAnswerButton.down", "massLabelsVisible"]
 
@@ -24,8 +28,10 @@ INFOACTIONS = ["forceVectorsFromObjectsVisible", "levelIndicatorVisible", "massL
 TESTINGACTIONS = ["CheckButton.down", "tiltPrediction", "ShowAnswerButton.down"]
 RESETACTIONS = ["TryAgainButton.down","resetAllButton"]
 
-LOWER_BOUND_PAUSE = 15		#lower bound of a pause in seconds
-UPPER_BOUND_PAUSE = 60*5	#upper bound of a pause in seconds
+DATEFMT = '%M:%S.%f'
+OUTDATEFMT = '%H:%M:%S.%f'
+# LOWER_BOUND_PAUSE = datetime.strptime("00:15.000", DATEFMT)	#lower bound of a pause in seconds
+# UPPER_BOUND_PAUSE = datetime.strptime("05:00.000", DATEFMT)	#upper bound of a pause in seconds
 
 
 def get_event_data(datafile = DATA):
@@ -35,7 +41,7 @@ def get_event_data(datafile = DATA):
 	data = np.genfromtxt(datafile, delimiter='\t', dtype='str', filling_values = '')
 	labels = list(data[0,:])
 	data = data[1:,:]
-	print "Parsing log file with {0} events (rows) and {1} event properties (columns)".format(data.shape[0],data.shape[1])
+	print "\nParsing log file with {0} events (rows) and {1} event properties (columns)\n".format(data.shape[0],data.shape[1])
 	return labels, data
 
 def create_sequence(labels, data):
@@ -49,27 +55,37 @@ def create_sequence(labels, data):
 	actionCol = labels.index('Action')
 	selectionCol = labels.index('Selection')
 	durationCol = labels.index('Duration after action')
+	startCol = labels.index('Time from start')
 	valueCol = labels.index('Value')
 	previousmassaction = None
 	previousmass = (None,None)
+	previousevent = None
 	buildfeedback = False	#by default the columns supporting the balance are present
 
 	#for each action we add the event to the correct sequence organized by students
 	for i,row in enumerate(data):
 		student = data[i,studentCol]	#get current student
 		action = data[i,actionCol]		#get current action
-		selection = data[i,selectionCol]		#get current selection of action, if any
-		duration = parse_seconds(data[i,durationCol])
+		selection = data[i,selectionCol]	#get current selection of action, if any
 		value = data[i,valueCol]		#get current value of action, if any
-		#print student
+		d =  data[i,durationCol]
+		s = data[i,startCol]
+		if d:
+			duration = datetime.strptime(d, DATEFMT)	#get duration of action
+		else:
+			duration = datetime.strptime("00:00.000", DATEFMT)
+		start = datetime.strptime(s, DATEFMT)		#get start time of action
+
 		if student not in students:		#check if new student
 			students.append(student) 
 			sequences[student] = [] #Add blank list of simulation sequences
 			buildfeedback = False
+
 		if action in NEWSIMACTION: 
 			#if new simulation, we append the current seq
 			# and initialize a new seq of events
-			sequences[student].append([action])
+			event = action
+			sequences[student].append([(event,start,duration)])
 
 			#We reset the columns and buildfeedback:
 			buildfeedback = False
@@ -129,29 +145,60 @@ def create_sequence(labels, data):
 				print "Uncategorized action:", action
 				continue
 
-			sequences[student][-1].append(event)	#add parsed action to latest sequence
+			#want to measure continuous chuncks of construction not individual events
+			if "build" in event and event == previousevent:
+				#edit previous event by adding to it's duration
+				paststart = sequences[student][-1][-1][1]
+				elapsed = start - paststart
+				if elapsed < timedelta(0):
+					#time doesn't count hours so we need to tweek it =(
+					#that way when paststart is 59:59 and start is 00:01 
+					#we don't get a negative number
+					elapsed = start + timedelta(hours=1) -paststart
+				newduration = elapsed + duration
+				sequences[student][-1][-1] = (event,paststart,newduration)
+				# print action
+				# print paststart, start, elapsed
+				# print duration, newduration
+				# sys.exit()
+			else:
+				sequences[student][-1].append((event,start,duration))	#add parsed action to latest sequence
 
-		#Check if pause after action
-		if duration > LOWER_BOUND_PAUSE and duration < UPPER_BOUND_PAUSE:
-			event = "pause"
-			sequences[student][-1].append(event)
 
-	#Row of last seq won't be added:
-	if len(seq)>3:
-		sequences[student].append(seq)
+		# #Check if pause after action
+		# if duration > LOWER_BOUND_PAUSE and duration < UPPER_BOUND_PAUSE:
+		# 	print 'pause'
+		# 	event = "pause"
+		# 	sequences[student][-1].append((event,start,duration))
+		# #FILL ME
 
-	return sequences
+		# #Check if too long pause after action
+		# if duration > UPPER_BOUND_PAUSE:
+		# 	print 'longpause'
+		# 	event = "longpause"
+		# 	sequences[student][-1].append((event,start,duration)) 
+
+		previousevent = event
+
+	# #Row of last seq won't be added:
+	# if len(seq)>3:
+	# 	sequences[student].append(seq)
+
+	return students, sequences
 
 
-def parse_seconds(duration):
-	'''get time in hh:mm:ss format and convert to seconds'''
-	time = 0
-	if duration:
-		m,s = duration.split(':')
-		time = float(s) + int(m)*60
-		return time
-	else:
-		return 0
+# def format_seconds(start):
+
+# 	h = int(start)/3600
+# 	m = int(start)/60
+# 	s = start-h*3600-m*60
+
+# 	print start 
+# 	print '{0}:{1}:{2}'.format(h,m,s)
+# 	if start > 40:
+# 		sys.exit()
+
+# 	return '{0}:{1}:{2}'.format(h,m,s)
 
 def check_build_status(value):
 	if value == "noColumns":
@@ -168,7 +215,21 @@ def check_info_display(value):
 	else:
 		return "addinfo"
 
+def format_eventflow(students,seqs):
+	'''Format event data for Eventflow'''
+	text = []
+	for student in students:
+		problem = 0
+		for seq in seqs[student]:
+			for event,start,duration in seq:
 
+				print student, event, start, duration
+				row = [student+'_'+str(problem), event, str(start.strftime(OUTDATEFMT)), str(duration.strftime(OUTDATEFMT))]
+				text.append(row)
+			problem += 1
+
+	print "\nFormatted log file with {0} events for EventFlow\n".format(len(text))
+	return text
 
 # def clean_sequence(seqs):
 # 	'''clean sequences to remove uninteresting information'''
@@ -182,15 +243,24 @@ def check_info_display(value):
 # 				siii = sii
 # 				sii = si
 # 				si = event
-
-
-
-	return newseq
+#	return newseq
 
 labels, data = get_event_data()
-seqs = create_sequence(labels, data)
+students, seqs = create_sequence(labels, data)
+table = format_eventflow(students, seqs)
+
+f = open(OUTPUT,'w')
+
+for row in table:
+	f.write('\t'.join(row))
+	f.write('\n')
+
+f.close()	
+
+
 # behaviours = clean_sequence(seqs)
 
+#print seqs["4986065"]
 
-print seqs["4986065"]
+	
 
