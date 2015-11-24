@@ -26,7 +26,8 @@ OUTPUT = os.path.join(PATH, SIMFOLDER, OUTPUTDATA)
 NEWSIMACTION = ["simStarted", "modeChange", "presentingChallenge", "NextButton.down"]
 INFOACTIONS = ["forceVectorsFromObjectsVisible", "levelIndicatorVisible", "massLabelsVisible", "positionMarkerState change"]
 TESTINGACTIONS = ["CheckButton.down", "tiltPrediction", "ShowAnswerButton.down"]
-RESETACTIONS = ["TryAgainButton.down","resetAllButton"]
+RESETACTIONS = ["resetAllButton"]
+TRYAGAINACTIONS = ["TryAgainButton.down"]
 
 DATEFMT = '%M:%S.%f'
 OUTDATEFMT = '%H:%M:%S.%f'
@@ -57,6 +58,7 @@ def create_sequence(labels, data):
 	durationCol = labels.index('Duration after action')
 	startCol = labels.index('Time from start')
 	valueCol = labels.index('Value')
+	modeCol = labels.index('Mode')
 	previousmassaction = None
 	previousmass = (None,None)
 	previousevent = None
@@ -68,6 +70,7 @@ def create_sequence(labels, data):
 		action = data[i,actionCol]		#get current action
 		selection = data[i,selectionCol]	#get current selection of action, if any
 		value = data[i,valueCol]		#get current value of action, if any
+		mode = data[i,modeCol]		#get current mode of simulation
 		d =  data[i,durationCol]
 		s = data[i,startCol]
 		if d:
@@ -84,7 +87,10 @@ def create_sequence(labels, data):
 		if action in NEWSIMACTION: 
 			#if new simulation, we append the current seq
 			# and initialize a new seq of events
-			event = action
+			if mode == "Balance Lab":
+				event = "labmode"
+			elif mode == "Game":
+				event = "gamemode"
 			sequences[student].append([(event,start,duration)])
 
 			#We reset the columns and buildfeedback:
@@ -135,6 +141,11 @@ def create_sequence(labels, data):
 			#else if reseting the simulation
 			elif action in RESETACTIONS:
 				event = "reset"
+				buildfeedback = False
+
+			#else if reseting the simulation
+			elif action in TRYAGAINACTIONS:
+				event = "tryagain"
 				buildfeedback = False
 
 			elif action == "plankIsMoving":
@@ -222,9 +233,8 @@ def format_eventflow(students,seqs):
 		problem = 0
 		for seq in seqs[student]:
 			for event,start,duration in seq:
-
-				print student, event, start, duration
-				row = [student+'_'+str(problem), event, str(start.strftime(OUTDATEFMT)), str(duration.strftime(OUTDATEFMT))]
+				end = start+timedelta(minutes=duration.minute,seconds=duration.second)
+				row = [student+'_'+str(problem), event, start.strftime(OUTDATEFMT), end.strftime(OUTDATEFMT)]
 				text.append(row)
 			problem += 1
 
