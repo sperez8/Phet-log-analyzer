@@ -12,7 +12,7 @@ import numpy as np
 from datetime import datetime
 from datetime import timedelta
 
-PATH = "C:\Users\Sarah\Google Drive\Ido_Sarah phet project\data"
+PATH = "C:\Users\Sarah\Google Drive\Ido Sarah phet project\data"
 SIMFOLDER = 'balance'
 RAWDATA = 'raw_data.txt'
 OUTPUTDATA = 'eventflow_data.txt'
@@ -191,25 +191,8 @@ def create_sequence(labels, data):
 
 		previousevent = event
 
-	# #Row of last seq won't be added:
-	# if len(seq)>3:
-	# 	sequences[student].append(seq)
-
 	return students, sequences
 
-
-# def format_seconds(start):
-
-# 	h = int(start)/3600
-# 	m = int(start)/60
-# 	s = start-h*3600-m*60
-
-# 	print start 
-# 	print '{0}:{1}:{2}'.format(h,m,s)
-# 	if start > 40:
-# 		sys.exit()
-
-# 	return '{0}:{1}:{2}'.format(h,m,s)
 
 def check_build_status(value):
 	if value == "noColumns":
@@ -241,36 +224,17 @@ def format_eventflow(students,seqs):
 	print "\nFormatted log file with {0} events for EventFlow\n".format(len(text))
 	return text
 
-# def clean_sequence(seqs):
-# 	'''clean sequences to remove uninteresting information'''
-# 	for student, sequences in seqs:
-# 		siii = ""
-# 		sii = ""
-# 		si = ""
-# 		for seq in sequences:
-# 			for event in seq:
-# 				#update
-# 				siii = sii
-# 				sii = si
-# 				si = event
-#	return newseq
+def write_file(table,OUTPUT):
+	f = open(OUTPUT,'w')
+
+	for row in table:
+		f.write('\t'.join(row))
+		f.write('\n')
+
+	f.close()
+	return None
 
 labels, data = get_event_data()
 students, seqs = create_sequence(labels, data)
 table = format_eventflow(students, seqs)
-
-f = open(OUTPUT,'w')
-
-for row in table:
-	f.write('\t'.join(row))
-	f.write('\n')
-
-f.close()	
-
-
-# behaviours = clean_sequence(seqs)
-
-#print seqs["4986065"]
-
-	
 
