@@ -12,9 +12,11 @@ import numpy as np
 from datetime import datetime
 from datetime import timedelta
 import string
+import glob, os
 
 PATH = "C:\Users\Sarah\Google Drive\Ido Sarah phet project\data"
 SIMFOLDER = 'videolog'
+os.chdir(os.path.join(PATH,SIMFOLDER))
 RAWDATA = '7524851040f3a807c6_log.txt'
 OUTPUTDATA = 'eventflow_data.txt'
 
@@ -24,73 +26,118 @@ OUTPUT = os.path.join(PATH, SIMFOLDER, OUTPUTDATA)
 
 DATEFMT = '%M:%S.%f'
 OUTDATEFMT = '%H:%M:%S.%f'
+ALL = []
 
 def get_event_data(datafile = DATA):
 	''' Load raw data file '''
 
 	#Load as a tab delimited file (watch out for symbols like '#' crashing this code)
 	data = np.genfromtxt(datafile, delimiter=']:', dtype='str', filling_values = '')
-	student = datafile.replace('.txt','')
-	print "\nParsing log file with {0} events (rows) and {1} event properties (columns)\n".format(data.shape[0],data.shape[1])
+	student = os.path.basename(datafile).replace('.txt','')
+	print "\nParsing log file with {0} events (rows) and {1} event properties (columns)".format(data.shape[0],data.shape[1])
 	return student, data
 
-def create_sequence(data):
+def create_sequence(student,data):
 	'''extrapolate set of behaviours from events using rules'''
 
 	seq =[]
+	events = []
+	pre_event = ''
+	start = datetime.strptime(cleandate(data[0][0]), OUTDATEFMT)
 	for row in data:
-		date = cleandate(row[0])
+		date = datetime.strptime(cleandate(row[0]), OUTDATEFMT)-start
 		event = cleanevent(row[1])
-		print date, event
-		sys.exit()
+		if event and event != pre_event:
+			seq.append([student,event,str(date)])
+			events.append(event)
+			pre_event = event
+		else:
+			continue
+		ALL.append([row[1], event])
 
-	#for each action we add the event to the correct sequence organized by students
-	#for i,row in enumerate(data):
-
-	return students, sequences
+	return seq, events
 
 def cleandate(row_0):
 	date = row_0.split(' ')[1]
 	return date
 
 
-EXCLUDE = set(string.punctuation)
+EXCLUDE = set(string.punctuation+string.digits)
 
-def cleanevent(row_1):
-	event = ''.join(ch for ch in row_1 if ch not in EXCLUDE)
-	if event[0] == ' ':
-		event = event[1:]
-	return event
+def cleanevent(event):
+	if event:
+		if event[0] == ' ':
+			event = event[1:]
+		if event[-1] == ' ':
+			event = event[:-1]
 
-def format_eventflow(students,seqs):
-	'''Format event data for Eventflow'''
-	text = []
-	for student in students:
-		problem = 0
-		for seq in seqs[student]:
-			for event,start,duration in seq:
-				end = start+timedelta(minutes=duration.minute,seconds=duration.second)
-				row = [student+'_'+str(problem), event, start.strftime(OUTDATEFMT), end.strftime(OUTDATEFMT)]
-				text.append(row)
-			problem += 1
+		if "Mouseover" in event or "Enlarge" in event or 'Exit' in event:
+			return ''
 
-	print "\nFormatted log file with {0} events for EventFlow\n".format(len(text))
-	return text
+		if "Condition" in event:
+			return event
 
-def write_file(table,OUTPUT):
+		event = ''.join(ch for ch in event if ch not in EXCLUDE)
+
+		if 'Playpaused' in event or "to pause" in event or "to play" in event or "Pause button" in event or "Play button" in event:
+			return 'Play/paused'
+
+		keywords = event.split(' ')
+		return ' '.join(keywords[0:2])
+	else:
+		return ''
+
+def write_file(seqs,OUTPUT):
 	f = open(OUTPUT,'w')
-
-	for row in table:
-		f.write('\t'.join(row))
-		f.write('\n')
+	for seq in seqs:
+		for row in seq:
+			f.write('\t'.join(row))
+			f.write('\n')
 
 	f.close()
 	return None
 
 
-student, data = get_event_data()
-print student, data
-seq = create_sequence(data)
-students = [student]
-seqs = [seq]
-table = format_eventflow(students, seqs)
+def write_file_beginning(seqs,OUTPUT,N=10):
+	f = open(OUTPUT,'w')
+	for seq in seqs:
+		seq = seq[:N+1]
+		for row in seq:
+			f.write('\t'.join(row))
+			f.write('\n')
+
+	f.close()
+	return None
+
+def write_file_ending(seqs,OUTPUT,N=10):
+	f = open(OUTPUT,'w')
+	for seq in seqs:
+		seq = seq[-N:]
+		for row in seq:
+			f.write('\t'.join(row))
+			f.write('\n')
+	f.close()
+	return None
+
+
+
+
+
+students = []
+seqs = []
+for datafile in glob.glob("*log.txt"):
+	student, data = get_event_data(datafile)
+	seq, events = create_sequence(student, data)
+	students.append(student)
+	seqs.append(seq)
+
+all_events = set(zip(*ALL)[1])
+print all_events
+write_file(seqs,OUTPUT)
+write_file_beginning(seqs,os.path.join(PATH, SIMFOLDER, "beginning_" + OUTPUTDATA),N=5)
+write_file_ending(seqs,os.path.join(PATH, SIMFOLDER, "ending_" + OUTPUTDATA),N=5)
+
+f = open('dump.txt','w')
+for item in all_events:
+	f.write(item)
+	f.write("\n")
