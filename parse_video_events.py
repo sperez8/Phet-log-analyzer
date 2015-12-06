@@ -43,12 +43,12 @@ def create_sequence(student,data):
 	seq =[]
 	events = []
 	pre_event = ''
-	start = datetime.strptime(cleandate(data[0][0]), OUTDATEFMT)
+	start = datetime.strptime(cleandate(data[0][0]), OUTDATEFMT)+timedelta(days=-1)
 	for row in data:
 		date = datetime.strptime(cleandate(row[0]), OUTDATEFMT)-start
 		event = cleanevent(row[1])
 		if event and event != pre_event:
-			seq.append([student,event,str(date)])
+			seq.append([student,event,str(date).replace('1 day, ','')])
 			events.append(event)
 			pre_event = event
 		else:
