@@ -25,7 +25,7 @@ OUTPUT = os.path.join(PATH, SIMFOLDER, OUTPUTDATA)
 
 
 DATEFMT = '%M:%S.%f'
-OUTDATEFMT = '%H:%M:%S.%f'
+OUTDATEFMT = '%d %H:%M:%S.%f'
 ALL = []
 
 def get_event_data(datafile = DATA):
@@ -34,31 +34,38 @@ def get_event_data(datafile = DATA):
 	#Load as a tab delimited file (watch out for symbols like '#' crashing this code)
 	data = np.genfromtxt(datafile, delimiter=']:', dtype='str', filling_values = '')
 	student = os.path.basename(datafile).replace('.txt','')
-	print "\nParsing log file with {0} events (rows) and {1} event properties (columns)".format(data.shape[0],data.shape[1])
+	#print "\nParsing log file with {0} events (rows) and {1} event properties (columns)".format(data.shape[0],data.shape[1])
 	return student, data
 
-def create_sequence(student,data):
+def create_sequence(student,data, clean=True):
 	'''extrapolate set of behaviours from events using rules'''
 
 	seq =[]
 	events = []
 	pre_event = ''
-	start = datetime.strptime(cleandate(data[0][0]), OUTDATEFMT)+timedelta(days=-1)
+	start = datetime.strptime(cleandate(data[0][0]), OUTDATEFMT)
 	for row in data:
 		date = datetime.strptime(cleandate(row[0]), OUTDATEFMT)-start
-		event = cleanevent(row[1])
-		if event and event != pre_event:
-			seq.append([student,event,str(date).replace('1 day, ','')])
-			events.append(event)
-			pre_event = event
+		if clean:
+			event = cleanevent(row[1])
+			if event and event != pre_event:
+				seq.append([student,event,str(date)])
+				events.append(event)
+				pre_event = event
+			else:
+				continue
+			ALL.append([row[1], event])
 		else:
-			continue
-		ALL.append([row[1], event])
+			event = row[1]
+			if event:
+				seq.append([event,str(date)])
+			else:
+				continue
 
 	return seq, events
 
 def cleandate(row_0):
-	date = row_0.split(' ')[1]
+	date = row_0.split('/')[-1]
 	return date
 
 
@@ -121,23 +128,24 @@ def write_file_ending(seqs,OUTPUT,N=10):
 
 
 
+def __main__():
+	students = []
+	seqs = []
+	for datafile in glob.glob("*log.txt"):
+		student, data = get_event_data(datafile)
+		seq, events = create_sequence(student, data)
+		students.append(student)
+		seqs.append(seq)
 
+	all_events = set(zip(*ALL)[1])
+	#print all_events
+	write_file(seqs,OUTPUT)
+	write_file_beginning(seqs,os.path.join(PATH, SIMFOLDER, "beginning_" + OUTPUTDATA),N=5)
+	write_file_ending(seqs,os.path.join(PATH, SIMFOLDER, "ending_" + OUTPUTDATA),N=5)
 
-students = []
-seqs = []
-for datafile in glob.glob("*log.txt"):
-	student, data = get_event_data(datafile)
-	seq, events = create_sequence(student, data)
-	students.append(student)
-	seqs.append(seq)
-
-all_events = set(zip(*ALL)[1])
-print all_events
-write_file(seqs,OUTPUT)
-write_file_beginning(seqs,os.path.join(PATH, SIMFOLDER, "beginning_" + OUTPUTDATA),N=5)
-write_file_ending(seqs,os.path.join(PATH, SIMFOLDER, "ending_" + OUTPUTDATA),N=5)
-
-f = open('dump.txt','w')
-for item in all_events:
-	f.write(item)
-	f.write("\n")
+	f = open('dump.txt','w')
+	all_events = list(all_events)
+	all_events.sort()
+	for item in all_events:
+		f.write(item)
+		f.write("\n")
