@@ -143,12 +143,13 @@ def parseviewage(vlog):
 					highlight_count = subsubchild.attrib.values()
 					highlight[colour].append(highlight_count)
 				vlog.add_highlights(video[0], highlight)
-			count = subchild.attrib.values()
-			if len(video) == 1 and len(count) == 1:
-				vlog.add_viewage(video[0], parsecount(count[0]))
 			else:
-				print "more than one key value pair in child!"
-				sys.exit()
+				count = subchild.attrib.values()
+				if len(video) == 1 and len(count) == 1:
+					vlog.add_viewage(video[0], parsecount(count[0]))
+				else:
+					print "more than one key value pair in child!"
+					sys.exit()
 	return vlog
 
 def parselog(vlog):
@@ -192,6 +193,9 @@ def plot_filling(x,y,name):
 	'''simple plot filling maker giving count data'''
 	fig, ax = plt.subplots(1)
 	ppl.fill_between(x, y, facecolor='blue', alpha = ALPHA)
+	ax.set_xlabel('time in video (sec)')
+	ax.set_ylabel('Number of times watched')
+	ax.set_title('Cumulative views of video')
 	fig.savefig('plots/count_'+name+'.png')
 	return None
 
@@ -207,16 +211,21 @@ def plot_mult_counts(vlogs, subject, condition, videoname):
 				y = vlog.viewage[videoname]
 				if sum(y)==0: #only take into account videos that were watched.
 					continue
-				x = range(len(y))
+				x = [i*2 for i in range(len(y))]
 				ppl.fill_between(x, y, facecolor='blue', alpha = ALPHA) #label=str(vlog.filename))
 				#files.append(vlog.filename)
 				counts.append(y)
 	if counts:
 		newcounts = zip(*counts)
 		medians = [stats.median(i) for i in newcounts]
-		ppl.plot(x,medians,'k-',label = 'median of '+str(len(counts))+' viewers')
-		means = [stats.mean(i) for i in newcounts]
-		ppl.plot(x,means,'w-',label = 'mean of '+str(len(counts))+' viewers')
+		print len(medians), len(x), len(counts), len(newcounts)
+		print counts
+		ppl.plot(x,medians,'k-',label = 'median')
+		# means = [stats.mean(i) for i in newcounts]
+		# ppl.plot(x,means,'w-',label = 'mean of '+str(len(counts))+' viewers')
+		ax.set_xlabel('time in video (sec)')
+		ax.set_ylabel('Number of times watched')
+		ax.set_title('Cumulative views of {0} viewers'.format(str(len(counts))))
 		ppl.legend()
 		# p = plt.Rectangle((0, 0), 1, 1, fc="r")
 		# ax.legend([p], files)
@@ -228,7 +237,7 @@ def plot_mult_counts(vlogs, subject, condition, videoname):
 def plot_video_count(vlog, videoname):
 	'''given a user log and video, plot count'''
 	y = vlog.viewage[videoname]
-	x = range(len(y))
+	x = [i*2 for i in range(len(y))]
 	plot_filling(x,y,videoname+'_'+vlog.filename.replace('.xml',''))
 	return None
 
@@ -257,13 +266,13 @@ def write_table(header, lines, output):
 
 
 vlogs = collect_vlogs()
-# all_videos = get_metadata(vlogs)
+all_videos = get_metadata(vlogs)
 
-# for subject, videos in all_videos.iteritems():
-# 	for videoname in videos:
-# 		for condition in [1,2]:
-# 			print subject, condition, videoname
-# 			plot_mult_counts(vlogs, subject, condition, videoname)
+for subject, videos in all_videos.iteritems():
+	for videoname in videos:
+		for condition in [1,2]:
+			print subject, condition, videoname
+			plot_mult_counts(vlogs, subject, condition, videoname)
 
 
 
@@ -278,9 +287,9 @@ vlogs = collect_vlogs()
 
 # print all_videos
 
-for vlog in vlogs:
-	#print vlog.filename, vlog.highlights
-	for video in vlog.viewage.keys():
-		plot_video_count(vlog,video)
+# for vlog in vlogs:
+# 	#print vlog.filename, vlog.highlights
+# 	for video in vlog.viewage.keys():
+# 		plot_video_count(vlog,video)
 
 #sanity_checks(vlogs)
