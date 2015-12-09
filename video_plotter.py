@@ -137,10 +137,12 @@ def parseviewage(vlog):
 		video = child.attrib.values()
 		for subchild in child:
 			if subchild.tag == 'highlight':
-				highlight_count = subchild.attrib.values()
-				if len(video) == 1 and len(highlight_count) == 1:
-					vlog.add_highlights(video[0], parsecount(highlight_count[0]))
-				continue
+				colour = subchild.attrib.values()[0]
+				highlight = {colour:[]}
+				for subsubchild in subchild:
+					highlight_count = subsubchild.attrib.values()
+					highlight[colour].append(highlight_count)
+				vlog.add_highlights(video[0], highlight)
 			count = subchild.attrib.values()
 			if len(video) == 1 and len(count) == 1:
 				vlog.add_viewage(video[0], parsecount(count[0]))
@@ -277,7 +279,7 @@ vlogs = collect_vlogs()
 # print all_videos
 
 for vlog in vlogs:
-	print vlog.filename, vlog.highlights
+	#print vlog.filename, vlog.highlights
 	for video in vlog.viewage.keys():
 		plot_video_count(vlog,video)
 
