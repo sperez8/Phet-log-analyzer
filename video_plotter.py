@@ -19,7 +19,8 @@ import measures_video as mv
 from parse_video_events import create_sequence, get_event_data
 
 PATH = "C:\Users\Sarah\Google Drive\Ido Sarah phet project\data"
-SIMFOLDER = 'videolog'
+SIMFOLDER = 'videolog\datafiles'
+PLOTFOLDER = 'videolog\plots'
 RAWDATA = '7557077831c1c6acd2.xml'
 
 DATA = os.path.join(PATH, SIMFOLDER, RAWDATA)
@@ -36,7 +37,7 @@ measures = [mv.studentID,
 			mv.video,
 			mv.cumulative_watched,
 			mv.fraction_watched,
-			mv.percent_rewatched,
+			mv.fraction_rewatched,
 			mv.number_of_2_sec_segments,
 			mv.moused_over_filmstrip,
 			mv.clicked_filmstrip,
@@ -50,7 +51,8 @@ measures = [mv.studentID,
 
 
 class Videolog(object):
-	'''docstring for Videolog'''
+	'''for each student log, Videolog captures how much of each video
+		they watched and highlighted along with their course subject and video'''
 	def __init__(self, filename):
 		super(Videolog, self).__init__()
 		self.filename = filename
@@ -82,6 +84,12 @@ class Videolog(object):
 					self.subject = "PHI"
 				elif 'FET' in videoname:
 					self.subject = "ENG"
+				elif videoname[0] in [str(x) for x in range(0,10)]:
+					self.subject = "CS"
+				elif 'tutorial' in videoname:
+					pass
+				else:
+					print "The subject of the video '{0}' could not be identified.".format(videoname)
 		else:
 			self.subject = None
 
@@ -196,7 +204,7 @@ def plot_filling(x,y,name):
 	ax.set_xlabel('time in video (sec)')
 	ax.set_ylabel('Number of times watched')
 	ax.set_title('Cumulative views of video')
-	fig.savefig('plots/count_'+name+'.png')
+	fig.savefig(os.path.join(PATH,PLOTFOLDER,'count_'+name+'.png'))
 	return None
 
 def plot_mult_counts(vlogs, subject, condition, videoname):
@@ -218,8 +226,6 @@ def plot_mult_counts(vlogs, subject, condition, videoname):
 	if counts:
 		newcounts = zip(*counts)
 		medians = [stats.median(i) for i in newcounts]
-		print len(medians), len(x), len(counts), len(newcounts)
-		print counts
 		ppl.plot(x,medians,'k-',label = 'median')
 		# means = [stats.mean(i) for i in newcounts]
 		# ppl.plot(x,means,'w-',label = 'mean of '+str(len(counts))+' viewers')
@@ -229,7 +235,7 @@ def plot_mult_counts(vlogs, subject, condition, videoname):
 		ppl.legend()
 		# p = plt.Rectangle((0, 0), 1, 1, fc="r")
 		# ax.legend([p], files)
-		fig.savefig('plots/mult_count_'+subject+'_'+str(condition)+'_'+videoname+'.png')
+		fig.savefig(os.path.join(PATH,PLOTFOLDER,'mult_count_'+subject+'_'+str(condition)+'_'+videoname+'.png'))
 	else:
 		print "No counts found under condition {0} for {1} video called {2}".format(condition,subject,videoname)
 	return None
@@ -268,6 +274,9 @@ def write_table(header, lines, output):
 vlogs = collect_vlogs()
 all_videos = get_metadata(vlogs)
 
+print vlogs
+print all_videos
+
 for subject, videos in all_videos.iteritems():
 	for videoname in videos:
 		for condition in [1,2]:
@@ -277,19 +286,20 @@ for subject, videos in all_videos.iteritems():
 
 
 
-# outfiles = [('parsed_data_all.txt',False),('parsed_data_not_tutorials.txt',True)]
+outfiles = [('../parsed_data_all.txt',False),('../parsed_data_not_tutorials.txt',True)]
 
-# header = [vm.__name__.replace('_',' ') for vm in measures]
-# for outfile,ignore in outfiles:
-# 	table = make_table(vlogs,measures,ignoretutorials = ignore)
-# 	write_table(header, table, outfile)
+header = [vm.__name__.replace('_',' ') for vm in measures]
+for outfile,ignore in outfiles:
+	table = make_table(vlogs,measures,ignoretutorials = ignore)
+	write_table(header, table, outfile)
+
 
 
 # print all_videos
 
-# for vlog in vlogs:
-# 	#print vlog.filename, vlog.highlights
-# 	for video in vlog.viewage.keys():
-# 		plot_video_count(vlog,video)
+for vlog in vlogs:
+	#print vlog.filename, vlog.highlights
+	for video in vlog.viewage.keys():
+		plot_video_count(vlog,video)
 
 #sanity_checks(vlogs)

@@ -15,7 +15,7 @@ import string
 import glob, os
 
 PATH = "C:\Users\Sarah\Google Drive\Ido Sarah phet project\data"
-SIMFOLDER = 'videolog'
+SIMFOLDER = 'videolog\datafiles'
 os.chdir(os.path.join(PATH,SIMFOLDER))
 RAWDATA = '7524851040f3a807c6_log.txt'
 OUTPUTDATA = 'eventflow_data.txt'
@@ -143,9 +143,9 @@ def __main__():
 	write_file_beginning(seqs,os.path.join(PATH, SIMFOLDER, "beginning_" + OUTPUTDATA),N=5)
 	write_file_ending(seqs,os.path.join(PATH, SIMFOLDER, "ending_" + OUTPUTDATA),N=5)
 
-	f = open('dump.txt','w')
-	all_events = list(all_events)
-	all_events.sort()
-	for item in all_events:
-		f.write(item)
-		f.write("\n")
+	# f = open('dump.txt','w')
+	# all_events = list(all_events)
+	# all_events.sort()
+	# for item in all_events:
+	# 	f.write(item)
+	# 	f.write("\n")
