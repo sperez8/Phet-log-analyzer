@@ -9,23 +9,22 @@ Loads video log event file and massages it.
 import os
 import sys
 import glob, os
+import argparse
 import xml.etree.ElementTree as ET
 import matplotlib.pyplot as plt
 import prettyplotlib as ppl
 import matplotlib as mpl
 from prettyplotlib import brewer2mpl
 import statistics as stats
+import numpy as np
 import measures_video as mv
 from parse_video_events import create_sequence, get_event_data
 
 PATH = "C:\Users\Sarah\Google Drive\Ido Sarah phet project\data"
 SIMFOLDER = 'videolog\datafiles'
 PLOTFOLDER = 'videolog\plots'
-RAWDATA = '7557077831c1c6acd2.xml'
 
-DATA = os.path.join(PATH, SIMFOLDER, RAWDATA)
-
-ALPHA = 0.2
+ALPHA = 0.05
 
 TUTORIALS = ['mytubetutorial1.mp4','myviewtutorial1.mp4']
 
@@ -117,7 +116,7 @@ def get_sequence(vlog):
 	seq, events = create_sequence(student, data, clean = False)
 	return seq
 
-def collect_vlogs(path=PATH,folder=SIMFOLDER):
+def collect_vlogs(path,folder):
 	'''parse video viewage count for all logs in folder'''
 	allvlogs = []
 	os.chdir(os.path.join(path,folder))
@@ -178,7 +177,8 @@ def parselog(vlog):
 	return vlog
 
 def get_metadata(vlogs):
-	'''create a dictionary of video names per subject'''
+	'''create a dictionary of video names per subject:
+		videos = {subject:all videos in that subject}'''
 	videos = {}
 	for vlog in vlogs:
 		if vlog.subject not in videos.keys():
@@ -188,26 +188,18 @@ def get_metadata(vlogs):
 				videos[vlog.subject].append(video)
 	return videos
 
-def sanity_checks(vlogs):
-	'''check that vlog parsing is functioning'''
-	for l in vlogs:
-		if len(l.viewage) == 3 and l.subject != 'ENG':
-			print "AHHH"
-		if len(l.viewage) == 4 and l.subject != 'PHI':
-			print "AHHH"
-		print l.filename, l.subject, l.condition
 
-def plot_filling(x,y,name):
+def plot_filling(path,plotfolder,x,y,name):
 	'''simple plot filling maker giving count data'''
 	fig, ax = plt.subplots(1)
 	ppl.fill_between(x, y, facecolor='blue', alpha = ALPHA)
 	ax.set_xlabel('time in video (sec)')
 	ax.set_ylabel('Number of times watched')
 	ax.set_title('Cumulative views of video')
-	fig.savefig(os.path.join(PATH,PLOTFOLDER,'count_'+name+'.png'))
+	fig.savefig(os.path.join(path,plotfolder,'count_'+name+'.png'))
 	return None
 
-def plot_mult_counts(vlogs, subject, condition, videoname):
+def plot_mult_counts(path,plotfolder,vlogs, subject, condition, videoname):
 	'''plot multiple counts with different summary stats'''
 	'''for a paticular course subject, condition, and video'''
 	fig, ax = plt.subplots(1)
@@ -220,13 +212,17 @@ def plot_mult_counts(vlogs, subject, condition, videoname):
 				if sum(y)==0: #only take into account videos that were watched.
 					continue
 				x = [i*2 for i in range(len(y))]
-				ppl.fill_between(x, y, facecolor='blue', alpha = ALPHA) #label=str(vlog.filename))
+				ppl.fill_between(x, y, facecolor='black', alpha = ALPHA) #label=str(vlog.filename))
 				#files.append(vlog.filename)
 				counts.append(y)
 	if counts:
 		newcounts = zip(*counts)
 		medians = [stats.median(i) for i in newcounts]
-		ppl.plot(x,medians,'k-',label = 'median')
+		quartile25 = [np.percentile(i,25) for i in newcounts]
+		quartile75 = [np.percentile(i,75) for i in newcounts]
+		ppl.plot(x,medians,'-', color = '#ffeda0',label = 'median')
+		ppl.plot(x,quartile25,'-', color = '#feb24c',label = 'quartile25')
+		ppl.plot(x,quartile75,'-', color = '#f03b20', label = 'quartile75')
 		# means = [stats.mean(i) for i in newcounts]
 		# ppl.plot(x,means,'w-',label = 'mean of '+str(len(counts))+' viewers')
 		ax.set_xlabel('time in video (sec)')
@@ -235,16 +231,16 @@ def plot_mult_counts(vlogs, subject, condition, videoname):
 		ppl.legend()
 		# p = plt.Rectangle((0, 0), 1, 1, fc="r")
 		# ax.legend([p], files)
-		fig.savefig(os.path.join(PATH,PLOTFOLDER,'mult_count_'+subject+'_'+str(condition)+'_'+videoname+'.png'))
+		fig.savefig(os.path.join(path,plotfolder,'mult_count_'+subject+'_'+str(condition)+'_'+videoname+'.png'))
 	else:
 		print "No counts found under condition {0} for {1} video called {2}".format(condition,subject,videoname)
 	return None
 
-def plot_video_count(vlog, videoname):
+def plot_video_count(path,plotfolder,vlog, videoname):
 	'''given a user log and video, plot count'''
 	y = vlog.viewage[videoname]
 	x = [i*2 for i in range(len(y))]
-	plot_filling(x,y,videoname+'_'+vlog.filename.replace('.xml',''))
+	plot_filling(path,plotfolder,x,y,videoname+'_'+vlog.filename.replace('.xml',''))
 	return None
 
 def make_table(vlogs,measures,ignoretutorials=False):
@@ -270,36 +266,81 @@ def write_table(header, lines, output):
 		outfile.write('\n')
 	return None
 
+def sanity_checks(vlogs):
+	'''check that vlog parsing is functioning'''
+	for l in vlogs:
+		if len(l.viewage) == 3 and l.subject != 'ENG':
+			print "AHHH"
+		if len(l.viewage) == 4 and l.subject != 'PHI':
+			print "AHHH"
+		print l.filename, l.subject, l.condition
 
-vlogs = collect_vlogs()
-all_videos = get_metadata(vlogs)
+def summary(vlogs, all_videos):
+	'''check that vlog parsing is functioning'''
+	print "There are {0} files total, broken up as follows:".format(len(vlogs))
+	studentcount = {}
+	studentcount = dict([ ((subject,condition),0) for subject in all_videos.keys() for condition in [1,2,None] ])
+	for l in vlogs:
+		studentcount[(l.subject,l.condition)]+=1
 
-print vlogs
-print all_videos
-
-for subject, videos in all_videos.iteritems():
-	for videoname in videos:
-		for condition in [1,2]:
-			print subject, condition, videoname
-			plot_mult_counts(vlogs, subject, condition, videoname)
-
-
-
-
-outfiles = [('../parsed_data_all.txt',False),('../parsed_data_not_tutorials.txt',True)]
-
-header = [vm.__name__.replace('_',' ') for vm in measures]
-for outfile,ignore in outfiles:
-	table = make_table(vlogs,measures,ignoretutorials = ignore)
-	write_table(header, table, outfile)
+	for subject in all_videos:
+		print "The course subject {0} has {1} video files and with {2} students in condition 1 and {3} students in condition 2.".format(subject,len(all_videos[subject])-2	,studentcount[(subject,1)],studentcount[(subject,2)])
 
 
 
-# print all_videos
+def main(*argv):
+	'''handles user input and creates a panel'''
+	parser = argparse.ArgumentParser(description='This scripts takes networks and created the necessary file to make an interactive Hive panel')
+	#parser.add_argument('-input', help='Location of network file')
+	parser.add_argument('-sanity_check', help='Run sanity checks', action = 'store_true')
+	parser.add_argument('-summary', help='Compute summary of data', action = 'store_true')
+	parser.add_argument('-singleplots', help='Plot viewage per student per video', action = 'store_true')
+	parser.add_argument('-multiplots', help='Plot viewage per video per condition aggregating students', action = 'store_true')
+	parser.add_argument('-parse', help='Parse data and calculate parameters per student per video', action = 'store_true')
+	parser.add_argument('-simfolder', help='Input folder', default = SIMFOLDER)
+	parser.add_argument('-plotfolder', help='Input folder', default = PLOTFOLDER)
+	parser.add_argument('-path', help='Input path', default = PATH)
+	args = parser.parse_args()
 
-for vlog in vlogs:
-	#print vlog.filename, vlog.highlights
-	for video in vlog.viewage.keys():
-		plot_video_count(vlog,video)
+	path = args.path
+	simfolder = args.simfolder
+	plotfolder = args.plotfolder
 
-#sanity_checks(vlogs)
+	vlogs = collect_vlogs(path,simfolder)
+	all_videos = get_metadata(vlogs)
+
+	if args.summary:
+		print "**Running summary**"
+		summary(vlogs,all_videos)
+	
+	elif args.sanity_check:
+		print "**Running sanity checks.**"
+		sanity_checks(vlogs)
+		sys.exit()
+
+	elif args.singleplots:
+		print "**Plotting the view counts of one student per video**"
+		for vlog in vlogs:
+		#print vlog.filename, vlog.highlights
+			for video in vlog.viewage.keys():
+				plot_video_count(path,plotfolder,vlog,video)
+
+	elif args.multiplots:
+		print "**Plotting the view counts of one video for all students per condition**"
+		for subject, videos in all_videos.iteritems():
+			for videoname in videos:
+				for condition in [1,2]:
+					print subject, condition, videoname
+					plot_mult_counts(path,plotfolder,vlogs, subject, condition, videoname)
+
+	elif args.parse:
+		print "**Parsing log files.**"
+		outfiles = [('../parsed_data_all.txt',False),('../parsed_data_not_tutorials.txt',True)]
+		header = [vm.__name__.replace('_',' ') for vm in measures]
+		for outfile,ignore in outfiles:
+			table = make_table(vlogs,measures,ignoretutorials = ignore)
+			write_table(header, table, outfile)
+
+
+if __name__ == "__main__":
+	main(*sys.argv[1:])

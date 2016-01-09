@@ -39,7 +39,7 @@ def fraction_watched(vlog,videoname):
 def fraction_rewatched(vlog,videoname):
 	'''From vlog, get percent rewatched, given video length'''
 	count = vlog.viewage[videoname]
-	total = float(sum([x if x>1 else 0 for x in coun]t))
+	total = float(sum([x if x>1 else 0 for x in count]))
 	return format_decimals(total/len(count))
 
 def number_of_2_sec_segments(vlog,videoname):
