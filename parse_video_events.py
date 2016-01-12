@@ -24,8 +24,7 @@ DATA = os.path.join(PATH, SIMFOLDER, RAWDATA)
 OUTPUT = os.path.join(PATH, SIMFOLDER, OUTPUTDATA)
 
 
-DATEFMT = '%M:%S.%f'
-OUTDATEFMT = '%d %H:%M:%S.%f'
+OUTDATEFMT = '%Y-%m-%d %H:%M:%S.%f'
 ALL = []
 
 def get_event_data(datafile = DATA):
@@ -43,9 +42,8 @@ def create_sequence(student,data, clean=True):
 	seq =[]
 	events = []
 	pre_event = ''
-	start = datetime.strptime(cleandate(data[0][0]), OUTDATEFMT)
 	for row in data:
-		date = datetime.strptime(cleandate(row[0]), OUTDATEFMT)-start
+		date = datetime.strptime(cleandate(row[0]), OUTDATEFMT)
 		if clean:
 			event = cleanevent(row[1])
 			if event and event != pre_event:
@@ -65,7 +63,9 @@ def create_sequence(student,data, clean=True):
 	return seq, events
 
 def cleandate(row_0):
-	date = row_0.split('/')[-1]
+	date = row_0.strip('[')
+	date = date.replace('/','-')
+	date = date[0:6] + str(int(date[6])+1) + date[7:]
 	return date
 
 
