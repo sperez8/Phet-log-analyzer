@@ -1,3 +1,0 @@
-[2015/11/20 14:49:33.142]: Questionnaire: 1. false, 2. true, 3. false, 4. false.
-[2015/11/20 14:50:30.489]: Starting with Condition 1
-[2015/11/20 14:51:06.280]: Exit.

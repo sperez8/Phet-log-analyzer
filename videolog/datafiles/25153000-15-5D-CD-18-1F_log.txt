@@ -1,9 +1,0 @@
-[2015/11/05 16:33:45.672]: Questionnaire: 1. true, 2. true, 3. true, 4. false.
-[2015/11/05 16:34:05.911]: Starting with Condition 2
-[2015/11/05 16:34:12.463]: Filmstrip: Mouseover 03:47.
-[2015/11/05 16:34:13.479]: Filmstrip: Mouseover 03:47.
-[2015/11/05 16:34:17.599]: 
-[2015/11/05 16:34:17.599]: Library View Clicked Video 0_IntroductionToTheDataAcquisitionDevice(DAQ).mp4, at 0.
-[2015/11/05 16:34:20.765]: Player: Clicked player to play video.
-[2015/11/05 16:34:23.854]: Player: Clicked player to pause video.
-[2015/11/05 16:35:36.426]: Exit.

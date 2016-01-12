@@ -46,8 +46,7 @@ measures = [mv.studentID,
 			mv.highlighted_total,
 			mv.played_highlights,
 			mv.searched,
-			mv.clicked_subtitleviewer,
-			mv.number_of_sessions]
+			mv.clicked_subtitleviewer]
 
 
 class Videolog(object):
@@ -218,24 +217,14 @@ def plot_mult_counts(path,plotfolder,vlogs, subject, condition, videoname):
 				counts.append(y)
 	if counts:
 		newcounts = zip(*counts)
+		medians = [stats.median(i) for i in newcounts]
 		quartile25 = [np.percentile(i,25) for i in newcounts]
-		#quartile25 = [0.01 if x == 0 else x for x in quartile25]
-		#quartile25 = [0.99 if x == 1 else x for x in quartile25]
-		quartile50 = [np.percentile(i,50) for i in newcounts]
-		#quartile50 = [0.01 if x == 0 else x for x in quartile50]
 		quartile75 = [np.percentile(i,75) for i in newcounts]
-		#quartile75 = [0.01 if x == 0 else x for x in quartile75]
-		#quartile75 = [1.01 if x == 1 else x for x in quartile75]
-		quartile100 = [np.percentile(i,100) for i in newcounts]
-		#quartile100 = [0.01 if x == 0 else x for x in quartile100]
-		#quartile100 = [1.02 if x == 1 else x for x in quartile100]
-		ppl.plot(x,quartile25,'-', color = '#f768a1',label = '25th percent quartile')
-		ppl.plot(x,quartile50,'-', color = '#ae017e',label = 'median')
-		ppl.plot(x,quartile75,'-', color = '#49006a', label = '75th percent quartile')
-		ppl.plot(x,quartile100,'-', color = 'black',label = 'Watched by at least one student')
+		ppl.plot(x,medians,'-', color = '#ffeda0',label = 'median')
+		ppl.plot(x,quartile25,'-', color = '#feb24c',label = 'quartile25')
+		ppl.plot(x,quartile75,'-', color = '#f03b20', label = 'quartile75')
 		# means = [stats.mean(i) for i in newcounts]
 		# ppl.plot(x,means,'w-',label = 'mean of '+str(len(counts))+' viewers')
-		ax.set_ylim([0,7])
 		ax.set_xlabel('time in video (sec)')
 		ax.set_ylabel('Number of times watched')
 		ax.set_title('Cumulative views of {0} viewers'.format(str(len(counts))))
