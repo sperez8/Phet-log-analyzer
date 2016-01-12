@@ -1,0 +1,141 @@
+[2015/10/23 01:38:40.202]: Questionnaire: 1. false, 2. false, 3. false, 4. true.
+[2015/10/23 01:39:00.149]: Starting with Condition 1
+[2015/10/23 01:39:09.846]: Click Filmstrip at 213.21276818419676
+[2015/10/23 01:39:09.846]: 
+[2015/10/23 01:39:09.846]: Library View Clicked Video Philippa Foot, Trolley Driver and Transplant Problems.mp4, at 213.21276818419676.
+[2015/10/23 01:39:10.606]: Filmstrip: Mouseover 4294967292:4294967255.
+[2015/10/23 01:39:20.509]: Player: Clicked player to play video.
+[2015/10/23 01:40:45.920]: Player: Clicked player to pause video.
+[2015/10/23 01:42:04.854]: Player: Clicked player to play video.
+[2015/10/23 01:45:47.512]: Player: Clicked player to pause video.
+[2015/10/23 01:45:50.213]: PlayerBar: Pressed Enlarge Button.
+[2015/10/23 01:46:46.266]: PlayerBar: Pressed Enlarge Button.
+[2015/10/23 01:47:38.899]: Player: Clicked player to play video.
+[2015/10/23 01:47:40.144]: Player: Clicked player to pause video.
+[2015/10/23 01:50:32.195]: 
+[2015/10/23 01:50:32.196]: Library View Clicked Video JJ Thomson, Bystander at the Switch and Loop Trolley Problems.mp4, at 0.
+[2015/10/23 01:50:40.732]: Player: Clicked player to play video.
+[2015/10/23 01:50:41.343]: Player: Clicked player to pause video.
+[2015/10/23 01:50:44.281]: Player: Clicked player to play video.
+[2015/10/23 02:04:19.698]: Player: Clicked player to pause video.
+[2015/10/23 02:04:29.352]: PlayerBar: Pressed Enlarge Button.
+[2015/10/23 02:04:33.766]: PlayerBar: Pressed Enlarge Button.
+[2015/10/23 02:06:00.776]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:01.776]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:02.776]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:03.792]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:04.792]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:05.792]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:06.792]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:07.809]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:08.809]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:09.826]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:10.842]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:11.858]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:12.858]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:13.874]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:14.892]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:15.893]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:16.892]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:17.896]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:18.910]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:19.926]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:20.943]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:21.959]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:22.959]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:23.976]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:24.975]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:25.993]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:26.992]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:27.992]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:29.009]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:30.009]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:31.025]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:32.042]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:33.058]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:34.059]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:35.074]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:36.092]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:37.092]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:38.092]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:39.109]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:40.109]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:41.125]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:42.125]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:43.139]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:44.139]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:45.142]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:46.142]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:47.142]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:48.143]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:49.143]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:50.156]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:51.156]: Filmstrip: Mouseover 02:20.
+[2015/10/23 02:06:53.343]: Filmstrip: Mouseover 03:02.
+[2015/10/23 02:06:54.343]: Filmstrip: Mouseover 02:07.
+[2015/10/23 02:06:55.344]: Filmstrip: Mouseover 02:40.
+[2015/10/23 02:06:56.357]: Filmstrip: Mouseover 04:10.
+[2015/10/23 02:06:57.360]: Filmstrip: Mouseover 02:25.
+[2015/10/23 02:06:58.360]: Filmstrip: Mouseover 02:26.
+[2015/10/23 02:07:09.438]: Player: Clicked player to play video.
+[2015/10/23 02:08:29.381]: Player: Clicked player to pause video.
+[2015/10/23 02:09:47.737]: Player: Clicked player to play video.
+[2015/10/23 02:12:14.100]: Player: Clicked player to pause video.
+[2015/10/23 02:13:56.826]: Filmstrip: Mouseover 06:09.
+[2015/10/23 02:13:59.827]: Click Filmstrip at 328.58754048098115
+[2015/10/23 02:14:00.393]: Filmstrip: Mouseover 05:29.
+[2015/10/23 02:14:01.396]: Filmstrip: Mouseover 05:29.
+[2015/10/23 02:14:02.409]: Filmstrip: Mouseover 05:29.
+[2015/10/23 02:14:03.410]: Filmstrip: Mouseover 05:29.
+[2015/10/23 02:14:04.410]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:05.410]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:06.410]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:07.410]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:08.429]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:09.443]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:10.446]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:11.463]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:12.463]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:13.463]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:14.463]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:15.464]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:16.476]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:17.476]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:18.476]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:19.476]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:20.476]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:21.476]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:22.476]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:23.476]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:24.476]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:25.476]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:26.476]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:27.477]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:28.496]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:29.496]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:30.496]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:31.497]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:32.497]: Filmstrip: Mouseover 05:16.
+[2015/10/23 02:14:33.499]: Filmstrip: Mouseover 05:26.
+[2015/10/23 02:14:34.510]: Filmstrip: Mouseover 05:36.
+[2015/10/23 02:14:35.510]: Filmstrip: Mouseover 05:36.
+[2015/10/23 02:14:36.510]: Filmstrip: Mouseover 05:36.
+[2015/10/23 02:14:37.511]: Filmstrip: Mouseover 05:36.
+[2015/10/23 02:14:38.511]: Filmstrip: Mouseover 05:25.
+[2015/10/23 02:14:39.529]: Filmstrip: Mouseover 05:16.
+[2015/10/23 02:14:40.543]: Filmstrip: Mouseover 05:19.
+[2015/10/23 02:14:41.563]: Filmstrip: Mouseover 05:20.
+[2015/10/23 02:14:42.576]: Filmstrip: Mouseover 05:20.
+[2015/10/23 02:14:43.576]: Filmstrip: Mouseover 05:20.
+[2015/10/23 02:14:44.576]: Filmstrip: Mouseover 05:21.
+[2015/10/23 02:14:45.596]: Filmstrip: Mouseover 05:21.
+[2015/10/23 02:14:46.596]: Filmstrip: Mouseover 05:21.
+[2015/10/23 02:14:47.597]: Filmstrip: Mouseover 05:19.
+[2015/10/23 02:14:48.597]: Filmstrip: Mouseover 05:19.
+[2015/10/23 02:14:49.610]: Filmstrip: Mouseover 05:28.
+[2015/10/23 02:14:50.610]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:51.611]: Filmstrip: Mouseover 05:32.
+[2015/10/23 02:14:52.630]: Filmstrip: Mouseover 05:33.
+[2015/10/23 02:14:57.543]: Clicked back button to go back to LibraryView
+[2015/10/23 02:15:00.385]: 
+[2015/10/23 02:15:00.385]: Library View Clicked Video JJ Thomson, 'fat man' trolley problem.mp4, at 0.

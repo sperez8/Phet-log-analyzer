@@ -1,0 +1,16 @@
+[2015/11/20 20:15:37.121]: Questionnaire: 1. true, 2. true, 3. true, 4. false.
+[2015/11/20 20:15:56.427]: Starting with Condition 2
+[2015/11/20 20:16:11.587]: 
+[2015/11/20 20:16:11.588]: Library View Clicked Video 0_IntroductionToTheDataAcquisitionDevice(DAQ).mp4, at 0.
+[2015/11/20 20:16:14.914]: SubtitleViewer: Clicked showHighlights button.
+[2015/11/20 20:16:51.399]: Clicked back button to go back to LibraryView
+[2015/11/20 20:16:57.706]: 
+[2015/11/20 20:16:57.706]: Library View Clicked Video 5_PausingProgramsWithSleep1.mp4, at 0.
+[2015/11/20 20:17:05.156]: Pixie: Start highlighting in 16489147 from 6.84.
+[2015/11/20 20:17:06.370]: Player: Clicked player to play video.
+[2015/11/20 20:17:06.969]: Player: Clicked player to pause video.
+[2015/11/20 20:17:08.277]: Pixie: Stop highlighting in 0 at 9.36.
+[2015/11/20 20:17:13.384]: Player: Clicked player to play video.
+[2015/11/20 20:17:13.959]: Player: Clicked player to pause video.
+[2015/11/20 20:19:05.955]: Play/paused video by pressing spacebar.
+[2015/11/21 18:34:09.538]: Exit.

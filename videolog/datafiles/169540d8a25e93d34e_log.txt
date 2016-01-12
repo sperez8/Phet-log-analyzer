@@ -1,0 +1,2 @@
+[2015/11/20 18:04:41.178]: Questionnaire: 1. false, 2. true, 3. false, 4. false.
+[2015/11/20 18:05:05.025]: Starting with Condition 2

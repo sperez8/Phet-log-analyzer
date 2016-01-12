@@ -1,0 +1,42 @@
+[2015/11/19 08:46:00.173]: Questionnaire: 1. false, 2. true, 3. false, 4. false.
+[2015/11/19 08:46:42.608]: Starting with Condition 2
+[2015/11/19 08:47:33.210]: 
+[2015/11/19 08:47:33.210]: Library View Clicked Video myviewtutorial1.mp4, at 0.
+[2015/11/19 08:49:39.334]: Exit.
+[2015/11/19 08:50:00.969]: 
+[2015/11/19 08:50:00.970]: Library View Clicked Video 0_IntroductionToTheDataAcquisitionDevice(DAQ).mp4, at 0.
+[2015/11/19 08:50:01.221]: Player: Clicked player to play video.
+[2015/11/19 08:50:08.908]: PlayerBar: Pressed Play button.
+[2015/11/19 08:51:07.933]: PlayerBar: Pressed Pause button.
+[2015/11/19 08:52:38.488]: PlayerBar: Pressed Play button.
+[2015/11/19 08:53:09.910]: PlayerBar: Pressed Pause button.
+[2015/11/19 09:01:05.180]: SubtitleViewer: Clicked 107200.
+[2015/11/19 09:01:32.378]: SubtitleViewer: Clicked 107200.
+[2015/11/19 09:01:33.231]: SubtitleViewer: Clicked 107200.
+[2015/11/19 09:01:35.031]: PlayerBar: Pressed Play button.
+[2015/11/19 09:01:37.613]: SubtitleViewer: Clicked 107200.
+[2015/11/19 09:02:02.892]: PlayerBar: Pressed Pause button.
+[2015/11/19 09:04:56.477]: SubtitleViewer: Clicked 167077.9230769231.
+[2015/11/19 09:05:22.933]: SubtitleViewer: Clicked 167077.9230769231.
+[2015/11/19 09:05:24.159]: PlayerBar: Pressed Play button.
+[2015/11/19 09:06:07.619]: PlayerBar: Pressed Pause button.
+[2015/11/19 09:06:11.500]: PlayerBar: Pressed Play button.
+[2015/11/19 09:06:59.392]: PlayerBar: Pressed Pause button.
+[2015/11/19 09:07:00.715]: PlayerBar: Pressed Play button.
+[2015/11/19 09:07:26.125]: Clicked back button to go back to LibraryView
+[2015/11/19 09:07:49.311]: 
+[2015/11/19 09:07:49.311]: Library View Clicked Video 1_IntroductionToDAQProgramming.mp4, at 0.
+[2015/11/19 09:08:38.617]: PlayerBar: Pressed Pause button.
+[2015/11/19 09:09:09.740]: PlayerBar: Pressed Play button.
+[2015/11/19 09:09:47.520]: PlayerBar: Pressed Pause button.
+[2015/11/19 09:09:51.424]: PlayerBar: Pressed Play button.
+[2015/11/19 09:12:17.791]: PlayerBar: Pressed Pause button.
+[2015/11/19 09:19:52.142]: SubtitleViewer: Clicked 438500.
+[2015/11/19 09:19:53.143]: Play/paused video by pressing spacebar.
+[2015/11/19 09:19:53.730]: Filmstrip: Mouseover 01:42.
+[2015/11/19 09:20:13.167]: Clicked back button to go back to LibraryView
+[2015/11/19 09:29:31.184]: 
+[2015/11/19 09:29:31.184]: Library View Clicked Video 5_PausingProgramsWithSleep1.mp4, at 0.
+[2015/11/19 09:33:30.089]: SubtitleViewer: Clicked 305714.28571428574.
+[2015/11/19 09:34:59.823]: Clicked back button to go back to LibraryView
+[2015/11/19 09:37:50.956]: Filmstrip: Mouseover 03:38.

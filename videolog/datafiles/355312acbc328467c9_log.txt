@@ -1,0 +1,16 @@
+[2015/11/03 19:25:20.514]: Questionnaire: 1. true, 2. true, 3. false, 4. false.
+[2015/11/03 19:25:51.013]: Starting with Condition 2
+[2015/11/03 19:26:02.378]: Filmstrip: Mouseover 00:50.
+[2015/11/03 19:26:03.863]: Filmstrip: Mouseover 01:19.
+[2015/11/03 19:26:08.295]: Filmstrip: Mouseover 00:44.
+[2015/11/03 19:26:09.412]: Filmstrip: Mouseover 01:44.
+[2015/11/03 19:26:10.412]: Filmstrip: Mouseover 01:44.
+[2015/11/03 19:26:11.425]: Filmstrip: Mouseover 01:44.
+[2015/11/03 19:26:12.428]: Filmstrip: Mouseover 01:44.
+[2015/11/03 19:26:13.429]: Filmstrip: Mouseover 01:44.
+[2015/11/03 19:26:14.444]: Filmstrip: Mouseover 03:06.
+[2015/11/03 19:26:15.445]: Filmstrip: Mouseover 03:06.
+[2015/11/03 19:26:16.460]: Filmstrip: Mouseover 03:06.
+[2015/11/03 19:26:17.460]: Filmstrip: Mouseover 03:06.
+[2015/11/03 19:26:18.460]: Filmstrip: Mouseover 03:06.
+[2015/11/03 19:26:23.693]: Exit.

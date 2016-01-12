@@ -1,0 +1,25 @@
+[2015/11/19 14:17:54.881]: Questionnaire: 1. false, 2. true, 3. true, 4. false.
+[2015/11/19 14:18:13.057]: Starting with Condition 1
+[2015/11/19 14:18:24.441]: Click Filmstrip at 160.98666590764617
+[2015/11/19 14:18:24.442]: 
+[2015/11/19 14:18:24.442]: Library View Clicked Video 0_IntroductionToTheDataAcquisitionDevice(DAQ).mp4, at 160.98666590764617.
+[2015/11/19 14:18:24.668]: Filmstrip: Mouseover 4294967294:4294967254.
+[2015/11/19 14:19:27.882]: Clicked back button to go back to LibraryView
+[2015/11/19 14:19:51.751]: Filmstrip: Mouseover 02:29.
+[2015/11/19 14:19:57.847]: Filmstrip: Mouseover 03:17.
+[2015/11/19 14:19:58.863]: Filmstrip: Mouseover 03:20.
+[2015/11/19 14:20:00.218]: Click Filmstrip at 287.6631770699912
+[2015/11/19 14:20:00.218]: 
+[2015/11/19 14:20:00.218]: Library View Clicked Video 1_IntroductionToDAQProgramming.mp4, at 287.6631770699912.
+[2015/11/19 14:20:01.018]: Filmstrip: Mouseover 4294967292:4294967265.
+[2015/11/19 14:20:15.562]: SubtitleViewer: Clicked 41200.
+[2015/11/19 14:28:45.550]: Exit.
+[2015/11/20 13:14:32.340]: 
+[2015/11/20 13:14:32.342]: Library View Clicked Video mytubetutorial1.mp4, at 0.
+[2015/11/20 13:14:33.894]: Clicked back button to go back to LibraryView
+[2015/11/20 13:15:07.679]: Click Filmstrip at 238.8138331483221
+[2015/11/20 13:15:07.679]: 
+[2015/11/20 13:15:07.679]: Library View Clicked Video 6_AnalogRead.mp4, at 238.8138331483221.
+[2015/11/20 13:15:22.544]: Filmstrip: Mouseover 04:56.
+[2015/11/20 13:17:03.716]: SubtitleViewer: Clicked 123369.42105263159.
+[2015/11/20 13:17:35.072]: Exit.

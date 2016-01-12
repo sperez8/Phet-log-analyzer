@@ -1,0 +1,23 @@
+[2015/11/18 20:23:17.889]: Questionnaire: 1. false, 2. true, 3. false, 4. false.
+[2015/11/18 20:23:44.416]: Starting with Condition 1
+[2015/11/18 20:23:56.062]: Filmstrip: Mouseover 03:20.
+[2015/11/18 20:23:57.075]: Filmstrip: Mouseover 02:04.
+[2015/11/18 20:23:58.078]: Filmstrip: Mouseover 05:25.
+[2015/11/18 20:23:59.095]: Filmstrip: Mouseover 08:05.
+[2015/11/19 19:44:03.066]: 
+[2015/11/19 19:44:03.067]: Library View Clicked Video 0_IntroductionToTheDataAcquisitionDevice(DAQ).mp4, at 0.
+[2015/11/19 19:44:42.458]: Filmstrip: Mouseover 02:29.
+[2015/11/19 19:44:42.961]: Click Filmstrip at 152.81291183139922
+[2015/11/19 19:44:43.459]: Filmstrip: Mouseover 02:40.
+[2015/11/19 19:44:43.741]: Click Filmstrip at 160.4535574229692
+[2015/11/19 19:44:44.342]: Click Filmstrip at 168.16303765950823
+[2015/11/19 19:44:44.459]: Filmstrip: Mouseover 02:48.
+[2015/11/19 19:44:44.942]: Click Filmstrip at 172.15544706771595
+[2015/11/19 19:44:45.459]: Filmstrip: Mouseover 02:44.
+[2015/11/19 19:44:50.429]: Filmstrip: Mouseover 00:46.
+[2015/11/19 19:44:54.981]: Click Filmstrip at 216.69146236272286
+[2015/11/19 19:44:55.070]: Filmstrip: Mouseover 03:36.
+[2015/11/19 19:44:55.601]: Click Filmstrip at 222.06056467031254
+[2015/11/19 19:45:00.351]: Clicked back button to go back to LibraryView
+[2015/11/19 19:45:02.220]: Filmstrip: Mouseover 01:44.
+[2015/11/19 19:45:03.219]: Filmstrip: Mouseover 01:44.

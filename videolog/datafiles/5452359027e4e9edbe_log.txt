@@ -1,0 +1,39 @@
+[2015/11/08 15:40:15.247]: Questionnaire: 1. false, 2. true, 3. false, 4. false.
+[2015/11/08 15:41:05.885]: Starting with Condition 2
+[2015/11/19 19:30:22.352]: 
+[2015/11/19 19:30:22.427]: Library View Clicked Video 1_IntroductionToDAQProgramming.mp4, at 0.
+[2015/11/19 19:30:32.570]: Pixie: Start highlighting in 16489147 from 6.39.
+[2015/11/19 19:30:36.264]: Pixie: Start highlighting in 16489147 from 10.07.
+[2015/11/19 19:30:37.146]: Pixie: Stop highlighting in 0 at 10.96.
+[2015/11/19 19:30:39.590]: SubtitleViewer: Clicked 5600.
+[2015/11/19 19:30:46.766]: SubtitleViewer: Clicked showHighlights button.
+[2015/11/19 19:38:31.819]: Clicked back button to go back to LibraryView
+[2015/11/19 19:38:37.497]: Filmstrip: Mouseover 07:59.
+[2015/11/19 19:38:38.510]: Filmstrip: Mouseover 07:59.
+[2015/11/19 19:38:43.695]: 
+[2015/11/19 19:38:43.696]: Library View Clicked Video 2_DigitalReadAndWrite.mp4, at 0.
+[2015/11/19 19:44:57.541]: Clicked back button to go back to LibraryView
+[2015/11/19 19:45:04.684]: Filmstrip: Mouseover 06:04.
+[2015/11/19 19:45:08.337]: 
+[2015/11/19 19:45:08.337]: Library View Clicked Video 3_SevenSegmentDisplays.mp4, at 0.
+[2015/11/19 19:51:35.037]: Clicked back button to go back to LibraryView
+[2015/11/19 19:51:38.937]: Filmstrip: Mouseover 04:17.
+[2015/11/19 19:51:40.136]: Filmstrip: Mouseover 02:17.
+[2015/11/19 19:51:41.137]: Filmstrip: Mouseover 02:17.
+[2015/11/19 19:51:42.635]: Filmstrip: Mouseover 04:23.
+[2015/11/19 19:51:44.188]: Filmstrip: Mouseover 03:45.
+[2015/11/19 19:51:45.189]: Filmstrip: Mouseover 03:45.
+[2015/11/19 19:51:46.189]: Filmstrip: Mouseover 03:45.
+[2015/11/19 19:51:49.122]: 
+[2015/11/19 19:51:49.123]: Library View Clicked Video 4_Programming7SegmentDisplays.mp4, at 0.
+[2015/11/19 19:56:32.321]: Clicked back button to go back to LibraryView
+[2015/11/19 19:56:37.089]: 
+[2015/11/19 19:56:37.089]: Library View Clicked Video 5_PausingProgramsWithSleep1.mp4, at 0.
+[2015/11/19 20:03:20.306]: Clicked back button to go back to LibraryView
+[2015/11/19 20:03:30.989]: 
+[2015/11/19 20:03:30.990]: Library View Clicked Video 5_PausingProgramsWithSleep1.mp4, at 0.
+[2015/11/19 20:06:04.549]: Clicked back button to go back to LibraryView
+[2015/11/19 20:06:08.454]: 
+[2015/11/19 20:06:08.454]: Library View Clicked Video 6_AnalogRead.mp4, at 0.
+[2015/11/19 20:12:07.660]: Clicked back button to go back to LibraryView
+[2015/11/19 20:12:10.647]: Filmstrip: Mouseover 07:57.

@@ -1,0 +1,7 @@
+[2015/11/20 00:41:02.663]: Questionnaire: 1. true, 2. false, 3. false, 4. false.
+[2015/11/20 00:41:10.911]: Starting with Condition 2
+[2015/11/20 00:41:23.029]: 
+[2015/11/20 00:41:23.030]: Library View Clicked Video 0_IntroductionToTheDataAcquisitionDevice(DAQ).mp4, at 0.
+[2015/11/20 00:41:30.211]: Player: Clicked player to play video.
+[2015/11/20 00:41:34.271]: Player: Clicked player to pause video.
+[2015/11/20 00:41:49.436]: Exit.

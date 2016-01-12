@@ -1,0 +1,15 @@
+[2015/11/20 22:09:11.652]: Questionnaire: 1. false, 2. true, 3. true, 4. false.
+[2015/11/20 22:09:35.869]: Starting with Condition 2
+[2015/11/20 22:09:57.361]: 
+[2015/11/20 22:09:57.361]: Library View Clicked Video 4_Programming7SegmentDisplays.mp4, at 0.
+[2015/11/20 22:10:00.217]: Clicked back button to go back to LibraryView
+[2015/11/20 22:10:12.045]: 
+[2015/11/20 22:10:12.045]: Library View Clicked Video 5_PausingProgramsWithSleep1.mp4, at 0.
+[2015/11/20 22:13:44.423]: Clicked back button to go back to LibraryView
+[2015/11/20 22:13:57.534]: 
+[2015/11/20 22:13:57.534]: Library View Clicked Video 7_DAQReview.mp4, at 0.
+[2015/11/20 22:14:03.510]: Clicked back button to go back to LibraryView
+[2015/11/20 22:14:05.694]: 
+[2015/11/20 22:14:05.694]: Library View Clicked Video 6_AnalogRead.mp4, at 0.
+[2015/11/20 22:19:43.156]: Clicked back button to go back to LibraryView
+[2015/11/20 22:19:50.943]: Exit.

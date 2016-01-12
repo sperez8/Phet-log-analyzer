@@ -1,0 +1,12 @@
+[2015/10/24 11:03:43.267]: Questionnaire: 1. false, 2. true, 3. true, 4. false.
+[2015/10/24 11:04:11.821]: Starting with Condition 1
+[2015/10/24 11:04:25.591]: Filmstrip: Mouseover 00:17.
+[2015/10/24 11:04:27.329]: Filmstrip: Mouseover 09:28.
+[2015/10/24 11:04:35.873]: Click Filmstrip at 30.891736677115983
+[2015/10/24 11:04:35.874]: 
+[2015/10/24 11:04:35.874]: Library View Clicked Video mytubetutorial1.mp4, at 30.891736677115983.
+[2015/10/24 11:04:55.010]: Filmstrip: Mouseover 00:29.
+[2015/10/24 11:04:56.027]: Filmstrip: Mouseover 00:42.
+[2015/10/24 11:05:54.275]: Clicked back button to go back to LibraryView
+[2015/10/24 11:06:03.701]: 
+[2015/10/24 11:06:03.701]: Library View Clicked Video (A draft) The MOSFET (part 1 of 3)-U2wWpLQACo8.mp4, at 0.

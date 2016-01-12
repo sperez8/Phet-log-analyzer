@@ -1,0 +1,22 @@
+[2015/11/20 19:34:44.363]: Questionnaire: 1. false, 2. true, 3. false, 4. false.
+[2015/11/20 19:35:09.494]: Starting with Condition 2
+[2015/11/20 19:35:20.477]: Filmstrip: Mouseover 01:15.
+[2015/11/20 19:35:21.477]: Filmstrip: Mouseover 01:21.
+[2015/11/20 19:35:22.493]: Filmstrip: Mouseover 01:21.
+[2015/11/20 19:35:25.178]: Click Filmstrip at 97.24923719958204
+[2015/11/20 19:35:25.178]: 
+[2015/11/20 19:35:25.179]: Library View Clicked Video myviewtutorial1.mp4, at 97.24923719958204.
+[2015/11/20 19:35:25.596]: Filmstrip: Mouseover 4294967295:4294967279.
+[2015/11/20 19:35:50.875]: Clicked back button to go back to LibraryView
+[2015/11/20 19:35:52.960]: Filmstrip: Mouseover 05:58.
+[2015/11/20 19:35:53.961]: Filmstrip: Mouseover 05:58.
+[2015/11/20 19:36:14.711]: Filmstrip: Mouseover 03:10.
+[2015/11/20 19:36:14.927]: Click Filmstrip at 190.50194859533775
+[2015/11/20 19:36:14.927]: 
+[2015/11/20 19:36:14.927]: Library View Clicked Video 2_DigitalReadAndWrite.mp4, at 190.50194859533775.
+[2015/11/20 19:36:15.712]: Filmstrip: Mouseover 4294967291:4294967267.
+[2015/11/20 19:36:19.382]: Clicked back button to go back to LibraryView
+[2015/11/20 19:54:30.908]: 
+[2015/11/20 19:54:30.908]: Library View Clicked Video 3_SevenSegmentDisplays.mp4, at 0.
+[2015/11/20 19:54:33.406]: Exit.
+[2015/11/20 19:57:55.153]: Exit.

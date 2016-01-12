@@ -1,0 +1,33 @@
+[2015/10/29 21:39:22.906]: Questionnaire: 1. true, 2. true, 3. true, 4. false.
+[2015/10/29 21:39:44.695]: Starting with Condition 2
+[2015/10/29 21:40:22.244]: 
+[2015/10/29 21:40:22.244]: Library View Clicked Video (A draft) The MOSFET (part 1 of 3)-U2wWpLQACo8.mp4, at 0.
+[2015/10/29 21:40:33.250]: Filmstrip: Mouseover 05:21.
+[2015/10/29 21:40:34.252]: Filmstrip: Mouseover 05:48.
+[2015/10/29 21:40:34.671]: Click Filmstrip at 365.38513267295224
+[2015/10/29 21:40:35.266]: Filmstrip: Mouseover 06:19.
+[2015/10/29 21:40:35.898]: Click Filmstrip at 500.04392314118627
+[2015/10/29 21:40:36.272]: Filmstrip: Mouseover 08:20.
+[2015/10/29 21:40:36.793]: Click Filmstrip at 588.7216632056331
+[2015/10/29 21:40:37.272]: Filmstrip: Mouseover 09:48.
+[2015/10/29 21:40:48.982]: Click Filmstrip at 683.1470345705533
+[2015/10/29 21:40:50.563]: Filmstrip: Mouseover 11:05.
+[2015/10/29 21:40:51.569]: Filmstrip: Mouseover 10:48.
+[2015/10/29 21:40:52.123]: Click Filmstrip at 880.208679158213
+[2015/10/29 21:40:52.584]: Filmstrip: Mouseover 14:37.
+[2015/10/29 21:40:53.593]: Filmstrip: Mouseover 12:54.
+[2015/10/29 21:40:54.599]: Filmstrip: Mouseover 12:53.
+[2015/10/29 21:40:59.605]: PlayerBar: Pressed CC Button.
+[2015/10/29 23:34:23.101]: 
+[2015/10/29 23:34:23.101]: Library View Clicked Video myviewtutorial1.mp4, at 0.
+[2015/10/29 23:34:26.712]: Click Filmstrip at 83.13001064162755
+[2015/10/29 23:34:27.420]: Filmstrip: Mouseover 01:22.
+[2015/10/29 23:34:28.421]: Filmstrip: Mouseover 01:52.
+[2015/10/29 23:34:28.745]: Click Filmstrip at 112.70726510172145
+[2015/10/29 23:34:29.436]: Filmstrip: Mouseover 01:10.
+[2015/10/29 23:34:30.435]: Filmstrip: Mouseover 01:01.
+[2015/10/29 23:34:31.435]: Filmstrip: Mouseover 01:38.
+[2015/10/29 23:34:32.560]: Player: Clicked player to play video.
+[2015/10/29 23:34:33.529]: Player: Clicked player to pause video.
+[2015/10/29 23:34:34.344]: Player: Clicked player to play video.
+[2015/10/29 23:34:35.796]: Player: Clicked player to pause video.

@@ -1,0 +1,60 @@
+[2015/11/10 12:04:44.720]: Questionnaire: 1. false, 2. true, 3. false, 4. false.
+[2015/11/10 12:05:36.736]: Starting with Condition 1
+[2015/11/10 12:06:03.552]: Click Filmstrip at 43.69554858934168
+[2015/11/10 12:06:03.553]: 
+[2015/11/10 12:06:03.553]: Library View Clicked Video mytubetutorial1.mp4, at 43.69554858934168.
+[2015/11/10 12:06:04.009]: Filmstrip: Mouseover 00:4294967254.
+[2015/11/10 12:06:06.465]: Player: Clicked player to play video.
+[2015/11/10 12:06:12.496]: Play/paused video by pressing spacebar.
+[2015/11/10 12:06:17.019]: Player: Clicked player to play video.
+[2015/11/10 12:06:18.682]: Player: Clicked player to pause video.
+[2015/11/10 12:06:26.007]: Player: Clicked player to play video.
+[2015/11/10 12:06:26.458]: Player: Clicked player to pause video.
+[2015/11/10 12:06:27.375]: Player: Clicked player to play video.
+[2015/11/10 12:06:27.814]: Player: Clicked player to pause video.
+[2015/11/10 12:06:31.844]: Clicked back button to go back to LibraryView
+[2015/11/10 12:06:33.183]: Click Filmstrip at 275.09095174119807
+[2015/11/10 12:06:33.184]: 
+[2015/11/10 12:06:33.184]: Library View Clicked Video (A draft) The MOSFET (part 1 of 3)-U2wWpLQACo8.mp4, at 275.09095174119807.
+[2015/11/10 12:06:33.549]: Filmstrip: Mouseover 4294967283:4294967280.
+[2015/11/10 12:06:38.328]: Play/paused video by pressing spacebar.
+[2015/11/10 12:06:39.177]: Player: Clicked player to pause video.
+[2015/11/10 12:06:51.268]: Filmstrip: Mouseover 01:07.
+[2015/11/10 12:06:51.992]: Click Filmstrip at 65.93671740519413
+[2015/11/10 12:06:52.289]: Filmstrip: Mouseover 01:14.
+[2015/11/10 12:06:52.695]: Click Filmstrip at 125.4090507510555
+[2015/11/10 12:06:53.287]: Click Filmstrip at 218.4961812054472
+[2015/11/10 12:06:53.315]: Filmstrip: Mouseover 03:38.
+[2015/11/10 12:06:54.055]: Click Filmstrip at 332.2693406497037
+[2015/11/10 12:06:54.335]: Filmstrip: Mouseover 05:32.
+[2015/11/10 12:06:54.775]: Click Filmstrip at 420.1849638566292
+[2015/11/10 12:06:55.360]: Filmstrip: Mouseover 08:42.
+[2015/11/10 12:06:55.533]: Filmstrip: Selected 522.32 to 523.62.
+[2015/11/10 12:06:56.375]: Filmstrip: Mouseover 12:59.
+[2015/11/10 12:06:56.473]: Filmstrip: Selected 523.62 to 779.6.
+[2015/11/10 12:06:56.969]: Click Filmstrip at 779.6047175555306
+[2015/11/10 12:06:57.393]: Filmstrip: Mouseover 11:17.
+[2015/11/10 12:06:58.521]: Clicked back button to go back to LibraryView
+[2015/11/10 21:34:19.292]: Filmstrip: Mouseover 12:20.
+[2015/11/10 21:34:21.858]: Filmstrip: Mouseover 15:46.
+[2015/11/10 21:34:22.859]: Filmstrip: Mouseover 21:22.
+[2015/11/10 21:34:23.874]: Filmstrip: Mouseover 07:35.
+[2015/11/10 21:34:24.875]: Filmstrip: Mouseover 31:39.
+[2015/11/10 21:34:26.259]: Filmstrip: Mouseover 03:58.
+[2015/11/10 21:34:27.259]: Filmstrip: Mouseover 17:32.
+[2015/11/10 21:34:29.569]: 
+[2015/11/10 21:34:29.569]: Library View Clicked Video (A draft) The MOSFET (part 1 of 3)-U2wWpLQACo8.mp4, at 0.
+[2015/11/10 21:34:32.180]: Player: Clicked player to play video.
+[2015/11/10 21:34:33.999]: Play/paused video by pressing spacebar.
+[2015/11/10 21:34:34.779]: Play/paused video by pressing spacebar.
+[2015/11/10 21:34:35.840]: Player: Clicked player to pause video.
+[2015/11/10 21:34:37.263]: Player: Clicked player to play video.
+[2015/11/10 21:34:37.731]: Player: Clicked player to pause video.
+[2015/11/10 21:34:39.730]: Player: Clicked player to play video.
+[2015/11/10 21:34:41.035]: Player: Clicked player to pause video.
+[2015/11/10 21:34:49.281]: Player: Clicked player to play video.
+[2015/11/10 21:34:49.386]: Player: Clicked player to pause video.
+[2015/11/10 21:34:54.571]: Player: Clicked player to play video.
+[2015/11/10 21:34:55.402]: Player: Clicked player to pause video.
+[2015/11/10 21:34:58.655]: Player: Clicked player to play video.
+[2015/11/10 21:34:59.935]: Player: Clicked player to pause video.

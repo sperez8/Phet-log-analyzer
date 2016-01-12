@@ -1,0 +1,37 @@
+[2015/11/20 22:21:01.345]: Questionnaire: 1. true, 2. false, 3. false, 4. false.
+[2015/11/20 22:21:44.229]: Starting with Condition 1
+[2015/11/20 22:21:53.498]: 
+[2015/11/20 22:21:53.498]: Library View Clicked Video 0_IntroductionToTheDataAcquisitionDevice(DAQ).mp4, at 0.
+[2015/11/20 22:21:55.495]: Player: Clicked player to play video.
+[2015/11/20 22:21:57.710]: Player: Clicked player to pause video.
+[2015/11/20 22:21:59.109]: Player: Clicked player to play video.
+[2015/11/20 22:22:03.991]: Player: Clicked player to pause video.
+[2015/11/20 22:23:23.184]: Player: Clicked player to play video.
+[2015/11/20 22:23:23.296]: Player: Clicked player to pause video.
+[2015/11/20 22:23:50.656]: PlayerBar: Pressed Enlarge Button.
+[2015/11/20 22:23:52.104]: Player: Clicked player to play video.
+[2015/11/20 22:23:52.300]: Player: Clicked player to pause video.
+[2015/11/20 22:26:16.850]: Clicked back button to go back to LibraryView
+[2015/11/20 22:26:21.197]: Filmstrip: Mouseover 03:36.
+[2015/11/20 22:26:54.471]: 
+[2015/11/20 22:26:54.472]: Library View Clicked Video 4_Programming7SegmentDisplays.mp4, at 0.
+[2015/11/20 22:30:36.866]: Clicked back button to go back to LibraryView
+[2015/11/20 22:30:42.088]: 
+[2015/11/20 22:30:42.088]: Library View Clicked Video 6_AnalogRead.mp4, at 0.
+[2015/11/20 22:36:41.506]: Clicked back button to go back to LibraryView
+[2015/11/20 22:36:47.978]: 
+[2015/11/20 22:36:47.978]: Library View Clicked Video 2_DigitalReadAndWrite.mp4, at 0.
+[2015/11/20 22:41:17.549]: Player: Clicked player to play video.
+[2015/11/20 22:41:40.191]: Player: Clicked player to pause video.
+[2015/11/20 22:42:07.671]: Player: Clicked player to play video.
+[2015/11/20 22:42:07.844]: Player: Clicked player to pause video.
+[2015/11/20 22:43:24.499]: Clicked back button to go back to LibraryView
+[2015/11/20 22:48:18.344]: 
+[2015/11/20 22:48:18.345]: Library View Clicked Video 2_DigitalReadAndWrite.mp4, at 0.
+[2015/11/20 22:52:22.294]: Clicked back button to go back to LibraryView
+[2015/11/20 22:52:24.466]: Filmstrip: Mouseover 02:15.
+[2015/11/20 22:52:25.470]: Filmstrip: Mouseover 02:15.
+[2015/11/20 22:52:26.484]: Filmstrip: Mouseover 02:15.
+[2015/11/20 22:52:27.485]: Filmstrip: Mouseover 02:15.
+[2015/11/20 22:52:28.501]: Filmstrip: Mouseover 02:15.
+[2015/11/20 22:52:36.501]: Exit.

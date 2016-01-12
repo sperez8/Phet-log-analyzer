@@ -1,0 +1,17 @@
+[2015/11/20 03:57:14.554]: Questionnaire: 1. false, 2. true, 3. true, 4. false.
+[2015/11/20 03:57:32.758]: Starting with Condition 2
+[2015/11/20 03:57:37.860]: Click Filmstrip at 32.91512643678161
+[2015/11/20 03:57:37.860]: 
+[2015/11/20 03:57:37.860]: Library View Clicked Video myviewtutorial1.mp4, at 32.91512643678161.
+[2015/11/20 03:57:44.782]: Click Filmstrip at 45.201698765432106
+[2015/11/20 03:57:45.266]: Filmstrip: Mouseover 00:45.
+[2015/11/20 03:57:46.265]: Filmstrip: Mouseover 01:08.
+[2015/11/20 03:57:48.467]: PlayerBar: Pressed Pause button.
+[2015/11/20 03:57:52.605]: Filmstrip: Selected 68.56 to 83.96.
+[2015/11/20 03:57:52.944]: Filmstrip: Mouseover 01:00.
+[2015/11/20 03:58:00.416]: Clicked back button to go back to LibraryView
+[2015/11/20 03:58:09.160]: 
+[2015/11/20 03:58:09.160]: Library View Clicked Video 0_IntroductionToTheDataAcquisitionDevice(DAQ).mp4, at 0.
+[2015/11/20 03:58:21.670]: Filmstrip: Mouseover 03:39.
+[2015/11/20 03:58:23.375]: Clicked back button to go back to LibraryView
+[2015/11/20 03:58:30.526]: Exit.

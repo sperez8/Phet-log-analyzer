@@ -1,0 +1,25 @@
+[2015/11/18 14:03:23.039]: Questionnaire: 1. true, 2. false, 3. false, 4. false.
+[2015/11/18 14:03:30.961]: Starting with Condition 1
+[2015/11/18 14:04:12.201]: Click Filmstrip at 176.2627728915834
+[2015/11/18 14:04:12.202]: 
+[2015/11/18 14:04:12.202]: Library View Clicked Video 0_IntroductionToTheDataAcquisitionDevice(DAQ).mp4, at 176.2627728915834.
+[2015/11/18 14:04:30.783]: Filmstrip: Mouseover 00:31.
+[2015/11/18 14:04:31.134]: Click Filmstrip at 31.740342447103295
+[2015/11/18 14:04:31.783]: Filmstrip: Mouseover 01:44.
+[2015/11/18 14:04:31.966]: Click Filmstrip at 104.5730925266171
+[2015/11/18 14:04:32.784]: Filmstrip: Mouseover 03:22.
+[2015/11/18 14:04:32.882]: Click Filmstrip at 202.91147492969606
+[2015/11/18 14:04:33.666]: Click Filmstrip at 242.02011115916264
+[2015/11/18 14:04:33.784]: Filmstrip: Mouseover 04:02.
+[2015/11/18 14:04:35.507]: Filmstrip: Mouseover 00:02.
+[2015/11/18 14:04:35.735]: Click Filmstrip at 2.267167317650235
+[2015/11/18 14:04:36.522]: Filmstrip: Mouseover 00:00.
+[2015/11/18 14:04:38.571]: PlayerBar: Pressed Pause button.
+[2015/11/18 14:04:44.292]: Player: Clicked player to pause video.
+[2015/11/18 14:05:08.354]: PlayerBar: Pressed Pause button.
+[2015/11/18 15:21:05.723]: PlayerBar: Pressed Play button.
+[2015/11/18 15:22:49.420]: Clicked back button to go back to LibraryView
+[2015/11/18 15:22:51.562]: Click Filmstrip at 216.7325306691714
+[2015/11/18 15:22:51.563]: 
+[2015/11/18 15:22:51.563]: Library View Clicked Video 1_IntroductionToDAQProgramming.mp4, at 216.7325306691714.
+[2015/11/18 15:28:04.326]: Exit.

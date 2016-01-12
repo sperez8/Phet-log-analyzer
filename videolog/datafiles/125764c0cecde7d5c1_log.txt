@@ -1,0 +1,25 @@
+[2015/10/21 16:18:36.095]: Questionnaire: 1. true, 2. true, 3. true, 4. false.
+[2015/10/21 16:21:20.914]: Starting with Condition 1
+[2015/10/21 16:21:23.477]: Filmstrip: Mouseover 04:53.
+[2015/10/21 16:21:24.494]: Filmstrip: Mouseover 04:53.
+[2015/10/21 16:21:25.494]: Filmstrip: Mouseover 04:53.
+[2015/10/21 16:21:26.494]: Filmstrip: Mouseover 04:53.
+[2015/10/21 16:21:27.495]: Filmstrip: Mouseover 04:53.
+[2015/10/21 16:21:28.511]: Filmstrip: Mouseover 04:53.
+[2015/10/21 16:21:29.527]: Filmstrip: Mouseover 04:53.
+[2015/10/21 17:29:16.680]: Filmstrip: Mouseover 00:39.
+[2015/10/21 17:29:17.221]: Click Filmstrip at 39.83408150470219
+[2015/10/21 17:29:17.221]: 
+[2015/10/21 17:29:17.221]: Library View Clicked Video mytubetutorial1.mp4, at 39.83408150470219.
+[2015/10/21 17:30:28.995]: Clicked back button to go back to LibraryView
+[2015/10/21 17:30:34.704]: Filmstrip: Mouseover 04:14.
+[2015/10/21 17:30:59.221]: 
+[2015/10/21 17:30:59.221]: Library View Clicked Video Philippa Foot, Trolley Driver and Transplant Problems.mp4, at 0.
+[2015/10/21 17:34:21.173]: Player: Clicked player to play video.
+[2015/10/21 17:34:23.411]: Player: Clicked player to pause video.
+[2015/10/21 17:37:05.722]: Clicked back button to go back to LibraryView
+[2015/10/21 17:37:09.745]: 
+[2015/10/21 17:37:09.745]: Library View Clicked Video JJ Thomson, Bystander at the Switch and Loop Trolley Problems.mp4, at 0.
+[2015/10/21 17:43:42.195]: Clicked back button to go back to LibraryView
+[2015/10/21 17:43:44.968]: 
+[2015/10/21 17:43:44.969]: Library View Clicked Video JJ Thomson, 'fat man' trolley problem.mp4, at 0.

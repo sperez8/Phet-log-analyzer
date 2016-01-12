@@ -1,0 +1,147 @@
+[2015/10/22 13:15:59.470]: Questionnaire: 1. false, 2. true, 3. true, 4. false.
+[2015/10/22 13:16:17.984]: Starting with Condition 1
+[2015/10/22 13:17:01.836]: Filmstrip: Mouseover 00:43.
+[2015/10/22 13:17:02.837]: Filmstrip: Mouseover 00:43.
+[2015/10/22 13:17:03.837]: Filmstrip: Mouseover 00:43.
+[2015/10/22 13:17:04.853]: Filmstrip: Mouseover 00:43.
+[2015/10/22 13:17:05.853]: Filmstrip: Mouseover 00:43.
+[2015/10/22 13:17:06.870]: Filmstrip: Mouseover 00:43.
+[2015/10/22 13:17:07.439]: Click Filmstrip at 55.07671473354231
+[2015/10/22 13:17:07.439]: 
+[2015/10/22 13:17:07.439]: Library View Clicked Video mytubetutorial1.mp4, at 55.07671473354231.
+[2015/10/22 13:17:07.879]: Filmstrip: Mouseover 00:4294967254.
+[2015/10/22 13:17:08.892]: Filmstrip: Mouseover 00:4294967254.
+[2015/10/22 13:17:09.905]: Filmstrip: Mouseover 00:4294967254.
+[2015/10/22 13:18:20.179]: PlayerBar: Pressed Pause button.
+[2015/10/22 13:18:22.310]: Clicked back button to go back to LibraryView
+[2015/10/26 13:45:20.931]: Click Filmstrip at 773.9225442319039
+[2015/10/26 13:45:20.933]: 
+[2015/10/26 13:45:20.933]: Library View Clicked Video (A draft) The MOSFET (part 1 of 3)-U2wWpLQACo8.mp4, at 773.9225442319039.
+[2015/10/26 13:45:21.715]: Filmstrip: Mouseover 4294967284:4294967245.
+[2015/10/26 13:45:26.728]: Player: Clicked player to play video.
+[2015/10/26 13:45:28.320]: Player: Clicked player to pause video.
+[2015/10/26 13:45:28.639]: Player: Clicked player to play video.
+[2015/10/26 13:45:29.103]: Player: Clicked player to pause video.
+[2015/10/26 13:46:02.410]: Clicked back button to go back to LibraryView
+[2015/10/26 13:46:06.537]: Filmstrip: Mouseover 03:54.
+[2015/10/26 13:46:07.552]: Filmstrip: Mouseover 03:54.
+[2015/10/26 13:46:08.552]: Filmstrip: Mouseover 03:54.
+[2015/10/26 13:46:09.568]: Filmstrip: Mouseover 03:54.
+[2015/10/26 13:46:10.571]: Filmstrip: Mouseover 03:54.
+[2015/10/26 13:46:11.586]: Filmstrip: Mouseover 04:38.
+[2015/10/26 13:46:12.605]: Filmstrip: Mouseover 06:43.
+[2015/10/26 13:46:12.624]: Click Filmstrip at 403.4667292204238
+[2015/10/26 13:46:12.624]: 
+[2015/10/26 13:46:12.624]: Library View Clicked Video (A draft) The MOSFET (part 1 of 3)-U2wWpLQACo8.mp4, at 403.4667292204238.
+[2015/10/26 13:46:13.616]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:14.625]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:15.636]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:16.655]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:17.678]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:18.698]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:19.717]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:20.741]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:21.765]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:22.784]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:23.808]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:24.818]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:25.821]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:26.828]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:27.847]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:28.851]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:29.870]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:30.893]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:31.913]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:32.928]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:33.940]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:34.961]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:35.971]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:36.990]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:38.006]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:39.011]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:40.022]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:41.045]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:42.067]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:43.074]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:44.094]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:45.110]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:46.134]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:47.147]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:48.166]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:49.187]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:50.198]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:51.216]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:52.222]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:53.243]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:46:54.261]: Filmstrip: Mouseover 4294967283:4294967286.
+[2015/10/26 13:47:07.775]: Player: Clicked player to play video.
+[2015/10/26 14:30:25.955]: Player: Clicked player to pause video.
+[2015/10/26 14:30:29.242]: Player: Clicked player to play video.
+[2015/10/26 14:30:30.478]: Player: Clicked player to pause video.
+[2015/10/26 14:30:31.461]: Clicked back button to go back to LibraryView
+[2015/10/26 14:30:33.053]: Filmstrip: Mouseover 16:15.
+[2015/10/26 14:30:38.365]: Click Filmstrip at 601.5322144740865
+[2015/10/26 14:30:38.365]: 
+[2015/10/26 14:30:38.365]: Library View Clicked Video (A draft) The MOSFET (part 1 of 3)-U2wWpLQACo8.mp4, at 601.5322144740865.
+[2015/10/26 14:30:39.144]: Filmstrip: Mouseover 4294967283:00.
+[2015/10/26 14:30:44.916]: Player: Clicked player to play video.
+[2015/10/26 14:30:58.235]: Filmstrip: Mouseover 11:14.
+[2015/10/26 14:31:10.345]: Filmstrip: Mouseover 07:33.
+[2015/10/26 14:31:11.357]: Filmstrip: Mouseover 01:21.
+[2015/10/26 14:31:13.053]: Filmstrip: Mouseover 00:01.
+[2015/10/26 14:31:13.062]: Click Filmstrip at 1.203758760019783
+[2015/10/26 14:31:22.785]: PlayerBar: Pressed Play button.
+[2015/10/26 14:32:06.085]: Filmstrip: Mouseover 01:01.
+[2015/10/26 14:32:07.110]: Filmstrip: Mouseover 00:54.
+[2015/10/26 14:32:07.440]: Click Filmstrip at 52.463296281321014
+[2015/10/26 14:32:16.926]: Filmstrip: Mouseover 00:53.
+[2015/10/26 14:32:17.415]: Filmstrip: Selected 46.36 to 62.22.
+[2015/10/26 14:32:17.955]: Filmstrip: Mouseover 00:46.
+[2015/10/26 14:32:23.799]: SubtitleViewer: Clicked 45847.15384615385.
+[2015/10/26 14:32:41.053]: Player: Clicked player to play video.
+[2015/10/26 14:33:25.490]: Player: Clicked player to pause video.
+[2015/10/26 14:33:53.576]: Player: Clicked player to play video.
+[2015/10/26 14:34:13.084]: Player: Clicked player to pause video.
+[2015/10/26 14:34:25.988]: Player: Clicked player to play video.
+[2015/10/26 14:34:33.692]: Player: Clicked player to pause video.
+[2015/10/26 14:34:41.504]: Filmstrip: Mouseover 03:49.
+[2015/10/26 14:35:29.912]: Player: Clicked player to play video.
+[2015/10/26 14:35:50.301]: Player: Clicked player to pause video.
+[2015/10/26 14:36:33.305]: Player: Clicked player to play video.
+[2015/10/26 14:36:55.281]: Player: Clicked player to pause video.
+[2015/10/26 14:37:36.108]: PlayerBar: Pressed Pause button.
+[2015/10/26 14:37:37.424]: Filmstrip: Mouseover 03:55.
+[2015/10/26 14:37:38.425]: Filmstrip: Mouseover 03:54.
+[2015/10/26 14:37:38.704]: Click Filmstrip at 234.25471827938685
+[2015/10/26 14:37:39.439]: Filmstrip: Mouseover 03:54.
+[2015/10/26 14:37:40.441]: Filmstrip: Mouseover 03:54.
+[2015/10/26 14:37:41.442]: Filmstrip: Mouseover 03:54.
+[2015/10/26 14:37:42.628]: Player: Clicked player to pause video.
+[2015/10/26 14:39:15.835]: Player: Clicked player to play video.
+[2015/10/26 14:39:48.502]: Player: Clicked player to pause video.
+[2015/10/26 14:40:14.629]: Player: Clicked player to play video.
+[2015/10/26 14:40:37.071]: PlayerBar: Pressed Play button.
+[2015/10/26 14:41:03.803]: PlayerBar: Pressed Pause button.
+[2015/10/26 14:41:23.547]: PlayerBar: Pressed Play button.
+[2015/10/26 14:43:21.078]: PlayerBar: Pressed Pause button.
+[2015/10/26 14:43:49.726]: PlayerBar: Pressed Play button.
+[2015/10/26 14:44:10.453]: PlayerBar: Pressed Pause button.
+[2015/10/26 14:44:13.233]: PlayerBar: Pressed Play button.
+[2015/10/26 14:44:13.542]: PlayerBar: Pressed Pause button.
+[2015/10/26 14:44:16.639]: PlayerBar: Pressed Play button.
+[2015/10/26 14:45:12.013]: Filmstrip: Mouseover 09:01.
+[2015/10/26 14:45:13.013]: Filmstrip: Mouseover 09:20.
+[2015/10/26 14:45:24.224]: PlayerBar: Pressed Pause button.
+[2015/10/26 14:46:38.391]: PlayerBar: Pressed Play button.
+[2015/10/26 14:50:24.738]: PlayerBar: Pressed Pause button.
+[2015/10/26 14:50:55.262]: PlayerBar: Pressed Play button.
+[2015/10/26 14:53:45.242]: Filmstrip: Mouseover 16:19.
+[2015/10/26 14:53:46.133]: Filmstrip: Selected 971.18 to 979.72.
+[2015/10/26 14:53:46.254]: Filmstrip: Mouseover 16:11.
+[2015/10/26 14:53:47.267]: Filmstrip: Mouseover 16:11.
+[2015/10/26 14:53:47.293]: Click Filmstrip at 971.1810195332913
+[2015/10/26 14:53:48.415]: Player: Clicked player to play video.
+[2015/10/26 14:53:58.492]: PlayerBar: Pressed Play button.
+[2015/10/26 14:57:23.015]: Clicked back button to go back to LibraryView
+[2015/10/26 14:57:33.609]: Filmstrip: Mouseover 07:17.
+[2015/10/26 14:57:34.609]: Filmstrip: Mouseover 07:17.

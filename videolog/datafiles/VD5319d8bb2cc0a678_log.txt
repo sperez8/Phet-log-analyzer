@@ -1,0 +1,6 @@
+[2015/11/19 14:13:05.047]: Questionnaire: 1. false, 2. true, 3. false, 4. false.
+[2015/11/19 14:13:39.965]: Starting with Condition 2
+[2015/11/20 18:55:11.009]: 
+[2015/11/20 18:55:11.047]: Library View Clicked Video 3_SevenSegmentDisplays.mp4, at 0.
+[2015/11/20 18:55:16.894]: Player: Clicked player to play video.
+[2015/11/21 18:13:37.690]: Exit.

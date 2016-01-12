@@ -1,0 +1,59 @@
+[2015/11/20 03:05:31.694]: Questionnaire: 1. true, 2. false, 3. false, 4. false.
+[2015/11/20 03:05:52.157]: Starting with Condition 1
+[2015/11/20 03:07:50.119]: Filmstrip: Mouseover 00:47.
+[2015/11/20 03:07:51.120]: Filmstrip: Mouseover 00:47.
+[2015/11/20 03:08:02.803]: Filmstrip: Mouseover 02:01.
+[2015/11/20 03:08:03.816]: Filmstrip: Mouseover 02:02.
+[2015/11/20 03:08:04.819]: Filmstrip: Mouseover 03:04.
+[2015/11/20 03:08:05.832]: Filmstrip: Mouseover 03:20.
+[2015/11/20 03:08:08.080]: 
+[2015/11/20 03:08:08.080]: Library View Clicked Video 8_DAQSimulatorDemo1.mp4, at 0.
+[2015/11/20 03:08:12.943]: Filmstrip: Mouseover 03:26.
+[2015/11/20 03:08:13.347]: Click Filmstrip at 209.3126728199887
+[2015/11/20 03:08:13.972]: Filmstrip: Mouseover 03:29.
+[2015/11/20 03:08:15.005]: Filmstrip: Mouseover 03:42.
+[2015/11/20 03:08:15.170]: Filmstrip: Selected 222.25 to 222.46.
+[2015/11/20 03:08:16.020]: Filmstrip: Mouseover 03:43.
+[2015/11/20 03:08:18.351]: Filmstrip: Mouseover 03:44.
+[2015/11/20 03:08:19.004]: Click Filmstrip at 144.21233585640832
+[2015/11/20 03:08:19.357]: Filmstrip: Mouseover 02:29.
+[2015/11/20 03:08:19.881]: Click Filmstrip at 220.09087430402522
+[2015/11/20 03:08:20.389]: Filmstrip: Mouseover 03:45.
+[2015/11/20 03:08:21.331]: Click Filmstrip at 227.8511793725315
+[2015/11/20 03:08:21.413]: Filmstrip: Mouseover 03:47.
+[2015/11/20 03:08:22.874]: Clicked back button to go back to LibraryView
+[2015/11/20 03:08:27.114]: Click Filmstrip at 363.2883348039355
+[2015/11/20 03:08:27.115]: 
+[2015/11/20 03:08:27.115]: Library View Clicked Video 7_DAQReview.mp4, at 363.2883348039355.
+[2015/11/20 03:08:27.431]: Filmstrip: Mouseover 4294967289:4294967268.
+[2015/11/20 03:08:30.377]: Filmstrip: Mouseover 01:33.
+[2015/11/20 03:08:30.920]: Click Filmstrip at 96.22043967508755
+[2015/11/20 03:08:31.385]: Filmstrip: Mouseover 03:37.
+[2015/11/20 03:08:32.254]: Click Filmstrip at 217.56247197470535
+[2015/11/20 03:08:32.411]: Filmstrip: Mouseover 03:37.
+[2015/11/20 03:08:33.266]: Filmstrip: Selected 165.9 to 166.37.
+[2015/11/20 03:08:33.442]: Filmstrip: Mouseover 01:30.
+[2015/11/20 03:08:33.880]: Click Filmstrip at 81.52667795130571
+[2015/11/20 03:08:34.448]: Filmstrip: Mouseover 01:27.
+[2015/11/20 03:08:42.193]: Player: Clicked player to play video.
+[2015/11/20 03:08:42.955]: Player: Clicked player to pause video.
+[2015/11/20 03:08:47.321]: Click Filmstrip at 107.12226288950635
+[2015/11/20 03:08:47.775]: Filmstrip: Mouseover 01:58.
+[2015/11/20 03:08:48.284]: Click Filmstrip at 118.02408610392513
+[2015/11/20 03:08:48.782]: Filmstrip: Mouseover 02:12.
+[2015/11/20 03:08:49.795]: Filmstrip: Mouseover 00:45.
+[2015/11/20 03:08:54.429]: PlayerBar: Pressed Enlarge Button.
+[2015/11/20 03:08:57.612]: PlayerBar: Pressed Enlarge Button.
+[2015/11/20 03:08:59.710]: PlayerBar: Pressed Enlarge Button.
+[2015/11/20 03:09:38.929]: Play/paused video by pressing spacebar.
+[2015/11/20 03:09:39.770]: Play/paused video by pressing spacebar.
+[2015/11/20 03:09:40.901]: Play/paused video by pressing spacebar.
+[2015/11/20 03:11:24.924]: Play/paused video by pressing spacebar.
+[2015/11/20 03:12:07.906]: PlayerBar: Pressed Pause button.
+[2015/11/20 03:12:08.763]: PlayerBar: Pressed Play button.
+[2015/11/20 03:12:10.003]: PlayerBar: Pressed Pause button.
+[2015/11/20 03:13:15.006]: Play/paused video by pressing spacebar.
+[2015/11/20 03:14:05.682]: Play/paused video by pressing spacebar.
+[2015/11/20 03:16:00.393]: Play/paused video by pressing spacebar.
+[2015/11/20 03:20:18.298]: Clicked back button to go back to LibraryView
+[2015/11/20 03:20:24.215]: Exit.

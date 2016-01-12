@@ -1,0 +1,70 @@
+[2015/11/20 18:58:58.106]: Questionnaire: 1. true, 2. true, 3. true, 4. false.
+[2015/11/20 18:59:57.038]: Starting with Condition 1
+[2015/11/20 20:22:29.105]: 
+[2015/11/20 20:22:29.105]: Library View Clicked Video 4_Programming7SegmentDisplays.mp4, at 0.
+[2015/11/20 20:23:26.030]: Filmstrip: Mouseover 01:41.
+[2015/11/20 20:23:26.696]: Click Filmstrip at 92.27230609051132
+[2015/11/20 20:23:27.031]: Filmstrip: Mouseover 01:32.
+[2015/11/20 20:23:28.030]: Filmstrip: Mouseover 01:47.
+[2015/11/20 20:23:29.046]: Filmstrip: Mouseover 02:10.
+[2015/11/20 20:23:30.047]: Filmstrip: Mouseover 01:50.
+[2015/11/20 20:23:31.062]: Filmstrip: Mouseover 01:55.
+[2015/11/20 20:23:32.062]: Filmstrip: Mouseover 02:03.
+[2015/11/20 20:23:33.063]: Filmstrip: Mouseover 01:52.
+[2015/11/20 20:23:34.062]: Filmstrip: Mouseover 01:54.
+[2015/11/20 20:23:34.711]: Click Filmstrip at 114.32862487091863
+[2015/11/20 20:23:35.064]: Filmstrip: Mouseover 01:54.
+[2015/11/20 20:23:35.827]: Click Filmstrip at 131.52850648866746
+[2015/11/20 20:23:36.080]: Filmstrip: Mouseover 02:11.
+[2015/11/20 20:23:36.510]: Click Filmstrip at 134.56377971532902
+[2015/11/20 20:23:37.097]: Filmstrip: Mouseover 02:23.
+[2015/11/20 20:23:37.225]: Click Filmstrip at 143.06254474998136
+[2015/11/20 20:23:37.812]: Click Filmstrip at 163.70240269127993
+[2015/11/20 20:23:38.097]: Filmstrip: Mouseover 03:05.
+[2015/11/20 20:23:38.328]: Click Filmstrip at 187.9845885045724
+[2015/11/20 20:23:38.977]: Click Filmstrip at 203.1609546378802
+[2015/11/20 20:23:39.112]: Filmstrip: Mouseover 03:23.
+[2015/11/20 20:23:39.861]: Filmstrip: Selected 212.27 to 212.87.
+[2015/11/20 20:23:40.114]: Filmstrip: Mouseover 03:32.
+[2015/11/20 20:23:40.395]: Click Filmstrip at 212.87382896319716
+[2015/11/20 20:23:41.129]: Filmstrip: Mouseover 03:26.
+[2015/11/20 20:23:43.694]: Clicked back button to go back to LibraryView
+[2015/11/20 20:23:52.525]: 
+[2015/11/20 20:23:52.525]: Library View Clicked Video 6_AnalogRead.mp4, at 0.
+[2015/11/20 20:24:00.731]: Filmstrip: Mouseover 00:03.
+[2015/11/20 20:24:00.775]: Click Filmstrip at 3.3076907157229085
+[2015/11/20 20:24:01.749]: Filmstrip: Mouseover 00:18.
+[2015/11/20 20:24:05.475]: PlayerBar: Pressed Enlarge Button.
+[2015/11/20 20:24:10.413]: PlayerBar: Pressed Enlarge Button.
+[2015/11/20 20:24:11.494]: Filmstrip: Mouseover 05:55.
+[2015/11/20 20:24:16.742]: Player: Clicked player to play video.
+[2015/11/20 20:24:17.684]: Player: Clicked player to pause video.
+[2015/11/20 20:28:03.848]: Click Filmstrip at 302.8002437482035
+[2015/11/20 20:28:04.100]: Filmstrip: Mouseover 05:01.
+[2015/11/20 20:28:04.536]: Click Filmstrip at 297.77590342052315
+[2015/11/20 20:28:05.013]: Click Filmstrip at 292.7515630928428
+[2015/11/20 20:28:05.114]: Filmstrip: Mouseover 04:52.
+[2015/11/20 20:28:06.114]: Filmstrip: Mouseover 04:47.
+[2015/11/20 20:28:07.116]: Filmstrip: Mouseover 04:36.
+[2015/11/20 20:28:08.131]: Filmstrip: Mouseover 04:44.
+[2015/11/20 20:28:08.348]: Click Filmstrip at 284.0427065248635
+[2015/11/20 20:28:09.149]: Filmstrip: Mouseover 04:44.
+[2015/11/20 20:28:10.149]: Filmstrip: Mouseover 04:47.
+[2015/11/20 20:28:11.151]: Filmstrip: Mouseover 04:43.
+[2015/11/20 20:28:12.165]: Filmstrip: Mouseover 04:46.
+[2015/11/20 20:28:13.170]: Filmstrip: Mouseover 04:30.
+[2015/11/20 20:29:39.930]: Clicked back button to go back to LibraryView
+[2015/11/20 20:29:48.439]: 
+[2015/11/20 20:29:48.439]: Library View Clicked Video 1_IntroductionToDAQProgramming.mp4, at 0.
+[2015/11/20 20:29:51.806]: PlayerBar: Pressed Enlarge Button.
+[2015/11/20 20:30:45.188]: PlayerBar: Pressed Pause button.
+[2015/11/21 06:35:37.410]: Player: Clicked player to pause video.
+[2015/11/21 06:37:44.396]: Player: Clicked player to play video.
+[2015/11/21 06:37:53.498]: Player: Clicked player to pause video.
+[2015/11/21 06:37:57.891]: Player: Clicked player to play video.
+[2015/11/21 06:38:28.203]: Clicked back button to go back to LibraryView
+[2015/11/21 06:38:34.680]: Click Filmstrip at 158.21416446076339
+[2015/11/21 06:38:34.680]: 
+[2015/11/21 06:38:34.680]: Library View Clicked Video 6_AnalogRead.mp4, at 158.21416446076339.
+[2015/11/21 06:38:56.674]: Player: Clicked player to play video.
+[2015/11/21 06:38:58.205]: Exit.

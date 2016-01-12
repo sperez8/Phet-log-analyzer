@@ -1,0 +1,165 @@
+[2015/11/19 13:41:55.877]: Questionnaire: 1. false, 2. true, 3. true, 4. false.
+[2015/11/19 13:42:32.189]: Starting with Condition 2
+[2015/11/19 13:44:28.609]: 
+[2015/11/19 13:44:28.609]: Library View Clicked Video 1_IntroductionToDAQProgramming.mp4, at 0.
+[2015/11/19 13:45:07.134]: PlayerBar: Pressed Pause button.
+[2015/11/19 13:45:50.076]: PlayerBar: Pressed Play button.
+[2015/11/19 13:46:31.802]: Filmstrip: Mouseover 07:50.
+[2015/11/19 13:47:05.501]: Filmstrip: Mouseover 02:11.
+[2015/11/19 13:48:39.716]: PlayerBar: Pressed Pause button.
+[2015/11/19 13:57:42.688]: PlayerBar: Pressed Play button.
+[2015/11/19 13:57:53.375]: Filmstrip: Mouseover 03:59.
+[2015/11/19 13:57:54.422]: Filmstrip: Mouseover 03:59.
+[2015/11/19 13:57:55.422]: Filmstrip: Mouseover 03:59.
+[2015/11/19 13:57:56.453]: Filmstrip: Mouseover 03:59.
+[2015/11/19 13:57:57.515]: Filmstrip: Mouseover 03:59.
+[2015/11/19 13:57:58.562]: Filmstrip: Mouseover 03:59.
+[2015/11/19 13:57:59.609]: Filmstrip: Mouseover 03:59.
+[2015/11/19 13:58:00.656]: Filmstrip: Mouseover 03:59.
+[2015/11/19 13:58:01.703]: Filmstrip: Mouseover 03:59.
+[2015/11/19 13:58:02.724]: Filmstrip: Mouseover 03:59.
+[2015/11/19 13:58:03.786]: Filmstrip: Mouseover 03:59.
+[2015/11/19 13:58:04.786]: Filmstrip: Mouseover 03:59.
+[2015/11/19 13:58:05.802]: Filmstrip: Mouseover 03:59.
+[2015/11/19 13:59:01.471]: Filmstrip: Mouseover 04:59.
+[2015/11/19 13:59:02.487]: Filmstrip: Mouseover 05:06.
+[2015/11/19 13:59:03.493]: Filmstrip: Mouseover 05:06.
+[2015/11/19 13:59:04.509]: Filmstrip: Mouseover 05:06.
+[2015/11/19 13:59:05.555]: Filmstrip: Mouseover 05:06.
+[2015/11/19 14:00:09.195]: Filmstrip: Mouseover 05:43.
+[2015/11/19 14:00:10.226]: Filmstrip: Mouseover 05:43.
+[2015/11/19 14:00:11.289]: Filmstrip: Mouseover 05:42.
+[2015/11/19 14:00:12.289]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:13.320]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:14.367]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:15.414]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:16.414]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:17.461]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:18.508]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:19.523]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:20.555]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:21.601]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:22.648]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:23.656]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:24.687]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:25.703]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:26.750]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:27.781]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:28.844]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:29.844]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:30.900]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:31.916]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:32.947]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:33.978]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:35.035]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:36.098]: Filmstrip: Mouseover 05:38.
+[2015/11/19 14:00:37.176]: Filmstrip: Mouseover 05:33.
+[2015/11/19 14:01:48.856]: Filmstrip: Mouseover 07:40.
+[2015/11/19 14:01:49.918]: Filmstrip: Mouseover 07:50.
+[2015/11/19 14:01:50.918]: Filmstrip: Mouseover 07:47.
+[2015/11/19 14:01:51.965]: Filmstrip: Mouseover 07:47.
+[2015/11/19 14:01:53.012]: Filmstrip: Mouseover 03:36.
+[2015/11/19 14:01:54.028]: Filmstrip: Mouseover 03:15.
+[2015/11/19 14:01:55.071]: Filmstrip: Mouseover 03:15.
+[2015/11/19 14:01:56.109]: Filmstrip: Mouseover 03:15.
+[2015/11/19 14:01:57.156]: Filmstrip: Mouseover 03:12.
+[2015/11/19 14:01:58.187]: Filmstrip: Mouseover 03:12.
+[2015/11/19 14:01:59.218]: Filmstrip: Mouseover 03:12.
+[2015/11/19 14:02:03.937]: Filmstrip: Mouseover 03:06.
+[2015/11/19 14:02:04.874]: Click Filmstrip at 186.57978903258822
+[2015/11/19 14:02:04.937]: Filmstrip: Mouseover 03:06.
+[2015/11/19 14:02:05.952]: Filmstrip: Mouseover 03:09.
+[2015/11/19 14:02:06.609]: Click Filmstrip at 197.70780825918396
+[2015/11/19 14:02:06.968]: Filmstrip: Mouseover 03:17.
+[2015/11/19 14:02:07.990]: Filmstrip: Mouseover 03:34.
+[2015/11/19 14:02:09.036]: Filmstrip: Mouseover 03:58.
+[2015/11/19 14:02:09.693]: Click Filmstrip at 260.02471592812
+[2015/11/19 14:02:10.286]: Filmstrip: Mouseover 04:22.
+[2015/11/19 14:02:15.068]: Filmstrip: Mouseover 04:47.
+[2015/11/19 14:02:16.099]: Filmstrip: Mouseover 04:30.
+[2015/11/19 14:02:17.146]: Filmstrip: Mouseover 04:50.
+[2015/11/19 14:02:17.974]: Click Filmstrip at 279.3132825875525
+[2015/11/19 14:02:18.161]: Filmstrip: Mouseover 04:39.
+[2015/11/19 14:02:19.193]: Filmstrip: Mouseover 04:46.
+[2015/11/19 14:02:20.208]: Filmstrip: Mouseover 04:46.
+[2015/11/19 14:02:20.740]: Click Filmstrip at 288.586631943049
+[2015/11/19 14:02:21.240]: Filmstrip: Mouseover 04:48.
+[2015/11/19 14:02:22.240]: Filmstrip: Mouseover 04:52.
+[2015/11/19 14:02:22.912]: Click Filmstrip at 298.2309152727653
+[2015/11/19 14:02:23.287]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:24.318]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:25.380]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:26.391]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:27.429]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:28.429]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:29.429]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:30.444]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:31.444]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:32.460]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:33.476]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:34.522]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:35.530]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:36.530]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:37.577]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:38.592]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:39.639]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:40.654]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:41.670]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:42.701]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:43.748]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:44.795]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:45.810]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:46.857]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:47.920]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:48.982]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:50.014]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:51.029]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:52.092]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:53.107]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:54.123]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:55.123]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:56.123]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:57.179]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:58.232]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:02:59.248]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:03:00.295]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:03:01.357]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:03:02.357]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:03:03.388]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:03:04.451]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:03:05.437]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:03:06.500]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:03:07.516]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:03:08.547]: Filmstrip: Mouseover 04:58.
+[2015/11/19 14:03:20.100]: PlayerBar: Pressed Pause button.
+[2015/11/19 14:03:20.991]: Clicked back button to go back to LibraryView
+[2015/11/19 14:03:41.496]: 
+[2015/11/19 14:03:41.496]: Library View Clicked Video 2_DigitalReadAndWrite.mp4, at 0.
+[2015/11/19 14:09:14.955]: PlayerBar: Pressed Pause button.
+[2015/11/19 14:09:43.571]: PlayerBar: Pressed Play button.
+[2015/11/19 14:10:19.982]: Clicked back button to go back to LibraryView
+[2015/11/19 15:13:38.212]: 
+[2015/11/19 15:13:38.212]: Library View Clicked Video 4_Programming7SegmentDisplays.mp4, at 0.
+[2015/11/19 15:13:44.336]: Clicked back button to go back to LibraryView
+[2015/11/19 15:13:49.336]: 
+[2015/11/19 15:13:49.336]: Library View Clicked Video 3_SevenSegmentDisplays.mp4, at 0.
+[2015/11/19 15:17:51.302]: PlayerBar: Pressed Pause button.
+[2015/11/19 15:17:57.432]: PlayerBar: Pressed Play button.
+[2015/11/19 15:19:00.949]: PlayerBar: Pressed Pause button.
+[2015/11/19 15:19:20.606]: PlayerBar: Pressed Play button.
+[2015/11/19 15:20:17.619]: Filmstrip: Mouseover 01:16.
+[2015/11/19 15:20:59.653]: Clicked back button to go back to LibraryView
+[2015/11/19 15:21:49.941]: 
+[2015/11/19 15:21:49.941]: Library View Clicked Video 4_Programming7SegmentDisplays.mp4, at 0.
+[2015/11/19 15:24:08.418]: PlayerBar: Pressed Pause button.
+[2015/11/19 15:24:33.201]: PlayerBar: Pressed Play button.
+[2015/11/19 15:25:51.493]: Clicked back button to go back to LibraryView
+[2015/11/19 16:18:41.617]: 
+[2015/11/19 16:18:41.617]: Library View Clicked Video 5_PausingProgramsWithSleep1.mp4, at 0.
+[2015/11/19 16:18:58.096]: PlayerBar: Pressed Pause button.
+[2015/11/19 16:20:59.010]: PlayerBar: Pressed Play button.
+[2015/11/19 16:27:35.618]: Clicked back button to go back to LibraryView
+[2015/11/19 17:14:12.408]: 
+[2015/11/19 17:14:12.408]: Library View Clicked Video 6_AnalogRead.mp4, at 0.
+[2015/11/19 17:20:13.491]: Clicked back button to go back to LibraryView
+[2015/11/19 17:20:26.010]: Exit.

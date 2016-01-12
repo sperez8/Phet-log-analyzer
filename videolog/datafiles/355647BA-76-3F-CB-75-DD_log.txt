@@ -1,0 +1,9 @@
+[2015/11/20 16:39:23.925]: Questionnaire: 1. false, 2. true, 3. true, 4. false.
+[2015/11/20 16:50:09.214]: Starting with Condition 1
+[2015/11/20 16:50:31.077]: Filmstrip: Mouseover 05:47.
+[2015/11/20 16:50:43.532]: 
+[2015/11/20 16:50:43.532]: Library View Clicked Video 0_IntroductionToTheDataAcquisitionDevice(DAQ).mp4, at 0.
+[2015/11/20 16:50:50.313]: Filmstrip: Mouseover 01:20.
+[2015/11/20 16:50:50.626]: Click Filmstrip at 80.42988938924553
+[2015/11/20 16:50:52.845]: PlayerBar: Pressed Pause button.
+[2015/11/20 16:51:34.687]: Exit.

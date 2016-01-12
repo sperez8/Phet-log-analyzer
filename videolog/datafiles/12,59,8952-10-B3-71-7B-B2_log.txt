@@ -1,0 +1,30 @@
+[2015/10/24 19:34:49.849]: Questionnaire: 1. true, 2. true, 3. true, 4. false.
+[2015/10/24 19:35:18.505]: Starting with Condition 1
+[2015/10/24 19:35:42.582]: 
+[2015/10/24 19:35:42.582]: Library View Clicked Video mytubetutorial1.mp4, at 0.
+[2015/10/24 19:35:46.925]: Filmstrip: Mouseover 00:10.
+[2015/10/24 19:35:54.849]: Filmstrip: Mouseover 00:19.
+[2015/10/24 19:35:58.855]: Filmstrip: Mouseover 00:20.
+[2015/10/24 19:35:59.464]: Click Filmstrip at 20.454039436619716
+[2015/10/24 19:35:59.855]: Filmstrip: Mouseover 00:21.
+[2015/10/24 19:36:00.886]: Filmstrip: Mouseover 00:28.
+[2015/10/24 19:36:01.277]: Click Filmstrip at 30.25493333333333
+[2015/10/24 19:36:01.902]: Filmstrip: Mouseover 00:30.
+[2015/10/24 19:36:02.902]: Filmstrip: Mouseover 00:45.
+[2015/10/24 19:36:04.233]: Filmstrip: Selected 33.06 to 55.27.
+[2015/10/24 19:36:04.748]: Filmstrip: Mouseover 00:55.
+[2015/10/24 19:36:05.780]: Filmstrip: Mouseover 00:47.
+[2015/10/24 19:36:06.784]: Filmstrip: Mouseover 00:54.
+[2015/10/24 19:36:07.425]: Filmstrip: Selected 38.11 to 54.73.
+[2015/10/24 19:36:07.800]: Filmstrip: Mouseover 00:43.
+[2015/10/24 19:36:08.815]: Filmstrip: Mouseover 00:32.
+[2015/10/24 19:36:09.331]: Filmstrip: Selected 32.02 to 47.6.
+[2015/10/24 19:36:12.034]: Click Filmstrip at 34.94231737089201
+[2015/10/24 19:36:12.846]: Filmstrip: Selected 15.83 to 40.06.
+[2015/10/24 19:36:16.643]: Click Filmstrip at 29.463556807511733
+[2015/10/24 19:36:17.018]: Filmstrip: Mouseover 00:28.
+[2015/10/24 19:36:17.440]: Click Filmstrip at 21.73241690140845
+[2015/10/24 19:36:18.034]: Filmstrip: Mouseover 00:15.
+[2015/10/24 19:36:18.159]: Click Filmstrip at 15.09702910798122
+[2015/10/24 19:36:18.612]: Click Filmstrip at 9.922644131455398
+[2015/10/24 19:36:19.612]: Clicked back button to go back to LibraryView

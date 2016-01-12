@@ -1,0 +1,460 @@
+[2015/10/21 15:12:21.151]: Questionnaire: 1. true, 2. true, 3. true, 4. false.
+[2015/10/21 15:13:02.019]: Starting with Condition 1
+[2015/10/21 15:13:14.692]: 
+[2015/10/21 15:13:14.692]: Library View Clicked Video mytubetutorial1.mp4, at 0.
+[2015/10/21 15:13:17.900]: Filmstrip: Mouseover 00:11.
+[2015/10/21 15:13:19.667]: Filmstrip: Mouseover 00:25.
+[2015/10/21 15:13:20.667]: Filmstrip: Mouseover 00:34.
+[2015/10/21 15:13:21.996]: Filmstrip: Mouseover 00:10.
+[2015/10/21 15:13:25.762]: Filmstrip: Mouseover 00:12.
+[2015/10/21 15:13:26.090]: Play/paused video by pressing spacebar.
+[2015/10/21 15:13:26.762]: Filmstrip: Mouseover 00:17.
+[2015/10/21 15:13:27.778]: Filmstrip: Mouseover 00:24.
+[2015/10/21 16:42:33.160]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:34.160]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:35.160]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:36.161]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:37.161]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:38.161]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:39.161]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:40.162]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:41.162]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:42.162]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:43.162]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:44.162]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:45.162]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:46.162]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:47.163]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:48.163]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:49.163]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:50.163]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:51.163]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:52.163]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:53.164]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:54.164]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:55.164]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:56.165]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:57.165]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:58.165]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:42:59.165]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:43:00.165]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:43:01.165]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:43:02.165]: Filmstrip: Mouseover 00:46.
+[2015/10/21 16:43:03.369]: Click Filmstrip at 36.988789968652036
+[2015/10/21 16:43:03.369]: 
+[2015/10/21 16:43:03.369]: Library View Clicked Video mytubetutorial1.mp4, at 36.988789968652036.
+[2015/10/21 16:43:03.879]: Filmstrip: Mouseover 00:4294967258.
+[2015/10/21 16:44:09.029]: Player: Clicked player to play video.
+[2015/10/21 16:44:18.266]: Filmstrip: Mouseover 00:20.
+[2015/10/21 16:44:19.266]: Filmstrip: Mouseover 00:55.
+[2015/10/21 16:44:23.813]: Clicked back button to go back to LibraryView
+[2015/10/21 16:44:30.956]: 
+[2015/10/21 16:44:30.956]: Library View Clicked Video (A draft) The MOSFET (part 1 of 3)-U2wWpLQACo8.mp4, at 0.
+[2015/10/21 16:44:33.779]: Clicked back button to go back to LibraryView
+[2015/10/26 14:21:49.714]: Filmstrip: Mouseover 13:41.
+[2015/10/26 14:21:55.462]: Filmstrip: Mouseover 18:57.
+[2015/10/26 14:22:01.028]: Filmstrip: Mouseover 10:30.
+[2015/10/26 14:22:01.053]: Click Filmstrip at 630.8752493264809
+[2015/10/26 14:22:01.053]: 
+[2015/10/26 14:22:01.053]: Library View Clicked Video (A draft) The MOSFET (part 1 of 3)-U2wWpLQACo8.mp4, at 630.8752493264809.
+[2015/10/26 14:22:02.033]: Filmstrip: Mouseover 4294967285:4294967263.
+[2015/10/26 14:22:17.462]: Player: Clicked player to play video.
+[2015/10/26 14:22:49.007]: Clicked back button to go back to LibraryView
+[2015/10/26 14:22:52.112]: Click Filmstrip at 1306.411570170388
+[2015/10/26 14:22:52.112]: 
+[2015/10/26 14:22:52.112]: Library View Clicked Video The FET (field effect transistor)-SjeK1nkiFvI.mp4, at 1306.411570170388.
+[2015/10/26 14:22:52.873]: Filmstrip: Mouseover 4294967278:4294967257.
+[2015/10/26 14:22:53.877]: Filmstrip: Mouseover 4294967278:4294967257.
+[2015/10/26 14:23:05.817]: Player: Clicked player to play video.
+[2015/10/26 14:24:26.816]: Clicked back button to go back to LibraryView
+[2015/10/26 14:24:28.688]: Click Filmstrip at 36.175849529780564
+[2015/10/26 14:24:28.688]: 
+[2015/10/26 14:24:28.688]: Library View Clicked Video mytubetutorial1.mp4, at 36.175849529780564.
+[2015/10/26 14:24:29.142]: Filmstrip: Mouseover 00:4294967258.
+[2015/10/26 14:25:30.839]: Player: Clicked player to play video.
+[2015/10/26 14:25:31.326]: Player: Clicked player to pause video.
+[2015/10/26 14:25:38.279]: Player: Clicked player to play video.
+[2015/10/26 14:25:38.786]: Player: Clicked player to pause video.
+[2015/10/26 14:25:39.128]: Player: Clicked player to play video.
+[2015/10/26 14:25:40.079]: Clicked back button to go back to LibraryView
+[2015/10/26 14:25:42.921]: Click Filmstrip at 1426.265842663084
+[2015/10/26 14:25:42.921]: 
+[2015/10/26 14:25:42.921]: Library View Clicked Video The FET (field effect transistor)-SjeK1nkiFvI.mp4, at 1426.265842663084.
+[2015/10/26 14:25:43.603]: Filmstrip: Mouseover 4294967278:4294967263.
+[2015/10/26 14:25:50.434]: Player: Clicked player to play video.
+[2015/10/26 14:25:51.442]: Player: Clicked player to pause video.
+[2015/10/26 14:26:04.003]: Clicked back button to go back to LibraryView
+[2015/10/26 14:26:07.352]: 
+[2015/10/26 14:26:07.352]: Library View Clicked Video The FET (field effect transistor)-SjeK1nkiFvI.mp4, at 0.
+[2015/10/26 14:26:11.488]: Clicked back button to go back to LibraryView
+[2015/10/26 14:26:14.193]: 
+[2015/10/26 14:26:14.193]: Library View Clicked Video mytubetutorial1.mp4, at 0.
+[2015/10/26 14:26:15.094]: Player: Clicked player to play video.
+[2015/10/26 14:26:19.783]: Player: Clicked player to pause video.
+[2015/10/26 14:26:29.143]: Player: Clicked player to play video.
+[2015/10/26 14:26:29.846]: Player: Clicked player to pause video.
+[2015/10/26 14:26:57.883]: Filmstrip: Mouseover 14:16.
+[2015/10/26 14:26:58.109]: Click Filmstrip at 785.0454848271596
+[2015/10/26 14:26:58.109]: 
+[2015/10/26 14:26:58.109]: Library View Clicked Video The FET (field effect transistor)-SjeK1nkiFvI.mp4, at 785.0454848271596.
+[2015/10/26 14:27:14.653]: Player: Clicked player to play video.
+[2015/10/26 14:27:16.209]: Clicked back button to go back to LibraryView
+[2015/10/26 14:27:18.582]: Filmstrip: Mouseover 19:04.
+[2015/10/26 14:27:19.584]: Filmstrip: Mouseover 18:10.
+[2015/10/26 14:27:20.367]: Click Filmstrip at 1090.6738796835348
+[2015/10/26 14:27:20.367]: 
+[2015/10/26 14:27:20.367]: Library View Clicked Video The FET (field effect transistor)-SjeK1nkiFvI.mp4, at 1090.6738796835348.
+[2015/10/26 14:27:21.710]: Filmstrip: Mouseover 4294967278:4294967247.
+[2015/10/26 14:27:28.374]: Filmstrip: Mouseover 00:01.
+[2015/10/26 14:27:30.696]: Click Filmstrip at 10.58123051434596
+[2015/10/26 14:27:31.230]: Filmstrip: Mouseover 00:10.
+[2015/10/26 14:27:40.802]: Filmstrip: Mouseover 00:28.
+[2015/10/26 14:27:41.815]: Filmstrip: Mouseover 00:33.
+[2015/10/26 14:27:45.154]: Filmstrip: Mouseover 00:24.
+[2015/10/26 14:27:45.625]: Filmstrip: Selected 7.05 to 24.69.
+[2015/10/26 14:27:46.172]: Filmstrip: Mouseover 00:31.
+[2015/10/26 14:27:48.986]: Filmstrip: Mouseover 00:24.
+[2015/10/26 14:27:49.999]: Filmstrip: Mouseover 00:24.
+[2015/10/26 14:27:50.270]: Filmstrip: Selected 15.87 to 35.27.
+[2015/10/26 14:27:51.008]: Filmstrip: Mouseover 00:07.
+[2015/10/26 14:27:51.880]: Click Filmstrip at 45.85199889549916
+[2015/10/26 14:27:52.007]: Filmstrip: Mouseover 00:45.
+[2015/10/26 14:27:52.038]: Click Filmstrip at 45.85199889549916
+[2015/10/26 14:27:53.027]: Filmstrip: Mouseover 00:08.
+[2015/10/26 14:27:53.598]: Click Filmstrip at 10.58123051434596
+[2015/10/26 14:27:53.756]: Click Filmstrip at 8.8176920952883
+[2015/10/26 14:27:54.037]: Filmstrip: Mouseover 00:08.
+[2015/10/26 14:28:22.378]: Filmstrip: Mouseover 20:45.
+[2015/10/26 14:28:23.386]: Filmstrip: Mouseover 20:45.
+[2015/10/26 14:28:24.388]: Filmstrip: Mouseover 20:45.
+[2015/10/26 14:28:25.390]: Filmstrip: Mouseover 20:45.
+[2015/10/26 14:29:11.119]: Player: Clicked player to play video.
+[2015/10/26 14:29:12.917]: Filmstrip: Mouseover 01:17.
+[2015/10/26 14:29:13.676]: Filmstrip: Selected 74.05 to 78.58.
+[2015/10/26 14:29:13.917]: Filmstrip: Mouseover 01:14.
+[2015/10/26 14:29:14.917]: Filmstrip: Mouseover 01:11.
+[2015/10/26 14:29:14.946]: Click Filmstrip at 71.02668409023688
+[2015/10/26 14:29:15.091]: Click Filmstrip at 71.02668409023688
+[2015/10/26 14:35:01.937]: Player: Clicked player to pause video.
+[2015/10/26 14:35:33.928]: Play/paused video by pressing spacebar.
+[2015/10/26 14:35:35.616]: Play/paused video by pressing spacebar.
+[2015/10/26 14:35:43.136]: Play/paused video by pressing spacebar.
+[2015/10/26 14:36:05.194]: Play/paused video by pressing spacebar.
+[2015/10/26 14:36:17.978]: Play/paused video by pressing spacebar.
+[2015/10/26 14:36:53.992]: Play/paused video by pressing spacebar.
+[2015/10/26 14:37:37.061]: Play/paused video by pressing spacebar.
+[2015/10/26 14:37:58.117]: Filmstrip: Mouseover 02:48.
+[2015/10/26 14:37:58.651]: Filmstrip: Selected 162.81 to 168.06.
+[2015/10/26 14:37:59.116]: Filmstrip: Mouseover 02:46.
+[2015/10/26 14:38:00.133]: Filmstrip: Mouseover 02:53.
+[2015/10/26 14:38:01.140]: Filmstrip: Mouseover 02:18.
+[2015/10/26 14:38:01.331]: Filmstrip: Selected 138.3 to 162.81.
+[2015/10/26 14:38:02.149]: Filmstrip: Mouseover 02:39.
+[2015/10/26 14:38:02.394]: Click Filmstrip at 159.30630385487527
+[2015/10/26 14:38:02.567]: Click Filmstrip at 159.30630385487527
+[2015/10/26 14:38:03.166]: Filmstrip: Mouseover 05:22.
+[2015/10/26 14:38:03.927]: Play/paused video by pressing spacebar.
+[2015/10/26 14:38:04.174]: Filmstrip: Mouseover 05:37.
+[2015/10/26 14:38:05.199]: Filmstrip: Mouseover 05:37.
+[2015/10/26 14:38:06.219]: Filmstrip: Mouseover 05:37.
+[2015/10/26 14:38:07.234]: Filmstrip: Mouseover 05:37.
+[2015/10/26 14:38:08.248]: Filmstrip: Mouseover 05:37.
+[2015/10/26 14:38:09.270]: Filmstrip: Mouseover 05:37.
+[2015/10/26 14:38:10.287]: Filmstrip: Mouseover 05:37.
+[2015/10/26 14:38:11.674]: Player: Clicked player to play video.
+[2015/10/26 14:38:33.876]: Player: Clicked player to pause video.
+[2015/10/26 14:39:16.615]: Play/paused video by pressing spacebar.
+[2015/10/26 14:40:39.712]: Play/paused video by pressing spacebar.
+[2015/10/26 14:40:59.626]: Play/paused video by pressing spacebar.
+[2015/10/26 14:45:28.368]: Player: Clicked player to pause video.
+[2015/10/26 14:45:38.469]: Play/paused video by pressing spacebar.
+[2015/10/26 14:46:13.293]: Play/paused video by pressing spacebar.
+[2015/10/26 14:46:49.773]: Play/paused video by pressing spacebar.
+[2015/10/26 14:47:20.839]: Play/paused video by pressing spacebar.
+[2015/10/26 14:47:53.015]: Play/paused video by pressing spacebar.
+[2015/10/26 14:49:05.718]: Filmstrip: Mouseover 05:04.
+[2015/10/26 14:49:06.705]: Click Filmstrip at 295.85456430191124
+[2015/10/26 14:49:06.736]: Filmstrip: Mouseover 04:55.
+[2015/10/26 14:49:06.865]: Click Filmstrip at 295.85456430191124
+[2015/10/26 14:49:09.292]: Player: Clicked player to pause video.
+[2015/10/26 14:49:27.838]: Play/paused video by pressing spacebar.
+[2015/10/26 14:49:59.975]: Play/paused video by pressing spacebar.
+[2015/10/26 14:50:27.852]: Play/paused video by pressing spacebar.
+[2015/10/26 14:50:41.561]: Play/paused video by pressing spacebar.
+[2015/10/26 14:50:55.056]: Play/paused video by pressing spacebar.
+[2015/10/26 14:52:04.016]: Player: Clicked player to pause video.
+[2015/10/26 14:52:06.994]: Filmstrip: Mouseover 20:28.
+[2015/10/26 14:52:08.016]: Filmstrip: Mouseover 20:28.
+[2015/10/26 14:52:09.021]: Filmstrip: Mouseover 20:28.
+[2015/10/26 14:52:11.741]: Filmstrip: Mouseover 16:18.
+[2015/10/26 14:52:12.752]: Filmstrip: Mouseover 16:18.
+[2015/10/26 14:52:13.768]: Filmstrip: Mouseover 16:18.
+[2015/10/26 14:52:14.783]: Filmstrip: Mouseover 16:18.
+[2015/10/26 14:52:15.792]: Filmstrip: Mouseover 16:18.
+[2015/10/26 14:52:16.805]: Filmstrip: Mouseover 16:18.
+[2015/10/26 14:52:20.038]: Filmstrip: Mouseover 05:34.
+[2015/10/26 14:52:20.412]: Click Filmstrip at 337.86941367023
+[2015/10/26 14:52:20.573]: Click Filmstrip at 337.86941367023
+[2015/10/26 14:52:21.050]: Filmstrip: Mouseover 05:37.
+[2015/10/26 14:52:22.058]: Filmstrip: Mouseover 05:37.
+[2015/10/26 14:52:23.059]: Filmstrip: Mouseover 05:37.
+[2015/10/26 14:52:24.064]: Filmstrip: Mouseover 05:37.
+[2015/10/26 14:52:26.000]: PlayerBar: Pressed Pause button.
+[2015/10/26 14:53:07.662]: Play/paused video by pressing spacebar.
+[2015/10/26 14:53:25.191]: Play/paused video by pressing spacebar.
+[2015/10/26 14:53:41.328]: Play/paused video by pressing spacebar.
+[2015/10/26 14:53:50.763]: Play/paused video by pressing spacebar.
+[2015/10/26 14:54:20.440]: Play/paused video by pressing spacebar.
+[2015/10/26 14:54:33.546]: Player: Clicked player to play video.
+[2015/10/26 14:55:18.528]: Player: Clicked player to pause video.
+[2015/10/26 14:55:47.900]: Player: Clicked player to play video.
+[2015/10/26 14:56:34.152]: Player: Clicked player to pause video.
+[2015/10/26 14:56:55.097]: Play/paused video by pressing spacebar.
+[2015/10/26 14:56:57.492]: Play/paused video by pressing spacebar.
+[2015/10/26 14:57:03.573]: Play/paused video by pressing spacebar.
+[2015/10/26 14:57:18.679]: Play/paused video by pressing spacebar.
+[2015/10/26 14:57:30.829]: Play/paused video by pressing spacebar.
+[2015/10/26 14:58:44.279]: Play/paused video by pressing spacebar.
+[2015/10/26 14:58:50.308]: Play/paused video by pressing spacebar.
+[2015/10/26 14:59:12.610]: Play/paused video by pressing spacebar.
+[2015/10/26 15:00:33.210]: Play/paused video by pressing spacebar.
+[2015/10/26 15:03:04.860]: Play/paused video by pressing spacebar.
+[2015/10/26 15:03:36.990]: Player: Clicked player to play video.
+[2015/10/26 15:04:00.444]: Click Filmstrip at 547.9436605118237
+[2015/10/26 15:04:00.475]: Filmstrip: Mouseover 09:07.
+[2015/10/26 15:04:00.600]: Click Filmstrip at 547.9436605118237
+[2015/10/26 15:04:01.479]: Player: Clicked player to pause video.
+[2015/10/26 15:04:44.707]: Player: Clicked player to play video.
+[2015/10/26 15:05:10.369]: Player: Clicked player to pause video.
+[2015/10/26 15:06:02.705]: Player: Clicked player to play video.
+[2015/10/26 15:06:58.233]: Filmstrip: Mouseover 10:33.
+[2015/10/26 15:06:58.261]: Click Filmstrip at 633.7239779721411
+[2015/10/26 15:06:58.400]: Click Filmstrip at 633.7239779721411
+[2015/10/26 15:06:59.233]: Filmstrip: Mouseover 10:33.
+[2015/10/26 15:07:01.583]: Player: Clicked player to pause video.
+[2015/10/26 15:07:18.676]: Play/paused video by pressing spacebar.
+[2015/10/26 15:08:17.928]: Play/paused video by pressing spacebar.
+[2015/10/26 15:09:01.930]: Player: Clicked player to play video.
+[2015/10/26 15:09:02.599]: Player: Clicked player to pause video.
+[2015/10/26 15:09:11.670]: Play/paused video by pressing spacebar.
+[2015/10/26 15:09:29.519]: Player: Clicked player to pause video.
+[2015/10/26 15:09:32.204]: Filmstrip: Mouseover 11:29.
+[2015/10/26 15:09:33.161]: Click Filmstrip at 679.2400647878198
+[2015/10/26 15:09:33.256]: Filmstrip: Mouseover 11:19.
+[2015/10/26 15:09:33.350]: Click Filmstrip at 679.2400647878198
+[2015/10/26 15:09:41.825]: Player: Clicked player to play video.
+[2015/10/26 15:10:12.141]: Play/paused video by pressing spacebar.
+[2015/10/26 15:10:46.689]: Play/paused video by pressing spacebar.
+[2015/10/26 15:11:55.858]: Player: Clicked player to pause video.
+[2015/10/26 15:11:57.683]: Filmstrip: Mouseover 11:17.
+[2015/10/26 15:11:58.151]: Click Filmstrip at 694.9956333009394
+[2015/10/26 15:11:58.314]: Click Filmstrip at 694.9956333009394
+[2015/10/26 15:12:09.399]: Player: Clicked player to play video.
+[2015/10/26 22:55:31.743]: Player: Clicked player to pause video.
+[2015/10/26 22:55:33.433]: Player: Clicked player to play video.
+[2015/10/27 08:24:13.502]: PlayerBar: Pressed Enlarge Button.
+[2015/10/27 08:24:15.330]: PlayerBar: Pressed CC Button.
+[2015/10/27 08:24:22.366]: Player: Clicked player to pause video.
+[2015/10/27 08:24:25.288]: PlayerBar: Pressed CC Button.
+[2015/10/27 08:24:34.197]: Player: Clicked player to play video.
+[2015/10/27 08:25:34.192]: Player: Clicked player to pause video.
+[2015/10/27 08:26:53.825]: Player: Clicked player to play video.
+[2015/10/27 08:27:16.064]: Play/paused video by pressing spacebar.
+[2015/10/27 08:27:43.035]: Player: Clicked player to play video.
+[2015/10/27 08:29:18.699]: Play/paused video by pressing spacebar.
+[2015/10/27 08:29:55.491]: Play/paused video by pressing spacebar.
+[2015/10/27 08:30:54.537]: Play/paused video by pressing spacebar.
+[2015/10/27 08:32:52.438]: Play/paused video by pressing spacebar.
+[2015/10/27 08:35:50.681]: Player: Clicked player to pause video.
+[2015/10/27 08:36:28.346]: Play/paused video by pressing spacebar.
+[2015/10/27 08:37:36.123]: Play/paused video by pressing spacebar.
+[2015/10/27 08:38:09.729]: Player: Clicked player to play video.
+[2015/10/27 08:38:15.730]: Player: Clicked player to pause video.
+[2015/10/27 08:38:40.186]: Player: Clicked player to play video.
+[2015/10/27 08:39:06.768]: Player: Clicked player to pause video.
+[2015/10/27 08:39:26.649]: Player: Clicked player to play video.
+[2015/10/27 08:40:58.862]: Player: Clicked player to pause video.
+[2015/10/27 08:41:05.441]: Player: Clicked player to play video.
+[2015/10/27 08:41:19.135]: Player: Clicked player to pause video.
+[2015/10/27 08:41:36.169]: Player: Clicked player to play video.
+[2015/10/27 08:41:39.748]: PlayerBar: Pressed Play button.
+[2015/10/27 08:42:15.939]: Player: Clicked player to play video.
+[2015/10/27 08:45:53.384]: Play/paused video by pressing spacebar.
+[2015/10/27 08:46:00.354]: Player: Clicked player to play video.
+[2015/10/27 08:46:30.519]: PlayerBar: Pressed Play button.
+[2015/10/27 08:47:00.726]: Player: Clicked player to play video.
+[2015/10/27 08:47:14.682]: Player: Clicked player to pause video.
+[2015/10/27 08:47:39.393]: Player: Clicked player to play video.
+[2015/10/27 08:48:02.678]: Player: Clicked player to pause video.
+[2015/10/27 08:48:06.991]: Player: Clicked player to play video.
+[2015/10/27 08:48:54.265]: Player: Clicked player to pause video.
+[2015/10/27 08:49:06.407]: Player: Clicked player to play video.
+[2015/10/27 08:49:29.301]: Player: Clicked player to pause video.
+[2015/10/27 08:50:41.046]: Player: Clicked player to play video.
+[2015/10/27 09:08:21.906]: Player: Clicked player to pause video.
+[2015/10/27 09:08:45.583]: Player: Clicked player to play video.
+[2015/10/27 09:09:26.226]: Player: Clicked player to pause video.
+[2015/10/27 09:09:57.706]: Player: Clicked player to play video.
+[2015/10/27 09:10:12.273]: Player: Clicked player to pause video.
+[2015/10/27 09:10:43.675]: Player: Clicked player to play video.
+[2015/10/27 09:11:17.966]: Player: Clicked player to pause video.
+[2015/10/27 09:11:19.279]: Player: Clicked player to play video.
+[2015/10/27 09:11:21.248]: Player: Clicked player to pause video.
+[2015/10/27 09:11:37.453]: Player: Clicked player to play video.
+[2015/10/27 09:11:52.850]: Player: Clicked player to pause video.
+[2015/10/27 09:11:59.945]: Player: Clicked player to play video.
+[2015/10/27 09:12:25.793]: Player: Clicked player to pause video.
+[2015/10/27 09:13:07.847]: Player: Clicked player to play video.
+[2015/10/27 09:13:56.090]: Player: Clicked player to pause video.
+[2015/10/27 09:14:13.057]: Player: Clicked player to play video.
+[2015/10/27 09:14:13.542]: Player: Clicked player to pause video.
+[2015/10/27 09:14:19.076]: Play/paused video by pressing spacebar.
+[2015/10/27 09:14:42.455]: Player: Clicked player to pause video.
+[2015/10/27 09:15:36.674]: Player: Clicked player to play video.
+[2015/10/27 09:20:11.527]: Player: Clicked player to pause video.
+[2015/10/27 09:20:54.445]: Player: Clicked player to play video.
+[2015/10/27 09:21:51.519]: Player: Clicked player to pause video.
+[2015/10/27 09:22:25.817]: Player: Clicked player to play video.
+[2015/10/27 09:22:40.304]: Player: Clicked player to pause video.
+[2015/10/27 09:22:43.429]: Player: Clicked player to play video.
+[2015/10/27 09:22:47.039]: Player: Clicked player to pause video.
+[2015/10/27 09:22:55.200]: Player: Clicked player to play video.
+[2015/10/27 09:23:22.032]: Player: Clicked player to pause video.
+[2015/10/27 09:23:25.580]: Player: Clicked player to play video.
+[2015/10/27 09:23:55.199]: Player: Clicked player to pause video.
+[2015/10/27 09:24:26.157]: Player: Clicked player to play video.
+[2015/10/27 09:27:55.386]: Player: Clicked player to pause video.
+[2015/10/27 09:30:00.724]: Play/paused video by pressing spacebar.
+[2015/10/27 09:33:09.162]: Player: Clicked player to pause video.
+[2015/10/27 09:33:39.743]: Player: Clicked player to play video.
+[2015/10/27 09:33:59.404]: Player: Clicked player to pause video.
+[2015/10/27 09:34:29.710]: Player: Clicked player to play video.
+[2015/10/27 09:34:56.079]: Player: Clicked player to pause video.
+[2015/10/27 09:36:14.920]: Player: Clicked player to play video.
+[2015/10/27 09:36:57.357]: Player: Clicked player to pause video.
+[2015/10/27 09:37:05.126]: Player: Clicked player to play video.
+[2015/10/27 09:37:21.019]: Player: Clicked player to pause video.
+[2015/10/27 09:38:52.701]: Player: Clicked player to play video.
+[2015/10/27 09:39:20.207]: Play/paused video by pressing spacebar.
+[2015/10/27 09:39:22.954]: Player: Clicked player to play video.
+[2015/10/27 09:39:40.206]: Play/paused video by pressing spacebar.
+[2015/10/27 09:39:51.276]: Player: Clicked player to play video.
+[2015/10/27 09:40:01.170]: Player: Clicked player to pause video.
+[2015/10/27 09:40:09.734]: Player: Clicked player to play video.
+[2015/10/27 09:40:49.246]: Player: Clicked player to pause video.
+[2015/10/27 09:41:16.675]: Player: Clicked player to play video.
+[2015/10/27 09:41:41.451]: Player: Clicked player to pause video.
+[2015/10/27 09:42:16.283]: Player: Clicked player to play video.
+[2015/10/27 09:42:47.899]: Player: Clicked player to pause video.
+[2015/10/27 09:43:20.374]: Player: Clicked player to play video.
+[2015/10/27 09:43:23.093]: Player: Clicked player to pause video.
+[2015/10/27 09:43:37.611]: Player: Clicked player to play video.
+[2015/10/27 09:43:54.129]: Player: Clicked player to pause video.
+[2015/10/27 09:44:09.728]: Player: Clicked player to play video.
+[2015/10/27 09:44:52.458]: Player: Clicked player to pause video.
+[2015/10/27 09:45:07.601]: Player: Clicked player to play video.
+[2015/10/27 09:45:39.091]: Player: Clicked player to pause video.
+[2015/10/27 09:46:01.459]: Player: Clicked player to play video.
+[2015/10/27 09:47:30.476]: Player: Clicked player to pause video.
+[2015/10/27 09:47:44.747]: Player: Clicked player to play video.
+[2015/10/27 09:47:45.966]: Player: Clicked player to pause video.
+[2015/10/27 09:47:55.076]: Player: Clicked player to play video.
+[2015/10/27 09:47:56.983]: Player: Clicked player to pause video.
+[2015/10/27 09:48:35.775]: Player: Clicked player to play video.
+[2015/10/27 09:49:08.453]: Player: Clicked player to pause video.
+[2015/10/27 09:49:49.999]: Player: Clicked player to play video.
+[2015/10/27 09:50:30.667]: Player: Clicked player to pause video.
+[2015/10/27 09:50:38.095]: Player: Clicked player to play video.
+[2015/10/27 09:51:41.983]: Player: Clicked player to pause video.
+[2015/10/27 09:52:21.130]: Player: Clicked player to play video.
+[2015/10/27 09:53:16.564]: Player: Clicked player to pause video.
+[2015/10/27 09:53:37.349]: Player: Clicked player to play video.
+[2015/10/27 09:54:05.167]: Player: Clicked player to pause video.
+[2015/10/27 09:54:34.729]: Player: Clicked player to play video.
+[2015/10/27 09:54:35.260]: Player: Clicked player to pause video.
+[2015/10/27 09:54:48.263]: Player: Clicked player to play video.
+[2015/10/27 09:55:30.428]: Player: Clicked player to pause video.
+[2015/10/27 09:55:55.495]: Player: Clicked player to play video.
+[2015/10/27 09:56:19.397]: Player: Clicked player to pause video.
+[2015/10/27 09:56:56.389]: Player: Clicked player to play video.
+[2015/10/27 09:57:22.598]: Player: Clicked player to pause video.
+[2015/10/27 09:57:58.267]: Clicked back button to go back to LibraryView
+[2015/10/27 09:58:00.767]: Click Filmstrip at 715.2364745271149
+[2015/10/27 09:58:00.767]: 
+[2015/10/27 09:58:00.767]: Library View Clicked Video (A draft) The MOSFET (part 1 of 3)-U2wWpLQACo8.mp4, at 715.2364745271149.
+[2015/10/27 09:58:03.298]: Filmstrip: Mouseover 4294967285:4294967267.
+[2015/10/27 09:59:06.893]: Player: Clicked player to play video.
+[2015/10/27 10:01:52.805]: Play/paused video by pressing spacebar.
+[2015/10/27 10:02:13.694]: Player: Clicked player to play video.
+[2015/10/27 10:02:45.234]: Player: Clicked player to pause video.
+[2015/10/27 10:03:12.486]: Player: Clicked player to play video.
+[2015/10/27 10:03:56.920]: Player: Clicked player to pause video.
+[2015/10/27 10:04:27.527]: Player: Clicked player to play video.
+[2015/10/27 10:04:59.580]: Player: Clicked player to pause video.
+[2015/10/27 10:05:28.057]: Player: Clicked player to play video.
+[2015/10/27 10:05:42.858]: Player: Clicked player to pause video.
+[2015/10/27 10:05:49.922]: Player: Clicked player to play video.
+[2015/10/27 10:06:02.736]: Player: Clicked player to pause video.
+[2015/10/27 10:06:19.942]: Player: Clicked player to play video.
+[2015/10/27 10:06:37.320]: Player: Clicked player to pause video.
+[2015/10/27 10:07:07.825]: Player: Clicked player to play video.
+[2015/10/27 10:07:57.927]: PlayerBar: Pressed Play button.
+[2015/10/27 10:08:15.963]: Player: Clicked player to play video.
+[2015/10/27 10:09:58.001]: Player: Clicked player to pause video.
+[2015/10/27 10:10:16.087]: Player: Clicked player to play video.
+[2015/10/27 10:10:57.843]: Player: Clicked player to pause video.
+[2015/10/27 10:11:16.439]: Player: Clicked player to play video.
+[2015/10/27 10:11:40.709]: Player: Clicked player to pause video.
+[2015/10/27 10:12:23.234]: Player: Clicked player to play video.
+[2015/10/27 10:13:59.974]: Player: Clicked player to pause video.
+[2015/10/27 10:14:40.077]: Player: Clicked player to play video.
+[2015/10/27 10:15:36.234]: Player: Clicked player to pause video.
+[2015/10/27 10:16:09.784]: Player: Clicked player to play video.
+[2015/10/27 10:19:29.201]: Player: Clicked player to pause video.
+[2015/10/27 10:20:06.254]: Player: Clicked player to play video.
+[2015/10/27 10:20:37.688]: Player: Clicked player to pause video.
+[2015/10/27 10:20:55.066]: Player: Clicked player to play video.
+[2015/10/27 10:21:10.162]: Player: Clicked player to pause video.
+[2015/10/27 10:22:34.722]: Player: Clicked player to play video.
+[2015/10/27 10:23:20.736]: Player: Clicked player to pause video.
+[2015/10/27 10:24:02.912]: Player: Clicked player to play video.
+[2015/10/27 10:24:52.294]: Player: Clicked player to pause video.
+[2015/10/27 10:25:07.753]: Player: Clicked player to play video.
+[2015/10/27 10:25:22.411]: Player: Clicked player to pause video.
+[2015/10/27 10:27:18.980]: Player: Clicked player to play video.
+[2015/10/27 10:28:30.640]: Player: Clicked player to pause video.
+[2015/10/27 10:29:05.318]: Player: Clicked player to play video.
+[2015/10/27 10:29:29.731]: Player: Clicked player to pause video.
+[2015/10/27 10:30:07.168]: Player: Clicked player to play video.
+[2015/10/27 10:30:33.395]: Player: Clicked player to pause video.
+[2015/10/27 10:31:25.072]: Player: Clicked player to play video.
+[2015/10/27 10:31:56.757]: Player: Clicked player to pause video.
+[2015/10/27 10:32:21.104]: Player: Clicked player to play video.
+[2015/10/27 10:33:21.114]: Player: Clicked player to pause video.
+[2015/10/27 10:33:52.745]: Player: Clicked player to play video.
+[2015/10/27 10:34:24.149]: Player: Clicked player to pause video.
+[2015/10/27 10:35:21.486]: Player: Clicked player to play video.
+[2015/10/27 10:35:43.412]: Player: Clicked player to pause video.
+[2015/10/27 10:35:53.133]: Player: Clicked player to play video.
+[2015/10/27 10:36:12.667]: Play/paused video by pressing spacebar.
+[2015/10/27 10:36:59.847]: Player: Clicked player to play video.
+[2015/10/27 10:37:21.679]: Player: Clicked player to pause video.
+[2015/10/27 10:37:28.667]: Player: Clicked player to play video.
+[2015/10/27 10:38:05.970]: Player: Clicked player to pause video.
+[2015/10/27 10:38:37.678]: Player: Clicked player to play video.
+[2015/10/27 10:39:45.314]: Play/paused video by pressing spacebar.
+[2015/10/27 10:40:55.749]: Player: Clicked player to play video.
+[2015/10/27 10:41:07.641]: Player: Clicked player to pause video.
+[2015/10/27 10:41:29.144]: Player: Clicked player to play video.
+[2015/10/27 10:41:39.239]: Player: Clicked player to pause video.
+[2015/10/27 10:42:09.242]: Player: Clicked player to play video.
+[2015/10/27 10:42:53.984]: Player: Clicked player to pause video.
+[2015/10/27 10:43:16.251]: Player: Clicked player to play video.
+[2015/10/27 10:44:34.083]: Play/paused video by pressing spacebar.
+[2015/10/27 10:45:23.088]: Player: Clicked player to play video.
+[2015/10/27 10:45:33.621]: Player: Clicked player to pause video.
+[2015/10/27 10:46:10.228]: Player: Clicked player to play video.
+[2015/10/27 10:46:27.142]: Player: Clicked player to pause video.
+[2015/10/27 10:47:36.026]: Player: Clicked player to play video.
+[2015/10/27 10:48:04.187]: Player: Clicked player to pause video.
+[2015/10/27 10:48:41.646]: Player: Clicked player to play video.

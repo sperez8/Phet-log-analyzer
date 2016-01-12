@@ -1,0 +1,6 @@
+[2015/11/19 20:40:39.953]: Questionnaire: 1. false, 2. true, 3. false, 4. false.
+[2015/11/19 20:41:13.220]: Starting with Condition 1
+[2015/11/19 20:41:33.129]: Filmstrip: Mouseover 02:21.
+[2015/11/19 20:41:37.080]: Filmstrip: Mouseover 01:24.
+[2015/11/19 20:41:38.080]: Filmstrip: Mouseover 01:24.
+[2015/11/19 20:41:39.597]: Exit.

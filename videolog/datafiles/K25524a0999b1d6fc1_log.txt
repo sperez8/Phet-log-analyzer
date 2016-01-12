@@ -1,0 +1,13 @@
+[2015/11/20 15:03:49.398]: Questionnaire: 1. false, 2. true, 3. false, 4. false.
+[2015/11/20 15:04:23.581]: Starting with Condition 2
+[2015/11/20 15:04:49.048]: Click Filmstrip at 77.54551599161282
+[2015/11/20 15:04:49.049]: 
+[2015/11/20 15:04:49.049]: Library View Clicked Video 4_Programming7SegmentDisplays.mp4, at 77.54551599161282.
+[2015/11/20 15:04:49.225]: Filmstrip: Mouseover 4294967293:4294967281.
+[2015/11/20 15:04:53.175]: Player: Clicked player to play video.
+[2015/11/20 15:04:53.406]: Player: Clicked player to pause video.
+[2015/11/20 15:05:05.613]: Pixie: Start highlighting in 16489147 from 16.05.
+[2015/11/20 15:05:07.247]: Player: Clicked player to play video.
+[2015/11/20 15:05:09.423]: Pixie: Stop highlighting in 0 at 17.69.
+[2015/11/20 15:05:12.370]: Player: Clicked player to pause video.
+[2015/11/20 15:05:17.510]: Exit.

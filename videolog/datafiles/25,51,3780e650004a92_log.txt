@@ -1,0 +1,232 @@
+[2015/11/05 18:43:59.044]: Questionnaire: 1. true, 2. true, 3. true, 4. false.
+[2015/11/05 18:44:36.219]: Starting with Condition 1
+[2015/11/05 18:44:57.366]: Filmstrip: Mouseover 03:36.
+[2015/11/05 18:44:58.367]: Filmstrip: Mouseover 03:09.
+[2015/11/05 18:44:59.382]: Filmstrip: Mouseover 01:45.
+[2015/11/05 18:45:00.398]: Filmstrip: Mouseover 04:23.
+[2015/11/05 18:45:03.936]: 
+[2015/11/05 18:45:03.936]: Library View Clicked Video mytubetutorial1.mp4, at 0.
+[2015/11/05 18:46:17.074]: Clicked back button to go back to LibraryView
+[2015/11/05 18:46:21.112]: 
+[2015/11/05 18:46:21.112]: Library View Clicked Video 0_IntroductionToTheDataAcquisitionDevice(DAQ).mp4, at 0.
+[2015/11/05 18:46:23.745]: PlayerBar: Pressed Pause button.
+[2015/11/05 18:48:16.600]: PlayerBar: Pressed Play button.
+[2015/11/05 18:50:34.972]: Click Filmstrip at 130.72145808311694
+[2015/11/05 18:50:34.997]: Filmstrip: Mouseover 02:10.
+[2015/11/05 18:50:36.001]: Click Filmstrip at 120.13831155165019
+[2015/11/05 18:50:36.027]: Filmstrip: Mouseover 02:00.
+[2015/11/05 18:50:36.718]: Click Filmstrip at 104.85154433953157
+[2015/11/05 18:50:37.036]: Filmstrip: Mouseover 01:44.
+[2015/11/05 18:50:43.438]: PlayerBar: Pressed Enlarge Button.
+[2015/11/05 18:50:45.355]: PlayerBar: Pressed Enlarge Button.
+[2015/11/05 18:50:47.740]: PlayerBar: Pressed Enlarge Button.
+[2015/11/05 18:52:15.271]: Player: Clicked player to play video.
+[2015/11/05 18:52:30.872]: Player: Clicked player to pause video.
+[2015/11/05 18:58:49.680]: 
+[2015/11/05 18:58:49.680]: Library View Clicked Video 1_IntroductionToDAQProgramming.mp4, at 0.
+[2015/11/05 19:02:21.205]: PlayerBar: Pressed Enlarge Button.
+[2015/11/05 19:02:26.296]: PlayerBar: Pressed Enlarge Button.
+[2015/11/05 19:06:35.674]: Player: Clicked player to play video.
+[2015/11/05 19:09:16.689]: Player: Clicked player to pause video.
+[2015/11/05 19:09:19.811]: Player: Clicked player to play video.
+[2015/11/05 19:11:07.888]: Player: Clicked player to pause video.
+[2015/11/05 19:11:13.405]: Player: Clicked player to play video.
+[2015/11/05 19:11:36.526]: Player: Clicked player to pause video.
+[2015/11/05 19:11:57.384]: Player: Clicked player to play video.
+[2015/11/05 19:13:24.605]: Player: Clicked player to pause video.
+[2015/11/05 19:14:03.560]: Player: Clicked player to play video.
+[2015/11/05 19:14:15.696]: Player: Clicked player to pause video.
+[2015/11/05 19:14:58.300]: Player: Clicked player to play video.
+[2015/11/05 19:18:05.225]: Player: Clicked player to pause video.
+[2015/11/05 19:18:33.790]: Player: Clicked player to play video.
+[2015/11/05 19:19:07.813]: PlayerBar: Pressed Enlarge Button.
+[2015/11/05 19:20:53.279]: 
+[2015/11/05 19:20:53.280]: Library View Clicked Video 1_IntroductionToDAQProgramming.mp4, at 0.
+[2015/11/05 19:20:56.607]: Filmstrip: Mouseover 06:34.
+[2015/11/05 19:20:59.384]: Filmstrip: Mouseover 07:27.
+[2015/11/05 19:21:00.394]: Filmstrip: Mouseover 07:23.
+[2015/11/05 19:21:01.415]: Filmstrip: Mouseover 06:48.
+[2015/11/05 19:21:01.594]: Filmstrip: Selected 409 to 424.03.
+[2015/11/05 19:21:02.418]: Filmstrip: Mouseover 06:32.
+[2015/11/05 19:21:03.438]: Filmstrip: Mouseover 06:44.
+[2015/11/05 19:21:03.459]: Click Filmstrip at 404.13448053399765
+[2015/11/05 19:21:03.665]: Click Filmstrip at 404.13448053399765
+[2015/11/05 19:21:04.453]: Filmstrip: Mouseover 06:38.
+[2015/11/05 19:21:06.823]: Click Filmstrip at 363.01357605953183
+[2015/11/05 19:21:06.980]: Click Filmstrip at 363.01357605953183
+[2015/11/05 19:21:07.140]: Filmstrip: Mouseover 06:03.
+[2015/11/05 19:21:08.159]: Filmstrip: Mouseover 05:55.
+[2015/11/05 19:21:09.040]: Click Filmstrip at 353.2860502698732
+[2015/11/05 19:21:09.179]: Click Filmstrip at 353.2860502698732
+[2015/11/05 19:21:09.203]: Filmstrip: Mouseover 05:53.
+[2015/11/05 19:21:26.876]: PlayerBar: Pressed Enlarge Button.
+[2015/11/05 19:21:37.476]: Player: Clicked player to play video.
+[2015/11/05 19:21:41.268]: Player: Clicked player to pause video.
+[2015/11/05 19:21:44.334]: Player: Clicked player to play video.
+[2015/11/05 19:21:47.608]: Player: Clicked player to pause video.
+[2015/11/05 19:21:47.786]: Player: Clicked player to play video.
+[2015/11/05 19:21:48.368]: Player: Clicked player to pause video.
+[2015/11/05 19:21:51.226]: Player: Clicked player to play video.
+[2015/11/05 19:21:51.404]: Player: Clicked player to pause video.
+[2015/11/05 19:21:52.156]: Player: Clicked player to play video.
+[2015/11/05 19:21:53.603]: Player: Clicked player to pause video.
+[2015/11/05 19:21:56.783]: Clicked back button to go back to LibraryView
+[2015/11/05 19:21:58.446]: 
+[2015/11/05 19:21:58.446]: Library View Clicked Video 1_IntroductionToDAQProgramming.mp4, at 0.
+[2015/11/05 19:22:00.345]: Player: Clicked player to play video.
+[2015/11/05 19:22:02.337]: Exit.
+[2015/11/05 19:22:07.320]: 
+[2015/11/05 19:22:07.321]: Library View Clicked Video 1_IntroductionToDAQProgramming.mp4, at 0.
+[2015/11/05 19:22:09.116]: PlayerBar: Pressed Enlarge Button.
+[2015/11/05 19:22:14.681]: Player: Clicked player to play video.
+[2015/11/05 19:22:14.874]: Player: Clicked player to pause video.
+[2015/11/05 19:22:15.924]: Player: Clicked player to play video.
+[2015/11/05 19:22:16.262]: Player: Clicked player to pause video.
+[2015/11/05 19:22:16.424]: Player: Clicked player to play video.
+[2015/11/05 19:22:17.166]: Player: Clicked player to pause video.
+[2015/11/05 19:22:17.320]: Player: Clicked player to play video.
+[2015/11/05 19:22:18.150]: Player: Clicked player to pause video.
+[2015/11/05 19:22:18.916]: Player: Clicked player to play video.
+[2015/11/05 19:22:24.242]: PlayerBar: Pressed Enlarge Button.
+[2015/11/05 19:22:26.026]: Filmstrip: Mouseover 07:15.
+[2015/11/05 19:22:26.479]: Player: Clicked player to pause video.
+[2015/11/05 19:22:31.449]: PlayerBar: Pressed Enlarge Button.
+[2015/11/05 19:23:22.089]: Player: Clicked player to play video.
+[2015/11/05 19:24:13.065]: Player: Clicked player to pause video.
+[2015/11/05 19:24:46.850]: Player: Clicked player to play video.
+[2015/11/05 19:28:22.422]: Player: Clicked player to pause video.
+[2015/11/05 19:29:02.250]: Player: Clicked player to play video.
+[2015/11/05 19:29:05.930]: Player: Clicked player to pause video.
+[2015/11/05 19:29:21.994]: Player: Clicked player to play video.
+[2015/11/05 19:31:15.961]: Player: Clicked player to pause video.
+[2015/11/05 19:31:32.629]: Player: Clicked player to play video.
+[2015/11/05 19:31:40.841]: Player: Clicked player to pause video.
+[2015/11/05 19:31:44.540]: Player: Clicked player to play video.
+[2015/11/05 19:31:45.144]: Player: Clicked player to pause video.
+[2015/11/05 19:31:46.273]: Player: Clicked player to play video.
+[2015/11/05 19:46:10.418]: Clicked back button to go back to LibraryView
+[2015/11/05 19:46:22.834]: 
+[2015/11/05 19:46:22.834]: Library View Clicked Video 2_DigitalReadAndWrite.mp4, at 0.
+[2015/11/05 19:48:58.324]: Player: Clicked player to play video.
+[2015/11/05 19:50:34.017]: Player: Clicked player to pause video.
+[2015/11/05 19:51:12.222]: Player: Clicked player to play video.
+[2015/11/05 19:54:10.941]: Player: Clicked player to pause video.
+[2015/11/05 19:54:32.439]: Player: Clicked player to play video.
+[2015/11/05 19:55:22.172]: Player: Clicked player to pause video.
+[2015/11/05 19:57:19.189]: Player: Clicked player to play video.
+[2015/11/05 19:57:49.131]: Player: Clicked player to pause video.
+[2015/11/05 19:58:37.372]: Player: Clicked player to play video.
+[2015/11/05 20:00:25.832]: Player: Clicked player to pause video.
+[2015/11/05 20:00:33.526]: Player: Clicked player to play video.
+[2015/11/05 20:00:39.410]: Player: Clicked player to pause video.
+[2015/11/05 20:00:50.368]: Player: Clicked player to play video.
+[2015/11/05 20:00:50.927]: Player: Clicked player to pause video.
+[2015/11/05 20:00:54.787]: Player: Clicked player to play video.
+[2015/11/05 20:02:01.904]: Player: Clicked player to pause video.
+[2015/11/05 20:02:06.953]: Player: Clicked player to play video.
+[2015/11/05 20:03:56.113]: Player: Clicked player to pause video.
+[2015/11/05 20:06:12.227]: Player: Clicked player to play video.
+[2015/11/05 20:06:12.378]: Player: Clicked player to pause video.
+[2015/11/05 20:06:13.828]: Player: Clicked player to play video.
+[2015/11/05 20:08:38.280]: Player: Clicked player to pause video.
+[2015/11/05 20:09:19.870]: Player: Clicked player to play video.
+[2015/11/05 20:09:21.770]: Player: Clicked player to pause video.
+[2015/11/05 20:09:24.322]: Player: Clicked player to play video.
+[2015/11/05 20:12:53.106]: Player: Clicked player to pause video.
+[2015/11/05 20:13:08.568]: Player: Clicked player to play video.
+[2015/11/05 20:39:48.314]: 
+[2015/11/05 20:39:48.315]: Library View Clicked Video 2_DigitalReadAndWrite.mp4, at 0.
+[2015/11/05 20:39:55.417]: PlayerBar: Pressed Enlarge Button.
+[2015/11/05 20:40:48.264]: Player: Clicked player to play video.
+[2015/11/05 20:41:55.580]: Player: Clicked player to pause video.
+[2015/11/05 20:42:34.790]: Player: Clicked player to play video.
+[2015/11/05 20:43:08.152]: Player: Clicked player to pause video.
+[2015/11/05 20:43:22.378]: Player: Clicked player to play video.
+[2015/11/05 20:44:32.654]: Player: Clicked player to pause video.
+[2015/11/05 20:55:16.641]: Clicked back button to go back to LibraryView
+[2015/11/05 21:06:22.406]: 
+[2015/11/05 21:06:22.407]: Library View Clicked Video 3_SevenSegmentDisplays.mp4, at 0.
+[2015/11/05 21:06:23.849]: Player: Clicked player to play video.
+[2015/11/05 21:50:06.554]: Player: Clicked player to pause video.
+[2015/11/06 00:04:23.109]: Clicked back button to go back to LibraryView
+[2015/11/06 00:04:27.414]: 
+[2015/11/06 00:04:27.414]: Library View Clicked Video 4_Programming7SegmentDisplays.mp4, at 0.
+[2015/11/06 00:04:38.416]: Player: Clicked player to play video.
+[2015/11/06 00:04:39.171]: Player: Clicked player to pause video.
+[2015/11/06 00:04:44.703]: Player: Clicked player to play video.
+[2015/11/06 00:05:01.817]: Player: Clicked player to pause video.
+[2015/11/06 00:05:06.011]: Player: Clicked player to play video.
+[2015/11/06 00:07:18.358]: Player: Clicked player to pause video.
+[2015/11/06 00:07:21.526]: Player: Clicked player to play video.
+[2015/11/06 00:07:21.916]: Player: Clicked player to pause video.
+[2015/11/06 00:07:25.590]: Player: Clicked player to play video.
+[2015/11/06 00:07:26.600]: Player: Clicked player to pause video.
+[2015/11/06 00:08:01.925]: Player: Clicked player to play video.
+[2015/11/06 00:09:00.737]: Player: Clicked player to pause video.
+[2015/11/06 00:09:04.473]: Player: Clicked player to play video.
+[2015/11/06 00:09:35.547]: Player: Clicked player to pause video.
+[2015/11/06 00:09:52.053]: Player: Clicked player to play video.
+[2015/11/06 00:11:14.768]: Player: Clicked player to pause video.
+[2015/11/06 00:11:26.018]: Player: Clicked player to play video.
+[2015/11/06 00:14:44.529]: Player: Clicked player to pause video.
+[2015/11/06 00:20:21.068]: Player: Clicked player to pause video.
+[2015/11/06 00:20:46.821]: Player: Clicked player to play video.
+[2015/11/06 00:24:21.216]: Player: Clicked player to pause video.
+[2015/11/06 00:24:23.888]: Player: Clicked player to play video.
+[2015/11/06 00:25:48.529]: Player: Clicked player to pause video.
+[2015/11/06 00:25:50.113]: Clicked back button to go back to LibraryView
+[2015/11/06 00:26:01.068]: 
+[2015/11/06 00:26:01.068]: Library View Clicked Video 5_PausingProgramsWithSleep1.mp4, at 0.
+[2015/11/06 00:30:52.341]: Player: Clicked player to play video.
+[2015/11/06 00:32:49.766]: Player: Clicked player to pause video.
+[2015/11/06 00:33:10.458]: Player: Clicked player to play video.
+[2015/11/06 00:33:47.775]: Player: Clicked player to pause video.
+[2015/11/06 00:34:00.068]: Player: Clicked player to play video.
+[2015/11/06 00:35:22.134]: Player: Clicked player to pause video.
+[2015/11/06 00:37:02.934]: Player: Clicked player to play video.
+[2015/11/06 00:37:53.708]: Player: Clicked player to pause video.
+[2015/11/06 00:38:06.098]: Player: Clicked player to play video.
+[2015/11/06 00:38:14.990]: Player: Clicked player to pause video.
+[2015/11/06 00:38:16.233]: Player: Clicked player to play video.
+[2015/11/06 00:38:19.529]: Player: Clicked player to pause video.
+[2015/11/06 00:38:20.489]: Player: Clicked player to play video.
+[2015/11/06 00:50:56.558]: Player: Clicked player to pause video.
+[2015/11/06 00:51:55.393]: Player: Clicked player to play video.
+[2015/11/06 00:52:09.065]: Player: Clicked player to pause video.
+[2015/11/06 00:52:13.543]: Player: Clicked player to play video.
+[2015/11/06 01:00:04.007]: Player: Clicked player to pause video.
+[2015/11/06 01:00:43.976]: Player: Clicked player to play video.
+[2015/11/06 01:01:15.001]: Player: Clicked player to pause video.
+[2015/11/06 01:01:16.589]: Player: Clicked player to play video.
+[2015/11/06 01:01:23.979]: Player: Clicked player to pause video.
+[2015/11/06 01:01:30.914]: Player: Clicked player to play video.
+[2015/11/06 01:03:07.835]: Player: Clicked player to pause video.
+[2015/11/06 01:03:48.309]: Player: Clicked player to play video.
+[2015/11/06 01:04:14.501]: Player: Clicked player to pause video.
+[2015/11/06 01:05:36.212]: Clicked back button to go back to LibraryView
+[2015/11/06 01:06:10.870]: Filmstrip: Mouseover 05:04.
+[2015/11/06 04:50:18.831]: 
+[2015/11/06 04:50:18.831]: Library View Clicked Video 6_AnalogRead.mp4, at 0.
+[2015/11/06 04:52:24.723]: Player: Clicked player to play video.
+[2015/11/06 04:55:22.125]: Player: Clicked player to pause video.
+[2015/11/06 04:55:36.433]: Player: Clicked player to play video.
+[2015/11/06 04:55:52.113]: Player: Clicked player to pause video.
+[2015/11/06 05:00:49.009]: Player: Clicked player to play video.
+[2015/11/06 05:01:52.586]: Player: Clicked player to pause video.
+[2015/11/06 05:02:33.335]: Player: Clicked player to play video.
+[2015/11/06 05:02:54.517]: Player: Clicked player to pause video.
+[2015/11/06 05:03:05.531]: Player: Clicked player to play video.
+[2015/11/06 05:05:25.989]: Player: Clicked player to pause video.
+[2015/11/06 05:05:28.173]: Player: Clicked player to play video.
+[2015/11/06 05:05:28.672]: Player: Clicked player to pause video.
+[2015/11/06 05:06:10.095]: Player: Clicked player to play video.
+[2015/11/06 05:08:07.531]: Player: Clicked player to play video.
+[2015/11/06 05:09:07.152]: Player: Clicked player to pause video.
+[2015/11/06 05:10:04.568]: Clicked back button to go back to LibraryView
+[2015/11/06 05:11:42.474]: 
+[2015/11/06 05:11:42.475]: Library View Clicked Video 7_DAQReview.mp4, at 0.
+[2015/11/06 05:15:38.768]: Player: Clicked player to play video.
+[2015/11/06 05:16:51.984]: Player: Clicked player to pause video.
+[2015/11/06 05:17:26.164]: Player: Clicked player to play video.
+[2015/11/06 07:32:58.015]: Clicked back button to go back to LibraryView
+[2015/11/06 07:33:01.249]: Exit.

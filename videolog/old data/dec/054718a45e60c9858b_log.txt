@@ -1,0 +1,154 @@
+[2015/10/24 17:29:27.466]: Questionnaire: 1. false, 2. true, 3. false, 4. false.
+[2015/10/24 17:29:51.598]: Starting with Condition 2
+[2015/10/24 17:30:09.452]: Filmstrip: Mouseover 12:57.
+[2015/10/24 17:30:12.117]: Filmstrip: Mouseover 10:23.
+[2015/10/24 17:30:13.236]: Filmstrip: Mouseover 01:02.
+[2015/10/24 17:30:14.252]: Filmstrip: Mouseover 00:58.
+[2015/10/24 17:30:15.267]: Filmstrip: Mouseover 00:58.
+[2015/10/24 17:30:15.519]: Click Filmstrip at 58.72357784743992
+[2015/10/24 17:30:15.519]: 
+[2015/10/24 17:30:15.519]: Library View Clicked Video myviewtutorial1.mp4, at 58.72357784743992.
+[2015/10/24 17:30:16.275]: Filmstrip: Mouseover 4294967295:4294967277.
+[2015/10/24 17:30:17.277]: Filmstrip: Mouseover 4294967295:4294967277.
+[2015/10/24 17:32:22.713]: Clicked back button to go back to LibraryView
+[2015/10/24 17:32:23.806]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:24.806]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:25.806]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:26.820]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:27.823]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:28.823]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:29.839]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:30.840]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:31.856]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:32.856]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:33.855]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:34.856]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:35.855]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:36.855]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:37.872]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:38.872]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:39.872]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:40.887]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:41.905]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:42.923]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:43.935]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:44.936]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:45.936]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:46.936]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:47.937]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:48.937]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:49.937]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:50.938]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:51.955]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:52.972]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:53.971]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:54.971]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:55.987]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:57.002]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:58.018]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:32:59.037]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:00.053]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:01.054]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:02.054]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:03.054]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:04.070]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:05.070]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:06.086]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:07.087]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:08.087]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:09.105]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:10.104]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:11.104]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:12.120]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:13.136]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:14.136]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:15.137]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:16.153]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:17.153]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:18.168]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:19.169]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:20.169]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:21.169]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:22.186]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:23.185]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:24.203]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:25.203]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:26.219]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:27.219]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:28.219]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:29.236]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:30.248]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:31.251]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:32.253]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:33.269]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:34.284]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:35.303]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:36.303]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:37.319]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:38.319]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:39.334]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:40.334]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:41.335]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:42.352]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:43.368]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:44.368]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:45.369]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:46.368]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:47.369]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:48.384]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:49.397]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:50.400]: Filmstrip: Mouseover 00:02.
+[2015/10/24 17:33:51.401]: Filmstrip: Mouseover 00:02.
+[2015/10/24 18:45:32.591]: Filmstrip: Mouseover 16:33.
+[2015/11/01 15:11:45.263]: Filmstrip: Mouseover 09:13.
+[2015/11/01 15:11:46.279]: Filmstrip: Mouseover 09:13.
+[2015/11/01 15:11:47.279]: Filmstrip: Mouseover 09:13.
+[2015/11/01 15:11:48.279]: Filmstrip: Mouseover 09:13.
+[2015/11/01 15:11:49.297]: Filmstrip: Mouseover 09:13.
+[2015/11/01 15:11:50.308]: Filmstrip: Mouseover 09:13.
+[2015/11/01 15:11:51.861]: Filmstrip: Mouseover 08:55.
+[2015/11/01 15:11:52.875]: Filmstrip: Mouseover 05:55.
+[2015/11/01 15:11:53.875]: Filmstrip: Mouseover 02:08.
+[2015/11/01 15:11:54.241]: Click Filmstrip at 245.74791688880362
+[2015/11/01 15:11:54.242]: 
+[2015/11/01 15:11:54.242]: Library View Clicked Video (A draft) The MOSFET (part 1 of 3)-U2wWpLQACo8.mp4, at 245.74791688880362.
+[2015/11/01 15:11:56.551]: PlayerBar: Pressed Pause button.
+[2015/11/01 15:13:06.159]: PlayerBar: Pressed Play button.
+[2015/11/01 15:13:27.369]: PlayerBar: Pressed Pause button.
+[2015/11/01 15:14:53.925]: PlayerBar: Pressed Play button.
+[2015/11/01 15:15:01.246]: Filmstrip: Mouseover 01:31.
+[2015/11/01 15:15:02.262]: Filmstrip: Mouseover 00:32.
+[2015/11/01 15:15:05.921]: Filmstrip: Selected 2.2 to 3.3.
+[2015/11/01 15:15:06.273]: Filmstrip: Mouseover 00:02.
+[2015/11/01 15:15:06.857]: Filmstrip: Selected 0 to 39.29.
+[2015/11/01 15:15:12.161]: Pixie: Playing clips highlighted 16489147.
+[2015/11/01 15:15:13.944]: Pixie: Start highlighting in 16489147 from 42.86.
+[2015/11/01 15:15:14.326]: Pixie: Start highlighting in 16489147 from 43.24.
+[2015/11/01 15:15:15.261]: Pixie: Stop highlighting in 0 at 44.18.
+[2015/11/01 15:15:18.197]: Filmstrip: Mouseover 00:27.
+[2015/11/01 15:15:18.246]: Click Filmstrip at 27.917066316585114
+[2015/11/01 15:15:18.944]: Click Filmstrip at 19.70616445876596
+[2015/11/01 15:15:19.200]: Filmstrip: Mouseover 00:17.
+[2015/11/01 15:15:19.578]: Click Filmstrip at 7.389811672037236
+[2015/11/01 15:15:20.215]: Filmstrip: Mouseover 00:05.
+[2015/11/01 15:16:04.369]: Click Filmstrip at 29.559246688148946
+[2015/11/01 15:16:04.982]: Click Filmstrip at 7.389811672037236
+[2015/11/01 15:16:05.011]: Filmstrip: Mouseover 00:07.
+[2015/11/01 15:16:06.020]: Filmstrip: Mouseover 00:06.
+[2015/11/01 15:16:07.036]: Filmstrip: Mouseover 00:36.
+[2015/11/01 15:16:08.053]: Filmstrip: Mouseover 00:36.
+[2015/11/01 15:16:08.500]: Click Filmstrip at 36.127968174404266
+[2015/11/01 15:16:09.052]: Filmstrip: Mouseover 00:36.
+[2015/11/01 15:16:10.069]: Filmstrip: Mouseover 00:24.
+[2015/11/01 15:16:11.070]: Filmstrip: Mouseover 00:24.
+[2015/11/01 15:16:12.086]: Filmstrip: Mouseover 00:24.
+[2015/11/01 15:16:13.086]: Filmstrip: Mouseover 00:32.
+[2015/11/01 15:16:14.089]: Filmstrip: Mouseover 00:21.
+[2015/11/01 15:16:14.518]: Click Filmstrip at 22.990525201893625
+[2015/11/01 15:16:16.268]: Clicked back button to go back to LibraryView
+[2015/11/01 15:16:18.646]: Filmstrip: Mouseover 15:04.
+[2015/11/01 15:16:18.788]: Click Filmstrip at 904.8997573198559
+[2015/11/01 15:16:18.788]: 
+[2015/11/01 15:16:18.788]: Library View Clicked Video The FET (field effect transistor)-SjeK1nkiFvI.mp4, at 904.8997573198559.
+[2015/11/01 15:16:19.656]: Filmstrip: Mouseover 4294967275:4294967278.
+[2015/11/01 15:16:27.034]: Player: Clicked player to play video.

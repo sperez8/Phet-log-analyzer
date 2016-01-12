@@ -1,0 +1,13 @@
+[2015/11/20 14:17:52.838]: Questionnaire: 1. false, 2. true, 3. false, 4. false.
+[2015/11/20 14:18:07.119]: Starting with Condition 1
+[2015/11/20 14:18:29.638]: Filmstrip: Mouseover 00:35.
+[2015/11/20 14:18:30.413]: Click Filmstrip at 35.362909090909085
+[2015/11/20 14:18:30.414]: 
+[2015/11/20 14:18:30.414]: Library View Clicked Video mytubetutorial1.mp4, at 35.362909090909085.
+[2015/11/20 14:18:30.638]: Filmstrip: Mouseover 00:4294967253.
+[2015/11/20 14:18:52.386]: Clicked back button to go back to LibraryView
+[2015/11/20 14:18:53.908]: 
+[2015/11/20 14:18:53.909]: Library View Clicked Video 0_IntroductionToTheDataAcquisitionDevice(DAQ).mp4, at 0.
+[2015/11/20 14:20:11.629]: PlayerBar: Pressed Pause button.
+[2015/11/20 14:21:49.842]: Player: Clicked player to pause video.
+[2015/11/20 14:22:13.141]: PlayerBar: Pressed Pause button.

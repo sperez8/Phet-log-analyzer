@@ -6,6 +6,11 @@ by sperez8
 data massaging and analysis of video log data.
 '''
 import sys
+from datetime import datetime
+from datetime import timedelta
+
+MICRODATEFMT = '%Y-%m-%d %H:%M:%S.%f'
+DATEFMT = '%Y-%m-%d %H:%M:%S'
 
 ### Below are the methods for computing all table data
 
@@ -83,6 +88,25 @@ def searched(vlog,videoname):
 def clicked_subtitleviewer(vlog,videoname):
 	seq = vlog.log[videoname]
 	return count_event('SubtitleViewer: Clicked',seq)
+
+DIFF = timedelta(minutes=30)
+def number_of_sessions(vlog,videoname):
+	seq = vlog.log[videoname]
+	prev_date = None
+	conv_date = None
+	sessions = 1
+
+	for event,date in seq:
+		try:
+			conv_date = datetime.strptime(date, MICRODATEFMT)
+		except ValueError:
+			conv_date = datetime.strptime(date, DATEFMT)
+		if prev_date and conv_date - prev_date > DIFF:
+			sessions += 1
+			prev_date = conv_date
+		else:
+			prev_date = conv_date
+	return sessions
 
 
 
