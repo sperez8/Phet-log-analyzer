@@ -89,7 +89,7 @@ def clicked_subtitleviewer(vlog,videoname):
 	seq = vlog.log[videoname]
 	return count_event('SubtitleViewer: Clicked',seq)
 
-DIFF = timedelta(minutes=30)
+DIFF = timedelta(minutes=60)
 def number_of_sessions(vlog,videoname):
 	seq = vlog.log[videoname]
 	prev_date = None

@@ -25,6 +25,7 @@ SIMFOLDER = 'videolog\datafiles'
 PLOTFOLDER = 'videolog\plots'
 
 ALPHA = 0.05
+ALPHASINGLE = 0.2
 
 TUTORIALS = ['mytubetutorial1.mp4','myviewtutorial1.mp4']
 
@@ -193,7 +194,7 @@ def get_metadata(vlogs):
 def plot_filling(path,plotfolder,x,y,name):
 	'''simple plot filling maker giving count data'''
 	fig, ax = plt.subplots(1)
-	ppl.fill_between(x, y, facecolor='blue', alpha = ALPHA)
+	ppl.fill_between(x, y, facecolor='black', alpha = ALPHASINGLE)
 	ax.set_xlabel('time in video (sec)')
 	ax.set_ylabel('Number of times watched')
 	ax.set_title('Cumulative views of video')

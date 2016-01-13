@@ -14,20 +14,11 @@ from datetime import timedelta
 import string
 import glob, os
 
-PATH = "C:\Users\Sarah\Google Drive\Ido Sarah phet project\data"
-SIMFOLDER = 'videolog\datafiles'
-os.chdir(os.path.join(PATH,SIMFOLDER))
-RAWDATA = '7524851040f3a807c6_log.txt'
-OUTPUTDATA = 'eventflow_data.txt'
-
-DATA = os.path.join(PATH, SIMFOLDER, RAWDATA)
-OUTPUT = os.path.join(PATH, SIMFOLDER, OUTPUTDATA)
-
 
 OUTDATEFMT = '%Y-%m-%d %H:%M:%S.%f'
 ALL = []
 
-def get_event_data(datafile = DATA):
+def get_event_data(datafile):
 	''' Load raw data file '''
 
 	#Load as a tab delimited file (watch out for symbols like '#' crashing this code)
@@ -41,24 +32,27 @@ def create_sequence(student,data, clean=True):
 
 	seq =[]
 	events = []
-	pre_event = ''
+	prev_event = ''
 	for row in data:
 		date = datetime.strptime(cleandate(row[0]), OUTDATEFMT)
 		if clean:
 			event = cleanevent(row[1])
-			if event and event != pre_event:
+			if event and event != prev_event:
 				seq.append([student,event,str(date)])
 				events.append(event)
-				pre_event = event
+				prev_event = event
 			else:
 				continue
 			ALL.append([row[1], event])
 		else:
 			event = row[1]
-			if event:
+			#Check prev_event mostly for Filmstrip: Mouseover that are continuously outputed every second
+			if event and event != prev_event:
 				seq.append([event,str(date)])
+				prev_event = event
 			else:
 				continue
+
 
 	return seq, events
 
@@ -127,21 +121,29 @@ def write_file_ending(seqs,OUTPUT,N=10):
 	return None
 
 
+# PATH = "C:\Users\Sarah\Google Drive\Ido Sarah phet project\data"
+# SIMFOLDER = 'videolog\datafiles'
+# os.chdir(os.path.join(PATH,SIMFOLDER))
+# RAWDATA = '7524851040f3a807c6_log.txt'
+# OUTPUTDATA = 'eventflow_data.txt'
 
-def __main__():
-	students = []
-	seqs = []
-	for datafile in glob.glob("*log.txt"):
-		student, data = get_event_data(datafile)
-		seq, events = create_sequence(student, data)
-		students.append(student)
-		seqs.append(seq)
+# DATA = os.path.join(PATH, SIMFOLDER, RAWDATA)
+# OUTPUT = os.path.join(PATH, SIMFOLDER, OUTPUTDATA)
 
-	all_events = set(zip(*ALL)[1])
-	#print all_events
-	write_file(seqs,OUTPUT)
-	write_file_beginning(seqs,os.path.join(PATH, SIMFOLDER, "beginning_" + OUTPUTDATA),N=5)
-	write_file_ending(seqs,os.path.join(PATH, SIMFOLDER, "ending_" + OUTPUTDATA),N=5)
+# def __main__():
+# 	students = []
+# 	seqs = []
+# 	for datafile in glob.glob("*log.txt"):
+# 		student, data = get_event_data(DATA)
+# 		seq, events = create_sequence(student, data)
+# 		students.append(student)
+# 		seqs.append(seq)
+
+# 	all_events = set(zip(*ALL)[1])
+# 	#print all_events
+# 	write_file(seqs,OUTPUT)
+# 	write_file_beginning(seqs,os.path.join(PATH, SIMFOLDER, "beginning_" + OUTPUTDATA),N=5)
+# 	write_file_ending(seqs,os.path.join(PATH, SIMFOLDER, "ending_" + OUTPUTDATA),N=5)
 
 	# f = open('dump.txt','w')
 	# all_events = list(all_events)
