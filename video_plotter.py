@@ -191,17 +191,18 @@ def get_metadata(vlogs):
 	return videos
 
 
-def plot_filling(path,plotfolder,x,y,name):
+def plot_filling(path,plotfolder,x,y,condition,videoname,name):
 	'''simple plot filling maker giving count data'''
 	fig, ax = plt.subplots(1)
 	ppl.fill_between(x, y, facecolor='black', alpha = ALPHASINGLE)
+	ax.set_ylim([0,8])
 	ax.set_xlabel('time in video (sec)')
 	ax.set_ylabel('Number of times watched')
-	ax.set_title('Cumulative views of video')
+	ax.set_title('Number of views by a student in condition {0} of the video \n{1}'.format(condition,videoname))
 	fig.savefig(os.path.join(path,plotfolder,'count_'+name+'.png'))
 	return None
 
-def plot_mult_counts(path,plotfolder,vlogs, subject, condition, videoname):
+def plot_mult_counts(path,plotfolder,vlogs, subject, conditions, videoname):
 	'''plot multiple counts with different summary stats'''
 	'''for a paticular course subject, condition, and video'''
 	fig, ax = plt.subplots(1)
@@ -209,7 +210,7 @@ def plot_mult_counts(path,plotfolder,vlogs, subject, condition, videoname):
 	counts = []
 	for vlog in vlogs:
 		for video in vlog.viewage.keys():
-			if vlog.condition == condition and vlog.subject == subject and video == videoname:
+			if vlog.condition in conditions and vlog.subject == subject and video == videoname:
 				y = vlog.viewage[videoname]
 				if sum(y)==0: #only take into account videos that were watched.
 					continue
@@ -219,30 +220,32 @@ def plot_mult_counts(path,plotfolder,vlogs, subject, condition, videoname):
 				counts.append(y)
 	if counts:
 		newcounts = zip(*counts)
-		medians = [stats.median(i) for i in newcounts]
 		quartile25 = [np.percentile(i,25) for i in newcounts]
+		quartile50 = [np.percentile(i,50) for i in newcounts]
 		quartile75 = [np.percentile(i,75) for i in newcounts]
-		ppl.plot(x,medians,'-', color = '#ffeda0',label = 'median')
-		ppl.plot(x,quartile25,'-', color = '#feb24c',label = 'quartile25')
-		ppl.plot(x,quartile75,'-', color = '#f03b20', label = 'quartile75')
-		# means = [stats.mean(i) for i in newcounts]
-		# ppl.plot(x,means,'w-',label = 'mean of '+str(len(counts))+' viewers')
+		ppl.plot(x,quartile25,'-', color = '#f768a1',label = 'Watched by at least 75% of students', linewidth=2, alpha=0.8)
+		ppl.plot(x,quartile50,'-', color = '#ae017e',label = 'Watched by at least 50% of students', linewidth=2, alpha=0.7)
+		ppl.plot(x,quartile75,'-', color = '#49006a', label = 'Watched by at least 25% of students', linewidth=2, alpha=0.6)
 		ax.set_xlabel('time in video (sec)')
 		ax.set_ylabel('Number of times watched')
-		ax.set_title('Cumulative views of {0} viewers'.format(str(len(counts))))
+		if len(conditions)==1:
+			ax.set_title('Aggregated views of {0} students in condition {1} for video lecture \n "{2}"'.format(str(len(counts)),conditions[0],videoname))
+		else:
+			ax.set_title('Aggregated views of {0} students and all conditions for video lecture \n "{1}"'.format(str(len(counts)),videoname))
+		ax.set_ylim([0,8])
 		ppl.legend()
 		# p = plt.Rectangle((0, 0), 1, 1, fc="r")
 		# ax.legend([p], files)
-		fig.savefig(os.path.join(path,plotfolder,'mult_count_'+subject+'_'+str(condition)+'_'+videoname+'.png'))
+		fig.savefig(os.path.join(path,plotfolder,'mult_count_'+subject+'_'+str(conditions)+'_'+videoname+'.png'))
 	else:
-		print "No counts found under condition {0} for {1} video called {2}".format(condition,subject,videoname)
+		print "No counts found under conditions {0} for {1} video called {2}".format(conditions,subject,videoname)
 	return None
 
-def plot_video_count(path,plotfolder,vlog, videoname):
+def plot_video_count(path,plotfolder,vlog,videoname):
 	'''given a user log and video, plot count'''
 	y = vlog.viewage[videoname]
 	x = [i*2 for i in range(len(y))]
-	plot_filling(path,plotfolder,x,y,videoname+'_'+vlog.filename.replace('.xml',''))
+	plot_filling(path,plotfolder,x,y,vlog.condition,videoname,videoname+'_'+vlog.filename.replace('.xml',''))
 	return None
 
 def make_table(vlogs,measures,ignoretutorials=False):
@@ -297,8 +300,9 @@ def main(*argv):
 	parser.add_argument('-sanity_check', help='Run sanity checks', action = 'store_true')
 	parser.add_argument('-summary', help='Compute summary of data', action = 'store_true')
 	parser.add_argument('-singleplots', help='Plot viewage per student per video', action = 'store_true')
-	parser.add_argument('-multiplots', help='Plot viewage per video per condition aggregating students', action = 'store_true')
+	parser.add_argument('-multiplots', help='Plot viewage per video aggregating students and conditions', action = 'store_true')
 	parser.add_argument('-parse', help='Parse data and calculate parameters per student per video', action = 'store_true')
+	parser.add_argument('-plotbycondition', help='Plot viewage per video aggregating students by conditions', action = 'store_true')
 	parser.add_argument('-simfolder', help='Input folder', default = SIMFOLDER)
 	parser.add_argument('-plotfolder', help='Input folder', default = PLOTFOLDER)
 	parser.add_argument('-path', help='Input path', default = PATH)
@@ -328,12 +332,20 @@ def main(*argv):
 				plot_video_count(path,plotfolder,vlog,video)
 
 	elif args.multiplots:
-		print "**Plotting the view counts of one video for all students per condition**"
+		print "**Plotting the view counts of one video for all students and all conditions**"
+		conditions = [1,2]
 		for subject, videos in all_videos.iteritems():
 			for videoname in videos:
-				for condition in [1,2]:
-					print subject, condition, videoname
-					plot_mult_counts(path,plotfolder,vlogs, subject, condition, videoname)
+				print subject, conditions, videoname
+				plot_mult_counts(path,plotfolder,vlogs, subject, conditions, videoname)
+
+	elif args.plotbycondition:
+			print "**Plotting the view counts of one video for all students per condition**"
+			for subject, videos in all_videos.iteritems():
+				for videoname in videos:
+					for condition in [[1],[2]]:
+						print subject, condition, videoname
+						plot_mult_counts(path,plotfolder,vlogs, subject, condition, videoname)
 
 	elif args.parse:
 		print "**Parsing log files.**"
