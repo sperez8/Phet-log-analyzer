@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 import prettyplotlib as ppl
 import matplotlib as mpl
 from prettyplotlib import brewer2mpl
+import math
 import statistics as stats
 import numpy as np
 import measures_video as mv
@@ -39,6 +40,7 @@ measures = [mv.studentID,
 			mv.cumulative_watched,
 			mv.fraction_watched,
 			mv.fraction_rewatched,
+			mv.fraction_highlighted,
 			mv.number_of_2_sec_segments,
 			mv.moused_over_filmstrip,
 			mv.clicked_filmstrip,
@@ -130,6 +132,14 @@ def parsecount(count):
 	'''parse and format counts to ints'''
 	return [int(c) for c in count.split(',')]
 
+def parsehighlight(highglight,videolength):
+	'''parse and format highglights like count viewage data'''
+	start = round(float(highglight[0])/2, 0)
+	end = round(float(highglight[1])/2, 0)
+	if start == end:
+		end +=1
+	return [1 if i>= start and i <= end else 0 for i,d in enumerate(range(videolength))]
+
 def parse(datafile):
 	'''from a single video log file, '''
 	'''parse the view counts per video'''
@@ -142,6 +152,7 @@ def parse(datafile):
 def parseviewage(vlog):
 	tree = ET.parse(vlog.filename)
 	root = tree.getroot()
+	number_of_video_segments = 0
 	for child in root:
 		video = child.attrib.values()
 		for subchild in child:
@@ -150,12 +161,14 @@ def parseviewage(vlog):
 				highlight = {colour:[]}
 				for subsubchild in subchild:
 					highlight_count = subsubchild.attrib.values()
-					highlight[colour].append(highlight_count)
-				vlog.add_highlights(video[0], highlight)
+					highlight[colour].append(parsehighlight(highlight_count, number_of_video_segments))
+				if len(subchild):
+					vlog.add_highlights(video[0], highlight)
 			else:
 				count = subchild.attrib.values()
 				if len(video) == 1 and len(count) == 1:
 					vlog.add_viewage(video[0], parsecount(count[0]))
+					number_of_video_segments = len(count[0]) #need this to format highlights
 				else:
 					print "more than one key value pair in child!"
 					sys.exit()
@@ -189,18 +202,6 @@ def get_metadata(vlogs):
 			if video not in videos[vlog.subject]:
 				videos[vlog.subject].append(video)
 	return videos
-
-
-def plot_filling(path,plotfolder,x,y,condition,videoname,name):
-	'''simple plot filling maker giving count data'''
-	fig, ax = plt.subplots(1)
-	ppl.fill_between(x, y, facecolor='black', alpha = ALPHASINGLE)
-	ax.set_ylim([0,8])
-	ax.set_xlabel('time in video (sec)')
-	ax.set_ylabel('Number of times watched')
-	ax.set_title('Number of views by a student in condition {0} of the video \n{1}'.format(condition,videoname))
-	fig.savefig(os.path.join(path,plotfolder,'count_'+name+'.png'))
-	return None
 
 def plot_mult_counts(path,plotfolder,vlogs, subject, conditions, videoname):
 	'''plot multiple counts with different summary stats'''
@@ -241,11 +242,27 @@ def plot_mult_counts(path,plotfolder,vlogs, subject, conditions, videoname):
 		print "No counts found under conditions {0} for {1} video called {2}".format(conditions,subject,videoname)
 	return None
 
+def plot_filling(path,plotfolder,x,y,z,condition,videoname,name):
+	'''simple plot filling maker giving count data'''
+	fig, ax = plt.subplots(1)
+	ppl.fill_between(x, y, facecolor='black', alpha = ALPHASINGLE)
+	ppl.fill_between(x, z, facecolor='pink', alpha = ALPHASINGLE)
+	ax.set_ylim([0,8])
+	ax.set_xlabel('time in video (sec)')
+	ax.set_ylabel('Number of times watched')
+	ax.set_title('Number of views by a student in condition {0} of the video \n{1}'.format(condition,videoname))
+	fig.savefig(os.path.join(path,plotfolder,'count_'+name+'.png'))
+	return None
+
 def plot_video_count(path,plotfolder,vlog,videoname):
 	'''given a user log and video, plot count'''
 	y = vlog.viewage[videoname]
 	x = [i*2 for i in range(len(y))]
-	plot_filling(path,plotfolder,x,y,vlog.condition,videoname,videoname+'_'+vlog.filename.replace('.xml',''))
+	if z in vlog.highglights.keys():
+		z = vlog.highglights[videoname].values()[0][0]
+	else:
+		z = [0 for i in range(len(y))]
+	plot_filling(path,plotfolder,x,y,z,vlog.condition,videoname,videoname+'_'+vlog.filename.replace('.xml',''))
 	return None
 
 def make_table(vlogs,measures,ignoretutorials=False):

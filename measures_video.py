@@ -47,6 +47,23 @@ def fraction_rewatched(vlog,videoname):
 	total = float(sum([x if x>1 else 0 for x in count]))
 	return format_decimals(total/len(count))
 
+def fraction_highlighted(vlog,videoname):
+	'''From vlog, get percent highlighted, given video length'''
+	if videoname in vlog.highlights.keys():
+		highlights = vlog.highlights[videoname]
+		total_count = None
+		for color, counts in highlights.iteritems():
+			for count in counts:
+				if total_count:
+					total_count = [sum(x) for x in zip(total_count,count)]
+				else:
+					total_count = count
+		if total_count:
+			total = float(sum([x if x>=1 else 0 for x in total_count]))
+			return format_decimals(total/len(count))
+	else:
+		return 0
+
 def number_of_2_sec_segments(vlog,videoname):
 	'''From vlog, get the number of 2 sec segments to get at searching'''
 	seq = vlog.log[videoname]
