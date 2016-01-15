@@ -278,6 +278,34 @@ def make_table(vlogs,measures,ignoretutorials=False):
 			lines.append(line)
 	return lines
 
+def make_table_by_student(vlogs,measures,ignoretutorials=False):
+	'''Output per user data into a table'''
+	lines = []
+	data = {}
+
+	for vlog in vlogs:
+		for videoname in vlog.viewage.keys():
+			if ignoretutorials and videoname in TUTORIALS:
+				continue
+			line = []
+			if vlog.filename not in data.keys():
+				data[vlog.filename] = [0,0,0,0,0,0,[]]
+			data[vlog.filename][0] += mv.fraction_highlighted(vlog,videoname)
+			data[vlog.filename][1] += mv.highlighted_in_subtitleviewer(vlog,videoname)
+			data[vlog.filename][2] += mv.highlighted_from_video(vlog,videoname)
+			data[vlog.filename][3] += mv.highlighted_total(vlog,videoname)
+			data[vlog.filename][4] += mv.played_highlights(vlog,videoname)
+			data[vlog.filename][5] += mv.fraction_rewatched(vlog,videoname)*100
+			data[vlog.filename][6].append(mv.fraction_rewatched(vlog,videoname)*100)			
+
+	for student, line in data.iteritems():
+		avg_rewatched = float(sum(line[-1]))/float(len(line[-1]))
+		line = line[:-1]
+		line.append(avg_rewatched)
+		line.insert(0,student)
+		lines.append(line)
+	return lines
+
 def write_table(header, lines, output):
 	'''create file with tab delimited table'''
 	outfile = open(output,'w')
@@ -319,6 +347,7 @@ def main(*argv):
 	parser.add_argument('-singleplots', help='Plot viewage per student per video', action = 'store_true')
 	parser.add_argument('-multiplots', help='Plot viewage per video aggregating students and conditions', action = 'store_true')
 	parser.add_argument('-parse', help='Parse data and calculate parameters per student per video', action = 'store_true')
+	parser.add_argument('-parsebystudent', help='Parse data and calculate parameters per student per video', action = 'store_true')
 	parser.add_argument('-plotbycondition', help='Plot viewage per video aggregating students by conditions', action = 'store_true')
 	parser.add_argument('-simfolder', help='Input folder', default = SIMFOLDER)
 	parser.add_argument('-plotfolder', help='Input folder', default = PLOTFOLDER)
@@ -370,6 +399,18 @@ def main(*argv):
 		header = [vm.__name__.replace('_',' ') for vm in measures]
 		for outfile,ignore in outfiles:
 			table = make_table(vlogs,measures,ignoretutorials = ignore)
+			write_table(header, table, outfile)
+
+	elif args.parsebystudent:
+		print "**Parsing log files and aggregating over students.**"
+		outfiles = [('../parsed_data_all_by_student.txt',False),('../parsed_data_not_tutorials_by_student.txt',True)]
+		header = [mv.fraction_highlighted, mv.highlighted_in_subtitleviewer, mv.highlighted_from_video, mv.highlighted_total, mv.played_highlights,]
+		header = [m.__name__.replace('_',' ') for m in header]
+		header.insert(0,'studentID')
+		header.append("total percent rewatched")
+		header.append("average percent rewatched")
+		for outfile,ignore in outfiles:
+			table = make_table_by_student(vlogs,measures,ignoretutorials = ignore)
 			write_table(header, table, outfile)
 
 
