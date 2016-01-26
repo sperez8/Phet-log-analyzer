@@ -5,32 +5,63 @@
 <title>EvalViz Beta</title>
 <style>
 
+/*tooltip*/
+
+div.tooltip {
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-size: 13pt;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5px;  
+	position: absolute;
+	text-align: center;
+	color: "black";
+	width: auto;
+	min-width: 20px;
+	height:auto;
+	min-height: 20px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background: #ededed;
+	border: 0.5px;
+	border-radius: 8px;
+	pointer-events: none;
+	border-color: #d3d3d3;
+}
+
 /*for sankey chart*/
 
 .node rect {
   cursor: move;
-  fill-opacity: .9;
-  fill: #2F5D7C; 	
+  fill-opacity: .9;	
   shape-rendering: crispEdges;
 }
 
 .node text {
   pointer-events: none;
-  font-size: 12pt;
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-size: 14pt;
 }
 
 .link {
   fill: none;
   stroke: #2F5D7C;
-  stroke-opacity: .2;
+  stroke-opacity: .4;
 }
 
 .link:hover {
-  stroke-opacity: .6;
+  stroke-opacity: .8;
 }
 
 .heading {
-font-size:20pt;
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-size:20pt;
+	color: #ff7f0e;
 }
 
 #data-here{
@@ -45,19 +76,25 @@ font-size:20pt;
 
 
 .innovationLabel{
-	font-size: 10pt;
-	fill: black;
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-size: 13pt;
+	color: #ff7f0e;
 }
 
 .impactLabel{
-	font-size: 10pt;
-	fill: black;
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-size: 13pt;
+	color: #ff7f0e;
 	text-align: center;
 }
 
 .approachLabel{
-font-size: 10pt;
-	fill: black;
+	font-family: "Helvetica Neue";
+	font-style: normal;
+font-size: 13pt;
+	color: #ff7f0e;
 }
 
 

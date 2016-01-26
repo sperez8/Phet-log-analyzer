@@ -1,3 +1,36 @@
+
+
+//default behaviour of tool tip
+var tooltip = d3.select("body").append("div")   
+    .attr("class", "tooltip")               
+    .style("opacity", 0);
+
+var tooltipOpacity = 0.83
+
+var remove_tooltip = function (){
+    tooltip.style("opacity", 0);
+}
+
+
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+
+ //          MAKING THE SANKEY                //
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+
 d3.sankey = function() {
   var sankey = {},
       nodeWidth = 24,
@@ -54,7 +87,6 @@ d3.sankey = function() {
     var curvature = 0.4;
 
     function link(d) {
-      console.log(d.source,d.source.x,d.source.dx, d.source.y, d.target.y)
       var x0 = d.source.x + d.source.dx,
           x1 = d.target.x,
           xi = d3.interpolateNumber(x0, x1),
@@ -296,6 +328,23 @@ d3.sankey = function() {
 
 //end sanky script   
   
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+
+ //          WINDOW SETUP?                //
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
   
   
 var customData = jQuery( '#data-here' ).text();
@@ -320,6 +369,24 @@ var sankey = d3.sankey()
 	
 var path = sankey.link();
 var currentDraw = 0;
+
+
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+ //          MAKING THE HEATMAP                //
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
 
 
 // load the data
@@ -944,6 +1011,58 @@ evaluationApproach.sort(d3.ascending);
 	
 }; //end heatmapImapctApproach
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+
+ //          SANKEY MEAT                //
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
 var sankeyChart = function(n){  //this is used to hide the previous chart. SHould be replaced with .exit().remove() if possible! 
     width = 1200 - margin.sankey.left - margin.sankey.right,
     height = 800 - margin.sankey.top - margin.sankey.bottom;
@@ -1011,112 +1130,206 @@ svg.append("text").text("Evaluation Approach")
 
 
 	
-	  //set up graph 
-	  graph = {"nodes" : [], "links" : []};
+//set up graph 
+graph = {"nodes" : [], "links" : []};
 
-		data1.forEach(function (d) {
-		  graph.nodes.push({ "name": d.source });
-		  graph.nodes.push({ "name": d.target });
-		  graph.links.push({ "source": d.source,
-							 "target": d.target,
-							 "value": +d.value,
-							 "projectTitle": d.project_Title
-							});
-		 });
-		 
+data1.forEach(function (d) {
+  graph.nodes.push({ "name": d.source });
+  graph.nodes.push({ "name": d.target });
+  graph.links.push({ "source": d.source,
+					 "target": d.target,
+					 "value": +d.value,
+					 "projectTitle": d.project_Title
+					});
+ });
+ 
 
-		 // return only the distinct / unique nodes
-		 graph.nodes = d3.keys(d3.nest()
-		   .key(function (d) { return d.name; })
-		   .map(graph.nodes));
+ // return only the distinct / unique nodes
+ graph.nodes = d3.keys(d3.nest()
+   .key(function (d) { return d.name; })
+   .map(graph.nodes));
 
-		 // loop through each link replacing the text with its index from node
-		 graph.links.forEach(function (d, i) {
-		   graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
-		   graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
-		 });
+ // loop through each link replacing the text with its index from node
+ graph.links.forEach(function (d, i) {
+   graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
+   graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
+ });
 
-		 //now loop through each nodes to make nodes an array of objects
-		 // rather than an array of strings
-		 graph.nodes.forEach(function (d, i) {
-		   graph.nodes[i] = { "name": d };
-		 });
-		
-	  sankey
-		  .nodes(graph.nodes)
-		  .links(graph.links)
-		  .layout(30);
+ //now loop through each nodes to make nodes an array of objects
+ // rather than an array of strings
+ graph.nodes.forEach(function (d, i) {
+   graph.nodes[i] = { "name": d };
+ });
 
-	// add in the links
-	  var link = svg.append("g").selectAll(".link")
-		  .data(graph.links)
-		.enter().append("path")
-		  .attr("class", "link")
-		  .attr("d", path)
-		  .style("stroke-width", function(d) { return Math.max(1, d.dy); })
-		  .sort(function(a, b) { return b.dy - a.dy; });
+sankey
+  .nodes(graph.nodes)
+  .links(graph.links)
+  .layout(30);
 
-	// add the link titles
-	  link.append("title")
-			.text(function(d) {
-				return d.projectTitle; });
-					// old text d.source.name + " → " + 	d.target.name + "\n" +
-	
-	
-	// add in the nodes
-	  var node = svg.append("g").selectAll(".node")
-		  .data(graph.nodes)
-		.enter().append("g")
-		  .attr("class", "node")
-		  .attr("transform", function(d) { 
-			  return "translate(" + d.x + "," + d.y + ")"; })
-		.call(d3.behavior.drag()
-		  .origin(function(d) { return d; })
-		  .on("dragstart", function() { 
-			  this.parentNode.appendChild(this); })
-		  .on("drag", dragmove));
 
-	// add the rectangles for the nodes
-	  node.append("rect")
-		  .attr("height", function(d) { return d.dy; })
-		  .attr("width", sankey.nodeWidth())
-		  //.style("fill", function(d) { 
-			//  return d.color = color(d.name.replace(/ .*/, "")); })
-		.style("fill","#2F5D7C" )
-		 // .style("stroke", function(d) { 
-		//	  return d3.rgb(d.color).darker(2); })
-		.style("stroke","#002145" )
-		.append("title")
-		  .text(function(d) { 
-			  return d.name + "\n" + format(d.value); });
 
-	// add in the title for the nodes
-	  node.append("text")
-		  .attr("x", -6)
-		  .attr("y", function(d) { return d.dy / 2; })
-		  .attr("dy", ".35em")
-		  .attr("text-anchor", "end")
-		  .attr("transform", null)
-		  .text(function(d) { return d.name; })
-		.filter(function(d) { return d.x < width / 2; })
-		  .attr("x", 6 + sankey.nodeWidth())
-		  .attr("text-anchor", "start");
 
-		 
-		  
-	// the function for moving the nodes
-	  function dragmove(d) {
-		d3.select(this).attr("transform", 
-			"translate(" + d.x + "," + (
-					d.y = Math.max(0, Math.min(height -50 - d.dy, d3.event.y))
-				) + ")");
-		sankey.relayout();
-		link.attr("d", path);
-	  }
 
-  } //end sankey chart
+function get_trait_values(trait){
+    return graph.nodes.map(function (d) {return d[trait]})
+}
+
+function get_numerical_trait_values(trait){
+    return graph.nodes.map(function (d) {return Number(d[trait])})
+}
+
+middle_nodes = graph.nodes.filter(function (d) {return d.targetLinks.length !=0 && d.sourceLinks.length !=0}).map(function (d) {return d["name"]})
+
+function check_middle(node){
+  middle_nodes = graph.nodes.filter(function (d) {return d.targetLinks.length !=0 && d.sourceLinks.length !=0}).map(function (d) {return d["name"]})
+  return ($.inArray(node.name, middle_nodes) != -1)
+}
+
+nodeNames = get_trait_values("name")
+
+nodeValues = get_numerical_trait_values("value")
+
+// using colors from d3.scale.category10
+colorscheme = d3.scale.ordinal()
+  .domain(middle_nodes)
+  .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"])
+
+grey = "#7e7e7e"
+
+//color scheme
+//var color = d3.scale.category20b()
+function colorsGoogle(n) {
+  var colorsG = ["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477", "#66aa00", "#b82e2e", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eac"];
+  return colorsG[n % colorsG.length];
+}
+
+
+
+
+
+// add in the links
+var link = svg.append("g").selectAll(".link")
+  .data(graph.links)
+.enter().append("path")
+  .attr("class", "link")
+  .attr("d", path)
+  .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+  .style("stroke", function(d,i) { 
+    if (check_middle(d.source)) {
+      console.log(d.source, d.target)
+      return colorscheme(d.source.name)
+    } else if (check_middle(d.target)) {
+      return colorscheme(d.target.name)
+    }
+  })
+  .sort(function(a, b) { return b.dy - a.dy; })
+  .on("mouseover", function (l){
+    var cx = d3.event.pageX
+    var cy = d3.event.pageY
+    tooltip    
+      .style("opacity", tooltipOpacity);
+    tooltip.html(l.projectTitle)
+      .style("height", "32px")
+      .style("left", (cx + 5) + "px")     
+      .style("top", (cy - 28) + "px");
+
+    console.log(l, l.projectTitle, cx, cy, tooltipOpacity)
+  })
+  .on("mouseout", function (){
+      remove_tooltip()
+  });
+
+
+
+// add in the nodes
+var node = svg.append("g").selectAll(".node")
+  .data(graph.nodes)
+.enter().append("g")
+  .attr("class", "node")
+  .attr("transform", function(d) { 
+	  return "translate(" + d.x + "," + d.y + ")"; })
+.call(d3.behavior.drag()
+  .origin(function(d) { return d; })
+  .on("dragstart", function() { 
+	  this.parentNode.appendChild(this); })
+.on("drag", dragmove));
+
+// add the rectangles for the nodes
+node.append("rect")
+  .attr("height", function(d) { return d.dy; })
+  .attr("width", sankey.nodeWidth())
+  //.style("fill", function(d) { 
+	//  return d.color = color(d.name.replace(/ .*/, "")); })
+  .style("fill", function(d) {
+    if (check_middle(d)) {
+      return colorscheme(d.name)
+    } else{
+      return grey
+    }
+  })
+ // .style("stroke", function(d) { 
+//	  return d3.rgb(d.color).darker(2); })
+//.style("stroke","#002145" )
+.on("click", function (d){
+    console.log("clicked", d.name, d.value)
+    // XXX DO CLICK REC HERE
+    // if (d3.select(this).classed("clicked")){
+    //     d3.select(this)
+    //         .classed({"clicked":false})
+    //     removeReveal()
+    // } else {
+    //     d3.select(this)
+    //         .classed({"clicked":true})
+    //         .call(reveal(n))
+    // }
+});
+
+// add in the title for the nodes
+node.append("text")
+  .attr("x", -6)
+  .attr("y", function(d) { return d.dy / 2; })
+  .attr("dy", ".35em")
+  .attr("text-anchor", "end")
+  .attr("transform", null)
+  .text(function(d) { return d.name; })
+.filter(function(d) { return d.x < width / 2; })
+  .attr("x", 6 + sankey.nodeWidth())
+  .attr("text-anchor", "start");
+
+ 
   
+// the function for moving the nodes
+function dragmove(d) {
+d3.select(this).attr("transform", 
+	"translate(" + d.x + "," + (
+			d.y = Math.max(0, Math.min(height -50 - d.dy, d3.event.y))
+		) + ")");
+sankey.relayout();
+link.attr("d", path);
+}
+
+} //end sankey chart
   
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+
+ //          MAKING THE TABLE                //
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+
+
   
 function tabulate(tableData, columns) {
 
@@ -1141,13 +1354,13 @@ function tabulate(tableData, columns) {
         .data(columns)
         .enter()
         .append("th")
-            .text(function(column) { return column; });
+            .text(function(column) { return capitalizeFirstLetter(column.replace('_',' ')); });
 
 			var x = "_XX_"; //nothing should match this ;)
 			function unique(value){
-			return_this = (x != value["project_Title"]);
-			x = value["project_Title"];
-			return return_this;
+  			return_this = (x != value["project_Title"]);
+  			x = value["project_Title"];
+  			return return_this;
 			}
 			tableData = tableData.filter(unique);
 			
@@ -1363,7 +1576,26 @@ var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("selec
 
 
 	
-	
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+ //          UTILITIES                                                //
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 	
 	
 
