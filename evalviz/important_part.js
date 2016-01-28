@@ -1047,6 +1047,19 @@ evaluationApproach.sort(d3.ascending);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ****************************************************************** //
 // ****************************************************************** //
 // ****************************************************************** //
@@ -1167,26 +1180,30 @@ sankey
   .layout(30);
 
 
+opacityNormal = 0.4
+opacityLow = 0.2
+opacityHigh = 0.8
 
-
-
+//get array of possible values for trait of a node
 function get_trait_values(trait){
     return graph.nodes.map(function (d) {return d[trait]})
 }
 
+//get array of possible values for a numerical trait of a node
 function get_numerical_trait_values(trait){
     return graph.nodes.map(function (d) {return Number(d[trait])})
 }
 
+//get name of all nodes in the "middle" of the sankey chart
 middle_nodes = graph.nodes.filter(function (d) {return d.targetLinks.length !=0 && d.sourceLinks.length !=0}).map(function (d) {return d["name"]})
 
+//given name of a node, check if it has incoming and outgoing links and thus is in the middle
 function check_middle(node){
   middle_nodes = graph.nodes.filter(function (d) {return d.targetLinks.length !=0 && d.sourceLinks.length !=0}).map(function (d) {return d["name"]})
   return ($.inArray(node.name, middle_nodes) != -1)
 }
 
 nodeNames = get_trait_values("name")
-
 nodeValues = get_numerical_trait_values("value")
 
 // using colors from d3.scale.category10
@@ -1196,16 +1213,26 @@ colorscheme = d3.scale.ordinal()
 
 grey = "#7e7e7e"
 
-//color scheme
-//var color = d3.scale.category20b()
-function colorsGoogle(n) {
-  var colorsG = ["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477", "#66aa00", "#b82e2e", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eac"];
-  return colorsG[n % colorsG.length];
+var highlight_project = function (link, title){
+  d3.selectAll(".link")
+    .each(function (l){
+      //console.log(l.projectTitle, title)
+      if (l.projectTitle == title){
+        d3.select(this).call(highlight_link,opacityHigh)
+      } else {
+        d3.select(this).call(highlight_link,opacityLow)
+      }
+    })
 }
 
+var highlightTime = 500 //milliseconds
 
-
-
+var highlight_link = function (selection, opacity) {
+    selection            
+        .transition()
+        .duration(highlightTime)
+        .style("stroke-opacity", opacity)
+    };
 
 // add in the links
 var link = svg.append("g").selectAll(".link")
@@ -1214,7 +1241,7 @@ var link = svg.append("g").selectAll(".link")
   .attr("class", "link")
   .attr("d", path)
   .style("stroke-width", function(d) { return Math.max(1, d.dy); })
-  .style("stroke", function(d,i) { 
+  .style("stroke", function(d,i) {  //color given the middle node it's connected to
     if (check_middle(d.source)) {
       console.log(d.source, d.target)
       return colorscheme(d.source.name)
@@ -1228,15 +1255,33 @@ var link = svg.append("g").selectAll(".link")
     var cy = d3.event.pageY
     tooltip    
       .style("opacity", tooltipOpacity);
-    tooltip.html(l.projectTitle)
+    tooltip.html("Project: " + l.projectTitle)
       .style("height", "32px")
       .style("left", (cx + 5) + "px")     
       .style("top", (cy - 28) + "px");
 
-    console.log(l, l.projectTitle, cx, cy, tooltipOpacity)
+    //console.log(l, l.projectTitle, cx, cy, tooltipOpacity)
+    d3.select(this)
+      .call(highlight_project, l.projectTitle)
   })
   .on("mouseout", function (){
-      remove_tooltip()
+    remove_tooltip()
+    d3.selectAll(".link")
+      .call(highlight_link,opacityNormal)
+
+  })
+  .on("click", function (d){
+    console.log("clicked", d.name, d.value)
+    // XXX DO CLICK project HERE
+    // if (d3.select(this).classed("clicked")){
+    //     d3.select(this)
+    //         .classed({"clicked":false})
+    //     removeReveal()
+    // } else {
+    //     d3.select(this)
+    //         .classed({"clicked":true})
+    //         .call(reveal(n))
+    // }
   });
 
 
@@ -1258,31 +1303,14 @@ var node = svg.append("g").selectAll(".node")
 node.append("rect")
   .attr("height", function(d) { return d.dy; })
   .attr("width", sankey.nodeWidth())
-  //.style("fill", function(d) { 
-	//  return d.color = color(d.name.replace(/ .*/, "")); })
-  .style("fill", function(d) {
+  .style("fill", function(d) { //color nodes if they are in the middle, otherwise grey
     if (check_middle(d)) {
       return colorscheme(d.name)
     } else{
       return grey
     }
   })
- // .style("stroke", function(d) { 
-//	  return d3.rgb(d.color).darker(2); })
-//.style("stroke","#002145" )
-.on("click", function (d){
-    console.log("clicked", d.name, d.value)
-    // XXX DO CLICK REC HERE
-    // if (d3.select(this).classed("clicked")){
-    //     d3.select(this)
-    //         .classed({"clicked":false})
-    //     removeReveal()
-    // } else {
-    //     d3.select(this)
-    //         .classed({"clicked":true})
-    //         .call(reveal(n))
-    // }
-});
+
 
 // add in the title for the nodes
 node.append("text")
