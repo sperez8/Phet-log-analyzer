@@ -1076,7 +1076,7 @@ evaluationApproach.sort(d3.ascending);
 // ****************************************************************** //
 
 
-var sankeyChart = function(n){  //this is used to hide the previous chart. SHould be replaced with .exit().remove() if possible! 
+var sankeyChart = function(n){  //this is used to hide the previous chart. Should be replaced with .exit().remove() if possible! 
     width = 1200 - margin.sankey.left - margin.sankey.right,
     height = 800 - margin.sankey.top - margin.sankey.bottom;
 	
@@ -1104,240 +1104,288 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. SHoul
   );	
   
   
-filterData();
-	
-// append the svg canvas to the page
- d3.select("#sankeyChart").append("svg")
-    .attr("width", width + margin.sankey.left + margin.sankey.right)
-    .attr("height", height + margin.sankey.top + margin.sankey.bottom)
-  .append("g")
-    .attr("transform", 
-          "translate(" + margin.sankey.left + "," + margin.sankey.top + ")");
+  filterData();
+  	
+  // append the svg canvas to the page
+   d3.select("#sankeyChart").append("svg")
+      .attr("width", width + margin.sankey.left + margin.sankey.right)
+      .attr("height", height + margin.sankey.top + margin.sankey.bottom)
+    .append("g")
+      .attr("transform", 
+            "translate(" + margin.sankey.left + "," + margin.sankey.top + ")");
 
-//console.log(n);
-var	svg = d3.select("#sankeyChart").selectAll("g")
-	.append("g")
-	.attr("class", "sankey" + n)
-        .attr("transform", "translate(4,42)") //translate so the top label is not half hidden and left side of nodes is good
-		.style("visibility","block")
-	;
-	
-svg.append("text").text("Innovation")
-	.attr("class","heading")
-	.attr("x",0)
-	.attr("y",-10)
-	.attr("text-anchor", "start");
-svg.append("text").text("Area of Impact")
-	.attr("class","heading")
-	.attr("x",width/2)
-	.attr("y",-10)
-	.attr("text-anchor", "middle");	
-svg.append("text").text("Evaluation Approach")
-	.attr("class","heading")
-	.attr("x",width)
-	.attr("y",-10)
-	.attr("text-anchor", "end");
-	
-
-
+  //console.log(n);
+  var	svg = d3.select("#sankeyChart").selectAll("g")
+  	.append("g")
+  	.attr("class", "sankey" + n)
+          .attr("transform", "translate(4,42)") //translate so the top label is not half hidden and left side of nodes is good
+  		.style("visibility","block")
+  	;
+  	
+  svg.append("text").text("Innovation")
+  	.attr("class","heading")
+  	.attr("x",0)
+  	.attr("y",-10)
+  	.attr("text-anchor", "start");
+  svg.append("text").text("Area of Impact")
+  	.attr("class","heading")
+  	.attr("x",width/2)
+  	.attr("y",-10)
+  	.attr("text-anchor", "middle");	
+  svg.append("text").text("Evaluation Approach")
+  	.attr("class","heading")
+  	.attr("x",width)
+  	.attr("y",-10)
+  	.attr("text-anchor", "end");
+  	
 
 
-	
-//set up graph 
-graph = {"nodes" : [], "links" : []};
-
-data1.forEach(function (d) {
-  graph.nodes.push({ "name": d.source });
-  graph.nodes.push({ "name": d.target });
-  graph.links.push({ "source": d.source,
-					 "target": d.target,
-					 "value": +d.value,
-					 "projectTitle": d.project_Title
-					});
- });
- 
-
- // return only the distinct / unique nodes
- graph.nodes = d3.keys(d3.nest()
-   .key(function (d) { return d.name; })
-   .map(graph.nodes));
-
- // loop through each link replacing the text with its index from node
- graph.links.forEach(function (d, i) {
-   graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
-   graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
- });
-
- //now loop through each nodes to make nodes an array of objects
- // rather than an array of strings
- graph.nodes.forEach(function (d, i) {
-   graph.nodes[i] = { "name": d };
- });
-
-sankey
-  .nodes(graph.nodes)
-  .links(graph.links)
-  .layout(30);
 
 
-opacityNormal = 0.4
-opacityLow = 0.2
-opacityHigh = 0.8
+  	
+  //set up graph 
+  graph = {"nodes" : [], "links" : []};
 
-//get array of possible values for trait of a node
-function get_trait_values(trait){
-    return graph.nodes.map(function (d) {return d[trait]})
-}
+  data1.forEach(function (d) {
+    graph.nodes.push({ "name": d.source });
+    graph.nodes.push({ "name": d.target });
+    graph.links.push({ "source": d.source,
+  					 "target": d.target,
+  					 "value": +d.value,
+  					 "projectTitle": d.project_Title
+  					});
+   });
 
-//get array of possible values for a numerical trait of a node
-function get_numerical_trait_values(trait){
-    return graph.nodes.map(function (d) {return Number(d[trait])})
-}
+   // return only the distinct / unique nodes
+   graph.nodes = d3.keys(d3.nest()
+     .key(function (d) { return d.name; })
+     .map(graph.nodes));
 
-//get name of all nodes in the "middle" of the sankey chart
-middle_nodes = graph.nodes.filter(function (d) {return d.targetLinks.length !=0 && d.sourceLinks.length !=0}).map(function (d) {return d["name"]})
+   // loop through each link replacing the text with its index from node
+   graph.links.forEach(function (d, i) {
+     graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
+     graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
+   });
 
-//given name of a node, check if it has incoming and outgoing links and thus is in the middle
-function check_middle(node){
+   //now loop through each nodes to make nodes an array of objects
+   // rather than an array of strings
+   graph.nodes.forEach(function (d, i) {
+     graph.nodes[i] = { "name": d };
+   });
+
+  sankey
+    .nodes(graph.nodes)
+    .links(graph.links)
+    .layout(30);
+
+
+  opacityNormal = 0.4
+  opacityLow = 0.2
+  opacityHigh = 0.6
+
+  //get array of possible values for trait of a node
+  function get_trait_values(trait){
+      return graph.nodes.map(function (d) {return d[trait]})
+  }
+
+  //get array of possible values for a numerical trait of a node
+  function get_numerical_trait_values(trait){
+      return graph.nodes.map(function (d) {return Number(d[trait])})
+  }
+
+  //get name of all nodes in the "middle" of the sankey chart
   middle_nodes = graph.nodes.filter(function (d) {return d.targetLinks.length !=0 && d.sourceLinks.length !=0}).map(function (d) {return d["name"]})
-  return ($.inArray(node.name, middle_nodes) != -1)
-}
 
-nodeNames = get_trait_values("name")
-nodeValues = get_numerical_trait_values("value")
+  //given name of a node, check if it has incoming and outgoing links and thus is in the middle
+  function check_middle(node){
+    middle_nodes = graph.nodes.filter(function (d) {return d.targetLinks.length !=0 && d.sourceLinks.length !=0}).map(function (d) {return d["name"]})
+    return ($.inArray(node.name, middle_nodes) != -1)
+  }
 
-// using colors from d3.scale.category10
-colorscheme = d3.scale.ordinal()
-  .domain(middle_nodes)
-  .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"])
+  nodeNames = get_trait_values("name")
+  nodeValues = get_numerical_trait_values("value")
 
-grey = "#7e7e7e"
+  // using colors from d3.scale.category10
+  colorscheme = d3.scale.ordinal()
+    .domain(middle_nodes)
+    .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"])
 
-var highlight_project = function (link, title){
-  d3.selectAll(".link")
-    .each(function (l){
-      //console.log(l.projectTitle, title)
-      if (l.projectTitle == title){
-        d3.select(this).call(highlight_link,opacityHigh)
-      } else {
-        d3.select(this).call(highlight_link,opacityLow)
+  grey = "#7e7e7e"
+
+  var highlight_project = function (link, title){
+    d3.selectAll(".link")
+      .each(function (l){
+        //console.log(l.projectTitle, title)
+        if (l.projectTitle == title){
+          d3.select(this).call(highlight_link,opacityHigh)
+        } else {
+          d3.select(this).call(highlight_link,opacityLow)
+        }
+      })
+  }
+
+  var highlightTime = 500 //milliseconds
+
+  var highlight_link = function (selection, opacity) {
+      selection            
+          .transition()
+          .duration(highlightTime)
+          .style("stroke-opacity", opacity)
+      };
+
+  // add in the links
+  var link = svg.append("g").selectAll(".link")
+    .data(graph.links)
+  .enter().append("path")
+    .attr("class", "link")
+    .attr("d", path)
+    .style("opacity", opacityNormal)
+    .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+    .style("stroke", function(d,i) {  //color given the middle node it's connected to
+      if (check_middle(d.source)) {
+        console.log(d.source, d.target)
+        return colorscheme(d.source.name)
+      } else if (check_middle(d.target)) {
+        return colorscheme(d.target.name)
       }
     })
+    .sort(function(a, b) { return b.dy - a.dy; })
+    .on("mouseover", function (l){
+      var cx = d3.event.pageX
+      var cy = d3.event.pageY
+      tooltip    
+        .style("opacity", tooltipOpacity);
+      tooltip.html("Project: " + l.projectTitle)
+        .style("height", "32px")
+        .style("left", (cx + 5) + "px")     
+        .style("top", (cy - 28) + "px");
+
+      //console.log(l, l.projectTitle, cx, cy, tooltipOpacity)
+      d3.select(this)
+        .call(highlight_project, l.projectTitle)
+    })
+    .on("mouseout", function (){
+      remove_tooltip()
+      d3.selectAll(".link")
+        .call(highlight_link,opacityNormal)
+
+    })
+    .on("click", function (d){
+      console.log("clicked", d.name, d.value)
+      // XXX DO CLICK project HERE
+      // if (d3.select(this).classed("clicked")){
+      //     d3.select(this)
+      //         .classed({"clicked":false})
+      //     removeReveal()
+      // } else {
+      //     d3.select(this)
+      //         .classed({"clicked":true})
+      //         .call(reveal(n))
+      // }
+    });
+
+
+
+  // add in the nodes
+  var node = svg.append("g").selectAll(".node")
+    .data(graph.nodes)
+  .enter().append("g")
+    .attr("class", "node")
+    .attr("transform", function(d) { 
+  	  return "translate(" + d.x + "," + d.y + ")"; })
+  .call(d3.behavior.drag()
+    .origin(function(d) { return d; })
+    .on("dragstart", function() { 
+  	  this.parentNode.appendChild(this); })
+  .on("drag", dragmove));
+
+  // add the rectangles for the nodes
+  node.append("rect")
+    .attr("height", function(d) { return d.dy; })
+    .attr("width", sankey.nodeWidth())
+    .style("fill", function(d) { //color nodes if they are in the middle, otherwise grey
+      if (check_middle(d)) {
+        return colorscheme(d.name)
+      } else{
+        return grey
+      }
+    })
+
+
+  // add in the title for the nodes
+  node.append("text")
+    .attr("x", -6)
+    .attr("y", function(d) { return d.dy / 2; })
+    .attr("dy", ".35em")
+    .attr("text-anchor", "end")
+    .attr("transform", null)
+    .text(function(d) { return d.name; })
+  .filter(function(d) { return d.x < width / 2; })
+    .attr("x", 6 + sankey.nodeWidth())
+    .attr("text-anchor", "start");
+
+   
+    
+  // the function for moving the nodes
+  function dragmove(d) {
+  d3.select(this).attr("transform", 
+  	"translate(" + d.x + "," + (
+  			d.y = Math.max(0, Math.min(height -50 - d.dy, d3.event.y))
+  		) + ")");
+  sankey.relayout();
+  link.attr("d", path);
+  }
+
+
+
+  //Show the number of projects displayed in Sankey and HeatMap
+  var revealNumberOfProjects = function (total, highlightTime){
+      //removeReveal()
+      d3.select("#NumberOfProjects").append("p")
+          .html(total)
+          .style("color", grey)
+          .style("background-color", "white")
+          .transition()
+          .duration(highlightTime/2)
+  };
+
+  total = graph.links.map(function (d) {return d["projectTitle"]}).getUnique().length
+  revealNumberOfProjects(total, highlightTime)
+  console.log("RERUNN", graph.links.length, total)
+
+
+
 }
 
-var highlightTime = 500 //milliseconds
-
-var highlight_link = function (selection, opacity) {
-    selection            
-        .transition()
-        .duration(highlightTime)
-        .style("stroke-opacity", opacity)
-    };
-
-// add in the links
-var link = svg.append("g").selectAll(".link")
-  .data(graph.links)
-.enter().append("path")
-  .attr("class", "link")
-  .attr("d", path)
-  .style("stroke-width", function(d) { return Math.max(1, d.dy); })
-  .style("stroke", function(d,i) {  //color given the middle node it's connected to
-    if (check_middle(d.source)) {
-      console.log(d.source, d.target)
-      return colorscheme(d.source.name)
-    } else if (check_middle(d.target)) {
-      return colorscheme(d.target.name)
-    }
-  })
-  .sort(function(a, b) { return b.dy - a.dy; })
-  .on("mouseover", function (l){
-    var cx = d3.event.pageX
-    var cy = d3.event.pageY
-    tooltip    
-      .style("opacity", tooltipOpacity);
-    tooltip.html("Project: " + l.projectTitle)
-      .style("height", "32px")
-      .style("left", (cx + 5) + "px")     
-      .style("top", (cy - 28) + "px");
-
-    //console.log(l, l.projectTitle, cx, cy, tooltipOpacity)
-    d3.select(this)
-      .call(highlight_project, l.projectTitle)
-  })
-  .on("mouseout", function (){
-    remove_tooltip()
-    d3.selectAll(".link")
-      .call(highlight_link,opacityNormal)
-
-  })
-  .on("click", function (d){
-    console.log("clicked", d.name, d.value)
-    // XXX DO CLICK project HERE
-    // if (d3.select(this).classed("clicked")){
-    //     d3.select(this)
-    //         .classed({"clicked":false})
-    //     removeReveal()
-    // } else {
-    //     d3.select(this)
-    //         .classed({"clicked":true})
-    //         .call(reveal(n))
-    // }
-  });
 
 
 
-// add in the nodes
-var node = svg.append("g").selectAll(".node")
-  .data(graph.nodes)
-.enter().append("g")
-  .attr("class", "node")
-  .attr("transform", function(d) { 
-	  return "translate(" + d.x + "," + d.y + ")"; })
-.call(d3.behavior.drag()
-  .origin(function(d) { return d; })
-  .on("dragstart", function() { 
-	  this.parentNode.appendChild(this); })
-.on("drag", dragmove));
-
-// add the rectangles for the nodes
-node.append("rect")
-  .attr("height", function(d) { return d.dy; })
-  .attr("width", sankey.nodeWidth())
-  .style("fill", function(d) { //color nodes if they are in the middle, otherwise grey
-    if (check_middle(d)) {
-      return colorscheme(d.name)
-    } else{
-      return grey
-    }
-  })
 
 
-// add in the title for the nodes
-node.append("text")
-  .attr("x", -6)
-  .attr("y", function(d) { return d.dy / 2; })
-  .attr("dy", ".35em")
-  .attr("text-anchor", "end")
-  .attr("transform", null)
-  .text(function(d) { return d.name; })
-.filter(function(d) { return d.x < width / 2; })
-  .attr("x", 6 + sankey.nodeWidth())
-  .attr("text-anchor", "start");
 
- 
+
+
+
+
+//end sankey chart
   
-// the function for moving the nodes
-function dragmove(d) {
-d3.select(this).attr("transform", 
-	"translate(" + d.x + "," + (
-			d.y = Math.max(0, Math.min(height -50 - d.dy, d3.event.y))
-		) + ")");
-sankey.relayout();
-link.attr("d", path);
-}
 
-} //end sankey chart
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // ****************************************************************** //
@@ -1469,7 +1517,7 @@ yearAwarded = "Any";
 		//d3.select("#sankeyChart").selectAll("svg").remove();//remove old charts
 		//d3.select("#innovationImpactChart").selectAll("svg").remove();
 		//d3.select("#impactApproachChart").selectAll("svg").remove();
-			ChartType[currentChartType](1);//redraw previously selected chart 
+			ChartType[currentChartType](1);//redraw previously selected chart
  
 		});
 
@@ -1626,6 +1674,16 @@ function capitalizeFirstLetter(string) {
 }
 	
 	
-
+Array.prototype.getUnique = function(){
+   var u = {}, a = [];
+   for(var i = 0, l = this.length; i < l; ++i){
+      if(u.hasOwnProperty(this[i])) {
+         continue;
+      }
+      a.push(this[i]);
+      u[this[i]] = 1;
+   }
+   return a;
+}
 
 
