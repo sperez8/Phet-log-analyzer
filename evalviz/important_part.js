@@ -1179,9 +1179,9 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
     .layout(30);
 
 
-  opacityNormal = 0.4
-  opacityLow = 0.2
-  opacityHigh = 0.6
+  opacityNormal = 0.7
+  opacityLow = 0.3
+  opacityHigh = 1
 
   //get array of possible values for trait of a node
   function get_trait_values(trait){
@@ -1224,7 +1224,7 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
       })
   }
 
-  var highlightTime = 500 //milliseconds
+  var highlightTime = 200 //milliseconds
 
   var highlight_link = function (selection, opacity) {
       selection            
@@ -1239,11 +1239,10 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
   .enter().append("path")
     .attr("class", "link")
     .attr("d", path)
-    .style("opacity", opacityNormal)
-    .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+    .style("stroke-opacity", opacityNormal)
+    .style("stroke-width", function(d) {return Math.max(1, d.dy); })
     .style("stroke", function(d,i) {  //color given the middle node it's connected to
       if (check_middle(d.source)) {
-        console.log(d.source, d.target)
         return colorscheme(d.source.name)
       } else if (check_middle(d.target)) {
         return colorscheme(d.target.name)
@@ -1253,12 +1252,15 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
     .on("mouseover", function (l){
       var cx = d3.event.pageX
       var cy = d3.event.pageY
-      tooltip    
-        .style("opacity", tooltipOpacity);
       tooltip.html("Project: " + l.projectTitle)
         .style("height", "32px")
         .style("left", (cx + 5) + "px")     
         .style("top", (cy - 28) + "px");
+      tooltip
+          // .transition()
+          // .delay(2000)
+          // .duration(highlightTime)
+          .style("opacity", tooltipOpacity);
 
       //console.log(l, l.projectTitle, cx, cy, tooltipOpacity)
       d3.select(this)
@@ -1266,23 +1268,23 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
     })
     .on("mouseout", function (){
       remove_tooltip()
-      d3.selectAll(".link")
+      svg.selectAll(".link")
         .call(highlight_link,opacityNormal)
 
-    })
-    .on("click", function (d){
-      console.log("clicked", d.name, d.value)
-      // XXX DO CLICK project HERE
-      // if (d3.select(this).classed("clicked")){
-      //     d3.select(this)
-      //         .classed({"clicked":false})
-      //     removeReveal()
-      // } else {
-      //     d3.select(this)
-      //         .classed({"clicked":true})
-      //         .call(reveal(n))
-      // }
     });
+    // .on("click", function (d){
+    //   console.log("clicked", d.name, d.value)
+    //   // XXX DO CLICK project HERE
+    //   // if (d3.select(this).classed("clicked")){
+    //   //     d3.select(this)
+    //   //         .classed({"clicked":false})
+    //   //     removeReveal()
+    //   // } else {
+    //   //     d3.select(this)
+    //   //         .classed({"clicked":true})
+    //   //         .call(reveal(n))
+    //   // }
+    // });
 
 
 
@@ -1340,7 +1342,11 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
 
   //Show the number of projects displayed in Sankey and HeatMap
   var revealNumberOfProjects = function (total, highlightTime){
-      //removeReveal()
+      var removeReveal = function (){
+         d3.select("#NumberOfProjects").selectAll("p")
+          .remove();
+      };
+      removeReveal()
       d3.select("#NumberOfProjects").append("p")
           .html(total)
           .style("color", grey)
@@ -1351,9 +1357,7 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
 
   total = graph.links.map(function (d) {return d["projectTitle"]}).getUnique().length
   revealNumberOfProjects(total, highlightTime)
-  console.log("RERUNN", graph.links.length, total)
-
-
+  //console.log("RERUNN", graph.links.length, total)
 
 }
 
