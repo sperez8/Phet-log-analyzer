@@ -1,5 +1,38 @@
 
 
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+ //          UTILITIES                                                //
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+  
+  
+Array.prototype.getUnique = function(){
+   var u = {}, a = [];
+   for(var i = 0, l = this.length; i < l; ++i){
+      if(u.hasOwnProperty(this[i])) {
+         continue;
+      }
+      a.push(this[i]);
+      u[this[i]] = 1;
+   }
+   return a;
+}
+
 //default behaviour of tool tip
 var tooltip = d3.select("body").append("div")   
     .attr("class", "tooltip")               
@@ -431,11 +464,7 @@ data1 = data;
 	data1 = data1.filter( function(d) {return  d["Project Stage"]==projectStage;});
 	}
 		
-		
 	if (yearAwarded != "Any") {
-	//console.log("heatmap Data: " +  heatMapdata );
-	//console.log("year awarded variable: " +  yearAwarded );
-	
 	heatMapdata = heatMapdata.filter( function(d) {return d.year_awarded==yearAwarded;});
 	data1 = data1.filter( function(d) {return d["Year Awarded"]==yearAwarded;});
 	}
@@ -1354,10 +1383,8 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
           .transition()
           .duration(highlightTime/2)
   };
-
   total = graph.links.map(function (d) {return d["projectTitle"]}).getUnique().length
   revealNumberOfProjects(total, highlightTime)
-  //console.log("RERUNN", graph.links.length, total)
 
 }
 
@@ -1471,19 +1498,66 @@ function tabulate(tableData, columns) {
   
 
   
-  
-	//choice arrays for filters
-var facultyList = ["Any","Applied Science, Faculty of","Architecture and Landscape Architecture, School of","Arts, Faculty of","Audiology and Speech Sciences, School of","Business, Sauder School of","Community and Regional Planning, School of","Continuing Studies","Dentistry, Faculty of","Education, Faculty of","Environmental Health, School of","Forestry, Faculty of","Graduate and Postdoctoral Studies","Health Disciplines, College of","Journalism, School of","Kinesiology, School of","Land and Food Systems, Faculty of","Law, Peter A. Allard School of","Library, Archival and Information Studies, School of","Medicine, Faculty of","Music, School of","Nursing, School of","Pharmaceutical Sciences, Faculty of","Population and Public Health, School of","Science, Faculty of","Social Work, School of","UBC Vantage College","Vancouver School of Economics","Other"];
-var courseLevelList = ["Any","100","200","300","400","Graduate","Other","N/A"];
-var projectTitleList = ["Any","Web-based education segments for UBC Dietetics Major preceptors and students","Using a collaborative lecture annotation system for teaching education","Two Stage Review of Math and Physics Concepts","Transformation of KIN 469: Exercise prescription","Taking Entrepreneurship 101 online","On being strategic in selecting active learning techniques: A comparative analysis of pedagogical interventions in the furthering of specific learning objectives.","Neuroanatomy lab videos and interactive modules","Negotiating Change: Determining the readiness of second-year students for self-directed learning.","Improving Teamwork Skills in Geological Engineering","iEthics - planning for an integrated ethics curriculum in the health and human services programs at UBC","Flipped transformation of BIOL 112: Biology of the Cell and BIOL 121: Genetics, Evolution and Ecology","Flexible learning student engagement: a case study.","Exploring International Students’ Perceptions and Use of Peer Review in a First-Year Science Communications Course","Educating Occupational & Environmental Hygienists – The Canadian Experience","Blending fundamental and useful genetics","Berger inquiry interactive media site","Asia 222 and Asia 223 – video dialogues and interviews","Aptitude for Knowledge Transfer Across Disciplinary Boundaries"];  //make this dynamic form the data! TODO!! 
-var departmentList = ["Any"]; //Update this to be dynamic!!! TODO!!! 
-var enrolmentCapList = ["Any","Low (fewer than 50 students)","Medium (50-150 students)","High (more than 150 students)","N/A"];
-var courseTypeList = ["Any","Elective","N/A","Required","Service"];
-var courseLocationList = ["Any","On Campus (blended)","On campus (NOT blended)","Online","N/A"];
-var courseFormatList = ["Any","Capstone","Clinical","Community based", "internship","Lab","Lecture","Other","Program-level project (not limited to a specific course)","Project based","Seminar","Tutorial"];
-var projectTypeList = ["Any","Unfunded","SoTL seed","Small TLEF","FL/Large TLEF"];
-var projectStageList = ["Any","Planning","In progress","Completed"];
-var yearAwardedList = ["Any","2013","2014","2015","2016"];
+heatMapdata = d3.tsv.parse(customData);
+// var courseLevelList = heatMapdata.map(function (d) {
+//   option = d["Course_Level"]
+//   if (option==" " || option == ""){
+//     return "N/A"
+//   } else if (option.indexOf(',') > -1) {
+//     return option.split(",")[0]
+//   } else {
+//     console.log(option)
+//     return option
+//   }
+// }).getUnique()
+
+
+//dynamically obtain all options for each filter
+function get_filterOptions(filterName) {
+
+  options = heatMapdata.map(function (d) {return d[filterName]}).getUnique()
+
+  console.log(options)
+  newoptions = []
+
+  for (var i = options.length - 1; i >= 0; i--) {
+      console.log(options[i])
+      if (options[i]==" " || options[i] == ""){
+      newoptions.push("N/A")
+    } else if (options[i].indexOf(',') > -1) {
+      newoptions.concat(options[i].split(",")) //need to tease it out when survey gives multiple options[i]s
+    } else {
+      newoptions.push(options[i])
+    }
+  }
+  console.log(newoptions)
+  return newoptions.getUnique()
+}
+
+  //choice arrays for filters
+var courseLevelList = get_filterOptions("Course_Level")
+var facultyList = heatMapdata.map(function (d) {return d["Faculty_School"]}).getUnique()
+var projectTitleList = heatMapdata.map(function (d) {return d["project_Title"]}).getUnique()
+var departmentList = heatMapdata.map(function (d) {return d["Department"]}).getUnique()
+var enrolmentCapList = heatMapdata.map(function (d) {return d["Enrolment Cap"]}).getUnique()
+var courseFormatList = heatMapdata.map(function (d) {return d["Course Format"]}).getUnique()
+var courseTypeList = heatMapdata.map(function (d) {return d["Course Type"]}).getUnique()
+var courseLocationList = heatMapdata.map(function (d) {return d["Course Location"]}).getUnique()
+var projectTypeList = heatMapdata.map(function (d) {return d["Type of Project"]}).getUnique()
+var projectStageList = heatMapdata.map(function (d) {return d["Project Stage"]}).getUnique()
+var yearAwardedList = heatMapdata.map(function (d) {return d["Year Awarded"]}).getUnique()
+
+// var facultyList = ["Any","Applied Science, Faculty of","Architecture and Landscape Architecture, School of","Arts, Faculty of","Audiology and Speech Sciences, School of","Business, Sauder School of","Community and Regional Planning, School of","Continuing Studies","Dentistry, Faculty of","Education, Faculty of","Environmental Health, School of","Forestry, Faculty of","Graduate and Postdoctoral Studies","Health Disciplines, College of","Journalism, School of","Kinesiology, School of","Land and Food Systems, Faculty of","Law, Peter A. Allard School of","Library, Archival and Information Studies, School of","Medicine, Faculty of","Music, School of","Nursing, School of","Pharmaceutical Sciences, Faculty of","Population and Public Health, School of","Science, Faculty of","Social Work, School of","UBC Vantage College","Vancouver School of Economics","Other"];
+// var courseLevelList = ["Any","100","200","300","400","Graduate","Other","N/A"];
+// var projectTitleList = ["Any","Web-based education segments for UBC Dietetics Major preceptors and students","Using a collaborative lecture annotation system for teaching education","Two Stage Review of Math and Physics Concepts","Transformation of KIN 469: Exercise prescription","Taking Entrepreneurship 101 online","On being strategic in selecting active learning techniques: A comparative analysis of pedagogical interventions in the furthering of specific learning objectives.","Neuroanatomy lab videos and interactive modules","Negotiating Change: Determining the readiness of second-year students for self-directed learning.","Improving Teamwork Skills in Geological Engineering","iEthics - planning for an integrated ethics curriculum in the health and human services programs at UBC","Flipped transformation of BIOL 112: Biology of the Cell and BIOL 121: Genetics, Evolution and Ecology","Flexible learning student engagement: a case study.","Exploring International Students’ Perceptions and Use of Peer Review in a First-Year Science Communications Course","Educating Occupational & Environmental Hygienists – The Canadian Experience","Blending fundamental and useful genetics","Berger inquiry interactive media site","Asia 222 and Asia 223 – video dialogues and interviews","Aptitude for Knowledge Transfer Across Disciplinary Boundaries"];  //make this dynamic form the data! TODO!! 
+// var departmentList = ["Any"]; //Update this to be dynamic!!! TODO!!! 
+// var enrolmentCapList = ["Any","Low (fewer than 50 students)","Medium (50-150 students)","High (more than 150 students)","N/A"];
+// var courseTypeList = ["Any","Elective","N/A","Required","Service"];
+// var courseLocationList = ["Any","On Campus (blended)","On campus (NOT blended)","Online","N/A"];
+// var courseFormatList = ["Any","Capstone","Clinical","Community based", "internship","Lab","Lecture","Other","Program-level project (not limited to a specific course)","Project based","Seminar","Tutorial"];
+// var projectTypeList = ["Any","Unfunded","SoTL seed","Small TLEF","FL/Large TLEF"];
+// var projectStageList = ["Any","Planning","In progress","Completed"];
+// var yearAwardedList = ["Any","2013","2014","2015","2016"];
 
 //columns to display for table
  var tableColumns =  ["project_Title","Faculty_School","Course_Level","course_Format","Course_Type","course_Location","project_Type","year_awarded"];
@@ -1509,7 +1583,7 @@ yearAwarded = "Any";
   "heatmapImapctApproach":heatmapImapctApproach};
   
   
-  var currentChartType = "heatmapInnovationImpact";  //set the default chart type to be sankey
+  var currentChartType =  "sankey";//"heatmapInnovationImpact";  //set the default chart type to be sankey
 		
 	
   var facultyPicker = d3.select("#context-filter-faculty")
@@ -1653,41 +1727,5 @@ var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("selec
 		});
 
 	ChartType[currentChartType](1);//redraw previously selected chart 
-
-
-	
-
-// ****************************************************************** //
-// ****************************************************************** //
-// ****************************************************************** //
-// ****************************************************************** //
-
-
- //          UTILITIES                                                //
-
-
-// ****************************************************************** //
-// ****************************************************************** //
-// ****************************************************************** //
-// ****************************************************************** //
-
-
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-	
-	
-Array.prototype.getUnique = function(){
-   var u = {}, a = [];
-   for(var i = 0, l = this.length; i < l; ++i){
-      if(u.hasOwnProperty(this[i])) {
-         continue;
-      }
-      a.push(this[i]);
-      u[this[i]] = 1;
-   }
-   return a;
-}
 
 
