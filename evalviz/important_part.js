@@ -1514,39 +1514,35 @@ heatMapdata = d3.tsv.parse(customData);
 
 //dynamically obtain all options for each filter
 function get_filterOptions(filterName) {
-
   options = heatMapdata.map(function (d) {return d[filterName]}).getUnique()
-
-  console.log(options)
   newoptions = []
-
   for (var i = options.length - 1; i >= 0; i--) {
-      console.log(options[i])
       if (options[i]==" " || options[i] == ""){
       newoptions.push("N/A")
-    } else if (options[i].indexOf(',') > -1) {
-      newoptions.concat(options[i].split(",")) //need to tease it out when survey gives multiple options[i]s
+    // } else if (options[i].indexOf(',') > -1) {
+    //   newoptions.concat(options[i].split(",")) //need to tease it out when survey gives multiple options[i]s
     } else {
       newoptions.push(options[i])
     }
   }
-  console.log(newoptions)
-  return newoptions.getUnique()
+  fixedoptions = ["Any"].concat(newoptions.getUnique().sort())
+  return fixedoptions
 }
 
   //choice arrays for filters
 var courseLevelList = get_filterOptions("Course_Level")
-var facultyList = heatMapdata.map(function (d) {return d["Faculty_School"]}).getUnique()
-var projectTitleList = heatMapdata.map(function (d) {return d["project_Title"]}).getUnique()
-var departmentList = heatMapdata.map(function (d) {return d["Department"]}).getUnique()
-var enrolmentCapList = heatMapdata.map(function (d) {return d["Enrolment Cap"]}).getUnique()
-var courseFormatList = heatMapdata.map(function (d) {return d["Course Format"]}).getUnique()
-var courseTypeList = heatMapdata.map(function (d) {return d["Course Type"]}).getUnique()
-var courseLocationList = heatMapdata.map(function (d) {return d["Course Location"]}).getUnique()
-var projectTypeList = heatMapdata.map(function (d) {return d["Type of Project"]}).getUnique()
-var projectStageList = heatMapdata.map(function (d) {return d["Project Stage"]}).getUnique()
-var yearAwardedList = heatMapdata.map(function (d) {return d["Year Awarded"]}).getUnique()
+var facultyList = get_filterOptions("Faculty_School")
+var projectTitleList = get_filterOptions("project_Title")
+var departmentList = get_filterOptions("Department")
+var enrolmentCapList = get_filterOptions("Enrolment Cap")
+var courseFormatList = get_filterOptions("Course Format")
+var courseTypeList = get_filterOptions("Course Type")
+var courseLocationList = get_filterOptions("Course Location")
+var projectTypeList = get_filterOptions("Type of Project")
+var projectStageList = get_filterOptions("Project Stage")
+var yearAwardedList = get_filterOptions("Year Awarded")
 
+//Manual entry of list
 // var facultyList = ["Any","Applied Science, Faculty of","Architecture and Landscape Architecture, School of","Arts, Faculty of","Audiology and Speech Sciences, School of","Business, Sauder School of","Community and Regional Planning, School of","Continuing Studies","Dentistry, Faculty of","Education, Faculty of","Environmental Health, School of","Forestry, Faculty of","Graduate and Postdoctoral Studies","Health Disciplines, College of","Journalism, School of","Kinesiology, School of","Land and Food Systems, Faculty of","Law, Peter A. Allard School of","Library, Archival and Information Studies, School of","Medicine, Faculty of","Music, School of","Nursing, School of","Pharmaceutical Sciences, Faculty of","Population and Public Health, School of","Science, Faculty of","Social Work, School of","UBC Vantage College","Vancouver School of Economics","Other"];
 // var courseLevelList = ["Any","100","200","300","400","Graduate","Other","N/A"];
 // var projectTitleList = ["Any","Web-based education segments for UBC Dietetics Major preceptors and students","Using a collaborative lecture annotation system for teaching education","Two Stage Review of Math and Physics Concepts","Transformation of KIN 469: Exercise prescription","Taking Entrepreneurship 101 online","On being strategic in selecting active learning techniques: A comparative analysis of pedagogical interventions in the furthering of specific learning objectives.","Neuroanatomy lab videos and interactive modules","Negotiating Change: Determining the readiness of second-year students for self-directed learning.","Improving Teamwork Skills in Geological Engineering","iEthics - planning for an integrated ethics curriculum in the health and human services programs at UBC","Flipped transformation of BIOL 112: Biology of the Cell and BIOL 121: Genetics, Evolution and Ecology","Flexible learning student engagement: a case study.","Exploring International Students’ Perceptions and Use of Peer Review in a First-Year Science Communications Course","Educating Occupational & Environmental Hygienists – The Canadian Experience","Blending fundamental and useful genetics","Berger inquiry interactive media site","Asia 222 and Asia 223 – video dialogues and interviews","Aptitude for Knowledge Transfer Across Disciplinary Boundaries"];  //make this dynamic form the data! TODO!! 
@@ -1562,8 +1558,8 @@ var yearAwardedList = heatMapdata.map(function (d) {return d["Year Awarded"]}).g
 //columns to display for table
  var tableColumns =  ["project_Title","Faculty_School","Course_Level","course_Format","Course_Type","course_Location","project_Type","year_awarded"];
 
-
-faculty  = "Any"; //default start values
+//set default start values
+faculty  = "Any"; 
 courseLevel = "Any";
 projectTitle = "Any";
 department = "Any";
@@ -1574,7 +1570,6 @@ courseFormat = "Any";
 projectType = "Any";
 projectStage = "Any";
 yearAwarded = "Any";
-		
 		
   
   //variables for filters and chart type buttons
