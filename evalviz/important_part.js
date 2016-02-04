@@ -582,133 +582,6 @@ data1 = data;
 
 
 
-// ****************************************************************** //
-// ****************************************************************** //
-// ****************************************************************** //
-// ****************************************************************** //
-
-
-
- //          PROJECT LIST               //
-
-
-// ****************************************************************** //
-// ****************************************************************** //
-// ****************************************************************** //
-// ****************************************************************** //
-
-
-
-var projectList = function(n){
-
-  console.log("rerunning project list", n)
-
-  function wrap(text, width, listheight) {
-    text.each(function() {
-      var text = d3.select(this),
-          words = text.text().split(/\s+/).reverse(),
-          word,
-          line = [],
-          lineNumber = 0,
-          lineHeight = 1.1, // ems
-          y = text.attr("y"),
-          dy = parseFloat(text.attr("dy")),
-          tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
-      if (y>listheight){
-        return
-      }
-      spans = 0
-      while (word = words.pop()) {
-        line.push(word);
-        tspan.text(line.join(" "));
-        if (tspan.node().getComputedTextLength() > width) {
-          line.pop();
-          if (spans == 1){
-            line.pop()
-            line.push('...')
-            tspan.text(line.join(" "));
-            break
-          }
-          tspan.text(line.join(" "));
-          line = [word];
-          tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
-          spans = spans+1
-        }
-      }
-    });
-  }
-
-  heatMapdata = d3.tsv.parse(customData, function(d) { //type function
-         return {
-       matrix: d.matrix,
-          // innovation: d["source long name"], // to coerce into a number or not!  + means yes
-           innovation: d["source"], // to coerce into a number or not!  + means yes
-         //  impact: d["target long name"], // works
-           impact: d["target"],// doesn't work ????  FIX THIS!!! 
-                 value: +d.value,
-       Course_Level: d.Course_Level,
-       Faculty_School: d.Faculty_School,
-       project_Title: d["project_Title"],
-       department: d.Department,
-       enrolment_Cap: d["Enrolment Cap"],
-       course_Format: d["Course Format"],
-       Course_Type: d["Course Type"],
-       course_Location: d["Course Location"],
-       project_Type: d["Type of Project"],
-       project_Stage: d["Project Stage"],
-       year_awarded: d["Year Awarded"]
-          };
-      }
-  );
-
-  //set up graph 
-  projectdata = []
-
-  heatMapdata.forEach(function (d) {
-    projectdata.push(d.project_Title);
-   });
-
-   // return only the distinct / unique nodes
-   projectdata = projectdata.getUnique()
-
-var margin = {top: 10, right: 10, bottom: 10, left: 10}
-    listwidth = document.getElementById("projectList").offsetWidth - margin.left - margin.right,
-    listheight = document.getElementById("allCharts").offsetWidth - margin.top - margin.bottom;
-
-
-  // append the svg canvas to the page
-var svg = d3.select("#projectList").append("svg")
-    .attr("class", "list")
-    .attr("width", listwidth)
-    .attr("height", listheight)
-  .append("g")
-    .attr("transform", "translate(" + listwidth/2 + "," + 0 + ")");
-
-  svg.selectAll(".text")
-    .data(projectdata)
-  .enter().append("text")
-    .attr("class", "projectListItem")
-    .attr("x", 0)
-    .attr("dx", 0)
-    .attr("dy", 0)
-    .style("fill", grey)
-    .attr("y", function(d,i){return 70*i+20})
-    .text(function(d,i) {
-        return capitalizeFirstLetter(d.toLowerCase())
-    })
-    .call(wrap,listwidth, listheight)
-    .on("mouseover", function (l){
-      // //console.log(l, l.projectTitle, cx, cy, tooltipOpacity)
-      // d3.select(this)
-      //   .call(highlight_project, l.projectTitle)
-    })
-    .on("mouseout", function (){
-      // remove_tooltip()
-      // svg.selectAll(".link")
-      //   .call(highlight_link,opacityNormal)
-
-    });
-}
 
 
 
@@ -728,7 +601,7 @@ var svg = d3.select("#projectList").append("svg")
 
 
 var heatmapInnovationImpact = function(n){
-  projectList(1)
+  //projectList(1)
 	heatMapdata = d3.tsv.parse(customData, function(d) { //type function
          return {
 		   matrix: d.matrix,
@@ -978,42 +851,41 @@ d3.select("#innovationImpactChart").append("svg")
       }
     }
   });
-  }  
-	
 
+  } 
+  projectdata = []
 
+  heatMapdata.forEach(function (d) {
+    projectdata.push(d.project_Title);
+  });
 
+  // return only the distinct / unique nodes
+  projectdata = projectdata.getUnique()
+  console.log(projectdata)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
+  return projectdata
 }; //end heatmapInnovationImpact
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var heatmapImpactApproach= function(n){
-  projectList(1)
+  //projectList(1)
 
 	// var width = 1200 - margin.heatmap.left - margin.heatmap.right;
 	// var height = 1000 - margin.heatmap.top - margin.heatmap.bottom;
@@ -1263,7 +1135,17 @@ evaluationApproach.sort(d3.ascending);
     }
   });
   }  
-	
+
+  projectdata = []
+
+  heatMapdata.forEach(function (d) {
+    projectdata.push(d.project_Title);
+   });
+
+   // return only the distinct / unique nodes
+   projectdata = projectdata.getUnique()
+
+   return projectdata
 	
 }; //end heatmapImpactApproach
 	
@@ -1333,7 +1215,6 @@ evaluationApproach.sort(d3.ascending);
 
 
 var sankeyChart = function(n){  //this is used to hide the previous chart. Should be replaced with .exit().remove() if possible! 
-  projectList(1)
 	heatMapdata = d3.tsv.parse(customData, function(d) { //do this here for the tabular function. it resets the heatmap data
          return {
 		   matrix: d.matrix,
@@ -1458,7 +1339,7 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
 
   nodeNames = get_trait_values("name")
   nodeValues = get_numerical_trait_values("value")
-
+  
   // using colors from d3.scale.category10
   colorscheme = d3.scale.ordinal()
     .domain(middle_nodes)
@@ -1590,27 +1471,8 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
   link.attr("d", path);
   }
 
-
-
-  //Show the number of projects displayed in Sankey and HeatMap
-  var revealNumberOfProjects = function (total, highlightTime){
-      var removeReveal = function (){
-         d3.select("#NumberOfProjects").selectAll("p")
-          .remove();
-      };
-      removeReveal()
-      d3.select("#NumberOfProjects").append("p")
-          .html(total + " projects")
-          .style("color", grey)
-          .style("background-color", "white")
-          .transition()
-          .duration(highlightTime/2)
-  };
-  total = graph.links.map(function (d) {return d["projectTitle"]}).getUnique().length
-  revealNumberOfProjects(total, highlightTime)
-
+  return  graph.links.map(function (d) {return d["projectTitle"]}).getUnique()
 }
-
 
 
 
@@ -1720,7 +1582,158 @@ function tabulate(tableData, columns) {
 } //end tabulate
   
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+
+ //          FILTER stuff                //
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+function rerun(currentChartType){
+  projects = ChartType[currentChartType](1)
+  console.log('prs',currentChartType,projects)
+
+  //Show the number of projects displayed in Sankey and HeatMap
+  var revealNumberOfProjects = function (total, highlightTime){
+      var removeReveal = function (){
+         d3.select("#NumberOfProjects").selectAll("p")
+          .remove();
+      };
+      removeReveal()
+      d3.select("#NumberOfProjects").append("p")
+          .html(total + " projects")
+          .style("color", grey)
+          .style("background-color", "white")
+          .transition()
+          .duration(highlightTime/2)
+  };
+
+  var updateprojectList = function(projectdata){
+
+    var removeReveal = function (){
+       d3.select("#projectList").selectAll("svg")
+        .remove();
+    };
+
+    removeReveal()
+
+    function wrap(text, width, listheight) {
+      text.each(function() {
+        var text = d3.select(this),
+            words = text.text().split(/\s+/).reverse(),
+            word,
+            line = [],
+            lineNumber = 0,
+            lineHeight = 1.1, // ems
+            y = text.attr("y"),
+            dy = parseFloat(text.attr("dy")),
+            tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+        if (y>listheight){
+          return
+        }
+        spans = 0
+        while (word = words.pop()) {
+          line.push(word);
+          tspan.text(line.join(" "));
+          if (tspan.node().getComputedTextLength() > width) {
+            line.pop();
+            if (spans == 1){
+              line.pop()
+              line.push('...')
+              tspan.text(line.join(" "));
+              break
+            }
+            tspan.text(line.join(" "));
+            line = [word];
+            tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+            spans = spans+1
+          }
+        }
+      });
+    }
+
+  var margin = {top: 10, right: 10, bottom: 10, left: 10}
+      listwidth = document.getElementById("projectList").offsetWidth - margin.left - margin.right,
+      listheight = document.getElementById("allCharts").offsetWidth - margin.top - margin.bottom;
+
+
+    // append the svg canvas to the page
+  var svg = d3.select("#projectList").append("svg")
+      .attr("class", "list")
+      .attr("width", listwidth)
+      .attr("height", listheight)
+    .append("g")
+      .attr("transform", "translate(" + listwidth/2 + "," + 0 + ")");
+
+    svg.selectAll(".text")
+      .data(projectdata)
+    .enter().append("text")
+      .attr("class", "projectListItem")
+      .attr("x", 0)
+      .attr("dx", 0)
+      .attr("dy", 0)
+      .style("fill", grey)
+      .attr("y", function(d,i){return 70*i+20})
+      .text(function(d,i) {
+          return capitalizeFirstLetter(d.toLowerCase())
+      })
+      .call(wrap,listwidth, listheight)
+      .on("mouseover", function (l){
+        // //console.log(l, l.projectTitle, cx, cy, tooltipOpacity)
+        // d3.select(this)
+        //   .call(highlight_project, l.projectTitle)
+      })
+      .on("mouseout", function (){
+        // remove_tooltip()
+        // svg.selectAll(".link")
+        //   .call(highlight_link,opacityNormal)
+
+      });
+  }
+
+  total = projects.length
+  var highlightTime = 200 //milliseconds
+  revealNumberOfProjects(total, highlightTime)
+  updateprojectList(projects)
+
+}
+
+
+
 heatMapdata = d3.tsv.parse(customData);
 
 
@@ -1753,19 +1766,6 @@ var courseLocationList = get_filterOptions("Course Location")
 var projectTypeList = get_filterOptions("Type of Project")
 var projectStageList = get_filterOptions("Project Stage")
 var yearAwardedList = get_filterOptions("Year Awarded")
-
-//Manual entry of list
-// var facultyList = ["Any","Applied Science, Faculty of","Architecture and Landscape Architecture, School of","Arts, Faculty of","Audiology and Speech Sciences, School of","Business, Sauder School of","Community and Regional Planning, School of","Continuing Studies","Dentistry, Faculty of","Education, Faculty of","Environmental Health, School of","Forestry, Faculty of","Graduate and Postdoctoral Studies","Health Disciplines, College of","Journalism, School of","Kinesiology, School of","Land and Food Systems, Faculty of","Law, Peter A. Allard School of","Library, Archival and Information Studies, School of","Medicine, Faculty of","Music, School of","Nursing, School of","Pharmaceutical Sciences, Faculty of","Population and Public Health, School of","Science, Faculty of","Social Work, School of","UBC Vantage College","Vancouver School of Economics","Other"];
-// var courseLevelList = ["Any","100","200","300","400","Graduate","Other","N/A"];
-// var projectTitleList = ["Any","Web-based education segments for UBC Dietetics Major preceptors and students","Using a collaborative lecture annotation system for teaching education","Two Stage Review of Math and Physics Concepts","Transformation of KIN 469: Exercise prescription","Taking Entrepreneurship 101 online","On being strategic in selecting active learning techniques: A comparative analysis of pedagogical interventions in the furthering of specific learning objectives.","Neuroanatomy lab videos and interactive modules","Negotiating Change: Determining the readiness of second-year students for self-directed learning.","Improving Teamwork Skills in Geological Engineering","iEthics - planning for an integrated ethics curriculum in the health and human services programs at UBC","Flipped transformation of BIOL 112: Biology of the Cell and BIOL 121: Genetics, Evolution and Ecology","Flexible learning student engagement: a case study.","Exploring International Students’ Perceptions and Use of Peer Review in a First-Year Science Communications Course","Educating Occupational & Environmental Hygienists – The Canadian Experience","Blending fundamental and useful genetics","Berger inquiry interactive media site","Asia 222 and Asia 223 – video dialogues and interviews","Aptitude for Knowledge Transfer Across Disciplinary Boundaries"];  //make this dynamic form the data! TODO!! 
-// var departmentList = ["Any"]; //Update this to be dynamic!!! TODO!!! 
-// var enrolmentCapList = ["Any","Low (fewer than 50 students)","Medium (50-150 students)","High (more than 150 students)","N/A"];
-// var courseTypeList = ["Any","Elective","N/A","Required","Service"];
-// var courseLocationList = ["Any","On Campus (blended)","On campus (NOT blended)","Online","N/A"];
-// var courseFormatList = ["Any","Capstone","Clinical","Community based", "internship","Lab","Lecture","Other","Program-level project (not limited to a specific course)","Project based","Seminar","Tutorial"];
-// var projectTypeList = ["Any","Unfunded","SoTL seed","Small TLEF","FL/Large TLEF"];
-// var projectStageList = ["Any","Planning","In progress","Completed"];
-// var yearAwardedList = ["Any","2013","2014","2015","2016"];
 
 //columns to display for table
  var tableColumns =  ["project_Title","Faculty_School","Course_Level","course_Format","Course_Type","course_Location","project_Type","year_awarded"];
@@ -1802,7 +1802,7 @@ yearAwarded = "Any";
 		//d3.select("#sankeyChart").selectAll("svg").remove();//remove old charts
 		//d3.select("#innovationImpactChart").selectAll("svg").remove();
 		//d3.select("#impactApproachChart").selectAll("svg").remove();
-			ChartType[currentChartType](1);//redraw previously selected chart
+			rerun(currentChartType);//redraw previously selected chart
  
 		});
 
@@ -1815,35 +1815,35 @@ yearAwarded = "Any";
 		
 	var courseLevelPicker = d3.select("#context-filter-courseLevel").append("select").on("change",function() { courseLevel = d3.select(this).property("value");	
 
-		ChartType[currentChartType](1);//redraw previously selected chart 
+		rerun(currentChartType);//redraw previously selected chart 
   }); //redraw previously selected chart
 		
 	courseLevelPicker.selectAll("option").data(courseLevelList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
 	
 	var projectTitlePicker = d3.select("#context-filter-projectTitle").append("select").on("change",function() { projectTitle = d3.select(this).property("value");	
 
-		ChartType[currentChartType](1);//redraw previously selected chart 
+		rerun(currentChartType);//redraw previously selected chart 
   }); //redraw previously selected chart
 		
 	projectTitlePicker.selectAll("option").data(projectTitleList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
 	
 	var departmentPicker = d3.select("#context-filter-department").append("select").on("change",function() { department = d3.select(this).property("value");	
 
-		ChartType[currentChartType](1);//redraw previously selected chart 
+		rerun(currentChartType);//redraw previously selected chart 
   }); //redraw previously selected chart
 		
 	departmentPicker.selectAll("option").data(departmentList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
 	
 	var enrolmentCapPicker = d3.select("#context-filter-enrolmentCap").append("select").on("change",function() { enrolmentCap = d3.select(this).property("value");	
 
-		ChartType[currentChartType](1);//redraw previously selected chart 
+		rerun(currentChartType);//redraw previously selected chart 
   }); //redraw previously selected chart
 		
 	enrolmentCapPicker.selectAll("option").data(enrolmentCapList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
 	
 var courseTypePicker = d3.select("#context-filter-courseType").append("select").on("change",function() { courseType = d3.select(this).property("value");	
 
-		ChartType[currentChartType](1);//redraw previously selected chart 
+		rerun(currentChartType);//redraw previously selected chart 
   }); //redraw previously selected chart
 		
 	courseTypePicker.selectAll("option").data(courseTypeList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
@@ -1853,14 +1853,14 @@ var courseLocationPicker = d3.select("#context-filter-courseLocation")
 .on("change",function() { 
 	courseLocation = d3.select(this).property("value");	
 
-		ChartType[currentChartType](1);//redraw previously selected chart 
+		rerun(currentChartType);//redraw previously selected chart 
   }); //redraw previously selected chart
 		
 	courseLocationPicker.selectAll("option").data(courseLocationList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
 	
 var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("select").on("change",function() { courseFormat = d3.select(this).property("value");	
 
-		ChartType[currentChartType](1);//redraw previously selected chart 
+		rerun(currentChartType);//redraw previously selected chart 
   }); //redraw previously selected chart
 		
 	courseFormatPicker.selectAll("option").data(courseFormatList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
@@ -1868,7 +1868,7 @@ var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("selec
 	
 		var projectTypePicker = d3.select("#context-filter-projectType").append("select").on("change",function() { projectType = d3.select(this).property("value");	
 
-		ChartType[currentChartType](1);//redraw previously selected chart 
+		rerun(currentChartType);//redraw previously selected chart 
   }); //redraw previously selected chart
 		
 	projectTypePicker.selectAll("option").data(projectTypeList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
@@ -1877,7 +1877,7 @@ var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("selec
 	
 	var projectStagePicker = d3.select("#context-filter-projectStage").append("select").on("change",function() { projectStage = d3.select(this).property("value");	
 
-		ChartType[currentChartType](1);//redraw previously selected chart 
+		rerun(currentChartType);//redraw previously selected chart 
   }); //redraw previously selected chart
 		
 	projectStagePicker.selectAll("option").data(projectStageList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
@@ -1886,7 +1886,7 @@ var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("selec
 
 	var yearAwardedPicker = d3.select("#context-filter-yearAwarded").append("select").on("change",function() { yearAwarded = d3.select(this).property("value");	
 
-		ChartType[currentChartType](1);//redraw previously selected chart 
+		rerun(currentChartType);//redraw previously selected chart 
   }); //redraw previously selected chart
 		
 	yearAwardedPicker.selectAll("option").data(yearAwardedList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
@@ -1903,7 +1903,7 @@ var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("selec
 		.on("click",function (){		
 
 		currentChartType = "sankey";
-		ChartType[currentChartType](1);//redraw previously selected chart 
+		rerun(currentChartType);//redraw previously selected chart 
  		
 		});		
 		
@@ -1916,7 +1916,7 @@ var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("selec
 		.on("click",function (){
 		
 		currentChartType = "heatmapInnovationImpact";
-		ChartType[currentChartType](1);//redraw previously selected chart 
+		rerun(currentChartType);//redraw previously selected chart 
  
 		});
 		
@@ -1929,10 +1929,8 @@ var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("selec
 		.on("click",function (){
 
 		currentChartType = "heatmapImpactApproach";
-		ChartType[currentChartType](1);//redraw previously selected chart 
+		rerun(currentChartType);//redraw previously selected chart 
  
 		});
 
-	ChartType[currentChartType](1);//redraw previously selected chart 
-
-
+	rerun(currentChartType);//redraw previously selected chart 
