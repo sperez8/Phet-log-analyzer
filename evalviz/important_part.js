@@ -14,10 +14,11 @@
 // ****************************************************************** //
 // ****************************************************************** //
 
+grey = "#7e7e7e"
+
 //reloads page if the window is resized so the viz is always at optimal size
 window.onresize = function(){ location.reload(); }
 
-var dispatch = d3.dispatch("load")
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -46,34 +47,6 @@ var tooltipOpacity = 0.83
 var remove_tooltip = function (){
     tooltip.style("opacity", 0);
 }
-
-
-//wraps text within a width
-function wrap(text, width) {
-  text.each(function() {
-    var text = d3.select(this),
-        words = text.text().split(/\s+/).reverse(),
-        word,
-        line = [],
-        lineNumber = 0,
-        lineHeight = 1.1, // ems
-        y = text.attr("y"),
-        dy = parseFloat(text.attr("dy")),
-        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
-      console.log(text)
-    while (word = words.pop()) {
-      line.push(word);
-      tspan.text(line.join(" "));
-      if (tspan.node().getComputedTextLength() > width) {
-        line.pop();
-        tspan.text(line.join(" "));
-        line = [word];
-        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
-      }
-    }
-  });
-}
-
 
 
 // ****************************************************************** //
@@ -628,6 +601,43 @@ data1 = data;
 
 var projectList = function(n){
 
+  console.log("rerunning project list", n)
+
+  function wrap(text, width, listheight) {
+    text.each(function() {
+      var text = d3.select(this),
+          words = text.text().split(/\s+/).reverse(),
+          word,
+          line = [],
+          lineNumber = 0,
+          lineHeight = 1.1, // ems
+          y = text.attr("y"),
+          dy = parseFloat(text.attr("dy")),
+          tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+      if (y>listheight){
+        return
+      }
+      spans = 0
+      while (word = words.pop()) {
+        line.push(word);
+        tspan.text(line.join(" "));
+        if (tspan.node().getComputedTextLength() > width) {
+          line.pop();
+          if (spans == 1){
+            line.pop()
+            line.push('...')
+            tspan.text(line.join(" "));
+            break
+          }
+          tspan.text(line.join(" "));
+          line = [word];
+          tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+          spans = spans+1
+        }
+      }
+    });
+  }
+
   heatMapdata = d3.tsv.parse(customData, function(d) { //type function
          return {
        matrix: d.matrix,
@@ -660,19 +670,33 @@ var projectList = function(n){
 
    // return only the distinct / unique nodes
    projectdata = projectdata.getUnique()
-   console.log(projectdata)
+
+var margin = {top: 10, right: 10, bottom: 10, left: 10}
+    listwidth = document.getElementById("projectList").offsetWidth - margin.left - margin.right,
+    listheight = document.getElementById("allCharts").offsetWidth - margin.top - margin.bottom;
+
 
   // append the svg canvas to the page
-  d3.select("#projectList").append("svg").selectAll(".text")
+var svg = d3.select("#projectList").append("svg")
+    .attr("class", "list")
+    .attr("width", listwidth)
+    .attr("height", listheight)
+  .append("g")
+    .attr("transform", "translate(" + listwidth/2 + "," + 0 + ")");
+
+  svg.selectAll(".text")
     .data(projectdata)
   .enter().append("text")
     .attr("class", "projectListItem")
-    .attr("dx", 10)
-    .attr("dy", function(d,i) {return 20*i+20})
+    .attr("x", 0)
+    .attr("dx", 0)
+    .attr("dy", 0)
+    .style("fill", grey)
+    .attr("y", function(d,i){return 70*i+20})
     .text(function(d,i) {
-        return d
+        return capitalizeFirstLetter(d.toLowerCase())
     })
-    //.call(wrap,1000)
+    .call(wrap,listwidth, listheight)
     .on("mouseover", function (l){
       // //console.log(l, l.projectTitle, cx, cy, tooltipOpacity)
       // d3.select(this)
@@ -704,6 +728,7 @@ var projectList = function(n){
 
 
 var heatmapInnovationImpact = function(n){
+  projectList(1)
 	heatMapdata = d3.tsv.parse(customData, function(d) { //type function
          return {
 		   matrix: d.matrix,
@@ -988,6 +1013,7 @@ d3.select("#innovationImpactChart").append("svg")
 }; //end heatmapInnovationImpact
 
 var heatmapImpactApproach= function(n){
+  projectList(1)
 
 	// var width = 1200 - margin.heatmap.left - margin.heatmap.right;
 	// var height = 1000 - margin.heatmap.top - margin.heatmap.bottom;
@@ -1438,8 +1464,6 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
     .domain(middle_nodes)
     .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"])
 
-  grey = "#7e7e7e"
-
   var highlight_project = function (link, title){
     d3.selectAll(".link")
       .each(function (l){
@@ -1873,7 +1897,7 @@ var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("selec
 		//chartType buttons:		
 	d3.select("#chartTypeButtons") //Sankey
 		.append("input")
-		.attr("value","Sankey Chart")
+		.attr("value","Sankey: Flow from Innovation to Impact to Evaluation")
 		 .attr("type", "button")
 		.attr("class","chartTypeButtons")
 		.on("click",function (){		

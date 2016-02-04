@@ -30,6 +30,8 @@ body {
     margin-bottom: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     background: #d3d3d3;
 }
 
@@ -47,7 +49,7 @@ body {
 
 #listItems {
     width: 20%;
-    height: 80%;
+    height: 60%;
     float: right;
     clear: right;
     margin-top: 5px;
@@ -56,10 +58,8 @@ body {
     padding-left: 5px;
 }
 
-#NumberofProjects {
+#NumberOfProjects {
     height: 10%;
-    float: right;
-    margin-top: 10px;
     text-align: center;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -67,10 +67,18 @@ body {
 
 #projectList {
     height: 80%;
-    float: right;
     vertical-align: middle;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.projectListItem {
+	width:100%;
+	font-size: 14pt;
+}
+
+tspan{
+	text-anchor:middle;
 }
 
 #project-table {
@@ -79,13 +87,6 @@ body {
     vertical-align: middle;
     margin-top: 5px;
     margin-bottom: 5px;
-}
-
-.projectListItem {
-	font-size: 12pt;
-	text-align: center;
-	width: auto;
-	text-wrap:normal;
 }
 
 div.tooltip, div.tooltip-inner {
@@ -97,11 +98,11 @@ div.tooltip, div.tooltip-inner {
 	margin-top: 5px;  
 	position: absolute;
 	text-align: center;
+	vertical-align: center;
 	color: "black";
 	min-width: 20px;
 	max-width: 300px;
-	height: auto;
-	min-height: 20px;
+	min-height: 80px;
 	padding-top: 4px;
 	padding-bottom: 4px;
 	padding-left: 10px;
@@ -210,6 +211,6 @@ input[type="button"] {
 	background: white;
 	margin-left: 10px;
 	margin-right: 10px;
-    padding-right: 5px;
-    padding-left: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
