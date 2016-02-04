@@ -48,101 +48,31 @@ var remove_tooltip = function (){
 }
 
 
-
-
-// ****************************************************************** //
-// ****************************************************************** //
-// ****************************************************************** //
-// ****************************************************************** //
-
-
-
- //          PROJECT LIST               //
-
-
-// ****************************************************************** //
-// ****************************************************************** //
-// ****************************************************************** //
-// ****************************************************************** //
-
-
-
-var projectList = function(n){
-  // append the svg canvas to the page
-   d3.select("#projectChart").append("svg")
-      .attr("width", width + margin.sankey.left + margin.sankey.right)
-      .attr("height", height + margin.sankey.top + margin.sankey.bottom)
-    .append("g")
-      .attr("transform", 
-            "translate(" + margin.sankey.left + "," + margin.sankey.top + ")");
-
-  //console.log(n);
-  var svg = d3.select("#sankeyChart").selectAll("g")
-    .append("g")
-    .attr("class", "sankey" + n)
-          .attr("transform", "translate(4,42)") //translate so the top label is not half hidden and left side of nodes is good
-      .style("visibility","block")
-    ;
-
-
-    
-  data1.forEach(function (d) {
-    graph.nodes.push({ "name": d.source });
-    graph.nodes.push({ "name": d.target });
-    graph.links.push({ "source": d.source,
-             "target": d.target,
-             "value": +d.value,
-             "projectTitle": d.project_Title
-            });
-   });
-
-   // return only the distinct / unique nodes
-   graph.nodes = d3.keys(d3.nest()
-     .key(function (d) { return d.name; })
-     .map(graph.nodes));
-
-  // add in the links
-  var link = svg.append("g").selectAll(".link")
-    .data(graph.links)
-  .enter().append("path")
-    .attr("class", "link")
-    .attr("d", path)
-    .style("stroke-opacity", opacityNormal)
-    .style("stroke-width", function(d) {return Math.max(1, d.dy); })
-    .style("stroke", function(d,i) {  //color given the middle node it's connected to
-      if (check_middle(d.source)) {
-        return colorscheme(d.source.name)
-      } else if (check_middle(d.target)) {
-        return colorscheme(d.target.name)
+//wraps text within a width
+function wrap(text, width) {
+  text.each(function() {
+    var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0,
+        lineHeight = 1.1, // ems
+        y = text.attr("y"),
+        dy = parseFloat(text.attr("dy")),
+        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+      console.log(text)
+    while (word = words.pop()) {
+      line.push(word);
+      tspan.text(line.join(" "));
+      if (tspan.node().getComputedTextLength() > width) {
+        line.pop();
+        tspan.text(line.join(" "));
+        line = [word];
+        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
       }
-    })
-    .sort(function(a, b) { return b.dy - a.dy; })
-    .on("mouseover", function (l){
-      var cx = d3.event.pageX
-      var cy = d3.event.pageY
-      tooltip.html("Project: " + l.projectTitle)
-        .style("height", "32px")
-        .style("left", (cx + 5) + "px")     
-        .style("top", (cy - 28) + "px");
-      tooltip
-          // .transition()
-          // .delay(2000)
-          // .duration(highlightTime)
-          .style("opacity", tooltipOpacity);
-
-      //console.log(l, l.projectTitle, cx, cy, tooltipOpacity)
-      d3.select(this)
-        .call(highlight_project, l.projectTitle)
-    })
-    .on("mouseout", function (){
-      remove_tooltip()
-      svg.selectAll(".link")
-        .call(highlight_link,opacityNormal)
-
-    });
+    }
+  });
 }
-
-
 
 
 
@@ -628,12 +558,152 @@ data1 = data;
 			colors = ["#C3D0DB","#98B2C3","#5E869F","#2F5D7C"]; //UBC greys
 			
 
-var heatmapInnovationImpact = function(n){
 
-	// var width = 1200 - margin.heatmap.left - margin.heatmap.right;
-	// var height = 1000 - margin.heatmap.top - margin.heatmap.bottom;
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+
+ //          PROJECT LIST               //
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+
+var projectList = function(n){
+
+  heatMapdata = d3.tsv.parse(customData, function(d) { //type function
+         return {
+       matrix: d.matrix,
+          // innovation: d["source long name"], // to coerce into a number or not!  + means yes
+           innovation: d["source"], // to coerce into a number or not!  + means yes
+         //  impact: d["target long name"], // works
+           impact: d["target"],// doesn't work ????  FIX THIS!!! 
+                 value: +d.value,
+       Course_Level: d.Course_Level,
+       Faculty_School: d.Faculty_School,
+       project_Title: d["project_Title"],
+       department: d.Department,
+       enrolment_Cap: d["Enrolment Cap"],
+       course_Format: d["Course Format"],
+       Course_Type: d["Course Type"],
+       course_Location: d["Course Location"],
+       project_Type: d["Type of Project"],
+       project_Stage: d["Project Stage"],
+       year_awarded: d["Year Awarded"]
+          };
+      }
+  );
+
+  //set up graph 
+  projectdata = []
+
+  heatMapdata.forEach(function (d) {
+    projectdata.push(d.project_Title);
+   });
+
+   // return only the distinct / unique nodes
+   projectdata = projectdata.getUnique()
+   console.log(projectdata)
+
+  // append the svg canvas to the page
+  d3.select("#projectList").append("svg").selectAll(".text")
+    .data(projectdata)
+  .enter().append("text")
+    .attr("class", "projectListItem")
+    .attr("dx", 10)
+    .attr("dy", function(d,i) {return 20*i+20})
+    .text(function(d,i) {
+        return d
+    })
+    //.call(wrap,1000)
+    .on("mouseover", function (l){
+      // //console.log(l, l.projectTitle, cx, cy, tooltipOpacity)
+      // d3.select(this)
+      //   .call(highlight_project, l.projectTitle)
+    })
+    .on("mouseout", function (){
+      // remove_tooltip()
+      // svg.selectAll(".link")
+      //   .call(highlight_link,opacityNormal)
+
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var heatmapInnovationImpact = function(n){
 	heatMapdata = d3.tsv.parse(customData, function(d) { //type function
          return {
 		   matrix: d.matrix,
@@ -885,6 +955,35 @@ d3.select("#innovationImpactChart").append("svg")
   });
   }  
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 }; //end heatmapInnovationImpact
 
@@ -1208,6 +1307,31 @@ evaluationApproach.sort(d3.ascending);
 
 
 var sankeyChart = function(n){  //this is used to hide the previous chart. Should be replaced with .exit().remove() if possible! 
+  projectList(1)
+	heatMapdata = d3.tsv.parse(customData, function(d) { //do this here for the tabular function. it resets the heatmap data
+         return {
+		   matrix: d.matrix,
+          // innovation: d["source long name"], // to coerce into a number or not!  + means yes
+           innovation: d["source"], // to coerce into a number or not!  + means yes
+         //  impact: d["target long name"], // works
+           impact: d["target"],// doesn't work ????  FIX THIS!!! 
+                 value: +d.value,
+		   Course_Level: d.Course_Level,
+		   Faculty_School: d.Faculty_School,
+		   project_Title: d["project_Title"],
+		   department: d.Department,
+		   enrolment_Cap: d["Enrolment Cap"],
+		   course_Format: d["Course Format"],
+		   Course_Type: d["Course Type"],
+		   course_Location: d["Course Location"],
+		   project_Type: d["Type of Project"],
+		   project_Stage: d["Project Stage"],
+		   year_awarded: d["Year Awarded"]
+          };
+		  }
+  );	
+  
+  
   filterData();
   	
   // append the svg canvas to the page
@@ -1574,17 +1698,6 @@ function tabulate(tableData, columns) {
 
   
 heatMapdata = d3.tsv.parse(customData);
-// var courseLevelList = heatMapdata.map(function (d) {
-//   option = d["Course_Level"]
-//   if (option==" " || option == ""){
-//     return "N/A"
-//   } else if (option.indexOf(',') > -1) {
-//     return option.split(",")[0]
-//   } else {
-//     console.log(option)
-//     return option
-//   }
-// }).getUnique()
 
 
 //dynamically obtain all options for each filter

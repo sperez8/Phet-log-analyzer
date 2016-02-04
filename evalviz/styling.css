@@ -81,6 +81,13 @@ body {
     margin-bottom: 5px;
 }
 
+.projectListItem {
+	font-size: 12pt;
+	text-align: center;
+	width: auto;
+	text-wrap:normal;
+}
+
 div.tooltip, div.tooltip-inner {
 	font-family: "Helvetica Neue";
 	font-style: normal;
