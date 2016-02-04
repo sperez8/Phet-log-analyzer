@@ -687,6 +687,12 @@ d3.select("#innovationImpactChart").append("svg")
  
   dataRollUp =  [];
 
+  if (typeof heatMapNest === "undefined") {
+    console.log("no projects found!")
+    //Filters return no projects
+    return []
+  }
+
     heatMapNest.forEach(function (d,v) {
 	 v.forEach(function (d2,v2) {
       dataRollUp.push({ innovation: d2, impact: d, value: v2 });
@@ -985,6 +991,12 @@ evaluationApproach.sort(d3.ascending);
 
   dataRollUp =  [];
 
+  if (typeof heatMapNest === "undefined") {
+    console.log("no projects found!")
+    //Filters return no projects
+    return []
+  }
+  
     heatMapNest.forEach(function (d,v) {
 	 v.forEach(function (d2,v2) {
       dataRollUp.push({ impact: d, approach: d2, value: v2 });
@@ -1339,7 +1351,7 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
 
   nodeNames = get_trait_values("name")
   nodeValues = get_numerical_trait_values("value")
-  
+
   // using colors from d3.scale.category10
   colorscheme = d3.scale.ordinal()
     .domain(middle_nodes)
