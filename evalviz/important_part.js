@@ -392,7 +392,7 @@ var margin = {sankey:{top: 20, right: 10, bottom: 10, left: 10},
     //width = 1200 - margin.sankey.left - margin.sankey.right,
     //height = 800 - margin.sankey.top - margin.sankey.bottom;
     width = document.getElementById("allCharts").offsetWidth
-    height = width
+    height = window.innerHeight*0.75
 
 var formatNumber = d3.format(",.0f"),    // zero decimal places
     format = function(d) { return formatNumber(d) + " " + units; },
@@ -440,7 +440,7 @@ data1 = data;
 		d3.select("#sankeyChart").selectAll("svg").remove();
 		d3.select("#innovationImpactChart").selectAll("svg").remove();
 		d3.select("#impactApproachChart").selectAll("svg").remove();
-		d3.select("#project-table").selectAll("tr").remove();
+		//d3.select("#project-table").selectAll("tr").remove();
 
 
 	//all the single option filters are of type ==
@@ -519,7 +519,7 @@ data1 = data;
 	data1 = data1.filter( function(d){return (d["Course Type"].search(courseType))!=-1;})
 	}
 
-	 tabulate(heatMapdata,tableColumns);
+	 //tabulate(heatMapdata,tableColumns);
 }; //end filterData
 
 	
@@ -996,7 +996,7 @@ evaluationApproach.sort(d3.ascending);
     //Filters return no projects
     return []
   }
-  
+
     heatMapNest.forEach(function (d,v) {
 	 v.forEach(function (d2,v2) {
       dataRollUp.push({ impact: d, approach: d2, value: v2 });
@@ -1535,63 +1535,63 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
 
 
   
-function tabulate(tableData, columns) {
+// function tabulate(tableData, columns) {
 
-//console.log(data1[0]);
+// //console.log(data1[0]);
 
-//var tableData = d3.nest()   //this works to give a unique list of project titles. 
-	//.key(function(d) {return d.project_Title;})
-	//.map(data,d3.map).keys().sort(d3.ascending);
+// //var tableData = d3.nest()   //this works to give a unique list of project titles. 
+// 	//.key(function(d) {return d.project_Title;})
+// 	//.map(data,d3.map).keys().sort(d3.ascending);
 
-	//console.log(data[0]);
-	//console.log(data[0]["project_Title"]);
-	//console.log(tableData);
+// 	//console.log(data[0]);
+// 	//console.log(data[0]["project_Title"]);
+// 	//console.log(tableData);
 	
-    var table = d3.select("#project-table").append("table")
-     //       .attr("style", "margin-left: 150px"),
-        thead = table.append("thead"),
-        tbody = table.append("tbody");
+//     var table = d3.select("#project-table").append("table")
+//      //       .attr("style", "margin-left: 150px"),
+//         thead = table.append("thead"),
+//         tbody = table.append("tbody");
 
-    // append the header row
-    thead.append("tr")
-        .selectAll("th")
-        .data(columns)
-        .enter()
-        .append("th")
-            .text(function(column) { return capitalizeFirstLetter(column.replace('_',' ')); });
+//     // append the header row
+//     thead.append("tr")
+//         .selectAll("th")
+//         .data(columns)
+//         .enter()
+//         .append("th")
+//             .text(function(column) { return capitalizeFirstLetter(column.replace('_',' ')); });
 
-			var x = "_XX_"; //nothing should match this ;)
-			function unique(value){
-  			return_this = (x != value["project_Title"]);
-  			x = value["project_Title"];
-  			return return_this;
-			}
-			tableData = tableData.filter(unique);
+// 			var x = "_XX_"; //nothing should match this ;)
+// 			function unique(value){
+//   			return_this = (x != value["project_Title"]);
+//   			x = value["project_Title"];
+//   			return return_this;
+// 			}
+// 			tableData = tableData.filter(unique);
 			
-    // create a row for each object in the data
-    var rows = tbody.selectAll("tr")
-        .data(tableData)
-       // .data(tableData)
-        .enter()
-       .append("tr");
-	   //console.log(rows[0]);
+//     // create a row for each object in the data
+//     var rows = tbody.selectAll("tr")
+//         .data(tableData)
+//        // .data(tableData)
+//         .enter()
+//        .append("tr");
+// 	   //console.log(rows[0]);
 
-    // create a cell in each row for each column
-    var cells = rows.selectAll("td")
-        .data(function(row) {
-            return columns.map(function(column) {
-                return {column: column, value: row[column]};
+//     // create a cell in each row for each column
+//     var cells = rows.selectAll("td")
+//         .data(function(row) {
+//             return columns.map(function(column) {
+//                 return {column: column, value: row[column]};
 		   
-		// return d;})
-            });
-        })
-        .enter()
-        .append("td")
-		//.attr("style", "font-family: Courier") // sets the font style
-            .html(function(d) { return d.value; });
+// 		// return d;})
+//             });
+//         })
+//         .enter()
+//         .append("td")
+// 		//.attr("style", "font-family: Courier") // sets the font style
+//             .html(function(d) { return d.value; });
     
-    //return table;
-} //end tabulate
+//     //return table;
+// } //end tabulate
   
 
 
@@ -1700,7 +1700,7 @@ function rerun(currentChartType){
 
   var margin = {top: 10, right: 10, bottom: 10, left: 10}
       listwidth = document.getElementById("projectList").offsetWidth - margin.left - margin.right,
-      listheight = document.getElementById("allCharts").offsetWidth - margin.top - margin.bottom;
+      listheight = window.innerHeight*0.7
 
 
     // append the svg canvas to the page
