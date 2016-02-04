@@ -14,7 +14,10 @@
 // ****************************************************************** //
 // ****************************************************************** //
 
+//reloads page if the window is resized so the viz is always at optimal size
+window.onresize = function(){ location.reload(); }
 
+var dispatch = d3.dispatch("load")
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -54,6 +57,102 @@ var remove_tooltip = function (){
 
 
 
+ //          PROJECT LIST               //
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+
+var projectList = function(n){
+  // append the svg canvas to the page
+   d3.select("#projectChart").append("svg")
+      .attr("width", width + margin.sankey.left + margin.sankey.right)
+      .attr("height", height + margin.sankey.top + margin.sankey.bottom)
+    .append("g")
+      .attr("transform", 
+            "translate(" + margin.sankey.left + "," + margin.sankey.top + ")");
+
+  //console.log(n);
+  var svg = d3.select("#sankeyChart").selectAll("g")
+    .append("g")
+    .attr("class", "sankey" + n)
+          .attr("transform", "translate(4,42)") //translate so the top label is not half hidden and left side of nodes is good
+      .style("visibility","block")
+    ;
+
+
+    
+  data1.forEach(function (d) {
+    graph.nodes.push({ "name": d.source });
+    graph.nodes.push({ "name": d.target });
+    graph.links.push({ "source": d.source,
+             "target": d.target,
+             "value": +d.value,
+             "projectTitle": d.project_Title
+            });
+   });
+
+   // return only the distinct / unique nodes
+   graph.nodes = d3.keys(d3.nest()
+     .key(function (d) { return d.name; })
+     .map(graph.nodes));
+
+  // add in the links
+  var link = svg.append("g").selectAll(".link")
+    .data(graph.links)
+  .enter().append("path")
+    .attr("class", "link")
+    .attr("d", path)
+    .style("stroke-opacity", opacityNormal)
+    .style("stroke-width", function(d) {return Math.max(1, d.dy); })
+    .style("stroke", function(d,i) {  //color given the middle node it's connected to
+      if (check_middle(d.source)) {
+        return colorscheme(d.source.name)
+      } else if (check_middle(d.target)) {
+        return colorscheme(d.target.name)
+      }
+    })
+    .sort(function(a, b) { return b.dy - a.dy; })
+    .on("mouseover", function (l){
+      var cx = d3.event.pageX
+      var cy = d3.event.pageY
+      tooltip.html("Project: " + l.projectTitle)
+        .style("height", "32px")
+        .style("left", (cx + 5) + "px")     
+        .style("top", (cy - 28) + "px");
+      tooltip
+          // .transition()
+          // .delay(2000)
+          // .duration(highlightTime)
+          .style("opacity", tooltipOpacity);
+
+      //console.log(l, l.projectTitle, cx, cy, tooltipOpacity)
+      d3.select(this)
+        .call(highlight_project, l.projectTitle)
+    })
+    .on("mouseout", function (){
+      remove_tooltip()
+      svg.selectAll(".link")
+        .call(highlight_link,opacityNormal)
+
+    });
+}
+
+
+
+
+
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+// ****************************************************************** //
+
+
+
  //          MAKING THE SANKEY                //
 
 
@@ -61,6 +160,7 @@ var remove_tooltip = function (){
 // ****************************************************************** //
 // ****************************************************************** //
 // ****************************************************************** //
+
 
 
 
@@ -385,9 +485,11 @@ var customData = jQuery( '#data-here' ).text();
 var units = "Project Facet";
 
 var margin = {sankey:{top: 20, right: 10, bottom: 10, left: 10},
-				 heatmap:{top: 150, right: 0, bottom: 100, left: 200}};
-    width = 1200 - margin.sankey.left - margin.sankey.right,
-    height = 800 - margin.sankey.top - margin.sankey.bottom;
+				 heatmap:{top: 150, right: 0, bottom: 0, left: 200}};
+    //width = 1200 - margin.sankey.left - margin.sankey.right,
+    //height = 800 - margin.sankey.top - margin.sankey.bottom;
+    width = document.getElementById("allCharts").offsetWidth
+    height = width
 
 var formatNumber = d3.format(",.0f"),    // zero decimal places
     format = function(d) { return formatNumber(d) + " " + units; },
@@ -528,8 +630,8 @@ data1 = data;
 
 var heatmapInnovationImpact = function(n){
 
-	var width = 1200 - margin.heatmap.left - margin.heatmap.right;
-	var height = 1000 - margin.heatmap.top - margin.heatmap.bottom;
+	// var width = 1200 - margin.heatmap.left - margin.heatmap.right;
+	// var height = 1000 - margin.heatmap.top - margin.heatmap.bottom;
 	
 	
 	heatMapdata = d3.tsv.parse(customData, function(d) { //type function
@@ -786,10 +888,10 @@ d3.select("#innovationImpactChart").append("svg")
 	
 }; //end heatmapInnovationImpact
 
-var heatmapImapctApproach= function(n){
+var heatmapImpactApproach= function(n){
 
-	var width = 1200 - margin.heatmap.left - margin.heatmap.right;
-	var height = 1000 - margin.heatmap.top - margin.heatmap.bottom;
+	// var width = 1200 - margin.heatmap.left - margin.heatmap.right;
+	// var height = 1000 - margin.heatmap.top - margin.heatmap.bottom;
 	
 	//constants for heatmaps
 	// Just use the ones defined for the other heatmap :) 
@@ -1038,7 +1140,7 @@ evaluationApproach.sort(d3.ascending);
   }  
 	
 	
-}; //end heatmapImapctApproach
+}; //end heatmapImpactApproach
 	
 
 
@@ -1106,33 +1208,6 @@ evaluationApproach.sort(d3.ascending);
 
 
 var sankeyChart = function(n){  //this is used to hide the previous chart. Should be replaced with .exit().remove() if possible! 
-    width = 1200 - margin.sankey.left - margin.sankey.right,
-    height = 800 - margin.sankey.top - margin.sankey.bottom;
-	
-	heatMapdata = d3.tsv.parse(customData, function(d) { //do this here for the tabular function. it resets the heatmap data
-         return {
-		   matrix: d.matrix,
-          // innovation: d["source long name"], // to coerce into a number or not!  + means yes
-           innovation: d["source"], // to coerce into a number or not!  + means yes
-         //  impact: d["target long name"], // works
-           impact: d["target"],// doesn't work ????  FIX THIS!!! 
-                 value: +d.value,
-		   Course_Level: d.Course_Level,
-		   Faculty_School: d.Faculty_School,
-		   project_Title: d["project_Title"],
-		   department: d.Department,
-		   enrolment_Cap: d["Enrolment Cap"],
-		   course_Format: d["Course Format"],
-		   Course_Type: d["Course Type"],
-		   course_Location: d["Course Location"],
-		   project_Type: d["Type of Project"],
-		   project_Stage: d["Project Stage"],
-		   year_awarded: d["Year Awarded"]
-          };
-		  }
-  );	
-  
-  
   filterData();
   	
   // append the svg canvas to the page
@@ -1377,7 +1452,7 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
       };
       removeReveal()
       d3.select("#NumberOfProjects").append("p")
-          .html(total)
+          .html(total + " projects")
           .style("color", grey)
           .style("background-color", "white")
           .transition()
@@ -1575,7 +1650,7 @@ yearAwarded = "Any";
   //variables for filters and chart type buttons
   var ChartType = {"sankey":sankeyChart,
   "heatmapInnovationImpact":heatmapInnovationImpact,
-  "heatmapImapctApproach":heatmapImapctApproach};
+  "heatmapImpactApproach":heatmapImpactApproach};
   
   
   var currentChartType =  "sankey";//"heatmapInnovationImpact";  //set the default chart type to be sankey
@@ -1716,7 +1791,7 @@ var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("selec
 		.attr("class","chartTypeButtons")
 		.on("click",function (){
 
-		currentChartType = "heatmapImapctApproach";
+		currentChartType = "heatmapImpactApproach";
 		ChartType[currentChartType](1);//redraw previously selected chart 
  
 		});
