@@ -14,6 +14,33 @@
 // ****************************************************************** //
 // ****************************************************************** //
 
+var highlightProjectInList = function(project){
+
+  var highlightTime = 200 //milliseconds
+  var highlight_list_item = function (selection, color) {
+      selection            
+          .transition()
+          //.delay(highlightTime*2)
+          .duration(highlightTime)
+          .style("fill", color)
+      };
+
+  //console.log('highlight',project)
+  //console.log(d3.select("#projectList"))
+  console.log(d3.select("#projectList").select("svg").select("g").selectAll(".text"))
+
+  d3.select("#projectList").select("svg").select("g").selectAll(".text")
+      .each(function (t){
+          console.log(t)
+          if (t == project){
+            d3.select(this).call(highlight_list_item,"red")
+          } 
+          // else {
+          //   // console
+          // }
+      })
+  }
+
 grey = "#7e7e7e"
 
 //reloads page if the window is resized so the viz is always at optimal size
@@ -1363,6 +1390,7 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
         //console.log(l.projectTitle, title)
         if (l.projectTitle == title){
           d3.select(this).call(highlight_link,opacityHigh)
+          highlightProjectInList(l.projectTitle)
         } else {
           d3.select(this).call(highlight_link,opacityLow)
         }
