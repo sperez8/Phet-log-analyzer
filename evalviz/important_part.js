@@ -388,7 +388,7 @@ var customData = jQuery( '#data-here' ).text();
 var units = "Project Facet";
 
 var margin = {sankey:{top: 20, right: 10, bottom: 10, left: 10},
-				 heatmap:{top: 150, right: 0, bottom: 0, left: 200}};
+				 heatmap:{top: 150, right: 0, bottom: 0, left: 150}};
     //width = 1200 - margin.sankey.left - margin.sankey.right,
     //height = 800 - margin.sankey.top - margin.sankey.bottom;
     width = document.getElementById("allCharts").offsetWidth
@@ -891,24 +891,6 @@ d3.select("#innovationImpactChart").append("svg")
 
 
 var heatmapImpactApproach= function(n){
-  //projectList(1)
-
-	// var width = 1200 - margin.heatmap.left - margin.heatmap.right;
-	// var height = 1000 - margin.heatmap.top - margin.heatmap.bottom;
-	
-	//constants for heatmaps
-	// Just use the ones defined for the other heatmap :) 
-	
-	
-// gridSize = Math.floor(width / 12),  //should make this dynamic
-  //        legendElementWidth = gridSize*1.50,
-    //      buckets = 8,
-		//  colors = ['#f0f0f0','#d9d9d9','#bdbdbd','#969696','#737373','#525252','#252525','#000000']; //grey scale 
-
-
-
-// append the svg canvas to the page
-
 	
 		heatMapdata = d3.tsv.parse(customData, function(d) { //type function
          return {
@@ -931,12 +913,6 @@ var heatmapImpactApproach= function(n){
 		  }
   );
 
-
-
-
-
- // console.log("heat map data: " + heatMapdata);
-  //
  //Great nest learning tool: http://bl.ocks.org/shancarter/raw/4748131/ 
 var heatMapNest = d3.nest()
 .key(function(d) { return d.matrix; })
@@ -946,8 +922,6 @@ var heatMapNest = d3.nest()
   .map(heatMapdata, d3.map).get("impactXapproach"); //impactXapproach is in the data under "matrix"
   
 var areasOfImpact=heatMapNest.keys().sort(d3.ascending);
-
-//console.log("areas of impact: " + areasOfImpact);
 
 evaluationApproach = d3.nest()
 .key(function(d) { return d.matrix; })
@@ -1673,7 +1647,7 @@ function rerun(currentChartType){
             lineHeight = 1.1, // ems
             y = text.attr("y"),
             dy = parseFloat(text.attr("dy")),
-            tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+            tspan = text.text(null).append("tspan").attr("class","listitem").attr("x", 0).attr("y", y).attr("dy", dy + "em");
         if (y>listheight){
           return
         }
@@ -1691,7 +1665,7 @@ function rerun(currentChartType){
             }
             tspan.text(line.join(" "));
             line = [word];
-            tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+            tspan = text.append("tspan").attr("class","listitem").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
             spans = spans+1
           }
         }
