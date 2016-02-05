@@ -388,15 +388,15 @@ var customData = jQuery( '#data-here' ).text();
 var units = "Project Facet";
 
 var margin = {sankey:{top: 20, right: 10, bottom: 10, left: 10},
-				 heatmap:{top: 150, right: 0, bottom: 0, left: 150}};
+				 heatmap:{top: 130, right: 0, bottom: 0, left: 130}};
     //width = 1200 - margin.sankey.left - margin.sankey.right,
     //height = 800 - margin.sankey.top - margin.sankey.bottom;
     width = document.getElementById("allCharts").offsetWidth
     height = window.innerHeight*0.75
 
 var formatNumber = d3.format(",.0f"),    // zero decimal places
-    format = function(d) { return formatNumber(d) + " " + units; },
-    color = d3.scale.category20();
+    format = function(d) { return formatNumber(d) + " " + units; }
+    //color = d3.scale.category20();
 //console.log(color);
 
 	// Set the sankey diagram properties	
@@ -1304,6 +1304,10 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
   opacityLow = 0.3
   opacityHigh = 1
 
+  colorLow = "#98B2C3"
+  colorNormal = "#98B2C3"
+  colorHigh = "#5E869F"
+
   //get array of possible values for trait of a node
   function get_trait_values(trait){
       return graph.nodes.map(function (d) {return d[trait]})
@@ -1327,29 +1331,30 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
   nodeValues = get_numerical_trait_values("value")
 
   // using colors from d3.scale.category10
-  colorscheme = d3.scale.ordinal()
-    .domain(middle_nodes)
-    .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"])
+  // colorscheme = d3.scale.ordinal()
+  //   .domain(middle_nodes)
+  //   .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"])
 
   var highlight_project = function (link, title){
     d3.selectAll(".link")
       .each(function (l){
         //console.log(l.projectTitle, title)
         if (l.projectTitle == title){
-          d3.select(this).call(highlight_link,opacityHigh)
+          d3.select(this).call(highlight_link,colorHigh,opacityHigh)
         } else {
-          d3.select(this).call(highlight_link,opacityLow)
+          d3.select(this).call(highlight_link,colorLow,opacityLow)
         }
       })
   }
 
   var highlightTime = 200 //milliseconds
 
-  var highlight_link = function (selection, opacity) {
+  var highlight_link = function (selection, color, opacity) {
       selection            
           .transition()
           .duration(highlightTime)
           .style("stroke-opacity", opacity)
+          .style("stroke", color)
       };
 
   // add in the links
@@ -1360,13 +1365,14 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
     .attr("d", path)
     .style("stroke-opacity", opacityNormal)
     .style("stroke-width", function(d) {return Math.max(1, d.dy); })
-    .style("stroke", function(d,i) {  //color given the middle node it's connected to
-      if (check_middle(d.source)) {
-        return colorscheme(d.source.name)
-      } else if (check_middle(d.target)) {
-        return colorscheme(d.target.name)
-      }
-    })
+    // .style("stroke", function(d,i) {  //color given the middle node it's connected to
+    //   if (check_middle(d.source)) {
+    //     return colorscheme(d.source.name)
+    //   } else if (check_middle(d.target)) {
+    //     return colorscheme(d.target.name)
+    //   }
+    // })
+    .style("stroke",colorNormal)
     .sort(function(a, b) { return b.dy - a.dy; })
     .on("mouseover", function (l){
       var cx = d3.event.pageX
@@ -1388,7 +1394,7 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
     .on("mouseout", function (){
       remove_tooltip()
       svg.selectAll(".link")
-        .call(highlight_link,opacityNormal)
+        .call(highlight_link,colorNormal,opacityNormal)
 
     });
     // .on("click", function (d){
@@ -1424,13 +1430,14 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
   node.append("rect")
     .attr("height", function(d) { return d.dy; })
     .attr("width", sankey.nodeWidth())
-    .style("fill", function(d) { //color nodes if they are in the middle, otherwise grey
-      if (check_middle(d)) {
-        return colorscheme(d.name)
-      } else{
-        return grey
-      }
-    })
+    .style("fill",colorHigh)
+    // .style("fill", function(d) { //color nodes if they are in the middle, otherwise grey
+    //   if (check_middle(d)) {
+    //     return colorscheme(d.name)
+    //   } else{
+    //     return grey
+    //   }
+    // })
 
 
   // add in the title for the nodes
@@ -1706,7 +1713,7 @@ function rerun(currentChartType){
       .on("mouseout", function (){
         // remove_tooltip()
         // svg.selectAll(".link")
-        //   .call(highlight_link,opacityNormal)
+        //   .call(highlight_link,colorNormal,opacityNormal)
 
       });
   }

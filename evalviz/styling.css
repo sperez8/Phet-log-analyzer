@@ -4,7 +4,7 @@
 body {
 	font-family: "Helvetica Neue";
 	font-style: normal;
-	font-size: 14pt;
+	font-size: 11pt;
     min-height: 1000px;
     min-width: 1200px;
     margin-left: auto;
@@ -122,7 +122,7 @@ div.tooltip, div.tooltip-inner {
   pointer-events: none;
   font-family: "Helvetica Neue";
   font-style: normal;
-  font-size: 14pt;
+  font-size: 11pt;
 }
 
 .link {
@@ -149,24 +149,15 @@ div.tooltip, div.tooltip-inner {
 
 
 .innovationLabel{
-	font-family: "Helvetica Neue";
-	font-style: normal;
-	font-size: 13pt;
 	color: #ff7f0e;
 }
 
 .impactLabel{
-	font-family: "Helvetica Neue";
-	font-style: normal;
-	font-size: 13pt;
 	color: #ff7f0e;
 	text-align: center;
 }
 
 .approachLabel{
-	font-family: "Helvetica Neue";
-	font-style: normal;
-font-size: 13pt;
 	color: #ff7f0e;
 }
 
