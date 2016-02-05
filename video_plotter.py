@@ -215,7 +215,7 @@ def plot_mult_counts(path,plotfolder,vlogs, subject, conditions, videoname):
 				y = vlog.viewage[videoname]
 				if sum(y)==0: #only take into account videos that were watched.
 					continue
-				x = [i*2 for i in range(len(y))]
+				x = [i/2 for i in range(len(y))]
 				ppl.fill_between(x, y, facecolor='black', alpha = ALPHA) #label=str(vlog.filename))
 				#files.append(vlog.filename)
 				counts.append(y)
@@ -257,7 +257,7 @@ def plot_filling(path,plotfolder,x,y,z,condition,videoname,name):
 def plot_video_count(path,plotfolder,vlog,videoname):
 	'''given a user log and video, plot count'''
 	y = vlog.viewage[videoname]
-	x = [i*2 for i in range(len(y))]
+	x = [i/2 for i in range(len(y))]
 	if z in vlog.highglights.keys():
 		z = vlog.highglights[videoname].values()[0][0]
 	else:
