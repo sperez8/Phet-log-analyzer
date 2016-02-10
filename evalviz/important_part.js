@@ -27,7 +27,7 @@ var opacityNormal = 0.7,
     colorHigh = colors[2];
 
 //reloads page if the window is resized so the viz is always at optimal size
-window.onresize = function(){ location.reload(); }
+// window.onresize = function(){ location.reload(); }
 
 
 function capitalizeFirstLetter(string) {
@@ -450,7 +450,7 @@ var customData = jQuery( '#data-here' ).text();
 var units = "Project Facet";
 
 var margin = {sankey:{top: 20, right: 10, bottom: 10, left: 10},
-				 heatmap:{top: 130, right: 0, bottom: 0, left: 130}};
+				 heatmap:{top: 70, right: 0, bottom: 0, left: 270}};
     //width = 1200 - margin.sankey.left - margin.sankey.right,
     //height = 800 - margin.sankey.top - margin.sankey.bottom;
     width = document.getElementById("allCharts").offsetWidth
@@ -585,9 +585,10 @@ data1 = data;
 }; //end filterData
 
 	
-	//constants for heatmaps
- gridSize = Math.floor(width / 12),  //should make this dynamic
-          legendElementWidth = gridSize*1.50,
+  //constants for heatmaps
+  gridSizeX = Math.floor(width / 12),  //should make this dynamic
+  gridSizeY = Math.floor(width / 18),  //should make this dynamic
+          legendElementWidth = gridSizeX*1.50,
           buckets = 4;
 			
 
@@ -723,12 +724,12 @@ d3.select("#innovationImpactChart").append("svg")
 
 	 
 	 //title  "Innovation by Area of Impact"
-	svg.append("text")
-        .attr("x", - margin.heatmap.left)             
-        .attr("y", 0 - (margin.heatmap.top) + 40)
-        .attr("text-anchor", "start")  
-        .attr("class","heading")
-        .text("Innovation by Area of Impact");	
+	// svg.append("text")
+ //        .attr("x", - margin.heatmap.left)             
+ //        .attr("y", 0 - (margin.heatmap.top) + 40)
+ //        .attr("text-anchor", "start")  
+ //        .attr("class","heading")
+ //        .text("Innovation by Area of Impact");	
 	
 
 
@@ -771,13 +772,13 @@ d3.select("#innovationImpactChart").append("svg")
   		var innovationLabel = svg.selectAll("g")
           .data(areasOfInnovation)
           .enter().append("g")
-    		.attr("y", function(d, i) { return (i + 1) * ( gridSize); })
+    		.attr("y", function(d, i) { return (i + 1) * ( gridSizeY); })
             .attr("x", 0)
 			.attr("class","innovationLabel")
 			//.style("glyph-orientation-vertical", "-90")			
 			.style("text-anchor", "start")
 			//.style("writing-mode", "tb")
-		    //.attr("transform", "translate(" + -0.5*gridSize + ", -6)")
+		    //.attr("transform", "translate(" + -0.5*gridSizeX + ", -6)")
 			; 
 			
 			//y-axis
@@ -785,13 +786,14 @@ d3.select("#innovationImpactChart").append("svg")
 			.append("text")
 			.text(function(d) { return d; })
 			.text(function(d, i) { return d; })
-			.attr("y", function(d, i) { return (((i) * gridSize/2) +gridSize/6); })
+			.attr("y", function(d, i) { return (((i) * gridSizeY/2) +gridSizeY/4); })
             .attr("x", -10)
 			.attr("dx",0)
 			.attr("dy",0)
-			//.attr("transform", "translate(-6," + gridSize/4  + ")")
+			//.attr("transform", "translate(-6," + gridSizeX/4  + ")")
 			.attr("class","innovationLabel")					
 			.style("text-anchor", "end")
+      .style("vertical-align","middle")
 			.call(wrapx,margin.heatmap.left-30)  
 			;
 			
@@ -811,15 +813,15 @@ d3.select("#innovationImpactChart").append("svg")
           .data(areasOfImpact)
           .enter().append("text")
             .text(function (d) { return d; })
-            .attr("x", function (d, i) { return ((i) * gridSize); })
-            //.attr("x", function (d, i) { return gridSize; })
+            .attr("x", function (d, i) { return ((i) * gridSizeX); })
+            //.attr("x", function (d, i) { return gridSizeX; })
 			.attr("y", -10)
 			.attr("dy",0)
 			.attr("dx",0)
 			.attr("class","impactLabel")
             .style("text-anchor", "start")
-            //.attr("transform", "translate(6," + -1*gridSize/4  + ")")
-			.call(wrapy,gridSize)
+            //.attr("transform", "translate(6," + -1*gridSizeX/4  + ")")
+			.call(wrapy,gridSizeX)
 			 ; 
 			
 			
@@ -831,16 +833,16 @@ d3.select("#innovationImpactChart").append("svg")
 			  
 			  cards.enter()
 			  .append("rect")              		  		  
-              //.attr("y", function(d) { return ((areasOfInnovation.indexOf( d[1])) * gridSize/2); }) //array-works
-			   .attr("y", function(d) { return ((areasOfInnovation.indexOf( d.impact)) * gridSize/2); })
-			  //.attr("x", function(d) { return areasOfImpact.indexOf(d[0]) * gridSize; })  //array. works
-			  .attr("x", function(d) { return areasOfImpact.indexOf(d.innovation) * gridSize; })  
-			  //.attr("y", function(d,i) { return i * gridSize; })  
+              //.attr("y", function(d) { return ((areasOfInnovation.indexOf( d[1])) * gridSizeX/2); }) //array-works
+			   .attr("y", function(d) { return ((areasOfInnovation.indexOf( d.impact)) * gridSizeY/2); })
+			  //.attr("x", function(d) { return areasOfImpact.indexOf(d[0]) * gridSizeX; })  //array. works
+			  .attr("x", function(d) { return areasOfImpact.indexOf(d.innovation) * gridSizeX; })  
+			  //.attr("y", function(d,i) { return i * gridSizeX; })  
               .attr("rx", 6)
               .attr("ry", 6)
 			   .attr("class", "card")
-              .attr("width", gridSize)
-              .attr("height", gridSize/2)
+              .attr("width", gridSizeX)
+              .attr("height", gridSizeY/2)
               .style("fill", "white")
 			  .style("stroke","white")
 			  ;
@@ -1009,12 +1011,12 @@ evaluationApproach.sort(d3.ascending);
 
 	 
 	 //title  "Area of Impact by Evaluation Approach"
-	svg.append("text")
-        .attr("x", - margin.heatmap.left)             
-        .attr("y", 0 - (margin.heatmap.top) + 40)
-        .attr("text-anchor", "start")  
-        .attr("class","heading")
-        .text("Area of Impact by Evaluation Approach");	
+	// svg.append("text")
+ //        .attr("x", - margin.heatmap.left)             
+ //        .attr("y", 0 - (margin.heatmap.top) + 40)
+ //        .attr("text-anchor", "start")  
+ //        .attr("class","heading")
+ //        .text("Area of Impact by Evaluation Approach");	
  
  
  heatMapNest = d3.nest()
@@ -1055,13 +1057,14 @@ evaluationApproach.sort(d3.ascending);
 			.append("text")
 			.text(function(d) { return d; })
 			.text(function(d, i) { return d; })
-			.attr("y", function(d, i) { return (((i) * gridSize/2) +gridSize/6); })
+			.attr("y", function(d, i) { return (((i) * gridSizeY/2) +gridSizeY/6); })
             .attr("x", -10)
 			.attr("dx",0)
 			.attr("dy",0)
-			//.attr("transform", "translate(-6," + gridSize/4  + ")")
+			//.attr("transform", "translate(-6," + gridSizeX/4  + ")")
 			.attr("class","impactLabel")					
 			.style("text-anchor", "end")
+      .style("vertical-align","middle")
 			.call(wrapx,margin.heatmap.left-30)  
 			;
 			
@@ -1080,14 +1083,14 @@ evaluationApproach.sort(d3.ascending);
           .data(evaluationApproach)
           .enter().append("text")
             .text(function (d) { return d; })
-            .attr("x", function (d, i) { return ((i) * gridSize); })
+            .attr("x", function (d, i) { return ((i) * gridSizeX); })
 			.attr("y", -10)
 			.attr("dy",0)
 			.attr("dx",0)
 			.attr("class","approachLabel")
             .style("text-anchor", "start")
-            //.attr("transform", "translate(6," + -1*gridSize/4  + ")")
-			.call(wrapy,gridSize)
+            //.attr("transform", "translate(6," + -1*gridSizeX/4  + ")")
+			.call(wrapy,gridSizeY)
 			 ; 
 			
 			
@@ -1099,13 +1102,13 @@ evaluationApproach.sort(d3.ascending);
 			  
 			  cards.enter()
 			  .append("rect") 
-			  .attr("x", function(d) { return evaluationApproach.indexOf(d.approach) * gridSize; })  
-			  .attr("y", function(d) { return ((areasOfImpact.indexOf( d.impact)) * gridSize)/2; })
+			  .attr("x", function(d) { return evaluationApproach.indexOf(d.approach) * gridSizeX; })  
+			  .attr("y", function(d) { return ((areasOfImpact.indexOf( d.impact)) * gridSizeY)/2; })
               .attr("rx", 6)
               .attr("ry", 6)
 			   .attr("class", "card")
-              .attr("width", gridSize)
-              .attr("height", gridSize/2)
+              .attr("width", gridSizeX)
+              .attr("height", gridSizeY/2)
               .style("fill", "white")
 			  .style("stroke","white")
 			  ;
@@ -1832,84 +1835,55 @@ yearAwarded = "Any";
 		
 		
 	var courseLevelPicker = d3.select("#context-filter-courseLevel").append("select").on("change",function() { courseLevel = d3.select(this).property("value");	
+		rerun(currentChartType)});
+	
+  var projectTitlePicker = d3.select("#context-filter-projectTitle").append("select").on("change",function() { projectTitle = d3.select(this).property("value");
+		rerun(currentChartType)});
+	
+  var departmentPicker = d3.select("#context-filter-department").append("select").on("change",function() { department = d3.select(this).property("value");	
+		rerun(currentChartType)});
+	
+  var enrolmentCapPicker = d3.select("#context-filter-enrolmentCap").append("select").on("change",function() { enrolmentCap = d3.select(this).property("value");
+		rerun(currentChartType)});
+	
+  var courseTypePicker = d3.select("#context-filter-courseType").append("select").on("change",function() { courseType = d3.select(this).property("value");	
+		rerun(currentChartType)});
+	
+  var courseLocationPicker = d3.select("#context-filter-courseLocation").append("select").on("change",function() { courseLocation = d3.select(this).property("value");
+		rerun(currentChartType)});
 
-		rerun(currentChartType);//redraw previously selected chart 
-  }); //redraw previously selected chart
+	var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("select").on("change",function() { courseFormat = d3.select(this).property("value");
+		rerun(currentChartType)});
+			
+	var projectTypePicker = d3.select("#context-filter-projectType").append("select").on("change",function() { projectType = d3.select(this).property("value");	
+		rerun(currentChartType)});
 		
-	courseLevelPicker.selectAll("option").data(courseLevelList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
-	
-	var projectTitlePicker = d3.select("#context-filter-projectTitle").append("select").on("change",function() { projectTitle = d3.select(this).property("value");	
-
-		rerun(currentChartType);//redraw previously selected chart 
-  }); //redraw previously selected chart
-		
-	projectTitlePicker.selectAll("option").data(projectTitleList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
-	
-	var departmentPicker = d3.select("#context-filter-department").append("select").on("change",function() { department = d3.select(this).property("value");	
-
-		rerun(currentChartType);//redraw previously selected chart 
-  }); //redraw previously selected chart
-		
-	departmentPicker.selectAll("option").data(departmentList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
-	
-	var enrolmentCapPicker = d3.select("#context-filter-enrolmentCap").append("select").on("change",function() { enrolmentCap = d3.select(this).property("value");	
-
-		rerun(currentChartType);//redraw previously selected chart 
-  }); //redraw previously selected chart
-		
-	enrolmentCapPicker.selectAll("option").data(enrolmentCapList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
-	
-var courseTypePicker = d3.select("#context-filter-courseType").append("select").on("change",function() { courseType = d3.select(this).property("value");	
-
-		rerun(currentChartType);//redraw previously selected chart 
-  }); //redraw previously selected chart
-		
-	courseTypePicker.selectAll("option").data(courseTypeList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
-	
-var courseLocationPicker = d3.select("#context-filter-courseLocation")
-.append("select")
-.on("change",function() { 
-	courseLocation = d3.select(this).property("value");	
-
-		rerun(currentChartType);//redraw previously selected chart 
-  }); //redraw previously selected chart
-		
-	courseLocationPicker.selectAll("option").data(courseLocationList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
-	
-var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("select").on("change",function() { courseFormat = d3.select(this).property("value");	
-
-		rerun(currentChartType);//redraw previously selected chart 
-  }); //redraw previously selected chart
-		
-	courseFormatPicker.selectAll("option").data(courseFormatList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
-	
-	
-		var projectTypePicker = d3.select("#context-filter-projectType").append("select").on("change",function() { projectType = d3.select(this).property("value");	
-
-		rerun(currentChartType);//redraw previously selected chart 
-  }); //redraw previously selected chart
-		
-	projectTypePicker.selectAll("option").data(projectTypeList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
-	
-
-	
-	var projectStagePicker = d3.select("#context-filter-projectStage").append("select").on("change",function() { projectStage = d3.select(this).property("value");	
-
-		rerun(currentChartType);//redraw previously selected chart 
-  }); //redraw previously selected chart
-		
-	projectStagePicker.selectAll("option").data(projectStageList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
-
-
+	var projectStagePicker = d3.select("#context-filter-projectStage").append("select").on("change",function() { projectStage = d3.select(this).property("value");
+		rerun(currentChartType)});
 
 	var yearAwardedPicker = d3.select("#context-filter-yearAwarded").append("select").on("change",function() { yearAwarded = d3.select(this).property("value");	
+		rerun(currentChartType)});
+		
 
-		rerun(currentChartType);//redraw previously selected chart 
-  }); //redraw previously selected chart
-		
-	yearAwardedPicker.selectAll("option").data(yearAwardedList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
-		
-	
+  courseLevelPicker.selectAll("option").data(courseLevelList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
+    
+  projectTitlePicker.selectAll("option").data(projectTitleList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
+    
+  departmentPicker.selectAll("option").data(departmentList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
+    
+  enrolmentCapPicker.selectAll("option").data(enrolmentCapList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
+    
+  courseTypePicker.selectAll("option").data(courseTypeList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
+    
+  courseLocationPicker.selectAll("option").data(courseLocationList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
+    
+  courseFormatPicker.selectAll("option").data(courseFormatList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
+    
+  projectTypePicker.selectAll("option").data(projectTypeList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
+    
+  projectStagePicker.selectAll("option").data(projectStageList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
+
+  yearAwardedPicker.selectAll("option").data(yearAwardedList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
 
 	
 		//chartType buttons:		
@@ -1917,7 +1891,7 @@ var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("selec
 		.append("input")
 		.attr("value","Sankey: Flow from Innovation to Impact to Evaluation")
 		 .attr("type", "button")
-		.attr("class","chartTypeButtons")
+		.attr("class","big_button")
 		.on("click",function (){		
 
 		currentChartType = "sankey";
@@ -1930,7 +1904,7 @@ var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("selec
 		.append("input")
 		.attr("value","Heatmap: Innovation by Area of Impact")
 		 .attr("type", "button")
-		.attr("class","chartTypeButtons")
+		.attr("class","big_button")
 		.on("click",function (){
 		
 		currentChartType = "heatmapInnovationImpact";
@@ -1943,7 +1917,7 @@ var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("selec
 		.append("input")
 		.attr("value","Heatmap: Area of Impact by Evaluation Approach")
 		 .attr("type", "button")
-		.attr("class","chartTypeButtons")
+		.attr("class","big_button")
 		.on("click",function (){
 
 		currentChartType = "heatmapImpactApproach";
@@ -1952,3 +1926,24 @@ var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("selec
 		});
 
 	rerun(currentChartType);//redraw previously selected chart 
+
+function reset_filters() {
+  //reset filters on page
+  d3.selectAll("select").property({"value":"Any"});
+  
+  //reset to default values
+  faculty  = "Any"; 
+  courseLevel = "Any";
+  projectTitle = "Any";
+  department = "Any";
+  enrolmentCap = "Any";
+  courseType = "Any";
+  courseLocation = "Any";
+  courseFormat = "Any"; 
+  projectType = "Any";
+  projectStage = "Any";
+  yearAwarded = "Any";
+
+  //rerun viz
+  rerun(currentChartType)
+}
