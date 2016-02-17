@@ -1,7 +1,7 @@
 #import string as str
 import sys
 
-datafile = "data_copy.txt"
+datafile = "data_copy_original.txt"
 outfile = "data_copy_new.txt"
 
 
