@@ -20,19 +20,6 @@ body {
     padding-left: 20px;
 }
 
-#chartTypeButtons {
-    width: 100%;
-    height: 10%;
-    float: left;
-    text-align: center;
-    margin-top: 5px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    background: #d3d3d3;
-}
-
 /*#sankeyChart, #innovationImpactChart, #impactApproachChart {*/
 #allCharts {
     width: 70%;
@@ -69,7 +56,7 @@ body {
 }
 
 .projectListItem {
-	width:100%;
+	width:110%;
 	font-size: 14pt;
 }
 
@@ -190,14 +177,34 @@ select, input[type="button"] {
     border-radius: 4px;
 }
 
+.small_button {
+	font-size: 12pt;
+}
+
+.big_button {
+	font-size: 16pt;
+}
+
 input[type="button"] { 
 	width: auto;
 	height: 35px;
-	font-size: 16pt;
 	color: grey;
 	background: white;
 	margin-left: 10px;
 	margin-right: 10px;
     padding-left: 20px;
     padding-right: 20px;
+}
+
+#chartTypeButtons {
+    width: 100%;
+    height: 10%;
+    float: left;
+    text-align: center;
+    margin-top: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #d3d3d3;
 }
