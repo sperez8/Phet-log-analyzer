@@ -450,7 +450,7 @@ var customData = jQuery( '#data-here' ).text();
 var units = "Project Facet";
 
 var margin = {sankey:{top: 20, right: 10, bottom: 10, left: 10},
-				 heatmap:{top: 70, right: 0, bottom: 0, left: 270}};
+         heatmap:{top: 70, right: 0, bottom: 0, left: 270}};
     //width = 1200 - margin.sankey.left - margin.sankey.right,
     //height = 800 - margin.sankey.top - margin.sankey.bottom;
     width = document.getElementById("allCharts").offsetWidth
@@ -461,12 +461,12 @@ var formatNumber = d3.format(",.0f"),    // zero decimal places
     //color = d3.scale.category20();
 //console.log(color);
 
-	// Set the sankey diagram properties	
+  // Set the sankey diagram properties  
 var sankey = d3.sankey()
     .nodeWidth(38)
     .nodePadding(7)
     .size([width-4, height-50]); //offset a bit to make the labels not cut off. 
-	
+  
 var path = sankey.link();
 var currentDraw = 0;
 
@@ -495,102 +495,102 @@ data = d3.tsv.parse(customData);
 var heatMapdata =[];
 var data1=[];
 
-var filterData = function(){ //Note that the d is different for the heatMapdata and the data1 data. It comes from the parent (calling function). 
+var filterData = function(n){ //Note that the d is different for the heatMapdata and the data1 data. It comes from the parent (calling function). 
 
 
 data1 = data;
-		d3.select("#sankeyChart").selectAll("svg").remove();
-		d3.select("#innovationImpactChart").selectAll("svg").remove();
-		d3.select("#impactApproachChart").selectAll("svg").remove();
-		//d3.select("#project-table").selectAll("tr").remove();
+    d3.select("#sankeyChart").selectAll("svg").remove();
+    d3.select("#innovationImpactChart").selectAll("svg").remove();
+    d3.select("#impactApproachChart").selectAll("svg").remove();
+    d3.select("#project-table").selectAll("tr").remove();
 
 
-	//all the single option filters are of type ==
-	if (faculty != "Any"){
-	heatMapdata = heatMapdata.filter( function(d){ return d.Faculty_School == faculty;});
-	data1 = data1.filter( function(d){ return d.Faculty_School == faculty;});
-	}
+  //all the single option filters are of type ==
+  if (faculty != "Any"){
+  heatMapdata = heatMapdata.filter( function(d){ return d.Faculty_School == faculty;});
+  data1 = data1.filter( function(d){ return d.Faculty_School == faculty;});
+  }
 
-	if (projectTitle != "Any") {
-	heatMapdata = heatMapdata.filter( function(d) {return d.project_Title==projectTitle;});
-	data1 = data1.filter( function(d) {return d.project_Title==projectTitle;});
-	}
-			
-	if (department != "Any") {
-	heatMapdata = heatMapdata.filter( function(d) {return d.Department==department;});
-	data1 = data1.filter( function(d) {return d.Department==department;});
-	}
-		
-	if (projectType != "Any") {
-	heatMapdata = heatMapdata.filter( function(d) {return d.project_Type==projectType;});
-	data1 = data1.filter( function(d) {return d["Type of Project"]==projectType;}); //Sankey chart loads the data differently thank heat maps  :S
-	}
-		
-	if (projectStage != "Any") {
-	heatMapdata = heatMapdata.filter( function(d) {return d.project_Stage==projectStage;});
-	data1 = data1.filter( function(d) {return  d["Project Stage"]==projectStage;});
-	}
-		
-	if (yearAwarded != "Any") {
-	heatMapdata = heatMapdata.filter( function(d) {return d.year_awarded==yearAwarded;});
-	data1 = data1.filter( function(d) {return d["Year Awarded"]==yearAwarded;});
-	}
-	
-	
-	
+  if (projectTitle != "Any") {
+  heatMapdata = heatMapdata.filter( function(d) {return d.project_Title==projectTitle;});
+  data1 = data1.filter( function(d) {return d.project_Title==projectTitle;});
+  }
+      
+  if (department != "Any") {
+  heatMapdata = heatMapdata.filter( function(d) {return d.Department==department;});
+  data1 = data1.filter( function(d) {return d.Department==department;});
+  }
+    
+  if (projectType != "Any") {
+  heatMapdata = heatMapdata.filter( function(d) {return d.project_Type==projectType;});
+  data1 = data1.filter( function(d) {return d["Type of Project"]==projectType;}); //Sankey chart loads the data differently thank heat maps  :S
+  }
+    
+  if (projectStage != "Any") {
+  heatMapdata = heatMapdata.filter( function(d) {return d.project_Stage==projectStage;});
+  data1 = data1.filter( function(d) {return  d["Project Stage"]==projectStage;});
+  }
+    
+  if (yearAwarded != "Any") {
+  heatMapdata = heatMapdata.filter( function(d) {return d.year_awarded==yearAwarded;});
+  data1 = data1.filter( function(d) {return d["Year Awarded"]==yearAwarded;});
+  }
+  
+  
+  
  //enrolment cap has ( and ) in it and doesn't work for heatmap data... try with search? 
-		if (enrolmentCap != "Any") {
-		var searchObj = enrolmentCap.replace('\)','\\\)').replace('\(','\\\('); //note the / needs to be escaped too! 
-			searchObj = new RegExp(searchObj,'i'); 
-	heatMapdata = heatMapdata.filter( function(d) {return (d.enrolment_Cap.search(searchObj))!=-1;});
-	data1 = data1.filter( function(d) {return d["Enrolment Cap"]==enrolmentCap;});
-	}
-		//all the multi-select type options are of the .search() type. 
-	if (courseLevel != "Any") {
-	heatMapdata = heatMapdata.filter( function(d){return (d.Course_Level.search(courseLevel))!=-1;});
-	data1 = data1.filter( function(d){return (d.Course_Level.search(courseLevel))!=-1;})
-	}
-	
-	if (courseFormat != "Any") {
-	heatMapdata = heatMapdata.filter( function(d){return (d.course_Format.search(courseFormat))!=-1;});
-	data1 = data1.filter( function(d){return (d["Course Format"].search(courseFormat))!=-1;})
-	}	
-	
-	//console.log(courseLocation);
-	if (courseLocation != "Any") {
-	// The str.search uses regular expressions. The ( and ) are screwing it up in the course location data. I need to 
-	// make a regualr expression object and then use that to search.
-	// the obj is made by replacing all the ( with /( and all the ) with /)
-	
-	//console.log(courseLocation);
-	var searchObj = courseLocation.replace('\)','\\\)').replace('\(','\\\('); //note the / needs to be escaped too! 
-	//console.log(searchObj);
-	//searchObj.replace('\(','\\\('); 
-	//console.log(searchObj); console.log("type: " +  typeof searchObj);
-	searchObj = new RegExp(searchObj,'i');  //i for case IIIInsensitive. 
-		//console.log(searchObj); console.log("type: " +  typeof searchObj);
-	heatMapdata = heatMapdata.filter( function(d){return (d.course_Location.search(searchObj))!=-1;});
-	//data1 = data1.filter( function(d){return (d["Course Location"].search(courseLocation))!=-1;});  //doesn't work. Needs searchObj
-	data1 = data1.filter( function(d){return (d["Course Location"].search(searchObj))!=-1;});
-	//console.log(heatMapdata);
-	//console.log(data1);
-	}	
-	
-	if (courseType != "Any") {
-	heatMapdata = heatMapdata.filter( function(d){return (d.Course_Type.search(courseType))!=-1;});
-	data1 = data1.filter( function(d){return (d["Course Type"].search(courseType))!=-1;})
-	}
+    if (enrolmentCap != "Any") {
+    var searchObj = enrolmentCap.replace('\)','\\\)').replace('\(','\\\('); //note the / needs to be escaped too! 
+      searchObj = new RegExp(searchObj,'i'); 
+  heatMapdata = heatMapdata.filter( function(d) {return (d.enrolment_Cap.search(searchObj))!=-1;});
+  data1 = data1.filter( function(d) {return d["Enrolment Cap"]==enrolmentCap;});
+  }
+    //all the multi-select type options are of the .search() type. 
+  if (courseLevel != "Any") {
+  heatMapdata = heatMapdata.filter( function(d){return (d.Course_Level.search(courseLevel))!=-1;});
+  data1 = data1.filter( function(d){return (d.Course_Level.search(courseLevel))!=-1;})
+  }
+  
+  if (courseFormat != "Any") {
+  heatMapdata = heatMapdata.filter( function(d){return (d.course_Format.search(courseFormat))!=-1;});
+  data1 = data1.filter( function(d){return (d["Course Format"].search(courseFormat))!=-1;})
+  } 
+  
+  //console.log(courseLocation);
+  if (courseLocation != "Any") {
+  // The str.search uses regular expressions. The ( and ) are screwing it up in the course location data. I need to 
+  // make a regualr expression object and then use that to search.
+  // the obj is made by replacing all the ( with /( and all the ) with /)
+  
+  //console.log(courseLocation);
+  var searchObj = courseLocation.replace('\)','\\\)').replace('\(','\\\('); //note the / needs to be escaped too! 
+  //console.log(searchObj);
+  //searchObj.replace('\(','\\\('); 
+  //console.log(searchObj); console.log("type: " +  typeof searchObj);
+  searchObj = new RegExp(searchObj,'i');  //i for case IIIInsensitive. 
+    //console.log(searchObj); console.log("type: " +  typeof searchObj);
+  heatMapdata = heatMapdata.filter( function(d){return (d.course_Location.search(searchObj))!=-1;});
+  //data1 = data1.filter( function(d){return (d["Course Location"].search(courseLocation))!=-1;});  //doesn't work. Needs searchObj
+  data1 = data1.filter( function(d){return (d["Course Location"].search(searchObj))!=-1;});
+  //console.log(heatMapdata);
+  //console.log(data1);
+  } 
+  
+  if (courseType != "Any") {
+  heatMapdata = heatMapdata.filter( function(d){return (d.Course_Type.search(courseType))!=-1;});
+  data1 = data1.filter( function(d){return (d["Course Type"].search(courseType))!=-1;})
+  }
 
-	 //tabulate(heatMapdata,tableColumns);
+  tabulate(heatMapdata,tableColumns);
 }; //end filterData
 
-	
+  
   //constants for heatmaps
   gridSizeX = Math.floor(width / 12),  //should make this dynamic
   gridSizeY = Math.floor(width / 18),  //should make this dynamic
           legendElementWidth = gridSizeX*1.50,
           buckets = 4;
-			
+      
 
 
 
@@ -663,27 +663,27 @@ data1 = data;
 
 var heatmapInnovationImpact = function(n){
   //projectList(1)
-	heatMapdata = d3.tsv.parse(customData, function(d) { //type function
+  heatMapdata = d3.tsv.parse(customData, function(d) { //type function
          return {
-		   matrix: d.matrix,
+       matrix: d.matrix,
           // innovation: d["source long name"], // to coerce into a number or not!  + means yes
            innovation: d["source"], // to coerce into a number or not!  + means yes
          //  impact: d["target long name"], // works
            impact: d["target"],// doesn't work ????  FIX THIS!!! 
                  value: +d.value,
-		   Course_Level: d.Course_Level,
-		   Faculty_School: d.Faculty_School,
-		   project_Title: d["project_Title"],
-		   department: d.Department,
-		   enrolment_Cap: d["Enrolment Cap"],
-		   course_Format: d["Course Format"],
-		   Course_Type: d["Course Type"],
-		   course_Location: d["Course Location"],
-		   project_Type: d["Type of Project"],
-		   project_Stage: d["Project Stage"],
-		   year_awarded: d["Year Awarded"]
+       Course_Level: d.Course_Level,
+       Faculty_School: d.Faculty_School,
+       project_Title: d["project_Title"],
+       department: d.Department,
+       enrolment_Cap: d["Enrolment Cap"],
+       course_Format: d["Course Format"],
+       Course_Type: d["Course Type"],
+       course_Location: d["Course Location"],
+       project_Type: d["Type of Project"],
+       project_Stage: d["Project Stage"],
+       year_awarded: d["Year Awarded"]
           };
-		  }
+      }
   );
  // console.log("heat map data: " + heatMapdata);
   //
@@ -706,8 +706,9 @@ areasOfImpact = d3.nest()
   
 areasOfImpact.sort(d3.ascending);
 
+ console.log("filtering")
  filterData();//get the keys before you filter the data to get the whole original lists. 
- 	
+  
 
 // append the svg canvas to the page
 d3.select("#innovationImpactChart").append("svg")
@@ -716,21 +717,21 @@ d3.select("#innovationImpactChart").append("svg")
   .append("g")
     .attr("transform", 
           "translate(" + margin.heatmap.left + "," + margin.heatmap.top + ")");
-		  
+      
  var svg = d3.select("#innovationImpactChart").selectAll("g")
           .append("g")
-		  .attr("class", "heatmapInnovationImpact" + n)
+      .attr("class", "heatmapInnovationImpact" + n)
           ;
 
-	 
-	 //title  "Innovation by Area of Impact"
-	// svg.append("text")
+   
+   //title  "Innovation by Area of Impact"
+  // svg.append("text")
  //        .attr("x", - margin.heatmap.left)             
  //        .attr("y", 0 - (margin.heatmap.top) + 40)
  //        .attr("text-anchor", "start")  
  //        .attr("class","heading")
- //        .text("Innovation by Area of Impact");	
-	
+ //        .text("Innovation by Area of Impact"); 
+  
 
 
 
@@ -755,118 +756,118 @@ d3.select("#innovationImpactChart").append("svg")
   }
 
     heatMapNest.forEach(function (d,v) {
-	 v.forEach(function (d2,v2) {
+   v.forEach(function (d2,v2) {
       dataRollUp.push({ innovation: d2, impact: d, value: v2 });
-	  //data.push([ d2,d, v2]); //array-works
-	// console.log("inn " +d + "  " + "impact " + d2 + "  " + v2);
-	  }
-	  )
-	  }
-	  );
+    //data.push([ d2,d, v2]); //array-works
+  // console.log("inn " +d + "  " + "impact " + d2 + "  " + v2);
+    }
+    )
+    }
+    );
    
 //console.log(data);
 //console.log("area of impact: " + areasOfImpact);
 //console.log("area of Innovation: " + areasOfInnovation);
 //console.log(areasOfImpact.length);
   
-  		var innovationLabel = svg.selectAll("g")
+      var innovationLabel = svg.selectAll("g")
           .data(areasOfInnovation)
           .enter().append("g")
-    		.attr("y", function(d, i) { return (i + 1) * ( gridSizeY); })
+        .attr("y", function(d, i) { return (i + 1) * ( gridSizeY); })
             .attr("x", 0)
-			.attr("class","innovationLabel")
-			//.style("glyph-orientation-vertical", "-90")			
-			.style("text-anchor", "start")
-			//.style("writing-mode", "tb")
-		    //.attr("transform", "translate(" + -0.5*gridSizeX + ", -6)")
-			; 
-			
-			//y-axis
-		innovationLabel
-			.append("text")
-			.text(function(d) { return d; })
-			.text(function(d, i) { return d; })
-			.attr("y", function(d, i) { return (((i) * gridSizeY/2) +gridSizeY/4); })
+      .attr("class","innovationLabel")
+      //.style("glyph-orientation-vertical", "-90")     
+      .style("text-anchor", "start")
+      //.style("writing-mode", "tb")
+        //.attr("transform", "translate(" + -0.5*gridSizeX + ", -6)")
+      ; 
+      
+      //y-axis
+    innovationLabel
+      .append("text")
+      .text(function(d) { return d; })
+      .text(function(d, i) { return d; })
+      .attr("y", function(d, i) { return (((i) * gridSizeY/2) +gridSizeY/4); })
             .attr("x", -10)
-			.attr("dx",0)
-			.attr("dy",0)
-			//.attr("transform", "translate(-6," + gridSizeX/4  + ")")
-			.attr("class","innovationLabel")					
-			.style("text-anchor", "end")
+      .attr("dx",0)
+      .attr("dy",0)
+      //.attr("transform", "translate(-6," + gridSizeX/4  + ")")
+      .attr("class","innovationLabel")          
+      .style("text-anchor", "end")
       .style("vertical-align","middle")
-			.call(wrapx,margin.heatmap.left-30)  
-			;
-			
-			
+      .call(wrapx,margin.heatmap.left-30)  
+      ;
+      
+      
   
   
   var max = d3.max(dataRollUp, function (d) { return d.value; });
 //console.log(max);  
           var colorScale = d3.scale.quantile()
-			//.domain([0,5,10,30,40])
+      //.domain([0,5,10,30,40])
               .domain([1, 0.25*max,0.5*max,0.75*max,max])
               .range(colors);
-			  
-//console.log("area of impact: " + areasOfImpact);			  
-		//x-axis
-		var impactLabels = svg.selectAll(".impactLabel")
+        
+//console.log("area of impact: " + areasOfImpact);        
+    //x-axis
+    var impactLabels = svg.selectAll(".impactLabel")
           .data(areasOfImpact)
           .enter().append("text")
             .text(function (d) { return d; })
             .attr("x", function (d, i) { return ((i) * gridSizeX); })
             //.attr("x", function (d, i) { return gridSizeX; })
-			.attr("y", -10)
-			.attr("dy",0)
-			.attr("dx",0)
-			.attr("class","impactLabel")
+      .attr("y", -10)
+      .attr("dy",0)
+      .attr("dx",0)
+      .attr("class","impactLabel")
             .style("text-anchor", "start")
             //.attr("transform", "translate(6," + -1*gridSizeX/4  + ")")
-			.call(wrapy,gridSizeX)
-			 ; 
-			
-			
+      .call(wrapy,gridSizeX)
+       ; 
+      
+      
 //draw boxes
           var cards = svg.selectAll(".cards")
-			  .data(dataRollUp);
-			  
-			  //console.log(cards);
-			  
-			  cards.enter()
-			  .append("rect")              		  		  
+        .data(dataRollUp);
+        
+        //console.log(cards);
+        
+        cards.enter()
+        .append("rect")                         
               //.attr("y", function(d) { return ((areasOfInnovation.indexOf( d[1])) * gridSizeX/2); }) //array-works
-			   .attr("y", function(d) { return ((areasOfInnovation.indexOf( d.impact)) * gridSizeY/2); })
-			  //.attr("x", function(d) { return areasOfImpact.indexOf(d[0]) * gridSizeX; })  //array. works
-			  .attr("x", function(d) { return areasOfImpact.indexOf(d.innovation) * gridSizeX; })  
-			  //.attr("y", function(d,i) { return i * gridSizeX; })  
+         .attr("y", function(d) { return ((areasOfInnovation.indexOf( d.impact)) * gridSizeY/2); })
+        //.attr("x", function(d) { return areasOfImpact.indexOf(d[0]) * gridSizeX; })  //array. works
+        .attr("x", function(d) { return areasOfImpact.indexOf(d.innovation) * gridSizeX; })  
+        //.attr("y", function(d,i) { return i * gridSizeX; })  
               .attr("rx", 6)
               .attr("ry", 6)
-			   .attr("class", "card")
+         .attr("class", "card")
               .attr("width", gridSizeX)
               .attr("height", gridSizeY/2)
               .style("fill", "white")
-			  .style("stroke","white")
-			  ;
-			   
-			   cards.append("title");
-			  
+        .style("stroke","white")
+        ;
+         
+         cards.append("title");
+        
           cards.transition()
           .ease("linear")
-				.duration(500)  //slows it down! 
+        .duration(500)  //slows it down! 
               .style("fill", function(d) { return colorScale(d.value); })
-			  .style("stroke","#ffffff");
+        .style("stroke","#ffffff");
 
-			  //displays as tooltip text :) 
+        //displays as tooltip text :) 
           //cards.select("title").text(function(d) { return d[2]; }); //array-works
-		  cards.select("title")
-		  .text(function(d) { return (d.value); });
-		  
-		 		
-	
-		  // console.log(cards.exit());		
+      cards.select("title")
+      .text(function(d) { return (d.value); });
+      
+        
+  
+      // console.log(cards.exit());   
          // cards.exit().remove();
-		    
+        
 
-	  function wrapx(text, width) {
+    function wrapx(text, width) {
   text.each(function() {
     var text = d3.select(this),
         words = text.text().split(/\s+/).reverse(),
@@ -875,7 +876,7 @@ d3.select("#innovationImpactChart").append("svg")
         lineNumber = 0,
         lineHeight = 1.1, // ems
         y = text.attr("y"),
-		x = text.attr("x"),
+    x = text.attr("x"),
         dy = parseFloat(text.attr("dy")),
         tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
     while (word = words.pop()) {
@@ -900,23 +901,23 @@ d3.select("#innovationImpactChart").append("svg")
         lineNumber = 0,
         lineHeight = 1.1, // ems
         x = text.attr("x"),
-		y = text.attr("y"),
+    y = text.attr("y"),
         dx = parseFloat(text.attr("dx")),
-		dy = parseFloat(text.attr("dy")),
+    dy = parseFloat(text.attr("dy")),
         tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dx", dx + "em");
     while (word = words.pop()) {
       line.reverse().push(word);
-	  line.reverse();
+    line.reverse();
       tspan.text(line.join(" "));
       if (tspan.node().getComputedTextLength() > width) {
-	  line.reverse();
+    line.reverse();
         line.pop();
-		line.reverse();
+    line.reverse();
         tspan.text(line.join(" "));
-		line = [word];
+    line = [word];
         //words.push(word); //NOT this. 
         tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", -1*(++lineNumber * lineHeight + dy) + "em").text(word);
-	
+  
       }
     }
   });
@@ -954,26 +955,26 @@ d3.select("#innovationImpactChart").append("svg")
 
 
 var heatmapImpactApproach= function(n){
-	
-		heatMapdata = d3.tsv.parse(customData, function(d) { //type function
+  
+    heatMapdata = d3.tsv.parse(customData, function(d) { //type function
          return {
-		   matrix: d.matrix,
+       matrix: d.matrix,
            approach: d.source, // to coerce into a number or not!  + means yes
            impact: d.target,
               value: +d.value,
-		   Course_Level: d.Course_Level,
-		   Faculty_School: d.Faculty_School,
-		   project_Title: d["project_Title"],
-		   department: d.Department,
-		   enrolment_Cap: d["Enrolment Cap"],
-		   course_Format: d["Course Format"],
-		   Course_Type: d["Course Type"],
-		   course_Location: d["Course Location"],
-		   project_Type: d["Type of Project"],
-		   project_Stage: d["Project Stage"],
-		   year_awarded: d["Year Awarded"]
+       Course_Level: d.Course_Level,
+       Faculty_School: d.Faculty_School,
+       project_Title: d["project_Title"],
+       department: d.Department,
+       enrolment_Cap: d["Enrolment Cap"],
+       course_Format: d["Course Format"],
+       Course_Type: d["Course Type"],
+       course_Location: d["Course Location"],
+       project_Type: d["Type of Project"],
+       project_Stage: d["Project Stage"],
+       year_awarded: d["Year Awarded"]
           };
-		  }
+      }
   );
 
  //Great nest learning tool: http://bl.ocks.org/shancarter/raw/4748131/ 
@@ -995,6 +996,7 @@ evaluationApproach = d3.nest()
   
 evaluationApproach.sort(d3.ascending);
 //console.log("evaluation approach: " + evaluationApproach);
+ console.log("filtering")
  filterData();//get the keys before you filter the data to get the whole original lists. 
  
  d3.select("#impactApproachChart").append("svg")
@@ -1003,20 +1005,20 @@ evaluationApproach.sort(d3.ascending);
   .append("g")
     .attr("transform", 
           "translate(" + margin.heatmap.left + "," + margin.heatmap.top + ")");
-		  
+      
  var svg = d3.select("#impactApproachChart").selectAll("g")
           .append("g")
-		  .attr("class", "heatmapImpactApproach" + n)
+      .attr("class", "heatmapImpactApproach" + n)
           ;
 
-	 
-	 //title  "Area of Impact by Evaluation Approach"
-	// svg.append("text")
+   
+   //title  "Area of Impact by Evaluation Approach"
+  // svg.append("text")
  //        .attr("x", - margin.heatmap.left)             
  //        .attr("y", 0 - (margin.heatmap.top) + 40)
  //        .attr("text-anchor", "start")  
  //        .attr("class","heading")
- //        .text("Area of Impact by Evaluation Approach");	
+ //        .text("Area of Impact by Evaluation Approach");  
  
  
  heatMapNest = d3.nest()
@@ -1035,103 +1037,103 @@ evaluationApproach.sort(d3.ascending);
   }
 
     heatMapNest.forEach(function (d,v) {
-	 v.forEach(function (d2,v2) {
+   v.forEach(function (d2,v2) {
       dataRollUp.push({ impact: d, approach: d2, value: v2 });
-	  }
-	  )
-	  }
-	  );
+    }
+    )
+    }
+    );
    
 //console.log(dataRollUp[0].approach);
   
-  		var impactLabel = svg.selectAll("g")
+      var impactLabel = svg.selectAll("g")
           .data(areasOfImpact)
           .enter().append("g")
-			//.style("glyph-orientation-vertical", "-90")			
-			.style("text-anchor", "start")
-			//.style("writing-mode", "tb")
-			; 
-			
-			//y-axis
-		impactLabel
-			.append("text")
-			.text(function(d) { return d; })
-			.text(function(d, i) { return d; })
-			.attr("y", function(d, i) { return (((i) * gridSizeY/2) +gridSizeY/6); })
+      //.style("glyph-orientation-vertical", "-90")     
+      .style("text-anchor", "start")
+      //.style("writing-mode", "tb")
+      ; 
+      
+      //y-axis
+    impactLabel
+      .append("text")
+      .text(function(d) { return d; })
+      .text(function(d, i) { return d; })
+      .attr("y", function(d, i) { return (((i) * gridSizeY/2) +gridSizeY/6); })
             .attr("x", -10)
-			.attr("dx",0)
-			.attr("dy",0)
-			//.attr("transform", "translate(-6," + gridSizeX/4  + ")")
-			.attr("class","impactLabel")					
-			.style("text-anchor", "end")
+      .attr("dx",0)
+      .attr("dy",0)
+      //.attr("transform", "translate(-6," + gridSizeX/4  + ")")
+      .attr("class","impactLabel")          
+      .style("text-anchor", "end")
       .style("vertical-align","middle")
-			.call(wrapx,margin.heatmap.left-30)  
-			;
-			
-			
+      .call(wrapx,margin.heatmap.left-30)  
+      ;
+      
+      
   
   
   var max = d3.max(dataRollUp, function (d) { return d.value; });
 //console.log(max);  
           var colorScale = d3.scale.quantile()
-			//.domain([0,5,10,30,40])
+      //.domain([0,5,10,30,40])
               .domain([1, 0.25*max,0.5*max,0.75*max,max])
               .range(colors);
-		
-		//x-axis
-		var approachLabels = svg.selectAll(".approachLabel")
+    
+    //x-axis
+    var approachLabels = svg.selectAll(".approachLabel")
           .data(evaluationApproach)
           .enter().append("text")
             .text(function (d) { return d; })
             .attr("x", function (d, i) { return ((i) * gridSizeX); })
-			.attr("y", -10)
-			.attr("dy",0)
-			.attr("dx",0)
-			.attr("class","approachLabel")
+      .attr("y", -10)
+      .attr("dy",0)
+      .attr("dx",0)
+      .attr("class","approachLabel")
             .style("text-anchor", "start")
             //.attr("transform", "translate(6," + -1*gridSizeX/4  + ")")
-			.call(wrapy,gridSizeY)
-			 ; 
-			
-			
+      .call(wrapy,gridSizeY)
+       ; 
+      
+      
 //draw boxes
           var cards = svg.selectAll(".cards")
-			  .data(dataRollUp);
-			  
-			  //console.log(cards);
-			  
-			  cards.enter()
-			  .append("rect") 
-			  .attr("x", function(d) { return evaluationApproach.indexOf(d.approach) * gridSizeX; })  
-			  .attr("y", function(d) { return ((areasOfImpact.indexOf( d.impact)) * gridSizeY)/2; })
+        .data(dataRollUp);
+        
+        //console.log(cards);
+        
+        cards.enter()
+        .append("rect") 
+        .attr("x", function(d) { return evaluationApproach.indexOf(d.approach) * gridSizeX; })  
+        .attr("y", function(d) { return ((areasOfImpact.indexOf( d.impact)) * gridSizeY)/2; })
               .attr("rx", 6)
               .attr("ry", 6)
-			   .attr("class", "card")
+         .attr("class", "card")
               .attr("width", gridSizeX)
               .attr("height", gridSizeY/2)
               .style("fill", "white")
-			  .style("stroke","white")
-			  ;
-			   
-			   cards.append("title");
-			  
+        .style("stroke","white")
+        ;
+         
+         cards.append("title");
+        
           cards.transition()
           .ease("linear")
-				.duration(500)  //slows it down! 
+        .duration(500)  //slows it down! 
               .style("fill", function(d) { return colorScale(d.value); })
-			  .style("stroke","#ffffff");
+        .style("stroke","#ffffff");
 
-			  //displays as tooltip text :) 
-		  cards.select("title")
-		  .text(function(d) { return (d.value); });
-		  
-		 		
-	
-		  // console.log(cards.exit());		
+        //displays as tooltip text :) 
+      cards.select("title")
+      .text(function(d) { return (d.value); });
+      
+        
+  
+      // console.log(cards.exit());   
          // cards.exit().remove();
-		    
+        
 
-	  function wrapx(text, width) {
+    function wrapx(text, width) {
   text.each(function() {
     var text = d3.select(this),
         words = text.text().split(/\s+/).reverse(),
@@ -1140,7 +1142,7 @@ evaluationApproach.sort(d3.ascending);
         lineNumber = 0,
         lineHeight = 1.1, // ems
         y = text.attr("y"),
-		x = text.attr("x"),
+    x = text.attr("x"),
         dy = parseFloat(text.attr("dy")),
         tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
     while (word = words.pop()) {
@@ -1165,23 +1167,23 @@ evaluationApproach.sort(d3.ascending);
         lineNumber = 0,
         lineHeight = 1.1, // ems
         x = text.attr("x"),
-		y = text.attr("y"),
+    y = text.attr("y"),
         dx = parseFloat(text.attr("dx")),
-		dy = parseFloat(text.attr("dy")),
+    dy = parseFloat(text.attr("dy")),
         tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dx", dx + "em");
     while (word = words.pop()) {
       line.reverse().push(word);
-	  line.reverse();
+    line.reverse();
       tspan.text(line.join(" "));
       if (tspan.node().getComputedTextLength() > width) {
-	  line.reverse();
+    line.reverse();
         line.pop();
-		line.reverse();
+    line.reverse();
         tspan.text(line.join(" "));
-		line = [word];
+    line = [word];
         //words.push(word); //NOT this. 
         tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", -1*(++lineNumber * lineHeight + dy) + "em").text(word);
-	
+  
       }
     }
   });
@@ -1197,9 +1199,9 @@ evaluationApproach.sort(d3.ascending);
    projectdata = projectdata.getUnique()
 
    return projectdata
-	
+  
 }; //end heatmapImpactApproach
-	
+  
 
 
 
@@ -1266,32 +1268,33 @@ evaluationApproach.sort(d3.ascending);
 
 
 var sankeyChart = function(n){  //this is used to hide the previous chart. Should be replaced with .exit().remove() if possible! 
-	heatMapdata = d3.tsv.parse(customData, function(d) { //do this here for the tabular function. it resets the heatmap data
+  heatMapdata = d3.tsv.parse(customData, function(d) { //do this here for the tabular function. it resets the heatmap data
          return {
-		   matrix: d.matrix,
+       matrix: d.matrix,
           // innovation: d["source long name"], // to coerce into a number or not!  + means yes
            innovation: d["source"], // to coerce into a number or not!  + means yes
          //  impact: d["target long name"], // works
            impact: d["target"],// doesn't work ????  FIX THIS!!! 
                  value: +d.value,
-		   Course_Level: d.Course_Level,
-		   Faculty_School: d.Faculty_School,
-		   project_Title: d["project_Title"],
-		   department: d.Department,
-		   enrolment_Cap: d["Enrolment Cap"],
-		   course_Format: d["Course Format"],
-		   Course_Type: d["Course Type"],
-		   course_Location: d["Course Location"],
-		   project_Type: d["Type of Project"],
-		   project_Stage: d["Project Stage"],
-		   year_awarded: d["Year Awarded"]
+       Course_Level: d.Course_Level,
+       Faculty_School: d.Faculty_School,
+       project_Title: d["project_Title"],
+       department: d.Department,
+       enrolment_Cap: d["Enrolment Cap"],
+       course_Format: d["Course Format"],
+       Course_Type: d["Course Type"],
+       course_Location: d["Course Location"],
+       project_Type: d["Type of Project"],
+       project_Stage: d["Project Stage"],
+       year_awarded: d["Year Awarded"]
           };
-		  }
-  );	
+      }
+  );  
   
   
+  console.log("filtering")
   filterData();
-  	
+    
   // append the svg canvas to the page
    d3.select("#sankeyChart").append("svg")
       .attr("width", width + margin.sankey.left + margin.sankey.right)
@@ -1301,34 +1304,34 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
             "translate(" + margin.sankey.left + "," + margin.sankey.top + ")");
 
   //console.log(n);
-  var	svg = d3.select("#sankeyChart").selectAll("g")
-  	.append("g")
-  	.attr("class", "sankey" + n)
+  var svg = d3.select("#sankeyChart").selectAll("g")
+    .append("g")
+    .attr("class", "sankey" + n)
           .attr("transform", "translate(4,42)") //translate so the top label is not half hidden and left side of nodes is good
-  		.style("visibility","block")
-  	;
-  	
+      .style("visibility","block")
+    ;
+    
   svg.append("text").text("Innovation")
-  	.attr("class","heading")
-  	.attr("x",0)
-  	.attr("y",-10)
-  	.attr("text-anchor", "start");
+    .attr("class","heading")
+    .attr("x",0)
+    .attr("y",-10)
+    .attr("text-anchor", "start");
   svg.append("text").text("Area of Impact")
-  	.attr("class","heading")
-  	.attr("x",width/2)
-  	.attr("y",-10)
-  	.attr("text-anchor", "middle");	
+    .attr("class","heading")
+    .attr("x",width/2)
+    .attr("y",-10)
+    .attr("text-anchor", "middle"); 
   svg.append("text").text("Evaluation Approach")
-  	.attr("class","heading")
-  	.attr("x",width)
-  	.attr("y",-10)
-  	.attr("text-anchor", "end");
-  	
+    .attr("class","heading")
+    .attr("x",width)
+    .attr("y",-10)
+    .attr("text-anchor", "end");
+    
 
 
 
 
-  	
+    
   //set up graph 
   graph = {"nodes" : [], "links" : []};
 
@@ -1336,10 +1339,10 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
     graph.nodes.push({ "name": d.source });
     graph.nodes.push({ "name": d.target });
     graph.links.push({ "source": d.source,
-  					 "target": d.target,
-  					 "value": +d.value,
-  					 "projectTitle": d.project_Title
-  					});
+             "target": d.target,
+             "value": +d.value,
+             "projectTitle": d.project_Title
+            });
    });
 
    // return only the distinct / unique nodes
@@ -1450,11 +1453,11 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
   .enter().append("g")
     .attr("class", "node")
     .attr("transform", function(d) { 
-  	  return "translate(" + d.x + "," + d.y + ")"; })
+      return "translate(" + d.x + "," + d.y + ")"; })
   .call(d3.behavior.drag()
     .origin(function(d) { return d; })
     .on("dragstart", function() { 
-  	  this.parentNode.appendChild(this); })
+      this.parentNode.appendChild(this); })
   .on("drag", dragmove));
 
   // add the rectangles for the nodes
@@ -1488,9 +1491,9 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
   // the function for moving the nodes
   function dragmove(d) {
   d3.select(this).attr("transform", 
-  	"translate(" + d.x + "," + (
-  			d.y = Math.max(0, Math.min(height -50 - d.dy, d3.event.y))
-  		) + ")");
+    "translate(" + d.x + "," + (
+        d.y = Math.max(0, Math.min(height -50 - d.dy, d3.event.y))
+      ) + ")");
   sankey.relayout();
   link.attr("d", path);
   }
@@ -1547,63 +1550,63 @@ var sankeyChart = function(n){  //this is used to hide the previous chart. Shoul
 
 
   
-// function tabulate(tableData, columns) {
+function tabulate(tableData, columns) {
 
-// //console.log(data1[0]);
+//console.log(data1[0]);
 
-// //var tableData = d3.nest()   //this works to give a unique list of project titles. 
-// 	//.key(function(d) {return d.project_Title;})
-// 	//.map(data,d3.map).keys().sort(d3.ascending);
+//var tableData = d3.nest()   //this works to give a unique list of project titles. 
+  //.key(function(d) {return d.project_Title;})
+  //.map(data,d3.map).keys().sort(d3.ascending);
 
-// 	//console.log(data[0]);
-// 	//console.log(data[0]["project_Title"]);
-// 	//console.log(tableData);
-	
-//     var table = d3.select("#project-table").append("table")
-//      //       .attr("style", "margin-left: 150px"),
-//         thead = table.append("thead"),
-//         tbody = table.append("tbody");
+  //console.log(data[0]);
+  //console.log(data[0]["project_Title"]);
+  //console.log(tableData);
+  
+    var table = d3.select("#project-table").append("table")
+     //       .attr("style", "margin-left: 150px"),
+        thead = table.append("thead"),
+        tbody = table.append("tbody");
 
-//     // append the header row
-//     thead.append("tr")
-//         .selectAll("th")
-//         .data(columns)
-//         .enter()
-//         .append("th")
-//             .text(function(column) { return capitalizeFirstLetter(column.replace('_',' ')); });
+    // append the header row
+    thead.append("tr")
+        .selectAll("th")
+        .data(columns)
+        .enter()
+        .append("th")
+            .text(function(column) { return capitalizeFirstLetter(column.replace('_',' ')); });
 
-// 			var x = "_XX_"; //nothing should match this ;)
-// 			function unique(value){
-//   			return_this = (x != value["project_Title"]);
-//   			x = value["project_Title"];
-//   			return return_this;
-// 			}
-// 			tableData = tableData.filter(unique);
-			
-//     // create a row for each object in the data
-//     var rows = tbody.selectAll("tr")
-//         .data(tableData)
-//        // .data(tableData)
-//         .enter()
-//        .append("tr");
-// 	   //console.log(rows[0]);
+      var x = "_XX_"; //nothing should match this ;)
+      function unique(value){
+        return_this = (x != value["project_Title"]);
+        x = value["project_Title"];
+        return return_this;
+      }
+      tableData = tableData.filter(unique);
+      
+    // create a row for each object in the data
+    var rows = tbody.selectAll("tr")
+        .data(tableData)
+       // .data(tableData)
+        .enter()
+       .append("tr");
+     //console.log(rows[0]);
 
-//     // create a cell in each row for each column
-//     var cells = rows.selectAll("td")
-//         .data(function(row) {
-//             return columns.map(function(column) {
-//                 return {column: column, value: row[column]};
-		   
-// 		// return d;})
-//             });
-//         })
-//         .enter()
-//         .append("td")
-// 		//.attr("style", "font-family: Courier") // sets the font style
-//             .html(function(d) { return d.value; });
-    
-//     //return table;
-// } //end tabulate
+    // create a cell in each row for each column
+    var cells = rows.selectAll("td")
+        .data(function(row) {
+            return columns.map(function(column) {
+                return {column: column, value: row[column]};
+       
+    // return d;})
+            });
+        })
+        .enter()
+        .append("td")
+    //.attr("style", "font-family: Courier") // sets the font style
+            .html(function(d) { return d.value; });
+
+  return tableData.map(function (d) {return d["project_Title"]});
+} //end tabulate
   
 
 
@@ -1746,6 +1749,7 @@ function rerun(currentChartType){
       });
   }
 
+  console.log(projects)
   total = projects.length
   var highlightTime = 200 //milliseconds
   revealNumberOfProjects(total, highlightTime)
@@ -1803,67 +1807,68 @@ courseFormat = "Any";
 projectType = "Any";
 projectStage = "Any";
 yearAwarded = "Any";
-		
+    
   
   //variables for filters and chart type buttons
   var ChartType = {"sankey":sankeyChart,
   "heatmapInnovationImpact":heatmapInnovationImpact,
-  "heatmapImpactApproach":heatmapImpactApproach};
+  "heatmapImpactApproach":heatmapImpactApproach,
+  "table":filterData};
   
   
   var currentChartType =  "sankey";//"heatmapInnovationImpact";  //set the default chart type to be sankey
-		
-	
+    
+  
   var facultyPicker = d3.select("#context-filter-faculty")
-		.append("select")
-		.on("change",function() { 				
-		//update filter variables
-		faculty = d3.select(this).property("value");	
-		//I put these in the filter() method now
-		//d3.select("#sankeyChart").selectAll("svg").remove();//remove old charts
-		//d3.select("#innovationImpactChart").selectAll("svg").remove();
-		//d3.select("#impactApproachChart").selectAll("svg").remove();
-			rerun(currentChartType);//redraw previously selected chart
+    .append("select")
+    .on("change",function() {         
+    //update filter variables
+    faculty = d3.select(this).property("value");  
+    //I put these in the filter() method now
+    //d3.select("#sankeyChart").selectAll("svg").remove();//remove old charts
+    //d3.select("#innovationImpactChart").selectAll("svg").remove();
+    //d3.select("#impactApproachChart").selectAll("svg").remove();
+      rerun(currentChartType);//redraw previously selected chart
  
-		});
+    });
 
-	facultyPicker.selectAll("option")
-		.data(facultyList)
-	.enter().append("option")
-		.attr("value",function(d) {return d;})
-			.text(function(d) {return d;});
-		
-		
-	var courseLevelPicker = d3.select("#context-filter-courseLevel").append("select").on("change",function() { courseLevel = d3.select(this).property("value");	
-		rerun(currentChartType)});
-	
+  facultyPicker.selectAll("option")
+    .data(facultyList)
+  .enter().append("option")
+    .attr("value",function(d) {return d;})
+      .text(function(d) {return d;});
+    
+    
+  var courseLevelPicker = d3.select("#context-filter-courseLevel").append("select").on("change",function() { courseLevel = d3.select(this).property("value"); 
+    rerun(currentChartType)});
+  
   var projectTitlePicker = d3.select("#context-filter-projectTitle").append("select").on("change",function() { projectTitle = d3.select(this).property("value");
-		rerun(currentChartType)});
-	
-  var departmentPicker = d3.select("#context-filter-department").append("select").on("change",function() { department = d3.select(this).property("value");	
-		rerun(currentChartType)});
-	
+    rerun(currentChartType)});
+  
+  var departmentPicker = d3.select("#context-filter-department").append("select").on("change",function() { department = d3.select(this).property("value");  
+    rerun(currentChartType)});
+  
   var enrolmentCapPicker = d3.select("#context-filter-enrolmentCap").append("select").on("change",function() { enrolmentCap = d3.select(this).property("value");
-		rerun(currentChartType)});
-	
-  var courseTypePicker = d3.select("#context-filter-courseType").append("select").on("change",function() { courseType = d3.select(this).property("value");	
-		rerun(currentChartType)});
-	
+    rerun(currentChartType)});
+  
+  var courseTypePicker = d3.select("#context-filter-courseType").append("select").on("change",function() { courseType = d3.select(this).property("value");  
+    rerun(currentChartType)});
+  
   var courseLocationPicker = d3.select("#context-filter-courseLocation").append("select").on("change",function() { courseLocation = d3.select(this).property("value");
-		rerun(currentChartType)});
+    rerun(currentChartType)});
 
-	var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("select").on("change",function() { courseFormat = d3.select(this).property("value");
-		rerun(currentChartType)});
-			
-	var projectTypePicker = d3.select("#context-filter-projectType").append("select").on("change",function() { projectType = d3.select(this).property("value");	
-		rerun(currentChartType)});
-		
-	var projectStagePicker = d3.select("#context-filter-projectStage").append("select").on("change",function() { projectStage = d3.select(this).property("value");
-		rerun(currentChartType)});
+  var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("select").on("change",function() { courseFormat = d3.select(this).property("value");
+    rerun(currentChartType)});
+      
+  var projectTypePicker = d3.select("#context-filter-projectType").append("select").on("change",function() { projectType = d3.select(this).property("value"); 
+    rerun(currentChartType)});
+    
+  var projectStagePicker = d3.select("#context-filter-projectStage").append("select").on("change",function() { projectStage = d3.select(this).property("value");
+    rerun(currentChartType)});
 
-	var yearAwardedPicker = d3.select("#context-filter-yearAwarded").append("select").on("change",function() { yearAwarded = d3.select(this).property("value");	
-		rerun(currentChartType)});
-		
+  var yearAwardedPicker = d3.select("#context-filter-yearAwarded").append("select").on("change",function() { yearAwarded = d3.select(this).property("value"); 
+    rerun(currentChartType)});
+    
 
   courseLevelPicker.selectAll("option").data(courseLevelList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
     
@@ -1885,47 +1890,61 @@ yearAwarded = "Any";
 
   yearAwardedPicker.selectAll("option").data(yearAwardedList).enter().append("option").attr("value",function(d) {return d;}).text(function(d) {return d;});
 
-	
-		//chartType buttons:		
-	d3.select("#chartTypeButtons") //Sankey
-		.append("input")
-		.attr("value","Sankey: Flow from Innovation to Impact to Evaluation")
-		 .attr("type", "button")
-		.attr("class","big_button")
-		.on("click",function (){		
+  
+    //chartType buttons:    
+  d3.select("#chartTypeButtons") //Sankey
+    .append("input")
+    .attr("value","Sankey: Flow from Innovation to Impact to Evaluation")
+     .attr("type", "button")
+    .attr("class","big_button")
+    .on("click",function (){    
 
-		currentChartType = "sankey";
-		rerun(currentChartType);//redraw previously selected chart 
- 		
-		});		
-		
-		
-	d3.select("#chartTypeButtons") //heatmapInnovationImpact
-		.append("input")
-		.attr("value","Heatmap: Innovation by Area of Impact")
-		 .attr("type", "button")
-		.attr("class","big_button")
-		.on("click",function (){
-		
-		currentChartType = "heatmapInnovationImpact";
-		rerun(currentChartType);//redraw previously selected chart 
+    currentChartType = "sankey";
+    rerun(currentChartType);//redraw previously selected chart 
+    
+    });   
+    
+    
+  d3.select("#chartTypeButtons") //heatmapInnovationImpact
+    .append("input")
+    .attr("value","Heatmap: Innovation by Area of Impact")
+     .attr("type", "button")
+    .attr("class","big_button")
+    .on("click",function (){
+    
+    currentChartType = "heatmapInnovationImpact";
+    rerun(currentChartType);//redraw previously selected chart 
  
-		});
-		
-		
-	d3.select("#chartTypeButtons") 
-		.append("input")
-		.attr("value","Heatmap: Area of Impact by Evaluation Approach")
-		 .attr("type", "button")
-		.attr("class","big_button")
-		.on("click",function (){
+    });
+    
+    
+  d3.select("#chartTypeButtons") 
+    .append("input")
+    .attr("value","Heatmap: Area of Impact by Evaluation Approach")
+     .attr("type", "button")
+    .attr("class","big_button")
+    .on("click",function (){
 
-		currentChartType = "heatmapImpactApproach";
-		rerun(currentChartType);//redraw previously selected chart 
+    currentChartType = "heatmapImpactApproach";
+    rerun(currentChartType);//redraw previously selected chart 
  
-		});
+    });
 
-	rerun(currentChartType);//redraw previously selected chart 
+    
+  d3.select("#chartTypeButtons") //heatmapInnovationImpact
+    .append("input")
+    .attr("value","Table")
+     .attr("type", "button")
+    .attr("class","big_button")
+    .on("click",function (){
+    
+    currentChartType = "table";
+    filterData()//redraw previously selected table 
+ 
+    });
+
+
+  rerun(currentChartType);//redraw previously selected chart 
 
 function reset_filters() {
   //reset filters on page
