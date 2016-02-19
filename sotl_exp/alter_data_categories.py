@@ -13,19 +13,19 @@ replacementsLong = {
 					"In-class group work (e.g., small group discussions, group presentations, worksheets)" : "Active Learning - short activities (one or more single-session activities, e.g., clickers)",
 					"Other in-class active learning (e.g., clickers, games)" : "Active Learning - short activities (one or more single-session activities, e.g., clickers)",
 					"Other out-of-class active learning (e.g., virtual labs)" : "Active Learning - short activities (one or more single-session activities, e.g., clickers)",
-					"Out-of-class group work (e.g., projects)" : "Active Learning - multi-session activities",
-					"PBL/case studies" : "Active Learning - multi-session activities",
-					"Online discussion/forums" : "Assessment - peer feedback",
-					"Peer assessment/feedback (e.g., paper essays, PeerWise)" : "Assessment - peer feedback",
-					"Student generated content (e.g., wikis)" : "Content - student generated (e.g., wiki, seminar, media)",
-					"Community based/service learning" : "Community based",
-					"Out of class content delivery (e.g., videos, textbook)" : "Content - instructor generated",
-					"In-class content delivery (e.g., demos)" : "Content - instructor generated",
+					"Out-of-class group work (e.g., projects)" : "Active Learning - multi-session activities (e.g., capstone projects)",
+					"PBL/case studies" : "Active Learning - multi-session activities (e.g., capstone projects)",
+					"Online discussion/forums" : "Assessment - peer feedback (e.g., PeerWise, Calibrated Peer Review)",
+					"Peer assessment/feedback (e.g., paper essays, PeerWise)" : "Assessment - peer feedback (e.g., PeerWise, Calibrated Peer Review)",
+					"Student generated content (e.g., wikis)" : "Content - student generated (e.g., wiki, seminar)",
+					"Community based/service learning" : "Community based (e.g., community service)",
+					"Out of class content delivery (e.g., videos, textbook)" : "Content - instructor generated (e.g., videos)",
+					"In-class content delivery (e.g., demos)" : "Content - instructor generated (e.g., videos)",
 					"Other assessment (e.g., two-stage exam)" : "Assessment - other (e.g., two-stage exams, diagnostics)",
-					"Program level curricular modifications (e.g., learning outcomes alignment)" : "Program Structure",
-					"Reduced seat time (e.g., fewer face-to-face contact hours)" : "Reduced seat time (e.g., fewer face-to-face contact hours)",
+					"Program level curricular modifications (e.g., learning outcomes alignment)" : "Program Structure (e.g., learning outcomes alignment)",
+					"Reduced seat time (e.g., fewer face-to-face contact hours)" : "Reduced seat time (e.g., reducing face-to-face contact hours)",
 					#not found "Support for faculty (e.g., professional development)" : "Instructional team enhancement (e.g., roles, support, professional development)",
-					"Roles of Teaching Assistants (e.g., adding teaching responsibilities)" : "Instructional team enhancement (e.g., roles, support, professional development)",
+					"Roles of Teaching Assistants (e.g., adding teaching responsibilities)" : "Instructional Team (e.g., support, professional development, roles)",
 					"Technologies development (e.g., annotation systems)" : "Other Innovation",
 					"Increase of student choice (e.g., choice of activities, grading)" : "Other Innovation",
 					#not found "Strategic support for students (e.g., identifying and supporting at-risk students)" : "Other Innovation"
@@ -62,10 +62,12 @@ i=0
 for line in inputfile:
 	parts = line.split('\t')
 	newparts = []
+	same_line = False #for old categories where short and long format are the same
 	for part in parts:
-		if part in replacementsShort.keys():
+		if part in replacementsShort.keys() and not same_line:
 			newpart = replacementsShort[part]
 			countShort[part]+=1
+			same_line = True 
 		elif part in replacementsLong.keys():
 			newpart = replacementsLong[part]
 			countLong[part]+=1
