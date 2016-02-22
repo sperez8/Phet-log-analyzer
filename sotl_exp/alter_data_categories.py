@@ -9,7 +9,8 @@ outfile = "data_copy_new.txt"
 #otherwise sankey will crash
 
 #changes made from original :  added consistency with use of (e.g., ...) and created short version of name for each.
-replacementsLong = {
+replacementsLongInnov = {
+					#INNOVATION
 					"In-class group work (e.g., small group discussions, group presentations, worksheets)" : "Active Learning - short activities (one or more single-session activities, e.g., clickers)",
 					"Other in-class active learning (e.g., clickers, games)" : "Active Learning - short activities (one or more single-session activities, e.g., clickers)",
 					"Other out-of-class active learning (e.g., virtual labs)" : "Active Learning - short activities (one or more single-session activities, e.g., clickers)",
@@ -32,7 +33,8 @@ replacementsLong = {
 }
 
 #changes made from original :  added consistency with use of (e.g., ...) and created short version of name for each.
-replacementsShort = {
+replacementsShortInnov = {
+					#INNOVATION
 					"In-class group work" : "Active Learning - short activities",
 					"Other in-class active learning" : "Active Learning - short activities",
 					"Other out-of-class active learning" : "Active Learning - short activities",
@@ -48,29 +50,62 @@ replacementsShort = {
 					"Program level curricular modifications" : "Program Structure",
 					"Reduced seat time" : "Reduced seat time",
 					#not found "Support for faculty" : "Instructional team enhancement",
-					"Roles of Teaching Assistants" : "Instructional team enhancement",
+					"Roles of Teaching Assistants" : "Instructional teamX",
 					"Technologies development" : "Other Innovation",
 					"Increase of student choice" : "Other Innovation",
 					#not found "Strategic support for students" : "Other Innovation"
 }
 
+
+
+replacementsLongImpact = {
+					#AREA OF IMPACT
+					"Course/program specific knowledge (e.g., the French revolution, F=ma)":"Course/program specific knowledge (e.g., the French revolution, F=ma)",
+					"Generic Lifelong learning skills (e.g., collaboration, critical/interdisciplinary thinking)":"Professional and Lifelong learning skills (e.g., collaboration, critical/interdisciplinary thinking)",
+					"Professional competencies (e.g., appropriate use of procedural/clinical skills)":"Professional and Lifelong learning skills (e.g., collaboration, critical/interdisciplinary thinking)",
+					"Attitudes (e.g., perceptions about discipline)":"Attitudes and Motivation (e.g., perceptions about discipline, personal goals)",
+					"Motivation (e.g., personal goals)":"Attitudes and Motivation (e.g., perceptions about discipline, personal goals)",
+					"Actions and behaviours (e.g.,time on task, enrolment)":"Actions and behaviours (e.g.,time on task, enrolment)",
+					"Operations (e.g., finance, reputation)":"Operations (e.g., finance, reputation)",
+					"Instructional team (e.g., TA use of time)":"Instructional team Roles and practices(e.g., TA use of time)",
+}
+
+replacementsShortImpact = {
+					#AREA OF IMPACT
+					"Course/program specific knowledge":"Course/program specific knowledge",
+					"Generic Lifelong learning skills":"Professional and Lifelong learning skills",
+					"Professional competencies":"Professional and Lifelong learning skills",
+					"Attitudes":"Attitudes and Motivation",
+					"Motivation":"Attitudes and Motivation",
+					"Actions and behaviours":"Actions and behaviours",
+					"Operations":"Operations",
+					"Instructional team":"Instructional team Roles and practice",
+}
+
 inputfile = open(datafile,'r')
 outputfile = open(outfile, 'w')
-countShort = {k : 0 for k in replacementsShort.keys()}
-countLong = {k : 0 for k in replacementsLong.keys()}
+countShort = {k : 0 for k in replacementsShortImpact.keys()}
+countLong = {k : 0 for k in replacementsLongImpact.keys()}
 i=0
 for line in inputfile:
 	parts = line.split('\t')
 	newparts = []
-	same_line = False #for old categories where short and long format are the same
+	same_line_impact = False #for old categories where short and long format are the same
+	same_line_innov = False #for old categories where short and long format are the same
 	for part in parts:
-		if part in replacementsShort.keys() and not same_line:
-			newpart = replacementsShort[part]
+		#Need to do switch impact first because of "Instructional team" category
+		if part in replacementsShortImpact.keys() and not same_line_impact:
+			newpart = replacementsShortImpact[part]
 			countShort[part]+=1
-			same_line = True 
-		elif part in replacementsLong.keys():
-			newpart = replacementsLong[part]
+			same_line_impact = True
+		elif part in replacementsLongImpact.keys():
+			newpart = replacementsLongImpact[part]
 			countLong[part]+=1
+		elif part in replacementsShortInnov.keys() and not same_line_innov:
+			newpart = replacementsShortInnov[part]
+			same_line_innov = True 
+		elif part in replacementsLongInnov.keys():
+			newpart = replacementsLongInnov[part]
 		else:
 			newpart = part
 		newparts.append(newpart)
