@@ -22,7 +22,10 @@ var opacityNormal = 0.7,
   opacityHigh = 1,
   colorLow = colors[1],
   colorNormal = colors[1],
-  colorHigh = colors[2];
+  colorHigh = colors[2],
+  widthNormal = "1px",
+  widthHigh = "3px";
+
 
 //reloads page if the window is resized so the viz is always at optimal size
 // window.onresize = function(){ location.reload(); }
@@ -59,7 +62,7 @@ var remove_tooltip = function() {
 
 var highlightTime = 500 //milliseconds
 
-var highlight_project = function(link, title) {
+var highlight_project_sankey = function(link, title) {
   d3.selectAll(".link")
     .each(function(l) {
       if (l.projectTitle == title) {
@@ -67,6 +70,18 @@ var highlight_project = function(link, title) {
         highlightProjectInList(l.projectTitle)
       } else {
         d3.select(this).call(highlight_link, colorLow, opacityLow)
+      }
+    })
+}
+
+var highlight_project_heatmap = function(card, title) {
+  d3.selectAll(".card")
+    .each(function(l) {
+      if ($.inArray(title, l.projects)) {
+        d3.select(this).call(highlight_card, colorHigh, widthHigh)
+        highlightProjectInList(title)
+      } else {
+        d3.select(this).call(highlight_card, colorLow, widthNormal)
       }
     })
 }
@@ -79,6 +94,20 @@ var highlight_link = function(selection, color, opacity) {
     .style("stroke-opacity", opacity)
     .style("stroke", color)
 };
+
+var highlight_card = function(selection, color, width) {
+  selection
+    .transition()
+    .ease("linear")
+    .duration(highlightTime)
+    .style("stroke", color)
+    .style("stroke-width", width)
+};
+
+var remove_highlight_card = function() {
+  d3.selectAll(".card")
+    .call(highlight_card, "white", widthNormal)
+}
 
 var remove_highlight_link = function() {
   d3.selectAll(".link")
@@ -893,19 +922,22 @@ var heatmapInnovationImpact = function(n) {
     .on("mouseover", function(l) {
       var cx = d3.event.pageX
       var cy = d3.event.pageY
-      console.log(l)
+      console.log(l.projects)
       tooltip.html(l.value + "projects")
         .style("left", (cx + 5) + "px")
         .style("top", (cy - 28) + "px");
       tooltip
         .style("opacity", tooltipOpacity);
+      for (var i = l.projects.length - 1; i >= 0; i--) {
+        highlightProjectInList(l.projects[i])
+      }
       d3.select(this)
-        .call(highlight_project, l.projectTitle)
+        .call(highlight_card, colorHigh, widthHigh)
     })
     .on("mouseout", function() {
       remove_tooltip()
-      // remove_highlight_list_item()
-      // remove_highlight_link()
+      remove_highlight_list_item()
+      remove_highlight_card()
     });
 
   cards.append("title");
@@ -916,7 +948,8 @@ var heatmapInnovationImpact = function(n) {
     .style("fill", function(d) {
       return colorScale(d.value);
     })
-    .style("stroke", "#ffffff");
+    .style("stroke", "#ffffff")
+    .style("stroke-width", "1px");
 
   //displays as tooltip text :) 
   //cards.select("title").text(function(d) { return d[2]; }); //array-works
@@ -1460,7 +1493,7 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
 
       //console.log(l, l.projectTitle, cx, cy, tooltipOpacity)
       d3.select(this)
-        .call(highlight_project, l.projectTitle)
+        .call(highlight_project_sankey, l.projectTitle)
     })
     .on("mouseout", function() {
       remove_tooltip()
@@ -1784,11 +1817,13 @@ function rerun(currentChartType) {
       .call(wrap, listwidth, listheight)
       .on("mouseover", function(d) {
         highlightProjectInList(d)
-        d3.select("this").call(highlight_project, d)
+        d3.select("this").call(highlight_project_sankey, d)
+        d3.select("this").call(highlight_project_heatmap, d)
       })
       .on("mouseout", function() {
         remove_highlight_list_item()
         remove_highlight_link()
+        remove_highlight_card()
       });
   }
 
