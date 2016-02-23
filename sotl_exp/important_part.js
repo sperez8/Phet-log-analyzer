@@ -77,11 +77,11 @@ var highlight_project_sankey = function(link, title) {
 var highlight_project_heatmap = function(card, title) {
   d3.selectAll(".card")
     .each(function(l) {
-      if ($.inArray(title, l.projects)) {
+      if ($.inArray(title, l.projects) != -1) {
         d3.select(this).call(highlight_card, colorHigh, widthHigh)
         highlightProjectInList(title)
       } else {
-        d3.select(this).call(highlight_card, colorLow, widthNormal)
+        //d3.select(this).call(highlight_card, colorLow, widthNormal)
       }
     })
 }
@@ -138,6 +138,17 @@ var highlightProjectInList = function(project) {
     })
 }
 
+
+var highlightMultipleProjectInList = function(projects) {
+  remove_highlight_list_item()
+  d3.select("#projectList").selectAll(".projectListItem")
+    .each(function(t) {
+      if ($.inArray(t, projects) != -1) {
+        console.log(t, projects)
+        d3.select(this).call(highlight_list_item, colorHigh, "bold")
+      }
+    })
+}
 
 // ****************************************************************** //
 // ****************************************************************** //
@@ -802,9 +813,7 @@ var heatmapInnovationImpact = function(n) {
       // return d3.sum(projects, function(d) {
       //   return d.value;
       // })
-      return projects.map(function(d) {
-        return d["project_Title"]
-      })
+      return projects.map(function(d) {return d["project_Title"]})
     })
     .map(heatMapdata, d3.map).get("innovationXimpact");
 
@@ -922,17 +931,15 @@ var heatmapInnovationImpact = function(n) {
     .on("mouseover", function(l) {
       var cx = d3.event.pageX
       var cy = d3.event.pageY
-      console.log(l.projects)
+      console.log(l.projects.length)
       tooltip.html(l.value + "projects")
         .style("left", (cx + 5) + "px")
         .style("top", (cy - 28) + "px");
       tooltip
         .style("opacity", tooltipOpacity);
-      for (var i = l.projects.length - 1; i >= 0; i--) {
-        highlightProjectInList(l.projects[i])
-      }
-      d3.select(this)
-        .call(highlight_card, colorHigh, widthHigh)
+      highlightMultipleProjectInList(l.projects)
+      // d3.select(this)
+      //   .call(highlight_card, colorHigh, widthHigh)
     })
     .on("mouseout", function() {
       remove_tooltip()
@@ -1125,10 +1132,8 @@ var heatmapImpactApproach = function(n) {
     .key(function(d) {
       return d.impact;
     })
-    .rollup(function(x) {
-      return d3.sum(x, function(d) {
-        return d.value;
-      })
+    .rollup(function(projects) {
+      return projects.map(function(d) {return d["project_Title"]})
     })
     .map(heatMapdata, d3.map).get("impactXapproach");
 
@@ -1145,11 +1150,11 @@ var heatmapImpactApproach = function(n) {
       dataRollUp.push({
         impact: d,
         approach: d2,
-        value: v2
+        value: v2.length,
+        projects: v2
       });
     })
   });
-
   //console.log(dataRollUp[0].approach);
 
   var impactLabel = svg.selectAll("g")
@@ -1231,7 +1236,25 @@ var heatmapImpactApproach = function(n) {
     .attr("width", gridSizeX)
     .attr("height", gridSizeY / 2)
     .style("fill", "white")
-    .style("stroke", "white");
+    .style("stroke", "white")
+    .on("mouseover", function(l) {
+      var cx = d3.event.pageX
+      var cy = d3.event.pageY
+      console.log(l.projects.length)
+      tooltip.html(l.value + "projects")
+        .style("left", (cx + 5) + "px")
+        .style("top", (cy - 28) + "px");
+      tooltip
+        .style("opacity", tooltipOpacity);
+      highlightMultipleProjectInList(l.projects)
+      // d3.select(this)
+      //   .call(highlight_card, colorHigh, widthHigh)
+    })
+    .on("mouseout", function() {
+      remove_tooltip()
+      remove_highlight_list_item()
+      remove_highlight_card()
+    });
 
   cards.append("title");
 
