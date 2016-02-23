@@ -769,9 +769,12 @@ var heatmapInnovationImpact = function(n) {
     .key(function(d) {
       return d.impact;
     })
-    .rollup(function(x) {
-      return d3.sum(x, function(d) {
-        return d.value;
+    .rollup(function(projects) {
+      // return d3.sum(projects, function(d) {
+      //   return d.value;
+      // })
+      return projects.map(function(d) {
+        return d["project_Title"]
       })
     })
     .map(heatMapdata, d3.map).get("innovationXimpact");
@@ -790,7 +793,8 @@ var heatmapInnovationImpact = function(n) {
       dataRollUp.push({
         innovation: d2,
         impact: d,
-        value: v2
+        value: v2.length,
+        projects: v2
       });
       //data.push([ d2,d, v2]); //array-works
       // console.log("inn " +d + "  " + "impact " + d2 + "  " + v2);
@@ -885,7 +889,24 @@ var heatmapInnovationImpact = function(n) {
     .attr("width", gridSizeX)
     .attr("height", gridSizeY / 2)
     .style("fill", "white")
-    .style("stroke", "white");
+    .style("stroke", "white")
+    .on("mouseover", function(l) {
+      var cx = d3.event.pageX
+      var cy = d3.event.pageY
+      console.log(l)
+      tooltip.html(l.value + "projects")
+        .style("left", (cx + 5) + "px")
+        .style("top", (cy - 28) + "px");
+      tooltip
+        .style("opacity", tooltipOpacity);
+      d3.select(this)
+        .call(highlight_project, l.projectTitle)
+    })
+    .on("mouseout", function() {
+      remove_tooltip()
+      // remove_highlight_list_item()
+      // remove_highlight_link()
+    });
 
   cards.append("title");
 
@@ -1432,7 +1453,6 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
       var cx = d3.event.pageX
       var cy = d3.event.pageY
       tooltip.html("Project: " + l.projectTitle)
-        .style("height", "32px")
         .style("left", (cx + 5) + "px")
         .style("top", (cy - 28) + "px");
       tooltip

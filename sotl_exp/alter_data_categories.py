@@ -118,7 +118,7 @@ for k,v in countLong.iteritems():
 			print countShort[q], '\t',q
 			print "\n"
 
-
+print "**REMEMBER to make a unique list of rows before rendering!**"
 inputfile.close()
 outputfile.close
 
