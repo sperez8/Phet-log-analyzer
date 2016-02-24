@@ -512,7 +512,7 @@ var margin = {
 //width = 1200 - margin.sankey.left - margin.sankey.right,
 //height = 800 - margin.sankey.top - margin.sankey.bottom;
 width = document.getElementById("allCharts").offsetWidth
-height = window.innerHeight * 0.75
+height = window.innerHeight * 0.65
 
 var formatNumber = d3.format(",.0f"), // zero decimal places
   format = function(d) {
@@ -1551,14 +1551,14 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
     .attr("transform", function(d) {
       return "translate(" + d.x + "," + d.y + ")";
     })
-    .call(d3.behavior.drag()
-      .origin(function(d) {
-        return d;
-      })
-      .on("dragstart", function() {
-        this.parentNode.appendChild(this);
-      })
-      .on("drag", dragmove));
+    // .call(d3.behavior.drag()
+    //   .origin(function(d) {
+    //     return d;
+    //   })
+    //   .on("dragstart", function() {
+    //     this.parentNode.appendChild(this);
+    //   })
+    //   .on("drag", dragmove));
 
   // add the rectangles for the nodes
   node.append("rect")
@@ -1597,14 +1597,14 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
 
 
   // the function for moving the nodes
-  function dragmove(d) {
-    d3.select(this).attr("transform",
-      "translate(" + d.x + "," + (
-        d.y = Math.max(0, Math.min(height - 50 - d.dy, d3.event.y))
-      ) + ")");
-    sankey.relayout();
-    link.attr("d", path);
-  }
+  // function dragmove(d) {
+  //   d3.select(this).attr("transform",
+  //     "translate(" + d.x + "," + (
+  //       d.y = Math.max(0, Math.min(height - 50 - d.dy, d3.event.y))
+  //     ) + ")");
+  //   sankey.relayout();
+  //   link.attr("d", path);
+  // }
 
   return graph.links.map(function(d) {
     return d["projectTitle"]
@@ -1810,9 +1810,9 @@ function rerun(currentChartType) {
     }
 
     var margin = {
-      top: 10,
+      top: 5,
       right: 10,
-      bottom: 10,
+      bottom: 5,
       left: 10
     }
     listwidth = document.getElementById("projectList").offsetWidth - margin.left - margin.right,
@@ -1825,7 +1825,9 @@ function rerun(currentChartType) {
       .attr("width", listwidth)
       .attr("height", listheight)
       .append("g")
-      .attr("transform", "translate(" + listwidth / 2 + "," + 0 + ")");
+      .attr("transform", "translate( " +  0 + "," + 0 + ")");
+      //Use line beloe and "text-anchor:middle" for centered text
+      //.attr("transform", "translate( " +  listwidth /2 + "," + 0 + ")");
 
     svg.selectAll(".text")
       .data(projectdata)
@@ -1836,7 +1838,7 @@ function rerun(currentChartType) {
       .attr("dy", 0)
       .style("fill", colorNormal)
       .attr("y", function(d, i) {
-        return 70 * i + 20
+        return 60 * i + 40
       })
       .text(function(d, i) {
         return capitalizeFirstLetter(d.toLowerCase())

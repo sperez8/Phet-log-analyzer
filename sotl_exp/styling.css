@@ -18,12 +18,13 @@ body {
     float: left;
     clear: right;
     padding-left: 20px;
+    padding-top: 5px;
 }
 
 /*#sankeyChart, #innovationImpactChart, #impactApproachChart {*/
 #allCharts {
     width: 70%;
-    height: 70%;
+    height: 60%;
     float: left;
     clear: right;
     margin-right: 3%;
@@ -33,12 +34,12 @@ body {
 #listItems {
     width: 20%;
     height: 60%;
-    float: right;
+    float: left;
     clear: right;
     margin-top: 5px;
     margin-bottom: 5px;
-    padding-right: 5px;
-    padding-left: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 #NumberOfProjects {
@@ -57,12 +58,12 @@ body {
 
 .projectListItem {
 	width:110%;
-	font-size: 14pt;
+	font-size: 13pt;
 }
 
-.listitem {
+/*.listitem {
 	text-anchor:middle;
-}
+}*/
 
 #project-table {
 	width:100%;
@@ -195,7 +196,7 @@ input[type="button"] {
 }
 
 #chartTypeButtons {
-    width: 100%;
+    width: 75%;
     height: 10%;
     float: left;
     text-align: center;
