@@ -18,11 +18,12 @@ grey = "#7e7e7e"
 
 
 var opacityNormal = 0.7,
-  opacityLow = 0.3,
+  opacityLow = 0.1,
   opacityHigh = 1,
   colorLow = colors[1],
   colorNormal = colors[1],
   colorHigh = colors[2],
+
   widthNormal = "1px",
   widthHigh = "3px";
 
@@ -78,10 +79,10 @@ var highlight_project_heatmap = function(card, title) {
   d3.selectAll(".card")
     .each(function(l) {
       if ($.inArray(title, l.projects) != -1) {
-        d3.select(this).call(highlight_card, colorHigh, widthHigh)
+        d3.select(this).call(highlight_card, opacityHigh, "grey", widthHigh)
         highlightProjectInList(title)
       } else {
-        //d3.select(this).call(highlight_card, colorLow, widthNormal)
+        d3.select(this).call(highlight_card, opacityLow, "white", widthNormal)
       }
     })
 }
@@ -95,18 +96,21 @@ var highlight_link = function(selection, color, opacity) {
     .style("stroke", color)
 };
 
-var highlight_card = function(selection, color, width) {
+var highlight_card = function(selection, opacity, color, width) {
   selection
     .transition()
     .ease("linear")
     .duration(highlightTime)
     .style("stroke", color)
     .style("stroke-width", width)
+    //.style("fill",color)
+    .style("fill-opacity",opacity)
+    .style("stroke-opacity",opacity)
 };
 
 var remove_highlight_card = function() {
   d3.selectAll(".card")
-    .call(highlight_card, "white", widthNormal)
+    .call(highlight_card, opacityHigh, "white", widthNormal)
 }
 
 var remove_highlight_link = function() {
