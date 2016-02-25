@@ -9,26 +9,21 @@
 </head>
 <body>
 <div id="allFilters">
-	<div class="filter" id="context-filter-faculty"> Faculty:</div>
-	<!-- <div id="context-filter-department"> Department:</div>-->
-	<div class="filter"  id="context-filter-courseLevel"> Course Level:</div>
-	<div class="filter"  id="context-filter-projectTitle"> Project Title:</div>
-	<div class="filter"  id="context-filter-enrolmentCap"> Enrolment Cap:</div>
-	<div class="filter"  id="context-filter-courseType"> Course Type:</div>
-	<div class="filter"  id="context-filter-courseLocation"> Course Location:</div>
-	<div class="filter"  id="context-filter-CourseFormat"> Course Format:</div>	
-	<div class="filter"  id="context-filter-projectType"> Type of project:</div>
-	<div class="filter"  id="context-filter-projectStage"> Project Stage:</div>
-	<div class="filter"  id="context-filter-yearAwarded"> Year Awarded:</div>
+	<div class="filter" id="context-filter-faculty"></div>
+	<div class="filter"  id="context-filter-courseLevel"></div>
+	<div class="filter"  id="context-filter-projectType"></div>
+	<div class="filter"  id="context-filter-projectStage"></div>
+	<div class="filter"  id="context-filter-yearAwarded"></div>
 	<form action="">
 		<input value="Reset filters" id="Reset filters button" onclick="reset_filters();" type="button" class="small_button"/>
 	</form>
 </div>
-<div id="listItems">
+<div id="chartTypeButtons" >
 	<div id="NumberOfProjects" class = "heading"></div>
+</div>
+<div id="listItems">
 	<div id="projectList" class = "heading"></div>
 </div>
-<div id="chartTypeButtons" ></div>
 <div id="allCharts">
 	<div id="sankeyChart"></div>
 	<div id="innovationImpactChart"></div>

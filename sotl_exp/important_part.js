@@ -563,7 +563,7 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
 
 
   //all the single option filters are of type ==
-  if (faculty != "Any") {
+  if (faculty != "Faculty (all)") {
     heatMapdata = heatMapdata.filter(function(d) {
       return d.Faculty_School == faculty;
     });
@@ -572,25 +572,8 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
     });
   }
 
-  if (projectTitle != "Any") {
-    heatMapdata = heatMapdata.filter(function(d) {
-      return d.project_Title == projectTitle;
-    });
-    data1 = data1.filter(function(d) {
-      return d.project_Title == projectTitle;
-    });
-  }
-
-  if (department != "Any") {
-    heatMapdata = heatMapdata.filter(function(d) {
-      return d.Department == department;
-    });
-    data1 = data1.filter(function(d) {
-      return d.Department == department;
-    });
-  }
-
-  if (projectType != "Any") {
+  
+  if (projectType != "Project type (all)") {
     heatMapdata = heatMapdata.filter(function(d) {
       return d.project_Type == projectType;
     });
@@ -599,7 +582,7 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
     }); //Sankey chart loads the data differently thank heat maps  :S
   }
 
-  if (projectStage != "Any") {
+  if (projectStage != "Project stage (all)") {
     heatMapdata = heatMapdata.filter(function(d) {
       return d.project_Stage == projectStage;
     });
@@ -608,7 +591,7 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
     });
   }
 
-  if (yearAwarded != "Any") {
+  if (yearAwarded != "Year awarded (all)") {
     heatMapdata = heatMapdata.filter(function(d) {
       return d.year_awarded == yearAwarded;
     });
@@ -619,66 +602,14 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
 
 
 
-  //enrolment cap has ( and ) in it and doesn't work for heatmap data... try with search? 
-  if (enrolmentCap != "Any") {
-    var searchObj = enrolmentCap.replace('\)', '\\\)').replace('\(', '\\\('); //note the / needs to be escaped too! 
-    searchObj = new RegExp(searchObj, 'i');
-    heatMapdata = heatMapdata.filter(function(d) {
-      return (d.enrolment_Cap.search(searchObj)) != -1;
-    });
-    data1 = data1.filter(function(d) {
-      return d["Enrolment Cap"] == enrolmentCap;
-    });
-  }
+
   //all the multi-select type options are of the .search() type. 
-  if (courseLevel != "Any") {
+  if (courseLevel != "Course level (all)") {
     heatMapdata = heatMapdata.filter(function(d) {
       return (d.Course_Level.search(courseLevel)) != -1;
     });
     data1 = data1.filter(function(d) {
       return (d.Course_Level.search(courseLevel)) != -1;
-    })
-  }
-
-  if (courseFormat != "Any") {
-    heatMapdata = heatMapdata.filter(function(d) {
-      return (d.course_Format.search(courseFormat)) != -1;
-    });
-    data1 = data1.filter(function(d) {
-      return (d["Course Format"].search(courseFormat)) != -1;
-    })
-  }
-
-  //console.log(courseLocation);
-  if (courseLocation != "Any") {
-    // The str.search uses regular expressions. The ( and ) are screwing it up in the course location data. I need to 
-    // make a regualr expression object and then use that to search.
-    // the obj is made by replacing all the ( with /( and all the ) with /)
-
-    //console.log(courseLocation);
-    var searchObj = courseLocation.replace('\)', '\\\)').replace('\(', '\\\('); //note the / needs to be escaped too! 
-    //console.log(searchObj);
-    //searchObj.replace('\(','\\\('); 
-    //console.log(searchObj); console.log("type: " +  typeof searchObj);
-    searchObj = new RegExp(searchObj, 'i'); //i for case IIIInsensitive. 
-    //console.log(searchObj); console.log("type: " +  typeof searchObj);
-    heatMapdata = heatMapdata.filter(function(d) {
-      return (d.course_Location.search(searchObj)) != -1;
-    });
-    //data1 = data1.filter( function(d){return (d["Course Location"].search(courseLocation))!=-1;});  //doesn't work. Needs searchObj
-    data1 = data1.filter(function(d) {
-      return (d["Course Location"].search(searchObj)) != -1;
-    });
-    //console.log(heatMapdata);
-    //console.log(data1);
-  }
-
-  if (courseType != "Any") {
-    heatMapdata = heatMapdata.filter(function(d) {
-      return (d.Course_Type.search(courseType)) != -1;
-    });
-    data1 = data1.filter(function(d) {
-      return (d["Course Type"].search(courseType)) != -1;
     })
   }
 
@@ -1758,8 +1689,6 @@ function rerun(currentChartType) {
     removeReveal()
     d3.select("#NumberOfProjects").append("p")
       .html(total + " projects")
-      .style("color", grey)
-      .style("background-color", "white")
       .transition()
       .ease("linear")
       .duration(highlightTime / 2)
@@ -1880,41 +1809,28 @@ function get_filterOptions(filterName) {
       newoptions.push(options[i])
     }
   }
-  fixedoptions = ["Any"].concat(newoptions.getUnique().sort())
+  fixedoptions = newoptions.getUnique().sort()
   return fixedoptions
 }
 
 
 
 //choice arrays for filters
-var courseLevelList = get_filterOptions("Course_Level")
-var facultyList = get_filterOptions("Faculty_School")
-var projectTitleList = get_filterOptions("project_Title")
-var departmentList = get_filterOptions("Department")
-var enrolmentCapList = get_filterOptions("Enrolment Cap")
-var courseFormatList = get_filterOptions("Course Format")
-var courseTypeList = get_filterOptions("Course Type")
-var courseLocationList = get_filterOptions("Course Location")
-var projectTypeList = get_filterOptions("Type of Project")
-var projectStageList = get_filterOptions("Project Stage")
-var yearAwardedList = get_filterOptions("Year Awarded")
+var courseLevelList = ["Course level (all)"].concat(get_filterOptions("Course_Level"))
+var facultyList = ["Faculty (all)"].concat(get_filterOptions("Faculty_School"))
+var projectTypeList = ["Project type (all)"].concat(get_filterOptions("Type of Project"))
+var projectStageList = ["Project stage (all)"].concat(get_filterOptions("Project Stage"))
+var yearAwardedList = ["Year awarded (all)"].concat(get_filterOptions("Year Awarded"))
 
 //columns to display for table
 var tableColumns = ["project_Title", "Faculty_School", "Course_Level", "course_Format", "Course_Type", "course_Location", "project_Type", "year_awarded"];
 
 //set default start values
-faculty = "Any";
-courseLevel = "Any";
-projectTitle = "Any";
-department = "Any";
-enrolmentCap = "Any";
-courseType = "Any";
-courseLocation = "Any";
-courseFormat = "Any";
-projectType = "Any";
-projectStage = "Any";
-yearAwarded = "Any";
-
+faculty = "Faculty (all)";
+courseLevel = "Course level (all)";
+projectType = "Project type (all)";
+projectStage = "Project stage (all)";
+yearAwarded = "Year awarded (all)";
 
 //variables for filters and chart type buttons
 var ChartType = {
@@ -1928,29 +1844,10 @@ var ChartType = {
 var currentChartType = "sankey"; //"heatmapInnovationImpact";  //set the default chart type to be sankey
 
 
-var facultyPicker = d3.select("#context-filter-faculty")
-  .append("select")
-  .on("change", function() {
-    //update filter variables
+var facultyPicker = d3.select("#context-filter-faculty").append("select").on("change", function() {
     faculty = d3.select(this).property("value");
-    //I put these in the filter() method now
-    //d3.select("#sankeyChart").selectAll("svg").remove();//remove old charts
-    //d3.select("#innovationImpactChart").selectAll("svg").remove();
-    //d3.select("#impactApproachChart").selectAll("svg").remove();
-    rerun(currentChartType); //redraw previously selected chart
-
-  });
-
-facultyPicker.selectAll("option")
-  .data(facultyList)
-  .enter().append("option")
-  .attr("value", function(d) {
-    return d;
-  })
-  .text(function(d) {
-    return d;
-  });
-
+    rerun(currentChartType);
+});
 
 var courseLevelPicker = d3.select("#context-filter-courseLevel").append("select").on("change", function() {
   courseLevel = d3.select(this).property("value");
@@ -2002,67 +1899,11 @@ var yearAwardedPicker = d3.select("#context-filter-yearAwarded").append("select"
   rerun(currentChartType)
 });
 
-
-courseLevelPicker.selectAll("option").data(courseLevelList).enter().append("option").attr("value", function(d) {
-  return d;
-}).text(function(d) {
-  return d;
-});
-
-projectTitlePicker.selectAll("option").data(projectTitleList).enter().append("option").attr("value", function(d) {
-  return d;
-}).text(function(d) {
-  return d;
-});
-
-departmentPicker.selectAll("option").data(departmentList).enter().append("option").attr("value", function(d) {
-  return d;
-}).text(function(d) {
-  return d;
-});
-
-enrolmentCapPicker.selectAll("option").data(enrolmentCapList).enter().append("option").attr("value", function(d) {
-  return d;
-}).text(function(d) {
-  return d;
-});
-
-courseTypePicker.selectAll("option").data(courseTypeList).enter().append("option").attr("value", function(d) {
-  return d;
-}).text(function(d) {
-  return d;
-});
-
-courseLocationPicker.selectAll("option").data(courseLocationList).enter().append("option").attr("value", function(d) {
-  return d;
-}).text(function(d) {
-  return d;
-});
-
-courseFormatPicker.selectAll("option").data(courseFormatList).enter().append("option").attr("value", function(d) {
-  return d;
-}).text(function(d) {
-  return d;
-});
-
-projectTypePicker.selectAll("option").data(projectTypeList).enter().append("option").attr("value", function(d) {
-  return d;
-}).text(function(d) {
-  return d;
-});
-
-projectStagePicker.selectAll("option").data(projectStageList).enter().append("option").attr("value", function(d) {
-  return d;
-}).text(function(d) {
-  return d;
-});
-
-yearAwardedPicker.selectAll("option").data(yearAwardedList).enter().append("option").attr("value", function(d) {
-  return d;
-}).text(function(d) {
-  return d;
-});
-
+facultyPicker.selectAll("option").data(facultyList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
+courseLevelPicker.selectAll("option").data(courseLevelList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
+projectTypePicker.selectAll("option").data(projectTypeList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
+projectStagePicker.selectAll("option").data(projectStageList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
+yearAwardedPicker.selectAll("option").data(yearAwardedList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
 
 //chartType buttons:    
 d3.select("#chartTypeButtons") //Sankey
@@ -2126,17 +1967,11 @@ function reset_filters() {
   });
 
   //reset to default values
-  faculty = "Any";
-  courseLevel = "Any";
-  projectTitle = "Any";
-  department = "Any";
-  enrolmentCap = "Any";
-  courseType = "Any";
-  courseLocation = "Any";
-  courseFormat = "Any";
-  projectType = "Any";
-  projectStage = "Any";
-  yearAwarded = "Any";
+  faculty = "Faculty (all)";
+  courseLevel = "Course level (all)";
+  projectType = "Project type (all)";
+  projectStage = "Project stage (all)";
+  yearAwarded = "Year awarded (all)";
 
   //rerun viz
   console.log(currentChartType)
