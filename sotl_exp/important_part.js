@@ -14,8 +14,7 @@
 
 colors = ["#C3D0DB", "#98B2C3", "#5E869F", "#2F5D7C"]; //UBC blue greys
 
-grey = "#7e7e7e"
-
+darkblue = "#002145"
 
 var opacityNormal = 0.7,
   opacityLow = 0.1,
@@ -79,7 +78,7 @@ var highlight_project_heatmap = function(card, title) {
   d3.selectAll(".card")
     .each(function(l) {
       if ($.inArray(title, l.projects) != -1) {
-        d3.select(this).call(highlight_card, opacityHigh, "grey", widthHigh)
+        d3.select(this).call(highlight_card, opacityHigh, darkblue, widthHigh)
         highlightProjectInList(title)
       } else {
         d3.select(this).call(highlight_card, opacityLow, "white", widthNormal)
@@ -120,7 +119,7 @@ var remove_highlight_link = function() {
 
 var remove_highlight_list_item = function() {
   d3.select("#projectList").selectAll(".projectListItem")
-    .call(highlight_list_item, colorNormal, "none")
+    .call(highlight_list_item, colorHigh, "none")
 }
 
 var highlight_list_item = function(selection, color, boldness) {
@@ -137,7 +136,7 @@ var highlightProjectInList = function(project) {
   d3.select("#projectList").selectAll(".projectListItem")
     .each(function(t) {
       if (t == project) {
-        d3.select(this).call(highlight_list_item, colorHigh, "bold")
+        d3.select(this).call(highlight_list_item, darkblue, "bold")
       }
     })
 }
@@ -873,8 +872,6 @@ var heatmapInnovationImpact = function(n) {
       tooltip
         .style("opacity", tooltipOpacity);
       highlightMultipleProjectInList(l.projects)
-      // d3.select(this)
-      //   .call(highlight_card, colorHigh, widthHigh)
     })
     .on("mouseout", function() {
       remove_tooltip()
@@ -1182,8 +1179,6 @@ var heatmapImpactApproach = function(n) {
       tooltip
         .style("opacity", tooltipOpacity);
       highlightMultipleProjectInList(l.projects)
-      // d3.select(this)
-      //   .call(highlight_card, colorHigh, widthHigh)
     })
     .on("mouseout", function() {
       remove_tooltip()
@@ -1765,9 +1760,9 @@ function rerun(currentChartType) {
       .attr("x", 0)
       .attr("dx", 0)
       .attr("dy", 0)
-      .style("fill", colorNormal)
+      .style("fill", colorHigh)
       .attr("y", function(d, i) {
-        return 60 * i + 40
+        return 40 * i + 40
       })
       .text(function(d, i) {
         return capitalizeFirstLetter(d.toLowerCase())
@@ -1908,7 +1903,7 @@ yearAwardedPicker.selectAll("option").data(yearAwardedList).enter().append("opti
 //chartType buttons:    
 d3.select("#chartTypeButtons") //Sankey
   .append("input")
-  .attr("value", "Sankey: Flow from Innovation to Impact to Evaluation")
+  .attr("value", "Sankey flow of ")
   .attr("type", "button")
   .attr("class", "big_button")
   .on("click", function() {
@@ -1921,7 +1916,7 @@ d3.select("#chartTypeButtons") //Sankey
 
 d3.select("#chartTypeButtons") //heatmapInnovationImpact
   .append("input")
-  .attr("value", "Heatmap: Innovation by Area of Impact")
+  .attr("value", "Heatmap: Innovation x Impact")
   .attr("type", "button")
   .attr("class", "big_button")
   .on("click", function() {
@@ -1934,7 +1929,7 @@ d3.select("#chartTypeButtons") //heatmapInnovationImpact
 
 d3.select("#chartTypeButtons")
   .append("input")
-  .attr("value", "Heatmap: Area of Impact by Evaluation Approach")
+  .attr("value", "Heatmap: Impact x Evaluation")
   .attr("type", "button")
   .attr("class", "big_button")
   .on("click", function() {

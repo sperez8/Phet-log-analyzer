@@ -9,6 +9,20 @@ outfile = "data_copy_new.txt"
 #otherwise sankey will crash
 
 #changes made from original :  added consistency with use of (e.g., ...) and created short version of name for each.
+
+replacementShortEva = {
+					#EVALUATION
+					"Knowledge tests, diagnostics" : "Knowledge tests",
+					"Surveys about perception, attitudes and motivation" : "Attitude surveys",
+					"Interviews and focus groups" : "Interviews and focus groups",
+					"Observations: open ended ethnographic" : "Observations",
+					"Obeservations with protocol rubric" : "Observations",
+					"Participant documentation, reflective writing" : "Reflective writing",
+					"Existing/secondary data" : "Secondary data",
+					"Participant documentation: logging" : "Other Evaluation",
+					"Other" : "Other evaluation",
+}
+
 replacementsLongInnov = {
 					#INNOVATION
 					"In-class group work (e.g., small group discussions, group presentations, worksheets)" : "Active Learning - short activities (one or more single-session activities, e.g., clickers)",
