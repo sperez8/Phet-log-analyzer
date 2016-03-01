@@ -10,6 +10,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 5px;
+    fill: #002145;
 }
 
 #allFilters {
@@ -18,34 +19,56 @@ body {
     float: left;
     clear: right;
     padding-left: 20px;
+    padding-top: 5px;
 }
 
 /*#sankeyChart, #innovationImpactChart, #impactApproachChart {*/
 #allCharts {
     width: 70%;
-    height: 70%;
+    height: 80%;
     float: left;
     clear: right;
     margin-right: 3%;
     margin-left: 3%;
 }
 
+#chartTypeButtons {
+    width: 100%;
+    height: 5%;
+    float: right;
+    text-align: center;
+    margin-top: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #002145;
+}
+
 #listItems {
     width: 20%;
-    height: 60%;
-    float: right;
+    height: 80%;
+    float: left;
     clear: right;
     margin-top: 5px;
     margin-bottom: 5px;
-    padding-right: 5px;
-    padding-left: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 #NumberOfProjects {
-    height: 10%;
-    text-align: center;
+    width:20%;
+    height: 100%;
+    float:left;
+    vertical-align: center;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+ #NumberOfProjects p {
+    text-align: center;
+    background: #002145;
+    color: white;
 }
 
 #projectList {
@@ -57,12 +80,12 @@ body {
 
 .projectListItem {
 	width:110%;
-	font-size: 14pt;
+	font-size: 11pt;
 }
 
-.listitem {
+/*.listitem {
 	text-anchor:middle;
-}
+}*/
 
 #project-table {
 	width:100%;
@@ -75,7 +98,7 @@ body {
 div.tooltip, div.tooltip-inner {
 	font-family: "Helvetica Neue";
 	font-style: normal;
-	font-size: 13pt;
+	font-size: 11pt;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 5px;  
@@ -119,7 +142,7 @@ div.tooltip, div.tooltip-inner {
 	font-family: "Helvetica Neue";
 	font-style: normal;
 	font-size:20pt;
-	color: #ff7f0e;
+    fill: #002145;
 }
 
 #data-here{
@@ -160,19 +183,24 @@ display:none;
 }
 
 select { 
-	width: 100px;
+	width: auto;
 	height: 25px;
     margin-left: 2px;
     padding-right: 4px;
     padding-left: 4px;
+    border: 1px solid #002145;
+    color: #002145;
 }
 
 select, input[type="button"] { 
     margin-top: 3px;
     margin-bottom: 3px;
     background: transparent;
-    border: 1px solid grey;
     border-radius: 4px;
+}
+
+input[type="button"] { 
+    border: 1px solid white;
 }
 
 .small_button {
@@ -186,8 +214,8 @@ select, input[type="button"] {
 input[type="button"] { 
 	width: auto;
 	height: 35px;
-	color: grey;
-	background: white;
+	color: white;
+	background: #002145;
 	margin-left: 10px;
 	margin-right: 10px;
     padding-left: 20px;
