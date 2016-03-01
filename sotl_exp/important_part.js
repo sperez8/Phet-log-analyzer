@@ -1900,6 +1900,25 @@ projectTypePicker.selectAll("option").data(projectTypeList).enter().append("opti
 projectStagePicker.selectAll("option").data(projectStageList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
 yearAwardedPicker.selectAll("option").data(yearAwardedList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
 
+function unclick_buttons() {
+  d3.selectAll(".big_button")
+    .each(function(button) {
+      d3.select(this)
+        .transition()
+        .ease("linear")
+        .duration(highlightTime)
+        .style("background", "#002145")
+    })
+}
+
+function click_button(button) {
+  button
+    .transition()
+    .ease("linear")
+    .duration(highlightTime)
+    .style("background", colorNormal)
+}
+
 //chartType buttons:    
 d3.select("#chartTypeButtons") //Sankey
   .append("input")
@@ -1907,10 +1926,10 @@ d3.select("#chartTypeButtons") //Sankey
   .attr("type", "button")
   .attr("class", "big_button")
   .on("click", function() {
-
+    unclick_buttons()
+    d3.select(this).call(click_button)
     currentChartType = "sankey";
     rerun(currentChartType); //redraw previously selected chart 
-
   });
 
 
@@ -1920,7 +1939,8 @@ d3.select("#chartTypeButtons") //heatmapInnovationImpact
   .attr("type", "button")
   .attr("class", "big_button")
   .on("click", function() {
-
+    unclick_buttons()
+    d3.select(this).call(click_button)
     currentChartType = "heatmapInnovationImpact";
     rerun(currentChartType); //redraw previously selected chart 
 
@@ -1933,7 +1953,8 @@ d3.select("#chartTypeButtons")
   .attr("type", "button")
   .attr("class", "big_button")
   .on("click", function() {
-
+    unclick_buttons()
+    d3.select(this).call(click_button)
     currentChartType = "heatmapImpactApproach";
     rerun(currentChartType); //redraw previously selected chart 
 
@@ -1946,7 +1967,8 @@ d3.select("#chartTypeButtons")
   .attr("type", "button")
   .attr("class", "big_button")
   .on("click", function() {
-
+    unclick_buttons()
+    d3.select(this).call(click_button)
     currentChartType = "table";
     rerun(currentChartType); //redraw previously selected chart
 
