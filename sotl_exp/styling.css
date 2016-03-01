@@ -206,3 +206,8 @@ input[type="button"] {
     padding-right: 10px;
     background: #d3d3d3;
 }
+
+
+#chartTypeButtons input[type="button"]:active{
+    background:#98B2C3;
+}
