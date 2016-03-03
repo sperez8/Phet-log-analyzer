@@ -596,8 +596,34 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
     });
   }
 
+  if (innovation != "Innovation (all)") {
+    heatMapdata = heatMapdata.filter(function(d) {
+      return d.innovation == innovation;
+    });
+    data1 = data1.filter(function(d) {
+      return d["source"] == innovation;
+    });
+  }
 
 
+  if (impact != "Impact (all)") {
+    heatMapdata = heatMapdata.filter(function(d) {
+      console.log(d)
+      return d.impact == impact;
+    });
+    data1 = data1.filter(function(d) {
+      return d["target"] == impact || d["source"] == impact;
+    });
+  }
+
+  if (evaluation != "Evaluation (all)") {
+    heatMapdata = heatMapdata.filter(function(d) {
+      return d.approach == evaluation;
+    });
+    data1 = data1.filter(function(d) {
+      return d["target"] == evaluation;
+    });
+  }
 
   //all the multi-select type options are of the .search() type. 
   if (courseLevel != "Course level (all)") {
