@@ -207,10 +207,6 @@ input[type="button"] {
 	font-size: 12pt;
 }
 
-.big_button {
-	font-size: 16pt;
-}
-
 input[type="button"] { 
 	width: auto;
 	height: 35px;
@@ -225,6 +221,7 @@ input[type="button"] {
 #chartTypeButtons {
     width: 100%;
     height: 5%;
+    font-size: 14pt;
     float: right;
     text-align: center;
     margin-top: 5px;
@@ -236,6 +233,6 @@ input[type="button"] {
 }
 
 
-#chartTypeButtons input[type="button"]:active{
+#chartTypeButtons.clicked {
     background:#98B2C3;
 }

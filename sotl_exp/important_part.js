@@ -1765,7 +1765,7 @@ function rerun(currentChartType) {
         return 40 * i + 40
       })
       .text(function(d, i) {
-        return capitalizeFirstLetter(d.toLowerCase())
+        return "- " + capitalizeFirstLetter(d.toLowerCase())
       })
       .call(wrap, listwidth, listheight)
       .on("mouseover", function(d) {
@@ -1836,7 +1836,7 @@ var ChartType = {
 };
 
 
-var currentChartType = "sankey"; //"heatmapInnovationImpact";  //set the default chart type to be sankey
+var currentChartType = "table"; //"heatmapInnovationImpact";  //set the default chart type to be sankey
 
 
 var facultyPicker = d3.select("#context-filter-faculty").append("select").on("change", function() {
@@ -1922,55 +1922,75 @@ function click_button(button) {
 //chartType buttons:    
 d3.select("#chartTypeButtons") //Sankey
   .append("input")
-  .attr("value", "Sankey flow of ")
+  .attr("value", "Flow from Innovation to Evaluation")
   .attr("type", "button")
   .attr("class", "big_button")
+  .style("background",  function() {
+      if (currentChartType == "sankey"){
+        return colorHigh
+      }
+  })
   .on("click", function() {
     unclick_buttons()
     d3.select(this).call(click_button)
-    currentChartType = "sankey";
-    rerun(currentChartType); //redraw previously selected chart 
+    setChartType = "sankey";
+    rerun(setChartType); //redraw previously selected chart 
   });
 
 
 d3.select("#chartTypeButtons") //heatmapInnovationImpact
   .append("input")
-  .attr("value", "Heatmap: Innovation x Impact")
+  .attr("value", "Frequency of Innovation x Impact")
   .attr("type", "button")
   .attr("class", "big_button")
+  .style("background",  function() {
+      if (currentChartType == "heatmapInnovationImpact"){
+        return colorHigh
+      }
+  })
   .on("click", function() {
     unclick_buttons()
     d3.select(this).call(click_button)
-    currentChartType = "heatmapInnovationImpact";
-    rerun(currentChartType); //redraw previously selected chart 
+    setChartType = "heatmapInnovationImpact";
+    rerun(setChartType); //redraw previously selected chart 
 
   });
 
 
 d3.select("#chartTypeButtons")
   .append("input")
-  .attr("value", "Heatmap: Impact x Evaluation")
+  .attr("value", "Frequency of Impact x Evaluation")
   .attr("type", "button")
   .attr("class", "big_button")
+  .style("background",  function() {
+      if (currentChartType == "heatmapImpactApproach"){
+        return colorHigh
+      }
+  })
   .on("click", function() {
     unclick_buttons()
     d3.select(this).call(click_button)
-    currentChartType = "heatmapImpactApproach";
-    rerun(currentChartType); //redraw previously selected chart 
+    setChartType = "heatmapImpactApproach";
+    rerun(setChartType); //redraw previously selected chart 
 
   });
 
 
 d3.select("#chartTypeButtons")
   .append("input")
-  .attr("value", "Table")
+  .attr("value", "Table of projects")
   .attr("type", "button")
   .attr("class", "big_button")
+  .style("background",  function() {
+      if (currentChartType == "table"){
+        return colorHigh
+      }
+  })
   .on("click", function() {
     unclick_buttons()
     d3.select(this).call(click_button)
-    currentChartType = "table";
-    rerun(currentChartType); //redraw previously selected chart
+    setChartType = "table";
+    rerun(setChartType); //redraw previously selected chart
 
   });
 
