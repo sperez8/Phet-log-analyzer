@@ -147,7 +147,6 @@ var highlightMultipleProjectInList = function(projects) {
   d3.select("#projectList").selectAll(".projectListItem")
     .each(function(t) {
       if ($.inArray(t, projects) != -1) {
-        console.log(t, projects)
         d3.select(this).call(highlight_list_item, colorHigh, "bold")
       }
     })
@@ -501,16 +500,16 @@ var margin = {
     left: 10
   },
   heatmap: {
-    top: 70,
+    top: 110,
     right: 0,
     bottom: 0,
-    left: 270
+    left: 240
   }
 };
 
 //width = 1200 - margin.sankey.left - margin.sankey.right,
 //height = 800 - margin.sankey.top - margin.sankey.bottom;
-width = document.getElementById("allCharts").offsetWidth
+width = document.getElementById("allCharts").offsetWidth*0.9
 height = window.innerHeight * 0.65
 
 var formatNumber = d3.format(",.0f"), // zero decimal places
@@ -518,7 +517,6 @@ var formatNumber = d3.format(",.0f"), // zero decimal places
     return formatNumber(d) + " " + units;
   }
   //color = d3.scale.category20();
-  //console.log(color);
 
 // Set the sankey diagram properties  
 var sankey = d3.sankey()
@@ -548,7 +546,6 @@ var currentDraw = 0;
 
 
 // load the data
-//console.log(customData);
 data = d3.tsv.parse(customData);
 var heatMapdata = [];
 var data1 = [];
@@ -640,8 +637,8 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
 
 
 //constants for heatmaps
-gridSizeX = Math.floor(width / 12), //should make this dynamic
-  gridSizeY = Math.floor(width / 18), //should make this dynamic
+gridSizeX = Math.floor(width / 11), //should make this dynamic
+  gridSizeY = Math.floor(width / 14), //should make this dynamic
   legendElementWidth = gridSizeX * 1.50,
   buckets = 4;
 
@@ -669,7 +666,6 @@ var heatmapInnovationImpact = function(n) {
     };
   });
 
-  // console.log("heat map data: " + heatMapdata);
   //
   //Great nest learning tool: http://bl.ocks.org/shancarter/raw/4748131/ 
   var heatMapNest = d3.nest()
@@ -768,8 +764,6 @@ var heatmapInnovationImpact = function(n) {
         value: v2.length,
         projects: v2
       });
-      //data.push([ d2,d, v2]); //array-works
-      // console.log("inn " +d + "  " + "impact " + d2 + "  " + v2);
     })
   });
 
@@ -811,13 +805,12 @@ var heatmapInnovationImpact = function(n) {
   var max = d3.max(dataRollUp, function(d) {
     return d.value;
   });
-  //console.log(max);  
+
   var colorScale = d3.scale.quantile()
     //.domain([0,5,10,30,40])
     .domain([1, 0.25 * max, 0.5 * max, 0.75 * max, max])
     .range(colors);
-
-  //console.log("area of impact: " + areasOfImpact);        
+   
   //x-axis
   var impactLabels = svg.selectAll(".impactLabel")
     .data(areasOfImpact)
@@ -842,8 +835,6 @@ var heatmapInnovationImpact = function(n) {
   var cards = svg.selectAll(".cards")
     .data(dataRollUp);
 
-  //console.log(cards);
-
   cards.enter()
     .append("rect")
     //.attr("y", function(d) { return ((areasOfInnovation.indexOf( d[1])) * gridSizeX/2); }) //array-works
@@ -865,7 +856,6 @@ var heatmapInnovationImpact = function(n) {
     .on("mouseover", function(l) {
       var cx = d3.event.pageX
       var cy = d3.event.pageY
-      console.log(l.projects.length)
       tooltip.html(l.value + "projects")
         .style("left", (cx + 5) + "px")
         .style("top", (cy - 28) + "px");
@@ -899,7 +889,7 @@ var heatmapInnovationImpact = function(n) {
 
 
 
-  // console.log(cards.exit());   
+  
   // cards.exit().remove();
 
 
@@ -1030,7 +1020,6 @@ var heatmapImpactApproach = function(n) {
     .map(heatMapdata, d3.map).get("impactXapproach").keys(); //impactXapproach is in the data under "matrix"
 
   evaluationApproach.sort(d3.ascending);
-  //console.log("evaluation approach: " + evaluationApproach);
   filterData(); //get the keys before you filter the data to get the whole original lists. 
 
   d3.select("#impactApproachChart").append("svg")
@@ -1087,7 +1076,6 @@ var heatmapImpactApproach = function(n) {
       });
     })
   });
-  //console.log(dataRollUp[0].approach);
 
   var impactLabel = svg.selectAll("g")
     .data(areasOfImpact)
@@ -1123,7 +1111,6 @@ var heatmapImpactApproach = function(n) {
   var max = d3.max(dataRollUp, function(d) {
     return d.value;
   });
-  //console.log(max);  
   var colorScale = d3.scale.quantile()
     //.domain([0,5,10,30,40])
     .domain([1, 0.25 * max, 0.5 * max, 0.75 * max, max])
@@ -1152,8 +1139,6 @@ var heatmapImpactApproach = function(n) {
   var cards = svg.selectAll(".cards")
     .data(dataRollUp);
 
-  //console.log(cards);
-
   cards.enter()
     .append("rect")
     .attr("x", function(d) {
@@ -1172,7 +1157,6 @@ var heatmapImpactApproach = function(n) {
     .on("mouseover", function(l) {
       var cx = d3.event.pageX
       var cy = d3.event.pageY
-      console.log(l.projects.length)
       tooltip.html(l.value + "projects")
         .style("left", (cx + 5) + "px")
         .style("top", (cy - 28) + "px");
@@ -1201,12 +1185,6 @@ var heatmapImpactApproach = function(n) {
     .text(function(d) {
       return (d.value);
     });
-
-
-
-  // console.log(cards.exit());   
-  // cards.exit().remove();
-
 
   function wrapx(text, width) {
     text.each(function() {
@@ -1303,7 +1281,6 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
     .attr("transform",
       "translate(" + margin.sankey.left + "," + margin.sankey.top + ")");
 
-  //console.log(n);
   var svg = d3.select("#sankeyChart").selectAll("g")
     .append("g")
     .attr("class", "sankey" + n)
@@ -1443,8 +1420,6 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
         .style("top", (cy - 28) + "px");
       tooltip
         .style("opacity", tooltipOpacity);
-
-      //console.log(l, l.projectTitle, cx, cy, tooltipOpacity)
       d3.select(this)
         .call(highlight_project_sankey, l.projectTitle)
     })
@@ -1454,7 +1429,6 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
       remove_highlight_link()
     });
   // .on("click", function (d){
-  //   console.log("clicked", d.name, d.value)
   //   // XXX DO CLICK project HERE
   //   // if (d3.select(this).classed("clicked")){
   //   //     d3.select(this)
@@ -1582,22 +1556,13 @@ var tabulate = function() {
           year_awarded: d["Year Awarded"]
         };
       });
-    console.log("Running table", heatMapdata.length)
-    //console.log(data1[0]);
-
     //var tableData = d3.nest()   //this works to give a unique list of project titles. 
     //.key(function(d) {return d.project_Title;})
     //.map(data,d3.map).keys().sort(d3.ascending);
 
-    //console.log(data[0]);
-    //console.log(data[0]["project_Title"]);
-    //console.log(tableData);
-
     filterData()
     tableData = heatMapdata
     columns = tableColumns
-
-    console.log(heatMapdata)
 
     var table = d3.select("#project-table").append("table")
       //       .attr("style", "margin-left: 150px"),
@@ -1628,7 +1593,6 @@ var tabulate = function() {
       // .data(tableData)
       .enter()
       .append("tr");
-    //console.log(rows[0]);
 
     // create a cell in each row for each column
     var cells = rows.selectAll("td")
@@ -1836,7 +1800,7 @@ var ChartType = {
 };
 
 
-var currentChartType = "table"; //"heatmapInnovationImpact";  //set the default chart type to be sankey
+var currentChartType = "sankey"; //"heatmapInnovationImpact";  //set the default chart type to be sankey
 
 
 var facultyPicker = d3.select("#context-filter-faculty").append("select").on("change", function() {
@@ -1999,9 +1963,6 @@ rerun(currentChartType); //redraw previously selected chart
 
 function reset_filters() {
   //reset filters on page
-  d3.selectAll("select").property({
-    "value": "Any"
-  });
 
   //reset to default values
   faculty = "Faculty (all)";
@@ -2010,7 +1971,12 @@ function reset_filters() {
   projectStage = "Project stage (all)";
   yearAwarded = "Year awarded (all)";
 
+  d3.select("#context-filter-faculty").selectAll("select").property({"value":faculty})
+  d3.select("#context-filter-courseLevel").selectAll("select").property({"value":courseLevel})
+  d3.select("#context-filter-projectType").selectAll("select").property({"value":projectType})
+  d3.select("#context-filter-projectStage").selectAll("select").property({"value":projectStage})
+  d3.select("#context-filter-yearAwarded").selectAll("select").property({"value":yearAwarded})
+
   //rerun viz
-  console.log(currentChartType)
   rerun(currentChartType)
 }
