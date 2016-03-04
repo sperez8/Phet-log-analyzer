@@ -596,12 +596,39 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
     });
   }
 
+  //all the multi-select type options are of the .search() type. 
+  if (courseLevel != "Course level (all)") {
+    heatMapdata = heatMapdata.filter(function(d) {
+      return (d.Course_Level.search(courseLevel)) != -1;
+    });
+    data1 = data1.filter(function(d) {
+      return (d.Course_Level.search(courseLevel)) != -1;
+    })
+  }
+
   if (innovation != "Innovation (all)") {
     heatMapdata = heatMapdata.filter(function(d) {
       return d.innovation == innovation;
     });
+
+    //find all projects with "innovation"
+    //find all impacts that it links too
+    //filter if row matchs project and impact
+
+    relevant_projects = data1.map(function(d) {
+      if (d["source"] == innovation){return d["project_Title"]}
+    }).getUnique()
+    relevant_impacts = data1.map(function(d) {
+      if (d["source"] == innovation){return d["target"]}
+    }).getUnique()
+
     data1 = data1.filter(function(d) {
-      return d["source"] == innovation;
+      console.log(d)
+      if ($.inArray(d["project_Title"], relevant_projects) != -1){
+        if (d["source"] == innovation || ($.inArray(d["source"], relevant_impacts) != -1)){
+          return true
+        }
+      }
     });
   }
 
@@ -623,16 +650,6 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
     data1 = data1.filter(function(d) {
       return d["target"] == evaluation;
     });
-  }
-
-  //all the multi-select type options are of the .search() type. 
-  if (courseLevel != "Course level (all)") {
-    heatMapdata = heatMapdata.filter(function(d) {
-      return (d.Course_Level.search(courseLevel)) != -1;
-    });
-    data1 = data1.filter(function(d) {
-      return (d.Course_Level.search(courseLevel)) != -1;
-    })
   }
 
 }; //end filterData
