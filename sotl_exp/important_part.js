@@ -1781,6 +1781,33 @@ var projectTypeList = ["Project type (all)"].concat(get_filterOptions("Type of P
 var projectStageList = ["Project stage (all)"].concat(get_filterOptions("Project Stage"))
 var yearAwardedList = ["Year awarded (all)"].concat(get_filterOptions("Year Awarded"))
 
+
+function get_filterCategoryOptions(category) {
+  heatMapdata = d3.tsv.parse(customData);
+  options = heatMapdata.map(function(d) {
+    if (category == "Innovation" && d["matrix"]=="innovationXimpact"){
+        return d["source"]
+      } else if (category == "Impact" && d["matrix"]=="innovationXimpact"){
+        return d["target"]
+      } else if (category == "Evaluation" && d["matrix"]=="impactXapproach"){
+        return d["target"]
+      }
+    }).getUnique()
+  newoptions = []
+  for (var i = options.length - 1; i >= 0; i--) {
+    if (options[i] != " " && options[i] != "") {
+      newoptions.push(options[i])
+    }
+  }
+  fixedoptions = newoptions.getUnique().sort()
+  return fixedoptions
+}
+
+
+var innovationList = ["Innovation (all)"].concat(get_filterCategoryOptions("Innovation"))
+var impactList = ["Impact (all)"].concat(get_filterCategoryOptions("Impact"))
+var evaluationList = ["Evaluation (all)"].concat(get_filterCategoryOptions("Evaluation"))
+
 //columns to display for table
 var tableColumns = ["project_Title", "Faculty_School", "Course_Level", "course_Format", "Course_Type", "course_Location", "project_Type", "year_awarded"];
 
@@ -1790,6 +1817,9 @@ courseLevel = "Course level (all)";
 projectType = "Project type (all)";
 projectStage = "Project stage (all)";
 yearAwarded = "Year awarded (all)";
+innovation = "Innovation (all)"
+impact = "Impact (all)"
+evaluation = "Evaluation (all)"
 
 //variables for filters and chart type buttons
 var ChartType = {
@@ -1809,39 +1839,10 @@ var facultyPicker = d3.select("#context-filter-faculty").append("select").on("ch
 });
 
 var courseLevelPicker = d3.select("#context-filter-courseLevel").append("select").on("change", function() {
-  courseLevel = d3.select(this).property("value");
+  projectType = d3.select(this).property("value");
   rerun(currentChartType)
 });
 
-var projectTitlePicker = d3.select("#context-filter-projectTitle").append("select").on("change", function() {
-  projectTitle = d3.select(this).property("value");
-  rerun(currentChartType)
-});
-
-var departmentPicker = d3.select("#context-filter-department").append("select").on("change", function() {
-  department = d3.select(this).property("value");
-  rerun(currentChartType)
-});
-
-var enrolmentCapPicker = d3.select("#context-filter-enrolmentCap").append("select").on("change", function() {
-  enrolmentCap = d3.select(this).property("value");
-  rerun(currentChartType)
-});
-
-var courseTypePicker = d3.select("#context-filter-courseType").append("select").on("change", function() {
-  courseType = d3.select(this).property("value");
-  rerun(currentChartType)
-});
-
-var courseLocationPicker = d3.select("#context-filter-courseLocation").append("select").on("change", function() {
-  courseLocation = d3.select(this).property("value");
-  rerun(currentChartType)
-});
-
-var courseFormatPicker = d3.select("#context-filter-CourseFormat").append("select").on("change", function() {
-  courseFormat = d3.select(this).property("value");
-  rerun(currentChartType)
-});
 
 var projectTypePicker = d3.select("#context-filter-projectType").append("select").on("change", function() {
   projectType = d3.select(this).property("value");
@@ -1858,11 +1859,30 @@ var yearAwardedPicker = d3.select("#context-filter-yearAwarded").append("select"
   rerun(currentChartType)
 });
 
+var innovationPicker = d3.select("#context-filter-innovation").append("select").on("change", function() {
+  innovation = d3.select(this).property("value");
+  rerun(currentChartType)
+});
+
+var impactPicker = d3.select("#context-filter-impact").append("select").on("change", function() {
+  impact = d3.select(this).property("value");
+  rerun(currentChartType)
+});
+
+var evaluationPicker = d3.select("#context-filter-evaluation").append("select").on("change", function() {
+  evaluation = d3.select(this).property("value");
+  rerun(currentChartType)
+});
+
+
 facultyPicker.selectAll("option").data(facultyList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
 courseLevelPicker.selectAll("option").data(courseLevelList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
 projectTypePicker.selectAll("option").data(projectTypeList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
 projectStagePicker.selectAll("option").data(projectStageList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
 yearAwardedPicker.selectAll("option").data(yearAwardedList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
+innovationPicker.selectAll("option").data(innovationList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
+impactPicker.selectAll("option").data(impactList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
+evaluationPicker.selectAll("option").data(evaluationList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
 
 function unclick_buttons() {
   d3.selectAll(".big_button")
@@ -1970,12 +1990,18 @@ function reset_filters() {
   projectType = "Project type (all)";
   projectStage = "Project stage (all)";
   yearAwarded = "Year awarded (all)";
+  innovation = "Innovation (all)"
+  impact = "Impact (all)"
+  evaluation = "Evaluation (all)"
 
   d3.select("#context-filter-faculty").selectAll("select").property({"value":faculty})
   d3.select("#context-filter-courseLevel").selectAll("select").property({"value":courseLevel})
   d3.select("#context-filter-projectType").selectAll("select").property({"value":projectType})
   d3.select("#context-filter-projectStage").selectAll("select").property({"value":projectStage})
   d3.select("#context-filter-yearAwarded").selectAll("select").property({"value":yearAwarded})
+  d3.select("#context-filter-innovation").selectAll("select").property({"value":yearAwarded})
+  d3.select("#context-filter-impact").selectAll("select").property({"value":yearAwarded})
+  d3.select("#context-filter-evaluation").selectAll("select").property({"value":yearAwarded})
 
   //rerun viz
   rerun(currentChartType)
