@@ -171,9 +171,9 @@ var highlightMultipleProjectInList = function(projects) {
 
 d3.sankey = function() {
   var sankey = {},
-    nodeWidth = 24,
-    nodePadding = 8,
-    size = [1, 1],
+    //nodeWidth = 500,
+    nodePadding = 80,
+    size = [4, 1],
     nodes = [],
     links = [];
 
@@ -222,7 +222,7 @@ d3.sankey = function() {
   };
 
   sankey.link = function() {
-    var curvature = 0.7;
+    var curvature = 0.9;
 
     function link(d) {
       var x0 = d.source.x + d.source.dx,
@@ -446,6 +446,14 @@ d3.sankey = function() {
         link.ty = ty;
         ty += link.dy;
       });
+      // node.sourceLinks.forEach(function(link) {
+      //   link.sy = Math.max(node.value-5,1)*link.dy/2.0 + sy;
+      //   sy += link.dy*Math.min(node.value,5)/node.value;
+      // });
+      // node.targetLinks.forEach(function(link) {
+      //   link.ty = Math.max(node.value-5,1)*link.dy/2.0 + ty;
+      //   ty += link.dy*Math.min(node.value,5)/node.value;
+      // });
     });
 
     function ascendingSourceDepth(a, b) {
@@ -1428,10 +1436,12 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
   nodeNames = get_trait_values("name")
   nodeValues = get_numerical_trait_values("value")
 
-  //using colors from d3.scale.category10
+  // using colors from d3.scale.category10
   colorscheme = d3.scale.ordinal()
     .domain(middle_nodes)
-    .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"])
+    // .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"])
+    //.range(["#1b9e77","#d95f02","#7570b3","#e7298a","#66a61e","#e6ab02","#a6761d"])
+    .range(["#a6d854","#8da0cb","#fc8d62","#b3b3b3","#ffd92f","#66c2a5","#e78ac3"])
 
 
   // add in the links
@@ -1483,6 +1493,7 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
   //   //         .call(reveal(n))
   //   // }
   // });
+
 
 
 
