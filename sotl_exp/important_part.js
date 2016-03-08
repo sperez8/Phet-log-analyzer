@@ -222,7 +222,7 @@ d3.sankey = function() {
   };
 
   sankey.link = function() {
-    var curvature = 0.4;
+    var curvature = 0.7;
 
     function link(d) {
       var x0 = d.source.x + d.source.dx,
@@ -912,7 +912,7 @@ var heatmapInnovationImpact = function(n) {
       remove_highlight_card()
     });
 
-  cards.append("title");
+  //cards.append("title");
 
   cards.transition()
     .ease("linear")
@@ -1428,10 +1428,10 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
   nodeNames = get_trait_values("name")
   nodeValues = get_numerical_trait_values("value")
 
-  // using colors from d3.scale.category10
-  // colorscheme = d3.scale.ordinal()
-  //   .domain(middle_nodes)
-  //   .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"])
+  //using colors from d3.scale.category10
+  colorscheme = d3.scale.ordinal()
+    .domain(middle_nodes)
+    .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"])
 
 
   // add in the links
@@ -1444,17 +1444,17 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
     .style("stroke-width", function(d) {
       return Math.max(1, d.dy);
     })
-    // .style("stroke", function(d,i) {  //color given the middle node it's connected to
-    //   if (check_middle(d.source)) {
-    //     return colorscheme(d.source.name)
-    //   } else if (check_middle(d.target)) {
-    //     return colorscheme(d.target.name)
-    //   }
-    // })
-    .style("stroke", colorNormal)
-    .sort(function(a, b) {
-      return b.dy - a.dy;
+    .style("stroke", function(d,i) {  //color given the middle node it's connected to
+      if (check_middle(d.source)) {
+        return colorscheme(d.source.name)
+      } else if (check_middle(d.target)) {
+        return colorscheme(d.target.name)
+      }
     })
+    // .style("stroke", colorNormal)
+    // .sort(function(a, b) {
+    //   return b.dy - a.dy;
+    // })
     .on("mouseover", function(l) {
       var cx = d3.event.pageX
       var cy = d3.event.pageY
