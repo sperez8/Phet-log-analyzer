@@ -631,7 +631,6 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
 
     //filter if row matchs project and impact
     data1 = data1.filter(function(d) {
-      console.log(d)
       if ($.inArray(d["project_Title"], relevant_projects) != -1){
         if (d["source"] == innovation || ($.inArray(d["source"], relevant_impacts) != -1)){
           return true
@@ -642,7 +641,6 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
 
   if (impact != "Impact (all)") {
     heatMapdata = heatMapdata.filter(function(d) {
-      console.log(d)
       return d.impact == impact;
     });
     data1 = data1.filter(function(d) {
@@ -667,7 +665,6 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
 
     //filter if row matchs project and impact
     data1 = data1.filter(function(d) {
-      console.log(d)
       if ($.inArray(d["project_Title"], relevant_projects) != -1){
         if (d["target"] == evaluation || ($.inArray(d["target"], relevant_impacts) != -1)){
           return true
@@ -675,15 +672,6 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
       }
     });
   }
-
-  // if (evaluation != "Evaluation (all)") {
-  //   heatMapdata = heatMapdata.filter(function(d) {
-  //     return d.approach == evaluation;
-  //   });
-  //   data1 = data1.filter(function(d) {
-  //     return d["target"] == evaluation;
-  //   });
-  // }
 
 }; //end filterData
 
@@ -829,6 +817,12 @@ var heatmapInnovationImpact = function(n) {
   if (typeof heatMapNest === "undefined") {
     console.log("no projects found!")
       //Filters return no projects
+        svg.append("text")
+               .attr("x", 10)             
+               .attr("y", height/2)
+               //.attr("text-anchor", "start")  
+               .attr("class","heading")
+               .text("No projects were found! Maybe it's time to launch a new project to address this gap ;)");  
     return []
   }
 
@@ -1139,6 +1133,12 @@ var heatmapImpactApproach = function(n) {
   if (typeof heatMapNest === "undefined") {
     console.log("no projects found!")
       //Filters return no projects
+        svg.append("text")
+               .attr("x", 10)             
+               .attr("y", height/2)
+               //.attr("text-anchor", "start")  
+               .attr("class","heading")
+               .text("No projects were found! Maybe it's time to launch a new project to address this gap ;)");  
     return []
   }
 
@@ -1362,6 +1362,18 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
     .attr("class", "sankey" + n)
     .attr("transform", "translate(4,42)") //translate so the top label is not half hidden and left side of nodes is good
     .style("visibility", "block");
+
+  if (data1.length == 0) {
+    console.log("no projects found!")
+      //Filters return no projects
+        svg.append("text")
+               .attr("x", 10)             
+               .attr("y", height/2)
+               //.attr("text-anchor", "start")  
+               .attr("class","heading")
+               .text("No projects were found! Maybe it's time to launch a new project to address this gap ;)");  
+    return []
+  }
 
   svg.append("text").text("Innovation")
     .attr("class", "heading")
