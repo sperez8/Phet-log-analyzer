@@ -22,7 +22,6 @@ var opacityNormal = 0.7,
   colorLow = colors[1],
   colorNormal = colors[1],
   colorHigh = colors[2],
-
   widthNormal = "1px",
   widthHigh = "3px";
 
@@ -86,13 +85,17 @@ var highlight_project_heatmap = function(card, title) {
     })
 }
 
-var highlight_link = function(selection, color, opacity) {
+var highlight_link = function(selection, color, opacity, widthChanger) {
+  // currentWidth = selection.style("stroke-width")
+  // currentWidth = parseInt(currentWidth.substring(0, currentWidth.length - 2))
   selection
     .transition()
     .ease("linear")
     .duration(highlightTime)
     .style("stroke-opacity", opacity)
-    .style("stroke", color)
+    //.style("stroke", color)
+    // .style("stroke-width", String(currentWidth*widthChanger)+"px")
+    // console.log(currentWidth, selection.style("stroke-width"))
 };
 
 var highlight_card = function(selection, opacity, color, width) {
