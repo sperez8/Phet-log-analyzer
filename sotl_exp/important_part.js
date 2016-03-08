@@ -619,17 +619,17 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
       return d.innovation == innovation;
     });
 
-    //find all projects with "innovation"
-    //find all impacts that it links too
-    //filter if row matchs project and impact
-
+    //find all projects with desired "innovation"
     relevant_projects = data1.map(function(d) {
       if (d["source"] == innovation){return d["project_Title"]}
     }).getUnique()
+
+    //find all impacts that it links too
     relevant_impacts = data1.map(function(d) {
       if (d["source"] == innovation){return d["target"]}
     }).getUnique()
 
+    //filter if row matchs project and impact
     data1 = data1.filter(function(d) {
       console.log(d)
       if ($.inArray(d["project_Title"], relevant_projects) != -1){
@@ -639,7 +639,6 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
       }
     });
   }
-
 
   if (impact != "Impact (all)") {
     heatMapdata = heatMapdata.filter(function(d) {
@@ -655,10 +654,36 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
     heatMapdata = heatMapdata.filter(function(d) {
       return d.approach == evaluation;
     });
+    
+    //find all projects with desired "evaluation"
+    relevant_projects = data1.map(function(d) {
+      if (d["target"] == evaluation){return d["project_Title"]}
+    }).getUnique()
+
+    //find all impacts that it links too
+    relevant_impacts = data1.map(function(d) {
+      if (d["target"] == evaluation){return d["source"]}
+    }).getUnique()
+
+    //filter if row matchs project and impact
     data1 = data1.filter(function(d) {
-      return d["target"] == evaluation;
+      console.log(d)
+      if ($.inArray(d["project_Title"], relevant_projects) != -1){
+        if (d["target"] == evaluation || ($.inArray(d["target"], relevant_impacts) != -1)){
+          return true
+        }
+      }
     });
   }
+
+  // if (evaluation != "Evaluation (all)") {
+  //   heatMapdata = heatMapdata.filter(function(d) {
+  //     return d.approach == evaluation;
+  //   });
+  //   data1 = data1.filter(function(d) {
+  //     return d["target"] == evaluation;
+  //   });
+  // }
 
 }; //end filterData
 
@@ -2033,7 +2058,8 @@ d3.select("#chartTypeButtons")
   });
 
 
-rerun(currentChartType); //redraw previously selected chart 
+rerun(currentChartType); 
+
 
 function reset_filters() {
   //reset filters on page
@@ -2053,9 +2079,9 @@ function reset_filters() {
   d3.select("#context-filter-projectType").selectAll("select").property({"value":projectType})
   d3.select("#context-filter-projectStage").selectAll("select").property({"value":projectStage})
   d3.select("#context-filter-yearAwarded").selectAll("select").property({"value":yearAwarded})
-  d3.select("#context-filter-innovation").selectAll("select").property({"value":yearAwarded})
-  d3.select("#context-filter-impact").selectAll("select").property({"value":yearAwarded})
-  d3.select("#context-filter-evaluation").selectAll("select").property({"value":yearAwarded})
+  d3.select("#context-filter-innovation").selectAll("select").property({"value":innovation})
+  d3.select("#context-filter-impact").selectAll("select").property({"value":impact})
+  d3.select("#context-filter-evaluation").selectAll("select").property({"value":evaluation})
 
   //rerun viz
   rerun(currentChartType)
