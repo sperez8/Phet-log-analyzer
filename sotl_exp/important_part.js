@@ -12,9 +12,11 @@
 // ****************************************************************** //
 // ****************************************************************** //
 
-colors = ["#C3D0DB", "#98B2C3", "#5E869F", "#2F5D7C"]; //UBC blue greys
 
-darkblue = "#002145"
+//oldblue = "#002145"
+
+colors = ["#C3D0DB", "#98B2C3", "#5E869F", "#2F5D7C"]; //UBC blue greys
+//colors = ["#818e82", "647065", "#485149", "#363c36"]; //greys
 
 var opacityNormal = 0.7,
   opacityLow = 0.1,
@@ -77,7 +79,7 @@ var highlight_project_heatmap = function(card, title) {
   d3.selectAll(".card")
     .each(function(l) {
       if ($.inArray(title, l.projects) != -1) {
-        d3.select(this).call(highlight_card, opacityHigh, darkblue, widthHigh)
+        d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh)
         highlightProjectInList(title)
       } else {
         d3.select(this).call(highlight_card, opacityLow, "white", widthNormal)
@@ -139,7 +141,7 @@ var highlightProjectInList = function(project) {
   d3.select("#projectList").selectAll(".projectListItem")
     .each(function(t) {
       if (t == project) {
-        d3.select(this).call(highlight_list_item, darkblue, "bold")
+        d3.select(this).call(highlight_list_item, colorHigh, "bold")
       }
     })
 }
@@ -271,6 +273,11 @@ d3.sankey = function() {
         d3.sum(node.sourceLinks, value),
         d3.sum(node.targetLinks, value)
       );
+    //console.log(node.sourceLinks)
+    // source_projects = node.sourceLinks.map(function(d) {return d["projectTitle"]}).getUnique()
+    // target_projects = node.targetLinks.map(function(d) {return d["projectTitle"]}).getUnique()
+    // node.value = Math.max(source_projects.length, target_projects.length);
+    // console.log(node.value, target_projects)
     });
   }
 
@@ -350,6 +357,7 @@ d3.sankey = function() {
 
     function initializeNodeDepth() {
       var ky = d3.min(nodesByBreadth, function(nodes) {
+        console.log(nodes.length, nodePadding, d3.sum(nodes, value))
         return (size[1] - (nodes.length - 1) * nodePadding) / d3.sum(nodes, value);
       });
 
@@ -929,11 +937,17 @@ var heatmapInnovationImpact = function(n) {
     .on("mouseover", function(l) {
       var cx = d3.event.pageX
       var cy = d3.event.pageY
-      tooltip.html(l.value + "projects")
+      if (l.value ==1){
+        text = l.value + " project"
+      } else {
+        text = l.value + " projects"
+      }
+      tooltip.html(text)
         .style("left", (cx + 5) + "px")
         .style("top", (cy - 28) + "px");
       tooltip
         .style("opacity", tooltipOpacity);
+      d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh)
       highlightMultipleProjectInList(l.projects)
     })
     .on("mouseout", function() {
@@ -1236,11 +1250,17 @@ var heatmapImpactApproach = function(n) {
     .on("mouseover", function(l) {
       var cx = d3.event.pageX
       var cy = d3.event.pageY
-      tooltip.html(l.value + "projects")
+      if (l.value ==1){
+        text = l.value + " project"
+      } else {
+        text = l.value + " projects"
+      }
+      tooltip.html(text)
         .style("left", (cx + 5) + "px")
         .style("top", (cy - 28) + "px");
       tooltip
         .style("opacity", tooltipOpacity);
+      d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh)
       highlightMultipleProjectInList(l.projects)
     })
     .on("mouseout", function() {
@@ -1249,7 +1269,7 @@ var heatmapImpactApproach = function(n) {
       remove_highlight_card()
     });
 
-  cards.append("title");
+  //cards.append("title");
 
   cards.transition()
     .ease("linear")
@@ -1476,13 +1496,12 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
   nodeNames = get_trait_values("name")
   nodeValues = get_numerical_trait_values("value")
 
-  // using colors from d3.scale.category10
   colorscheme = d3.scale.ordinal()
     .domain(middle_nodes)
-    // .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"])
+    // .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"])   // using colors from d3.scale.category10
     //.range(["#1b9e77","#d95f02","#7570b3","#e7298a","#66a61e","#e6ab02","#a6761d"])
     .range(["#a6d854","#8da0cb","#fc8d62","#b3b3b3","#ffd92f","#66c2a5","#e78ac3"])
-
+  console.log(middle_nodes)
 
   // add in the links
   var link = svg.append("g").selectAll(".link")
@@ -1560,14 +1579,14 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
       return d.dy;
     })
     .attr("width", sankey.nodeWidth())
-    .style("fill", colorHigh)
-    // .style("fill", function(d) { //color nodes if they are in the middle, otherwise grey
-    //   if (check_middle(d)) {
-    //     return colorscheme(d.name)
-    //   } else{
-    //     return grey
-    //   }
-    // })
+    //.style("fill", colorHigh)
+    .style("fill", function(d) { //color nodes if they are in the middle, otherwise grey
+      if (check_middle(d)) {
+        return colorscheme(d.name)
+      } else{
+        return colorHigh
+      }
+    })
 
 
   // add in the title for the nodes
@@ -1686,7 +1705,12 @@ var tabulate = function() {
       .data(tableData)
       // .data(tableData)
       .enter()
-      .append("tr");
+      .append("tr")
+      .style("background", function(d,i) {
+        console.log(d)
+        if (i % 2 === 0  ) {return colorNormal}
+        else {return "white"}
+      });
 
     // create a cell in each row for each column
     var cells = rows.selectAll("td")
@@ -1706,6 +1730,8 @@ var tabulate = function() {
       .html(function(d) {
         return d.value;
       });
+
+
     projects = tableData.map(function(d) {
       return d["project_Title"]
     })
@@ -1903,7 +1929,7 @@ var impactList = ["Impact (all)"].concat(get_filterCategoryOptions("Impact"))
 var evaluationList = ["Evaluation (all)"].concat(get_filterCategoryOptions("Evaluation"))
 
 //columns to display for table
-var tableColumns = ["project_Title", "Faculty_School", "Course_Level", "course_Format", "Course_Type", "course_Location", "project_Type", "year_awarded"];
+var tableColumns = ["project_Title", "Faculty_School", "Course_Level", "enrolment_Cap", "course_Format", "Course_Type", "course_Location", "project_Type", "year_awarded"];
 
 //set default start values
 faculty = "Faculty (all)";
@@ -1985,7 +2011,7 @@ function unclick_buttons() {
         .transition()
         .ease("linear")
         .duration(highlightTime)
-        .style("background", "#002145")
+        .style("background", colorHigh)
     })
 }
 
