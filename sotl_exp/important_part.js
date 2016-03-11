@@ -22,8 +22,8 @@ var opacityNormal = 0.7,
   opacityLow = 0.1,
   opacityHigh = 1,
   colorLow = colors[1],
-  colorNormal = colors[1],
-  colorHigh = colors[2],
+  colorNormal = colors[2],
+  colorHigh = colors[3],
   widthNormal = "1px",
   widthHigh = "3px";
 
@@ -357,7 +357,7 @@ d3.sankey = function() {
 
     function initializeNodeDepth() {
       var ky = d3.min(nodesByBreadth, function(nodes) {
-        console.log(nodes.length, nodePadding, d3.sum(nodes, value))
+        //console.log(nodes.length, nodePadding, d3.sum(nodes, value))
         return (size[1] - (nodes.length - 1) * nodePadding) / d3.sum(nodes, value);
       });
 
@@ -590,7 +590,7 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
   
   if (projectType != "Project type (all)") {
     heatMapdata = heatMapdata.filter(function(d) {
-      return d.project_Type == projectType;
+      return d.project_Type == projectType; 
     });
     data1 = data1.filter(function(d) {
       return d["Type of Project"] == projectType;
@@ -892,6 +892,8 @@ var heatmapInnovationImpact = function(n) {
     .domain([1, 0.25 * max, 0.5 * max, 0.75 * max, max])
     .range(colors);
    
+   console.log('d', colorScale.range(), colorScale.domain())
+
   //x-axis
   var impactLabels = svg.selectAll(".impactLabel")
     .data(areasOfImpact)
@@ -966,18 +968,6 @@ var heatmapInnovationImpact = function(n) {
     })
     .style("stroke", "#ffffff")
     .style("stroke-width", "1px");
-
-  //displays as tooltip text :) 
-  //cards.select("title").text(function(d) { return d[2]; }); //array-works
-  cards.select("title")
-    .text(function(d) {
-      return (d.value);
-    });
-
-
-
-  
-  // cards.exit().remove();
 
 
   function wrapx(text, width) {
@@ -1279,11 +1269,6 @@ var heatmapImpactApproach = function(n) {
     })
     .style("stroke", "#ffffff");
 
-  //displays as tooltip text :) 
-  cards.select("title")
-    .text(function(d) {
-      return (d.value);
-    });
 
   function wrapx(text, width) {
     text.each(function() {
@@ -1501,7 +1486,6 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
     // .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"])   // using colors from d3.scale.category10
     //.range(["#1b9e77","#d95f02","#7570b3","#e7298a","#66a61e","#e6ab02","#a6761d"])
     .range(["#a6d854","#8da0cb","#fc8d62","#b3b3b3","#ffd92f","#66c2a5","#e78ac3"])
-  console.log(middle_nodes)
 
   // add in the links
   var link = svg.append("g").selectAll(".link")
@@ -1584,7 +1568,7 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
       if (check_middle(d)) {
         return colorscheme(d.name)
       } else{
-        return colorHigh
+        return colorNormal
       }
     })
 
@@ -1707,7 +1691,6 @@ var tabulate = function() {
       .enter()
       .append("tr")
       .style("background", function(d,i) {
-        console.log(d)
         if (i % 2 === 0  ) {return colorNormal}
         else {return "white"}
       });
@@ -1844,7 +1827,7 @@ function rerun(currentChartType) {
       .attr("x", 0)
       .attr("dx", 0)
       .attr("dy", 0)
-      .style("fill", colorHigh)
+      .style("fill", colorNormal)
       .attr("y", function(d, i) {
         return 40 * i + 40
       })
@@ -2011,7 +1994,8 @@ function unclick_buttons() {
         .transition()
         .ease("linear")
         .duration(highlightTime)
-        .style("background", colorHigh)
+        .attr("class", "big_button unclicked")
+        //.style("background", colorHigh)
     })
 }
 
@@ -2020,7 +2004,8 @@ function click_button(button) {
     .transition()
     .ease("linear")
     .duration(highlightTime)
-    .style("background", colorNormal)
+    .attr("class", "big_button clicked")
+    //.style("background", colorNormal)
 }
 
 //chartType buttons:    
@@ -2028,11 +2013,11 @@ d3.select("#chartTypeButtons") //Sankey
   .append("input")
   .attr("value", "Flow from Innovation to Evaluation")
   .attr("type", "button")
-  .attr("class", "big_button")
-  .style("background",  function() {
+  .attr("class", function (){
+  //.style("background",  function() {
       if (currentChartType == "sankey"){
-        return colorHigh
-      }
+        return "big_button clicked"
+      } else {return "big_button unclicked"}
   })
   .on("click", function() {
     unclick_buttons()
@@ -2046,11 +2031,11 @@ d3.select("#chartTypeButtons") //heatmapInnovationImpact
   .append("input")
   .attr("value", "Frequency of Innovation x Impact")
   .attr("type", "button")
-  .attr("class", "big_button")
-  .style("background",  function() {
+  .attr("class", function (){
+  //.style("background",  function() {
       if (currentChartType == "heatmapInnovationImpact"){
-        return colorHigh
-      }
+        return "big_button clicked"
+      } else {return "big_button unclicked"}
   })
   .on("click", function() {
     unclick_buttons()
@@ -2065,11 +2050,11 @@ d3.select("#chartTypeButtons")
   .append("input")
   .attr("value", "Frequency of Impact x Evaluation")
   .attr("type", "button")
-  .attr("class", "big_button")
-  .style("background",  function() {
+  .attr("class", function (){
+  //.style("background",  function() {
       if (currentChartType == "heatmapImpactApproach"){
-        return colorHigh
-      }
+        return "big_button clicked"
+      } else {return "big_button unclicked"}
   })
   .on("click", function() {
     unclick_buttons()
@@ -2084,11 +2069,11 @@ d3.select("#chartTypeButtons")
   .append("input")
   .attr("value", "Table of projects")
   .attr("type", "button")
-  .attr("class", "big_button")
-  .style("background",  function() {
+  .attr("class", function (){
+  //.style("background",  function() {
       if (currentChartType == "table"){
-        return colorHigh
-      }
+        return "big_button clicked"
+      } else {return "big_button unclicked"}
   })
   .on("click", function() {
     unclick_buttons()
