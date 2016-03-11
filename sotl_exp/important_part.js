@@ -899,7 +899,7 @@ var heatmapInnovationImpact = function(n) {
   //   .range(colors);
 
   var opacityScale = d3.scale.quantile()
-    .domain([1, 0.4 * max, max])
+    .domain([1, max])
     .range([0.3,0.7,1])
 
   //x-axis
