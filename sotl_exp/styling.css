@@ -146,18 +146,31 @@ div.tooltip, div.tooltip-inner {
 	stroke-width:5px;   
 }
 
+.cardtext {
+    fill: white;
+    font-size: 27px;
+    font-weight: bold;
+    text-anchor: middle;
+    alignment-baseline: central;
+    opacity: 0.3;
+}
 
 .innovationLabel{
 	color: #ff7f0e;
+    text-align: center;
+    alignment-baseline: central;
 }
 
 .impactLabel{
 	color: #ff7f0e;
 	text-align: center;
+    alignment-baseline: central;
 }
 
 .approachLabel{
 	color: #ff7f0e;
+    text-align: center;
+    alignment-baseline: central;
 }
 
 #data-here{

@@ -22,7 +22,9 @@ colors = ["#C3D0DB", "#98B2C3", "#5E869F", "#2F5D7C"]; //UBC blue greys
 colorscheme = d3.scale.ordinal()
   .domain(["Course/program specific knowledge", "Professional and Lifelong learning skills", "Attitudes and Motivation", "Actions and behaviours", "Other Area of Impact", "Instructional team Roles and practice", "Operations"])
   //.range(["#a6d854","#8da0cb","#fc8d62","#b3b3b3","#ffd92f","#66c2a5","#e78ac3"])
-  .range(["#686AF5","#80E633","#FA7140","#FAB03B","#7d7d7d","#05CE8E","#B8447C"])
+  .range(["#686AF5","#80E633","#FA7140","#FAB03B","#e5fa3b","#05CE8E","#B8447C"])
+
+grey = "#b8b8b8"
 
 var opacityNormal = 0.7,
   opacityLow = 0.1,
@@ -36,7 +38,6 @@ var opacityNormal = 0.7,
 
 //reloads page if the window is resized so the viz is always at optimal size
 // window.onresize = function(){ location.reload(); }
-
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -854,6 +855,50 @@ var heatmapInnovationImpact = function(n) {
     })
   });
 
+  //need to calculate this before adding totals
+  var max = d3.max(dataRollUp, function(d) {
+    return d.value;
+  });
+
+  //calculating total columns      
+  for (var i = areasOfImpact.length - 1; i >= 0; i--) {
+    areasOfImpact[i]
+    total = []
+    for (var j = dataRollUp.length - 1; j >= 0; j--) {
+      //console.log(areasOfImpact[i],dataRollUp[j].innovation, dataRollUp[j].projects)
+      if (dataRollUp[j].innovation==areasOfImpact[i]){
+        total.push.apply(total,dataRollUp[j].projects)
+      }
+    }
+    dataRollUp.push({
+      innovation: areasOfImpact[i],
+      impact: "Total",
+      value: total.getUnique().length,
+      projects: total.getUnique()
+    });   
+  }
+
+  //calculating total rows      
+  for (var i = areasOfInnovation.length - 1; i >= 0; i--) {
+    areasOfInnovation[i]
+    total = []
+    for (var j = dataRollUp.length - 1; j >= 0; j--) {
+      //console.log(areasOfInnovation[i],dataRollUp[j].impact, dataRollUp[j].projects)
+      if (dataRollUp[j].impact==areasOfInnovation[i]){
+        total.push.apply(total,dataRollUp[j].projects)
+      }
+    }
+    dataRollUp.push({
+      innovation: "Total",
+      impact: areasOfInnovation[i],
+      value: total.getUnique().length,
+      projects: total.getUnique()
+    });   
+  }
+
+  areasOfInnovation.push("Total")
+  areasOfImpact.push("Total")
+
   var innovationLabel = svg.selectAll("g")
     .data(areasOfInnovation)
     .enter().append("g")
@@ -888,10 +933,6 @@ var heatmapInnovationImpact = function(n) {
     .style("text-anchor", "end")
     .style("vertical-align", "middle")
     .call(wrapx, margin.heatmap.left - 30);
-
-  var max = d3.max(dataRollUp, function(d) {
-    return d.value;
-  });
 
   // var colorScale = d3.scale.quantile()
   //   //.domain([0,5,10,30,40])
@@ -972,10 +1013,18 @@ var heatmapInnovationImpact = function(n) {
     .ease("linear")
     .duration(500) //slows it down! 
     .style("fill", function(d){
-      return colorscheme(d.innovation)
+      if (d.innovation != "Total"){
+        return colorscheme(d.innovation)
+      } else {
+      return grey
+      }
     })
     .style("opacity", function(d){
-      return opacityScale(d.value)
+      if (d.impact != "Total" && d.innovation != "Total"){
+        return opacityScale(d.value)
+      } else {
+        return opacityScale(max)
+      }
     })
     // .style("fill", function(d) {
     //   return colorScale(d.value);
@@ -1002,6 +1051,26 @@ var heatmapInnovationImpact = function(n) {
     // })
     .style("stroke", "#ffffff")
     .style("stroke-width", "1px");
+
+
+  //draw boxes
+  var cardtext = svg.selectAll(".cards")
+    .data(dataRollUp);
+
+  cardtext.enter()
+    .append("text")
+    .attr("class","cardtext")
+    .text(function(d){
+      if (d.impact == "Total" || d.innovation == "Total"){
+        return d.value
+      }
+    })
+    .attr("y", function(d) {
+      return (((areasOfInnovation.indexOf(d.impact))+ 0.5) * gridSizeY / 2);
+    })
+    .attr("x", function(d) {
+      return (areasOfImpact.indexOf(d.innovation)+ 0.5) * gridSizeX ;
+    })
 
 
   function wrapx(text, width) {
@@ -1194,6 +1263,53 @@ var heatmapImpactApproach = function(n) {
     })
   });
 
+
+
+  //need to calculate this before adding totals
+  var max = d3.max(dataRollUp, function(d) {
+    return d.value;
+  });
+
+  //calculating total columns      
+  for (var i = areasOfImpact.length - 1; i >= 0; i--) {
+    areasOfImpact[i]
+    total = []
+    for (var j = dataRollUp.length - 1; j >= 0; j--) {
+      console.log(areasOfImpact[i],dataRollUp[j].impact, dataRollUp[j].projects)
+      if (dataRollUp[j].impact==areasOfImpact[i]){
+        total.push.apply(total,dataRollUp[j].projects)
+      }
+    }
+    dataRollUp.push({
+      approach: "Total",
+      impact: areasOfImpact[i],
+      value: total.getUnique().length,
+      projects: total.getUnique()
+    });   
+  }
+
+  //calculating total rows      
+  for (var i = evaluationApproach.length - 1; i >= 0; i--) {
+    evaluationApproach[i]
+    total = []
+    for (var j = dataRollUp.length - 1; j >= 0; j--) {
+      //console.log(evaluationApproach[i],dataRollUp[j].approach, dataRollUp[j].projects)
+      if (dataRollUp[j].approach==evaluationApproach[i]){
+        total.push.apply(total,dataRollUp[j].projects)
+      }
+    }
+    dataRollUp.push({
+      approach: evaluationApproach[i],
+      impact: "Total",
+      value: total.getUnique().length,
+      projects: total.getUnique()
+    });   
+  }
+
+  evaluationApproach.push("Total")
+  areasOfImpact.push("Total")
+
+
   var impactLabel = svg.selectAll("g")
     .data(areasOfImpact)
     .enter().append("g")
@@ -1212,7 +1328,7 @@ var heatmapImpactApproach = function(n) {
       return d;
     })
     .attr("y", function(d, i) {
-      return (((i) * gridSizeY / 2) + gridSizeY / 6);
+      return (((i) * gridSizeY / 2) + gridSizeY / 4);
     })
     .attr("x", -10)
     .attr("dx", 0)
@@ -1223,15 +1339,6 @@ var heatmapImpactApproach = function(n) {
     .style("vertical-align", "middle")
     .call(wrapx, margin.heatmap.left - 30);
 
-
-
-  var max = d3.max(dataRollUp, function(d) {
-    return d.value;
-  });
-  // var colorScale = d3.scale.quantile()
-  //   //.domain([0,5,10,30,40])
-  //   .domain([1, 0.25 * max, 0.5 * max, 0.75 * max, max])
-  //   .range(colors);
 
   var opacityScale = d3.scale.quantile()
     .domain([1, 0.4 * max, max])
@@ -1297,31 +1404,45 @@ var heatmapImpactApproach = function(n) {
       remove_highlight_card()
     });
 
-  //cards.append("title");
-
   cards.transition()
     .ease("linear")
     .duration(500) //slows it down! 
     .style("fill", function(d){
-      return colorscheme(d.impact)
+      if (d.impact != "Total"){
+        return colorscheme(d.impact)
+      } else {
+      return grey
+      }
     })
     .style("opacity", function(d){
-      return opacityScale(d.value)
+      if (d.impact != "Total" && d.approach != "Total"){
+        return opacityScale(d.value)
+      } else {
+        return opacityScale(max)
+      }
     })
-    // .style("fill", function(d) {  //color given the middle node it's connected to
-    //   console.log(d.impact,d3.hcl(colorscheme(d.impact)).brighter(1).toString(), colorscheme(d.impact), d3.hcl(colorscheme(d.impact)).darker(1).toString())
-    //   if (d.value >= 1 && d.value < max*0.33) {
-    //     return d3.hcl(colorscheme(d.impact)).brighter(1).toString()
-    //   } else if (d.value < max*0.66) {
-    //     return colorscheme(d.impact)
-    //   } else {
-    //     return d3.hcl(colorscheme(d.impact)).darker(1).toString()
-    //   }
-    // })
-    // // .style("fill", function(d) {
-    // //   return colorScale(d.value);
-    // })
-    .style("stroke", "#ffffff");
+    .style("stroke", "#ffffff")
+    .style("stroke-width", "1px");
+
+
+  //draw boxes
+  var cardtext = svg.selectAll(".cards")
+    .data(dataRollUp);
+
+  cardtext.enter()
+    .append("text")
+    .attr("class","cardtext")
+    .text(function(d){
+      if (d.impact == "Total" || d.approach == "Total"){
+        return d.value
+      }
+    })
+    .attr("y", function(d) {
+      return ((areasOfImpact.indexOf(d.impact)+ 0.5) * gridSizeY / 2);
+    })
+    .attr("x", function(d) {
+      return (((evaluationApproach.indexOf(d.approach))+ 0.5) * gridSizeX );
+    })
 
 
   function wrapx(text, width) {
