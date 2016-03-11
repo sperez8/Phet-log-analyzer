@@ -78,6 +78,14 @@ body {
     margin-bottom: 5px;
 }
 
+.rowNotShaded{
+    background: white;
+}
+
+.rowShaded{
+    background: #dfdfdf;
+}
+
 div.tooltip, div.tooltip-inner {
 	font-family: "Helvetica Neue";
 	font-style: normal;

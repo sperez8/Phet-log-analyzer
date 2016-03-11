@@ -18,6 +18,12 @@
 colors = ["#C3D0DB", "#98B2C3", "#5E869F", "#2F5D7C"]; //UBC blue greys
 //colors = ["#818e82", "647065", "#485149", "#363c36"]; //greys
 
+//Change me when updating impact category names
+colorscheme = d3.scale.ordinal()
+  .domain(["Course/program specific knowledge", "Professional and Lifelong learning skills", "Attitudes and Motivation", "Actions and behaviours", "Other Area of Impact", "Instructional team Roles and practice", "Operations"])
+  //.range(["#a6d854","#8da0cb","#fc8d62","#b3b3b3","#ffd92f","#66c2a5","#e78ac3"])
+  .range(["#686AF5","#80E633","#FA7140","#FAB03B","#7d7d7d","#05CE8E","#B8447C"])
+
 var opacityNormal = 0.7,
   opacityLow = 0.1,
   opacityHigh = 1,
@@ -887,12 +893,14 @@ var heatmapInnovationImpact = function(n) {
     return d.value;
   });
 
-  var colorScale = d3.scale.quantile()
-    //.domain([0,5,10,30,40])
-    .domain([1, 0.25 * max, 0.5 * max, 0.75 * max, max])
-    .range(colors);
-   
-   console.log('d', colorScale.range(), colorScale.domain())
+  // var colorScale = d3.scale.quantile()
+  //   //.domain([0,5,10,30,40])
+  //   .domain([1, 0.25 * max, 0.5 * max, 0.75 * max, max])
+  //   .range(colors);
+
+  var opacityScale = d3.scale.quantile()
+    .domain([1, 0.4 * max, max])
+    .range([0.3,0.7,1])
 
   //x-axis
   var impactLabels = svg.selectAll(".impactLabel")
@@ -963,9 +971,35 @@ var heatmapInnovationImpact = function(n) {
   cards.transition()
     .ease("linear")
     .duration(500) //slows it down! 
-    .style("fill", function(d) {
-      return colorScale(d.value);
+    .style("fill", function(d){
+      return colorscheme(d.innovation)
     })
+    .style("opacity", function(d){
+      return opacityScale(d.value)
+    })
+    // .style("fill", function(d) {
+    //   return colorScale(d.value);
+    // })
+    // .style("fill", function(d) {  //color given the middle node it's connected to
+    //   console.log(d3.hsl(colorscheme(d.innovation)).brighter(0.9).toString(), colorscheme(d.innovation), d3.hsl(colorscheme(d.innovation)).darker(0.9).toString())
+    //   if (d.value >= 1 && d.value < max*0.33) {
+    //     return d3.hsl(colorscheme(d.innovation)).brighter(0.7).toString()
+    //   } else if (d.value < max*0.66) {
+    //     return colorscheme(d.innovation)
+    //   } else {
+    //     return d3.hsl(colorscheme(d.innovation)).darker(1.2).toString()
+    //   }
+    // })
+    // .style("fill", function(d) {  //color given the middle node it's connected to
+    //   console.log(d.innovation,d3.hcl(colorscheme(d.innovation)).brighter(1).toString(), colorscheme(d.innovation), d3.hcl(colorscheme(d.innovation)).darker(1).toString())
+    //   if (d.value >= 1 && d.value < max*0.33) {
+    //     return d3.hcl(colorscheme(d.innovation)).brighter(1).toString()
+    //   } else if (d.value < max*0.66) {
+    //     return colorscheme(d.innovation)
+    //   } else {
+    //     return d3.hcl(colorscheme(d.innovation)).darker(1).toString()
+    //   }
+    // })
     .style("stroke", "#ffffff")
     .style("stroke-width", "1px");
 
@@ -1194,10 +1228,14 @@ var heatmapImpactApproach = function(n) {
   var max = d3.max(dataRollUp, function(d) {
     return d.value;
   });
-  var colorScale = d3.scale.quantile()
-    //.domain([0,5,10,30,40])
-    .domain([1, 0.25 * max, 0.5 * max, 0.75 * max, max])
-    .range(colors);
+  // var colorScale = d3.scale.quantile()
+  //   //.domain([0,5,10,30,40])
+  //   .domain([1, 0.25 * max, 0.5 * max, 0.75 * max, max])
+  //   .range(colors);
+
+  var opacityScale = d3.scale.quantile()
+    .domain([1, 0.4 * max, max])
+    .range([0.3,0.7,1])
 
   //x-axis
   var approachLabels = svg.selectAll(".approachLabel")
@@ -1264,9 +1302,25 @@ var heatmapImpactApproach = function(n) {
   cards.transition()
     .ease("linear")
     .duration(500) //slows it down! 
-    .style("fill", function(d) {
-      return colorScale(d.value);
+    .style("fill", function(d){
+      return colorscheme(d.impact)
     })
+    .style("opacity", function(d){
+      return opacityScale(d.value)
+    })
+    // .style("fill", function(d) {  //color given the middle node it's connected to
+    //   console.log(d.impact,d3.hcl(colorscheme(d.impact)).brighter(1).toString(), colorscheme(d.impact), d3.hcl(colorscheme(d.impact)).darker(1).toString())
+    //   if (d.value >= 1 && d.value < max*0.33) {
+    //     return d3.hcl(colorscheme(d.impact)).brighter(1).toString()
+    //   } else if (d.value < max*0.66) {
+    //     return colorscheme(d.impact)
+    //   } else {
+    //     return d3.hcl(colorscheme(d.impact)).darker(1).toString()
+    //   }
+    // })
+    // // .style("fill", function(d) {
+    // //   return colorScale(d.value);
+    // })
     .style("stroke", "#ffffff");
 
 
@@ -1481,12 +1535,6 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
   nodeNames = get_trait_values("name")
   nodeValues = get_numerical_trait_values("value")
 
-  colorscheme = d3.scale.ordinal()
-    .domain(middle_nodes)
-    // .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"])   // using colors from d3.scale.category10
-    //.range(["#1b9e77","#d95f02","#7570b3","#e7298a","#66a61e","#e6ab02","#a6761d"])
-    .range(["#a6d854","#8da0cb","#fc8d62","#b3b3b3","#ffd92f","#66c2a5","#e78ac3"])
-
   // add in the links
   var link = svg.append("g").selectAll(".link")
     .data(graph.links)
@@ -1504,10 +1552,9 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
         return colorscheme(d.target.name)
       }
     })
-    // .style("stroke", colorNormal)
-    // .sort(function(a, b) {
-    //   return b.dy - a.dy;
-    // })
+    .sort(function(a, b) {
+      return b.dy - a.dy;
+    })
     .on("mouseover", function(l) {
       var cx = d3.event.pageX
       var cy = d3.event.pageY
@@ -1640,6 +1687,7 @@ var tabulate = function() {
           innovation: d["source"],
           impact: d["target"],
           value: +d["value"],
+          project_lead: d["Name of PI or project lead(s)"],
           Course_Level: d["Course_Level"],
           Faculty_School: d["Faculty_School"],
           project_Title: d["project_Title"],
@@ -1690,9 +1738,9 @@ var tabulate = function() {
       // .data(tableData)
       .enter()
       .append("tr")
-      .style("background", function(d,i) {
-        if (i % 2 === 0  ) {return colorNormal}
-        else {return "white"}
+      .attr("class", function(d,i) {
+        if (i % 2 === 0  ) {return "rowNotShaded"}
+        else {return "rowShaded"}
       });
 
     // create a cell in each row for each column
@@ -1912,7 +1960,7 @@ var impactList = ["Impact (all)"].concat(get_filterCategoryOptions("Impact"))
 var evaluationList = ["Evaluation (all)"].concat(get_filterCategoryOptions("Evaluation"))
 
 //columns to display for table
-var tableColumns = ["project_Title", "Faculty_School", "Course_Level", "enrolment_Cap", "course_Format", "Course_Type", "course_Location", "project_Type", "year_awarded"];
+var tableColumns = ["project_Title", "project_lead","department","enrolment_Cap", "Course_Level", "course_Format", "Course_Type", "course_Location", "project_Type", "year_awarded"];
 
 //set default start values
 faculty = "Faculty (all)";
