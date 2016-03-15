@@ -20,7 +20,7 @@ colors = ["#C3D0DB", "#98B2C3", "#5E869F", "#2F5D7C"]; //UBC blue greys
 
 //Change me when updating impact category names
 colorscheme = d3.scale.ordinal()
-  .domain(["Course/program specific knowledge", "Professional and Lifelong learning skills", "Attitudes and Motivation", "Actions and behaviours", "Other Area of Impact", "Instructional team Roles and practice", "Operations"])
+  .domain(["Course specific knowledge", "Lifelong learning skills", "Attitudes and motivation", "Actions and behaviours", "Other area of impact", "Instructional team practices", "Operations"])
   //.range(["#a6d854","#8da0cb","#fc8d62","#b3b3b3","#ffd92f","#66c2a5","#e78ac3"])
   .range(["#686AF5","#80E633","#FA7140","#FAB03B","#e5fa3b","#05CE8E","#B8447C"])
 
@@ -526,10 +526,10 @@ var margin = {
     left: 10
   },
   heatmap: {
-    top: 110,
+    top: 70,
     right: 0,
     bottom: 0,
-    left: 240
+    left: 170
   }
 };
 
@@ -719,8 +719,8 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
 
 
 //constants for heatmaps
-gridSizeX = Math.floor(width / 11), //should make this dynamic
-  gridSizeY = Math.floor(width / 14), //should make this dynamic
+gridSizeX = Math.floor(width / 9), //should make this dynamic
+  gridSizeY = Math.floor(width / 13), //should make this dynamic
   legendElementWidth = gridSizeX * 1.50,
   buckets = 4;
 

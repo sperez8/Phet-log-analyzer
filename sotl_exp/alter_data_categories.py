@@ -10,16 +10,17 @@ outfile = "data_copy_new.txt"
 
 #changes made from original :  added consistency with use of (e.g., ...) and created short version of name for each.
 
-replacementShortEva = {
+replacementsShortEva = {
 					#EVALUATION
 					"Knowledge tests, diagnostics" : "Knowledge tests",
-					"Surveys about perception, attitudes and motivation" : "Attitude surveys",
-					"Interviews and focus groups" : "Interviews and focus groups",
-					"Observations: open ended ethnographic" : "Observations",
-					"Obeservations with protocol rubric" : "Observations",
-					"Participant documentation, reflective writing" : "Reflective writing",
+					"Surveys about perceptions, attitudes, motivations" : "Attitude surveys",
+					"Interviews and focus groups" : "Interviews",
+					"Observations: Open ended/ethnographic" : "Observations",
+					"Observations: With protocol/rubric" : "Observations",
+					"Participant documentation: Logging" : "Reflective writing",
+					"Participant documentation: Reflective writing" : "Reflective writing",
 					"Existing/secondary data" : "Secondary data",
-					"Participant documentation: logging" : "Other Evaluation",
+					"Participant documentation: logging" : "Other evaluation",
 					"Other" : "Other evaluation",
 }
 
@@ -49,11 +50,11 @@ replacementsLongInnov = {
 #changes made from original :  added consistency with use of (e.g., ...) and created short version of name for each.
 replacementsShortInnov = {
 					#INNOVATION
-					"In-class group work" : "Active Learning - short activities",
-					"Other in-class active learning" : "Active Learning - short activities",
-					"Other out-of-class active learning" : "Active Learning - short activities",
-					"Out-of-class group work" : "Active Learning - multi-session activities",
-					"PBL/case studies" : "Active Learning - multi-session activities",
+					"In-class group work" : "Active learning - short activities",
+					"Other in-class active learning" : "Active learning - short activities",
+					"Other out-of-class active learning" : "Active learning - short activities",
+					"Out-of-class group work" : "Active learning - multi-session activities",
+					"PBL/case studies" : "Active learning - multi-session activities",
 					"Online discussion/forums" : "Assessment - peer feedback",
 					"Peer assessment/feedback" : "Assessment - peer feedback",
 					"Student generated content" : "Content - student generated",
@@ -61,12 +62,12 @@ replacementsShortInnov = {
 					"Out of class content delivery" : "Content - instructor generated",
 					"In-class content delivery" : "Content - instructor generated",
 					"Other assessment" : "Assessment - other",
-					"Program level curricular modifications" : "Program Structure",
+					"Program level curricular modifications" : "Program structure",
 					"Reduced seat time" : "Reduced seat time",
 					#not found "Support for faculty" : "Instructional team enhancement",
-					"Roles of Teaching Assistants" : "Instructional teamX",
-					"Technologies development" : "Other Innovation",
-					"Increase of student choice" : "Other Innovation",
+					"Roles of Teaching Assistants" : "Instructional team roles",
+					"Technologies development" : "Other innovation",
+					"Increase of student choice" : "Other innovation",
 					#not found "Strategic support for students" : "Other Innovation"
 }
 
@@ -81,19 +82,20 @@ replacementsLongImpact = {
 					"Motivation (e.g., personal goals)":"Attitudes and Motivation (e.g., perceptions about discipline, personal goals)",
 					"Actions and behaviours (e.g.,time on task, enrolment)":"Actions and behaviours (e.g.,time on task, enrolment)",
 					"Operations (e.g., finance, reputation)":"Operations (e.g., finance, reputation)",
-					"Instructional team (e.g., TA use of time)":"Instructional team Roles and practices(e.g., TA use of time)",
+					"Instructional team (e.g., TA use of time)":"Instructional team roles and practices(e.g., TA use of time)",
 }
 
 replacementsShortImpact = {
 					#AREA OF IMPACT
-					"Course/program specific knowledge":"Course/program specific knowledge",
-					"Generic Lifelong learning skills":"Professional and Lifelong learning skills",
-					"Professional competencies":"Professional and Lifelong learning skills",
-					"Attitudes":"Attitudes and Motivation",
-					"Motivation":"Attitudes and Motivation",
+					"Course/program specific knowledge":"Course specific knowledge",
+					"Generic Lifelong learning skills":"Lifelong learning skills",
+					"Professional competencies":"Lifelong learning skills",
+					"Attitudes":"Attitudes and motivation",
+					"Motivation":"Attitudes and motivation",
 					"Actions and behaviours":"Actions and behaviours",
 					"Operations":"Operations",
-					"Instructional team":"Instructional team Roles and practice",
+					"Instructional team":"Instructional team practices",
+					"Other Area of Impact": "Other area of impact",
 }
 
 inputfile = open(datafile,'r')
@@ -120,6 +122,8 @@ for line in inputfile:
 			same_line_innov = True 
 		elif part in replacementsLongInnov.keys():
 			newpart = replacementsLongInnov[part]
+		elif part in replacementsShortEva.keys():
+			newpart = replacementsShortEva[part]
 		else:
 			newpart = part
 		newparts.append(newpart)
