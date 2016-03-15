@@ -2111,14 +2111,13 @@ function get_current_chart() {
 }
 
 
-
 var facultyPicker = d3.select("#context-filter-faculty").append("select").on("change", function() {
-    faculty = d3.select(this).property("value");
-    rerun(get_current_chart());
+  faculty = d3.select(this).property("value");
+  rerun(get_current_chart());
 });
 
 var courseLevelPicker = d3.select("#context-filter-courseLevel").append("select").on("change", function() {
-  projectType = d3.select(this).property("value");
+  courseLevel = d3.select(this).property("value");
   rerun(get_current_chart())
 });
 
