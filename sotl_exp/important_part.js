@@ -825,7 +825,7 @@ var heatmapInnovationImpact = function(n) {
       // return d3.sum(projects, function(d) {
       //   return d.value;
       // })
-      return projects.map(function(d) {return d["project_Title"]})
+      return projects.map(function(d) {return d["project_Title"]}).getUnique()
     })
     .map(heatMapdata, d3.map).get("innovationXimpact");
 
@@ -993,6 +993,7 @@ var heatmapInnovationImpact = function(n) {
       } else {
         text = l.value + " projects"
       }
+      console.log(l.innovation,l.impact,l.projects)
       tooltip.html(text)
         .style("left", (cx + 5) + "px")
         .style("top", (cy - 28) + "px");
@@ -1234,7 +1235,7 @@ var heatmapImpactApproach = function(n) {
       return d.impact;
     })
     .rollup(function(projects) {
-      return projects.map(function(d) {return d["project_Title"]})
+      return projects.map(function(d) {return d["project_Title"]}).getUnique()
     })
     .map(heatMapdata, d3.map).get("impactXapproach");
 
