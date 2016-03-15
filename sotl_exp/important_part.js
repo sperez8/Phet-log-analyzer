@@ -865,7 +865,6 @@ var heatmapInnovationImpact = function(n) {
     areasOfImpact[i]
     total = []
     for (var j = dataRollUp.length - 1; j >= 0; j--) {
-      //console.log(areasOfImpact[i],dataRollUp[j].innovation, dataRollUp[j].projects)
       if (dataRollUp[j].innovation==areasOfImpact[i]){
         total.push.apply(total,dataRollUp[j].projects)
       }
@@ -883,7 +882,6 @@ var heatmapInnovationImpact = function(n) {
     areasOfInnovation[i]
     total = []
     for (var j = dataRollUp.length - 1; j >= 0; j--) {
-      //console.log(areasOfInnovation[i],dataRollUp[j].impact, dataRollUp[j].projects)
       if (dataRollUp[j].impact==areasOfInnovation[i]){
         total.push.apply(total,dataRollUp[j].projects)
       }
@@ -993,7 +991,6 @@ var heatmapInnovationImpact = function(n) {
       } else {
         text = l.value + " projects"
       }
-      console.log(l.innovation,l.impact,l.projects)
       tooltip.html(text)
         .style("left", (cx + 5) + "px")
         .style("top", (cy - 28) + "px");
@@ -1276,7 +1273,6 @@ var heatmapImpactApproach = function(n) {
     areasOfImpact[i]
     total = []
     for (var j = dataRollUp.length - 1; j >= 0; j--) {
-      console.log(areasOfImpact[i],dataRollUp[j].impact, dataRollUp[j].projects)
       if (dataRollUp[j].impact==areasOfImpact[i]){
         total.push.apply(total,dataRollUp[j].projects)
       }
@@ -1294,7 +1290,6 @@ var heatmapImpactApproach = function(n) {
     evaluationApproach[i]
     total = []
     for (var j = dataRollUp.length - 1; j >= 0; j--) {
-      //console.log(evaluationApproach[i],dataRollUp[j].approach, dataRollUp[j].projects)
       if (dataRollUp[j].approach==evaluationApproach[i]){
         total.push.apply(total,dataRollUp[j].projects)
       }
@@ -2096,55 +2091,66 @@ evaluation = "Evaluation (all)"
 
 //variables for filters and chart type buttons
 var ChartType = {
-  "sankey": sankeyChart,
-  "heatmapInnovationImpact": heatmapInnovationImpact,
-  "heatmapImpactApproach": heatmapImpactApproach,
-  "table": tabulate
+  "sankeyChart": sankeyChart,
+  "innovationImpactChart": heatmapInnovationImpact,
+  "impactApproachChart": heatmapImpactApproach,
+  "project-table": tabulate
 };
 
 
-var currentChartType = "sankey"; //"heatmapInnovationImpact";  //set the default chart type to be sankey
+var currentChartType = "innovationImpactChart";  //set the default chart type to be sankey
+
+function get_current_chart() {
+  currentChart = ''
+  divs = ["sankeyChart","innovationImpactChart","impactApproachChart","project-table"]
+  for (var i = divs.length - 1; i >= 0; i--) {
+    if ( $('#'+divs[i]).is(':empty') ) {
+    } else { currentChart = divs[i]}
+  }
+  return currentChart
+}
+
 
 
 var facultyPicker = d3.select("#context-filter-faculty").append("select").on("change", function() {
     faculty = d3.select(this).property("value");
-    rerun(currentChartType);
+    rerun(get_current_chart());
 });
 
 var courseLevelPicker = d3.select("#context-filter-courseLevel").append("select").on("change", function() {
   projectType = d3.select(this).property("value");
-  rerun(currentChartType)
+  rerun(get_current_chart())
 });
 
 
 var projectTypePicker = d3.select("#context-filter-projectType").append("select").on("change", function() {
   projectType = d3.select(this).property("value");
-  rerun(currentChartType)
+  rerun(get_current_chart())
 });
 
 var projectStagePicker = d3.select("#context-filter-projectStage").append("select").on("change", function() {
   projectStage = d3.select(this).property("value");
-  rerun(currentChartType)
+  rerun(get_current_chart())
 });
 
 var yearAwardedPicker = d3.select("#context-filter-yearAwarded").append("select").on("change", function() {
   yearAwarded = d3.select(this).property("value");
-  rerun(currentChartType)
+  rerun(get_current_chart())
 });
 
 var innovationPicker = d3.select("#context-filter-innovation").append("select").on("change", function() {
   innovation = d3.select(this).property("value");
-  rerun(currentChartType)
+  rerun(get_current_chart())
 });
 
 var impactPicker = d3.select("#context-filter-impact").append("select").on("change", function() {
   impact = d3.select(this).property("value");
-  rerun(currentChartType)
+  rerun(get_current_chart())
 });
 
 var evaluationPicker = d3.select("#context-filter-evaluation").append("select").on("change", function() {
   evaluation = d3.select(this).property("value");
-  rerun(currentChartType)
+  rerun(get_current_chart())
 });
 
 
@@ -2185,14 +2191,14 @@ d3.select("#chartTypeButtons") //Sankey
   .attr("type", "button")
   .attr("class", function (){
   //.style("background",  function() {
-      if (currentChartType == "sankey"){
+      if (currentChartType == "sankeyChart"){
         return "big_button clicked"
       } else {return "big_button unclicked"}
   })
   .on("click", function() {
     unclick_buttons()
     d3.select(this).call(click_button)
-    setChartType = "sankey";
+    setChartType = "sankeyChart";
     rerun(setChartType); //redraw previously selected chart 
   });
 
@@ -2203,14 +2209,14 @@ d3.select("#chartTypeButtons") //heatmapInnovationImpact
   .attr("type", "button")
   .attr("class", function (){
   //.style("background",  function() {
-      if (currentChartType == "heatmapInnovationImpact"){
+      if (currentChartType == "innovationImpactChart"){
         return "big_button clicked"
       } else {return "big_button unclicked"}
   })
   .on("click", function() {
     unclick_buttons()
     d3.select(this).call(click_button)
-    setChartType = "heatmapInnovationImpact";
+    setChartType = "innovationImpactChart";
     rerun(setChartType); //redraw previously selected chart 
 
   });
@@ -2222,14 +2228,14 @@ d3.select("#chartTypeButtons")
   .attr("type", "button")
   .attr("class", function (){
   //.style("background",  function() {
-      if (currentChartType == "heatmapImpactApproach"){
+      if (currentChartType == "impactApproachChart"){
         return "big_button clicked"
       } else {return "big_button unclicked"}
   })
   .on("click", function() {
     unclick_buttons()
     d3.select(this).call(click_button)
-    setChartType = "heatmapImpactApproach";
+    setChartType = "impactApproachChart";
     rerun(setChartType); //redraw previously selected chart 
 
   });
@@ -2241,14 +2247,14 @@ d3.select("#chartTypeButtons")
   .attr("type", "button")
   .attr("class", function (){
   //.style("background",  function() {
-      if (currentChartType == "table"){
+      if (currentChartType == "project-table"){
         return "big_button clicked"
       } else {return "big_button unclicked"}
   })
   .on("click", function() {
     unclick_buttons()
     d3.select(this).call(click_button)
-    setChartType = "table";
+    setChartType = "project-table";
     rerun(setChartType); //redraw previously selected chart
 
   });
@@ -2280,5 +2286,5 @@ function reset_filters() {
   d3.select("#context-filter-evaluation").selectAll("select").property({"value":evaluation})
 
   //rerun viz
-  rerun(currentChartType)
+  rerun(get_current_chart())
 }
