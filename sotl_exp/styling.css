@@ -124,11 +124,6 @@ div.tooltip, div.tooltip-inner {
   font-size: 11pt;
 }
 
-.link {
-  fill: none;
-  stroke: #2F5D7C;
-}
-
 .heading {
 	font-family: "Helvetica Neue";
 	font-style: normal;

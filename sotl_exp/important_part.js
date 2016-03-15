@@ -70,16 +70,36 @@ var remove_tooltip = function() {
 
 var highlightTime = 500 //milliseconds
 
-var highlight_project_sankey = function(link, title) {
+var highlight_project_sankey = function() {
   d3.selectAll(".link")
     .each(function(l) {
-      if (l.projectTitle == title) {
+      if (projectSelectionTracker[l.projectTitle]) {
         d3.select(this).call(highlight_link, colorHigh, opacityHigh)
         highlightProjectInList(l.projectTitle)
       } else {
         d3.select(this).call(highlight_link, colorLow, opacityLow)
       }
     })
+}
+
+
+var update_sankey_selection = function() {
+  no_project_selected = true
+  remove_highlight_link()
+  console.log(projectSelectionTracker)
+  d3.selectAll(".link")
+    .each(function(l) {
+      if (projectSelectionTracker[l.projectTitle]) {
+        no_project_selected = false
+        d3.select(this).call(highlight_link, colorHigh, opacityHigh)
+        highlightProjectInList(l.projectTitle)
+      } else {
+        d3.select(this).call(highlight_link, colorLow, opacityLow)
+      }
+    })
+  if (no_project_selected){
+    remove_highlight_link()
+  }
 }
 
 var highlight_project_heatmap = function(card, title) {
@@ -1672,22 +1692,36 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
     .sort(function(a, b) {
       return b.dy - a.dy;
     })
-    .on("mouseover", function(l) {
-      var cx = d3.event.pageX
-      var cy = d3.event.pageY
-      tooltip.html("Project: " + l.projectTitle)
-        .style("left", (cx + 5) + "px")
-        .style("top", (cy - 28) + "px");
-      tooltip
-        .style("opacity", tooltipOpacity);
-      d3.select(this)
-        .call(highlight_project_sankey, l.projectTitle)
+    .style("fill","none")
+    .on("click", function (l){
+      if (projectSelectionTracker[l.projectTitle]){
+        console.log("unselecting")
+        projectSelectionTracker[l.projectTitle] = false
+      } else {
+        console.log('selecting')
+        for(var key in projectSelectionTracker) {
+          projectSelectionTracker[key] = false;
+        }
+        projectSelectionTracker[l.projectTitle] = true
+      }
+      update_sankey_selection()
     })
-    .on("mouseout", function() {
-      remove_tooltip()
-      remove_highlight_list_item()
-      remove_highlight_link()
-    });
+    // .on("mouseover", function(l) {
+    //   // var cx = d3.event.pageX
+    //   // var cy = d3.event.pageY
+    //   // tooltip.html("Project: " + l.projectTitle)
+    //   //   .style("left", (cx + 5) + "px")
+    //   //   .style("top", (cy - 28) + "px");
+    //   // tooltip
+    //   //   .style("opacity", tooltipOpacity);
+    //   d3.select(this)
+    //     .call(highlight_project_sankey, l.projectTitle)
+    // })
+    // .on("mouseout", function() {
+    //   //remove_tooltip()
+    //   remove_highlight_list_item()
+    //   remove_highlight_link()
+    // });
   // .on("click", function (d){
   //   // XXX DO CLICK project HERE
   //   // if (d3.select(this).classed("clicked")){
@@ -2098,7 +2132,7 @@ var ChartType = {
 };
 
 
-var currentChartType = "innovationImpactChart";  //set the default chart type to be sankey
+var currentChartType = "sankeyChart" //set the default chart type to be sankey
 
 function get_current_chart() {
   currentChart = ''
@@ -2161,6 +2195,20 @@ yearAwardedPicker.selectAll("option").data(yearAwardedList).enter().append("opti
 innovationPicker.selectAll("option").data(innovationList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
 impactPicker.selectAll("option").data(impactList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
 evaluationPicker.selectAll("option").data(evaluationList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
+
+
+// Project selection tracker
+
+projectSelectionTracker = []; 
+
+allprojects = get_filterOptions("project_Title")
+
+for (var i = allprojects.length - 1; i >= 0; i--) {
+  projectSelectionTracker.push({
+      key:  allprojects[i],
+      value: false,
+  });
+}
 
 function unclick_buttons() {
   d3.selectAll(".big_button")
