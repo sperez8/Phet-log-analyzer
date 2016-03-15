@@ -9,8 +9,7 @@
 
 // ****************************************************************** //
 // ****************************************************************** //
-// ****************************************************************** //
-// ****************************************************************** //
+// ****************************************************************** udate// ****************************************************************** //
 
 
 //oldblue = "#002145"
@@ -27,14 +26,13 @@ colorscheme = d3.scale.ordinal()
 grey = "#b8b8b8"
 
 var opacityNormal = 0.7,
-  opacityLow = 0.1,
+  opacityLow = 0.2,
   opacityHigh = 1,
   colorLow = colors[1],
   colorNormal = colors[2],
   colorHigh = colors[3],
   widthNormal = "1px",
   widthHigh = "3px";
-
 
 //reloads page if the window is resized so the viz is always at optimal size
 // window.onresize = function(){ location.reload(); }
@@ -70,23 +68,21 @@ var remove_tooltip = function() {
 
 var highlightTime = 500 //milliseconds
 
-var highlight_project_sankey = function() {
+var highlight_project_sankey = function(link, title) {
   d3.selectAll(".link")
     .each(function(l) {
-      if (projectSelectionTracker[l.projectTitle]) {
+      if (l.projectTitle == title) {
         d3.select(this).call(highlight_link, colorHigh, opacityHigh)
         highlightProjectInList(l.projectTitle)
-      } else {
+      } else if (projectSelectionTracker[l.projectTitle]!=true){
         d3.select(this).call(highlight_link, colorLow, opacityLow)
       }
     })
 }
 
-
 var update_sankey_selection = function() {
   no_project_selected = true
   remove_highlight_link()
-  console.log(projectSelectionTracker)
   d3.selectAll(".link")
     .each(function(l) {
       if (projectSelectionTracker[l.projectTitle]) {
@@ -102,6 +98,50 @@ var update_sankey_selection = function() {
   }
 }
 
+var get_selected_projects = function() {
+  selected_projects = []
+  for (var key in projectSelectionTracker) {
+    console.log(projectSelectionTracker[key])
+    if (projectSelectionTracker[key]) {
+      selected_projects.push(key)
+    }
+  }
+  return selected_projects
+}
+
+var non_zero_intersection = function(a,b) {
+  for (var i = a.length - 1; i >= 0; i--) {
+    if ($.inArray(a[i], b) != -1) {
+      return true
+    }
+  }
+  return false
+}
+
+var update_heatmap_selection = function() {
+  no_project_selected = true
+  //remove_highlight_card()
+  selected_projects = get_selected_projects()
+  if (selected_projects.length == 0){
+    return null
+  }
+  d3.selectAll(".card")
+    .each(function(l) {
+      if (non_zero_intersection(selected_projects,l.projects)) {
+        console.log('here')
+        no_project_selected = false
+        d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh)
+        highlightProjectInList(l.projectTitle)
+      }
+      // } else {
+      //   d3.select(this).call(highlight_card, opacityLow, "white", widthNormal)
+      // }
+    })
+  // if (no_project_selected){
+  //   remove_highlight_card()
+  // }
+}
+
 var highlight_project_heatmap = function(card, title) {
   d3.selectAll(".card")
     .each(function(l) {
@@ -109,22 +149,17 @@ var highlight_project_heatmap = function(card, title) {
         d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh)
         highlightProjectInList(title)
       } else {
-        d3.select(this).call(highlight_card, opacityLow, "white", widthNormal)
+        d3.select(this).call(highlight_card, opacityLow, null, widthNormal)
       }
     })
 }
 
 var highlight_link = function(selection, color, opacity, widthChanger) {
-  // currentWidth = selection.style("stroke-width")
-  // currentWidth = parseInt(currentWidth.substring(0, currentWidth.length - 2))
   selection
     .transition()
     .ease("linear")
     .duration(highlightTime)
     .style("stroke-opacity", opacity)
-    //.style("stroke", color)
-    // .style("stroke-width", String(currentWidth*widthChanger)+"px")
-    // console.log(currentWidth, selection.style("stroke-width"))
 };
 
 var highlight_card = function(selection, opacity, color, width) {
@@ -1001,8 +1036,25 @@ var heatmapInnovationImpact = function(n) {
     .attr("class", "card")
     .attr("width", gridSizeX)
     .attr("height", gridSizeY / 2)
-    .style("fill", "white")
-    .style("stroke", "white")
+    //.style("fill", "white")
+    //.style("stroke", "white")
+    .style("fill", function(d){
+      if (d.innovation != "Total"){
+        return colorscheme(d.innovation)
+      } else {
+      return grey
+      }
+    })
+    .style("opacity", function(d){
+      if (d.impact != "Total" && d.innovation != "Total"){
+        return opacityScale(d.value)
+      } else {
+        return opacityScale(max)
+      }
+
+    })
+    .style("stroke", "#ffffff")
+    .style("stroke-width", "1px")
     .on("mouseover", function(l) {
       var cx = d3.event.pageX
       var cy = d3.event.pageY
@@ -1023,52 +1075,45 @@ var heatmapInnovationImpact = function(n) {
       remove_tooltip()
       remove_highlight_list_item()
       remove_highlight_card()
+      update_heatmap_selection()
+    })
+    .on("click", function (l){
+      selected_projects = get_selected_projects()
+      for(var key in projectSelectionTracker) {
+        projectSelectionTracker[key] = false;
+      }
+      if (non_zero_intersection(selected_projects,l.projects)){
+        //do nothing, since already unselected all projects
+      } else {
+        for (var i = l.projects.length - 1; i >= 0; i--) {
+          projectSelectionTracker[l.projects[i]] = true
+        }
+      } 
+      update_heatmap_selection()
     });
 
-  //cards.append("title");
 
-  cards.transition()
-    .ease("linear")
-    .duration(500) //slows it down! 
-    .style("fill", function(d){
-      if (d.innovation != "Total"){
-        return colorscheme(d.innovation)
-      } else {
-      return grey
-      }
-    })
-    .style("opacity", function(d){
-      if (d.impact != "Total" && d.innovation != "Total"){
-        return opacityScale(d.value)
-      } else {
-        return opacityScale(max)
-      }
-    })
-    // .style("fill", function(d) {
-    //   return colorScale(d.value);
-    // })
-    // .style("fill", function(d) {  //color given the middle node it's connected to
-    //   console.log(d3.hsl(colorscheme(d.innovation)).brighter(0.9).toString(), colorscheme(d.innovation), d3.hsl(colorscheme(d.innovation)).darker(0.9).toString())
-    //   if (d.value >= 1 && d.value < max*0.33) {
-    //     return d3.hsl(colorscheme(d.innovation)).brighter(0.7).toString()
-    //   } else if (d.value < max*0.66) {
-    //     return colorscheme(d.innovation)
-    //   } else {
-    //     return d3.hsl(colorscheme(d.innovation)).darker(1.2).toString()
-    //   }
-    // })
-    // .style("fill", function(d) {  //color given the middle node it's connected to
-    //   console.log(d.innovation,d3.hcl(colorscheme(d.innovation)).brighter(1).toString(), colorscheme(d.innovation), d3.hcl(colorscheme(d.innovation)).darker(1).toString())
-    //   if (d.value >= 1 && d.value < max*0.33) {
-    //     return d3.hcl(colorscheme(d.innovation)).brighter(1).toString()
-    //   } else if (d.value < max*0.66) {
-    //     return colorscheme(d.innovation)
-    //   } else {
-    //     return d3.hcl(colorscheme(d.innovation)).darker(1).toString()
-    //   }
-    // })
-    .style("stroke", "#ffffff")
-    .style("stroke-width", "1px");
+
+  // cards.transition()
+  //   .ease("linear")
+  //   .duration(500) //slows it down! 
+  //   .style("fill", function(d){
+  //     if (d.innovation != "Total"){
+  //       return colorscheme(d.innovation)
+  //     } else {
+  //     return grey
+  //     }
+  //   })
+  //   .style("opacity", function(d){
+  //     if (d.impact != "Total" && d.innovation != "Total"){
+  //       return opacityScale(d.value)
+  //     } else {
+  //       return opacityScale(max)
+  //     }
+
+  //   })
+  //   .style("stroke", "#ffffff")
+  //   .style("stroke-width", "1px");
 
 
   //draw boxes
@@ -1706,36 +1751,15 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
       }
       update_sankey_selection()
     })
-    // .on("mouseover", function(l) {
-    //   // var cx = d3.event.pageX
-    //   // var cy = d3.event.pageY
-    //   // tooltip.html("Project: " + l.projectTitle)
-    //   //   .style("left", (cx + 5) + "px")
-    //   //   .style("top", (cy - 28) + "px");
-    //   // tooltip
-    //   //   .style("opacity", tooltipOpacity);
-    //   d3.select(this)
-    //     .call(highlight_project_sankey, l.projectTitle)
-    // })
-    // .on("mouseout", function() {
-    //   //remove_tooltip()
-    //   remove_highlight_list_item()
-    //   remove_highlight_link()
-    // });
-  // .on("click", function (d){
-  //   // XXX DO CLICK project HERE
-  //   // if (d3.select(this).classed("clicked")){
-  //   //     d3.select(this)
-  //   //         .classed({"clicked":false})
-  //   //     removeReveal()
-  //   // } else {
-  //   //     d3.select(this)
-  //   //         .classed({"clicked":true})
-  //   //         .call(reveal(n))
-  //   // }
-  // });
-
-
+    .on("mouseover", function(l) {
+      d3.select(this)
+        .call(highlight_project_sankey, l.projectTitle)
+    })
+    .on("mouseout", function() {
+      remove_highlight_list_item()
+      remove_highlight_link()
+      update_sankey_selection()
+    });
 
 
   // add in the nodes
@@ -2247,6 +2271,7 @@ d3.select("#chartTypeButtons") //Sankey
     d3.select(this).call(click_button)
     setChartType = "sankeyChart";
     rerun(setChartType); //redraw previously selected chart 
+    update_sankey_selection()
   });
 
 
@@ -2265,7 +2290,7 @@ d3.select("#chartTypeButtons") //heatmapInnovationImpact
     d3.select(this).call(click_button)
     setChartType = "innovationImpactChart";
     rerun(setChartType); //redraw previously selected chart 
-
+    update_heatmap_selection()
   });
 
 
@@ -2284,7 +2309,6 @@ d3.select("#chartTypeButtons")
     d3.select(this).call(click_button)
     setChartType = "impactApproachChart";
     rerun(setChartType); //redraw previously selected chart 
-
   });
 
 
