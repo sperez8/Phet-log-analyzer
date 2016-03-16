@@ -131,36 +131,31 @@ var non_zero_intersection = function(a,b) {
 
 var update_heatmap_selection = function() {
   no_project_selected = true
-  //remove_highlight_card()
   selected_projects = get_selected_projects()
-  if (selected_projects.length == 0){
-    return null
-  }
   d3.selectAll(".card")
     .each(function(l) {
       if (non_zero_intersection(selected_projects,l.projects)) {
         console.log('here')
         no_project_selected = false
-        d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh)
+        d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh,1)
         highlightProjectInList(l.projectTitle)
+      } else {
+        d3.select(this).call(highlight_card, opacityLow, "white", widthNormal,1)
       }
-      // } else {
-      //   d3.select(this).call(highlight_card, opacityLow, "white", widthNormal)
-      // }
     })
-  // if (no_project_selected){
-  //   remove_highlight_card()
-  // }
+  if (no_project_selected){
+    remove_highlight_card()
+  }
 }
 
 var highlight_project_heatmap = function(card, title) {
   d3.selectAll(".card")
     .each(function(l) {
       if ($.inArray(title, l.projects) != -1) {
-        d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh)
+        d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh,1)
         highlightProjectInList(title)
       } else {
-        d3.select(this).call(highlight_card, opacityLow, null, widthNormal)
+        d3.select(this).call(highlight_card, opacityLow, null, widthNormal, opacityLow)
       }
     })
 }
@@ -173,7 +168,7 @@ var highlight_link = function(selection, color, opacity, widthChanger) {
     .style("stroke-opacity", opacity)
 };
 
-var highlight_card = function(selection, opacity, color, width) {
+var highlight_card = function(selection, opacity, color, width, stroke_opacity) {
   selection
     .transition()
     .ease("linear")
@@ -181,13 +176,13 @@ var highlight_card = function(selection, opacity, color, width) {
     .style("stroke", color)
     .style("stroke-width", width)
     //.style("fill",color)
-    .style("fill-opacity",opacity)
-    .style("stroke-opacity",opacity)
+    .style("opacity",opacity)
+    .style("stroke-opacity",stroke_opacity)
 };
 
 var remove_highlight_card = function() {
   d3.selectAll(".card")
-    .call(highlight_card, opacityHigh, "white", widthNormal)
+    .call(highlight_card, opacityHigh, "#ffffff", widthNormal, opacityLow)
 }
 
 var remove_highlight_link = function() {
@@ -1055,76 +1050,50 @@ var heatmapInnovationImpact = function(n) {
         return colorscheme(d.innovation)
       } else {
       return grey
-      }
-    })
-    .style("opacity", function(d){
+    }})
+    .style("fill-opacity", function(d){
       if (d.impact != "Total" && d.innovation != "Total"){
         return opacityScale(d.value)
       } else {
         return opacityScale(max)
-      }
-
-    })
+    }})
     .style("stroke", "#ffffff")
     .style("stroke-width", "1px")
-    .on("mouseover", function(l) {
-      var cx = d3.event.pageX
-      var cy = d3.event.pageY
-      if (l.value ==1){
-        text = l.value + " project"
-      } else {
-        text = l.value + " projects"
-      }
-      tooltip.html(text)
-        .style("left", (cx + 5) + "px")
-        .style("top", (cy - 28) + "px");
-      tooltip
-        .style("opacity", tooltipOpacity);
-      d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh)
-      highlightMultipleProjectInList(l.projects)
-    })
-    .on("mouseout", function() {
-      remove_tooltip()
-      remove_highlight_list_item()
-      remove_highlight_card()
-      update_heatmap_selection()
-    })
+    .style("stroke-opacity",opacityLow)
+    // .on("mouseover", function(l) {
+    //   var cx = d3.event.pageX
+    //   var cy = d3.event.pageY
+    //   if (l.value ==1){
+    //     text = l.value + " project"
+    //   } else {
+    //     text = l.value + " projects"
+    //   }
+    //   tooltip.html(text)
+    //     .style("left", (cx + 5) + "px")
+    //     .style("top", (cy - 28) + "px");
+    //   tooltip
+    //     .style("opacity", tooltipOpacity);
+    //   d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh,1)
+    //   highlightMultipleProjectInList(l.projects)
+    // })
+    // .on("mouseout", function() {
+    //   remove_tooltip()
+    //   remove_highlight_list_item()
+    //   remove_highlight_card()
+    //   update_heatmap_selection()
+    // })
     .on("click", function (l){
       selected_projects = get_selected_projects()
-      unselect_all_projects()
-      if (non_zero_intersection(selected_projects,l.projects)){
-        //do nothing, since already unselected all projects
-      } else {
+      if (non_zero_intersection(selected_projects,l.projects)) {
+        unselect_all_projects()
+      } else{
+        unselect_all_projects()
         for (var i = l.projects.length - 1; i >= 0; i--) {
           projectSelectionTracker[l.projects[i]] = true
         }
-      } 
+      }
       update_heatmap_selection()
     });
-
-
-
-  // cards.transition()
-  //   .ease("linear")
-  //   .duration(500) //slows it down! 
-  //   .style("fill", function(d){
-  //     if (d.innovation != "Total"){
-  //       return colorscheme(d.innovation)
-  //     } else {
-  //     return grey
-  //     }
-  //   })
-  //   .style("opacity", function(d){
-  //     if (d.impact != "Total" && d.innovation != "Total"){
-  //       return opacityScale(d.value)
-  //     } else {
-  //       return opacityScale(max)
-  //     }
-
-  //   })
-  //   .style("stroke", "#ffffff")
-  //   .style("stroke-width", "1px");
-
 
   //draw boxes
   var cardtext = svg.selectAll(".cards")
@@ -1466,7 +1435,7 @@ var heatmapImpactApproach = function(n) {
         .style("top", (cy - 28) + "px");
       tooltip
         .style("opacity", tooltipOpacity);
-      d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh)
+      d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh,1)
       highlightMultipleProjectInList(l.projects)
     })
     .on("mouseout", function() {
@@ -1485,7 +1454,7 @@ var heatmapImpactApproach = function(n) {
       return grey
       }
     })
-    .style("opacity", function(d){
+    .style("fill-opacity", function(d){
       if (d.impact != "Total" && d.approach != "Total"){
         return opacityScale(d.value)
       } else {
@@ -2045,6 +2014,7 @@ function rerun(currentChartType) {
       .attr("dx", 0)
       .attr("dy", 0)
       .style("fill", colorNormal)
+      .style("cursor","pointer")
       .attr("y", function(d, i) {
         return 40 * i + 40
       })
