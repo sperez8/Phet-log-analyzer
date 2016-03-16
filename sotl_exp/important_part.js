@@ -74,7 +74,8 @@ var highlight_project_sankey = function(link, title) {
       if (l.projectTitle == title) {
         d3.select(this).call(highlight_link, colorHigh, opacityHigh)
         highlightProjectInList(l.projectTitle)
-      } else if (projectSelectionTracker[l.projectTitle]!=true){
+      //} else if (projectSelectionTracker[l.projectTitle]!=true){
+      } else {
         d3.select(this).call(highlight_link, colorLow, opacityLow)
       }
     })
@@ -89,6 +90,7 @@ var update_sankey_selection = function() {
         no_project_selected = false
         d3.select(this).call(highlight_link, colorHigh, opacityHigh)
         highlightProjectInList(l.projectTitle)
+        console.log("here")
       } else {
         d3.select(this).call(highlight_link, colorLow, opacityLow)
       }
@@ -98,15 +100,24 @@ var update_sankey_selection = function() {
   }
 }
 
+var update_project_list_selection = function() {
+  bam = 0
+}
+
 var get_selected_projects = function() {
   selected_projects = []
   for (var key in projectSelectionTracker) {
-    console.log(projectSelectionTracker[key])
     if (projectSelectionTracker[key]) {
       selected_projects.push(key)
     }
   }
   return selected_projects
+}
+
+var unselect_all_projects = function() {
+  for(var key in projectSelectionTracker) {
+    projectSelectionTracker[key] = false;
+  }
 }
 
 var non_zero_intersection = function(a,b) {
@@ -638,6 +649,7 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
   d3.select("#impactApproachChart").selectAll("svg").remove();
   d3.select("#project-table").selectAll("tr").remove();
 
+  unselect_all_projects()
 
   //all the single option filters are of type ==
   if (faculty != "Faculty (all)") {
@@ -1079,9 +1091,7 @@ var heatmapInnovationImpact = function(n) {
     })
     .on("click", function (l){
       selected_projects = get_selected_projects()
-      for(var key in projectSelectionTracker) {
-        projectSelectionTracker[key] = false;
-      }
+      unselect_all_projects()
       if (non_zero_intersection(selected_projects,l.projects)){
         //do nothing, since already unselected all projects
       } else {
@@ -1740,13 +1750,10 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
     .style("fill","none")
     .on("click", function (l){
       if (projectSelectionTracker[l.projectTitle]){
-        console.log("unselecting")
+        unselect_all_projects()
         projectSelectionTracker[l.projectTitle] = false
       } else {
-        console.log('selecting')
-        for(var key in projectSelectionTracker) {
-          projectSelectionTracker[key] = false;
-        }
+        unselect_all_projects()
         projectSelectionTracker[l.projectTitle] = true
       }
       update_sankey_selection()
@@ -1794,7 +1801,6 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
       }
     })
 
-
   // add in the title for the nodes
   node.append("text")
     .attr("x", -6)
@@ -1812,18 +1818,6 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
     })
     .attr("x", 6 + sankey.nodeWidth())
     .attr("text-anchor", "start");
-
-
-
-  // the function for moving the nodes
-  // function dragmove(d) {
-  //   d3.select(this).attr("transform",
-  //     "translate(" + d.x + "," + (
-  //       d.y = Math.max(0, Math.min(height - 50 - d.dy, d3.event.y))
-  //     ) + ")");
-  //   sankey.relayout();
-  //   link.attr("d", path);
-  // }
 
   return graph.links.map(function(d) {
     return d["projectTitle"]
@@ -2058,6 +2052,15 @@ function rerun(currentChartType) {
         return "- " + capitalizeFirstLetter(d.toLowerCase())
       })
       .call(wrap, listwidth, listheight)
+    .on("click", function (d){
+      if (projectSelectionTracker[d]){
+        unselect_all_projects()
+      } else {
+        unselect_all_projects()
+        projectSelectionTracker[d] = true
+      }
+      update_sankey_selection()
+    })
       .on("mouseover", function(d) {
         highlightProjectInList(d)
         d3.select("this").call(highlight_project_sankey, d)
@@ -2065,8 +2068,10 @@ function rerun(currentChartType) {
       })
       .on("mouseout", function() {
         remove_highlight_list_item()
-        remove_highlight_link()
-        remove_highlight_card()
+        //remove_highlight_link()
+        //remove_highlight_card()
+        update_sankey_selection()
+        update_heatmap_selection()
       });
   }
 
