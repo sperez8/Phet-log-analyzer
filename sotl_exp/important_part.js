@@ -590,20 +590,20 @@ var margin = {
     top: 20,
     right: 10,
     bottom: 10,
-    left: 10
+    left: 25
   },
   heatmap: {
-    top: 70,
+    top: 60,
     right: 0,
     bottom: 0,
-    left: 170
+    left: 160
   }
 };
 
 //width = 1200 - margin.sankey.left - margin.sankey.right,
 //height = 800 - margin.sankey.top - margin.sankey.bottom;
-width = document.getElementById("allCharts").offsetWidth*0.9
-height = window.innerHeight * 0.65
+width = document.getElementById("allCharts").offsetWidth*0.95
+height = window.innerHeight*0.7
 
 var formatNumber = d3.format(",.0f"), // zero decimal places
   format = function(d) {
@@ -1930,6 +1930,32 @@ var tabulate = function() {
 // ****************************************************************** //
 // ****************************************************************** //
 // ****************************************************************** //
+
+
+
+var filtersOpen = false;
+
+function toggleFilterSidebar (argument) {
+  $('#allFilters').toggle();
+  if (filtersOpen)
+    $('.sidebarTitle.filters .openclose').text('-');
+  else
+    $('.sidebarTitle.filters .openclose').text('+');
+  filtersOpen = !filtersOpen;
+}
+
+var projectsOpen = false;
+
+function toggleProjectSidebar (argument) {
+  $('#projectList').toggle();
+  projectsOpen = !projectsOpen;
+  // if (argument){projectsOpen=argument}
+  if (projectsOpen)
+    $('.sidebarTitle.projects .openclose').text('-');
+  else
+    $('.sidebarTitle.projects .openclose').text('+');
+}
+
 
 
 function rerun(currentChartType) {
