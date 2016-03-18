@@ -11,6 +11,10 @@
 // ****************************************************************** //
 // ****************************************************************** udate// ****************************************************************** //
 
+// function scrollToElement(ele) {
+//     $(window).scrollTop(ele.offset().top).scrollLeft(ele.offset().left);
+// }
+// scrollToElement($('#NumberOfProjects'))
 
 //oldblue = "#002145"
 
@@ -99,8 +103,6 @@ var non_zero_intersection = function(a,b) {
 }
 
 var update_sankey_selection = function() {
-  console.log("updating sankey")
-  console.log(projectSelectionTracker)
   no_project_selected = true
   remove_highlight_link()
   d3.selectAll(".link")
@@ -109,7 +111,6 @@ var update_sankey_selection = function() {
         no_project_selected = false
         d3.select(this).call(highlight_link, colorHigh, opacityHigh)
         highlightProjectInList(l.projectTitle)
-        console.log("here")
       } else {
         d3.select(this).call(highlight_link, colorLow, opacityLow)
       }
@@ -120,8 +121,6 @@ var update_sankey_selection = function() {
 }
 
 var update_heatmap_selection = function() {
-  console.log("updating heatmap")
-  console.log(projectSelectionTracker)
   no_project_selected = true
   remove_highlight_card()
   selected_projects = get_selected_projects()
@@ -785,8 +784,8 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
 
 
 //constants for heatmaps
-gridSizeX = Math.floor(width / 9), //should make this dynamic
-  gridSizeY = Math.floor(width / 13), //should make this dynamic
+  gridSizeX = Math.floor(width / 9), //should make this dynamic
+  gridSizeY = Math.floor(width / 14), //should make this dynamic
   legendElementWidth = gridSizeX * 1.50,
   buckets = 4;
 
@@ -1855,7 +1854,7 @@ var tabulate = function() {
     columns = tableColumns
 
     var table = d3.select("#project-table").append("table")
-      //       .attr("style", "margin-left: 150px"),
+                  .attr("style", "margin: 20px"),
     thead = table.append("thead"),
       tbody = table.append("tbody");
 
@@ -1969,10 +1968,11 @@ function rerun(currentChartType) {
     };
     removeReveal()
     d3.select("#NumberOfProjects").append("p")
-      .html(total + " projects")
-      .transition()
-      .ease("linear")
-      .duration(highlightTime / 2)
+      .html(function(){
+        if (total==0){return "No projects given current filters"}
+        else if (total==1){return "Showing " + total + " project"}
+        else {return "Showing " + total + " projects"}
+      })
   };
 
   var updateprojectList = function(projectdata) {
@@ -2026,7 +2026,7 @@ function rerun(currentChartType) {
       left: 10
     }
     listwidth = document.getElementById("projectList").offsetWidth - margin.left - margin.right,
-      listheight = window.innerHeight * 0.7
+      listheight = window.innerHeight * 0.6
 
 
     // append the svg canvas to the page
@@ -2268,7 +2268,7 @@ function click_button(button) {
 //chartType buttons:    
 d3.select("#chartTypeButtons") //Sankey
   .append("input")
-  .attr("value", "Flow from Innovation to Evaluation")
+  .attr("value", "Flow")
   .attr("type", "button")
   .attr("class", function (){
   //.style("background",  function() {
@@ -2324,7 +2324,7 @@ d3.select("#chartTypeButtons")
 
 d3.select("#chartTypeButtons")
   .append("input")
-  .attr("value", "Table of projects")
+  .attr("value", "Table")
   .attr("type", "button")
   .attr("class", function (){
   //.style("background",  function() {
