@@ -1,10 +1,23 @@
 
 /*page setup*/
 
-body {
-    font-family: "Helvetica Neue";
+@font-face {
+    font-family: 'museo_sans500';
+    src: url('MuseoSans_500-webfont.eot');
+    src: url('MuseoSans_500-webfont.eot?#iefix') format('embedded-opentype'),
+         url('MuseoSans_500-webfont.woff2') format('woff2'),
+         url('MuseoSans_500-webfont.woff') format('woff'),
+         url('MuseoSans_500-webfont.ttf') format('truetype'),
+         url('MuseoSans_500-webfont.svg#museo_sans500') format('svg');
+    font-weight: normal;
     font-style: normal;
-    font-size: 10pt;
+
+}
+
+body {
+    font-family: "museo_sans500"; /*used to be Helvetica Neue*/
+    font-style: normal;
+    font-size: 9pt;
     min-height: 1000px;
     min-width: 1200px;
     height:100%;
@@ -53,7 +66,7 @@ body {
 }
 
 .projectListItem {
-    width:110%;
+    width:100%;
     font-size: 11pt;
 }
 
@@ -78,7 +91,7 @@ body {
 }
 
 div.tooltip, div.tooltip-inner {
-    font-family: "Helvetica Neue";
+    font-family: "museo_sans500"; /*used to be Helvetica Neue*/
     font-style: normal;
     font-size: 11pt;
     margin-left: auto;
@@ -109,21 +122,22 @@ div.tooltip, div.tooltip-inner {
 }
 
 .node text {
-  pointer-events: none;
-  font-family: "Helvetica Neue";
-  font-style: normal;
-  font-size: 11pt;
+    pointer-events: none;
+    font-family: "museo_sans500"; /*used to be Helvetica Neue*/
+    font-style: normal;
+    font-size: 10pt;
+    color: #ff7f0e;
 }
 
 .link {
-  fill: none;
-  stroke: #2F5D7C;
+    fill: none;
+    stroke: #2F5D7C;
 }
 
 .heading {
-    font-family: "Helvetica Neue";
+    font-family: "museo_sans500"; /*used to be Helvetica Neue*/
     font-style: normal;
-    font-size:20pt;
+    font-size: 17pt;
     fill: #002145;
 }
 
@@ -228,8 +242,8 @@ input[type="button"] {
     float: left;
     height: 34px;
     line-height: 50%;
-    font-size: 16px;
-    font-family: 'Museo Sans';
+    font-size: 13px;
+    font-family: 'museo_sans500';
     font-weight: 100;
     text-align: left;
     padding: 0 10px;
@@ -292,7 +306,7 @@ input[type="button"] {
     display: block;
     height: auto;
     line-height: 30px;
-    font-family: 'Museo Sans';
+    font-family: 'museo_sans500';
     font-weight: 100;
     /*text-transform: capitalize;*/
 }
@@ -304,8 +318,8 @@ input[type="button"] {
 }
 .filterLabel p {
     color: #fff;
-    font-size: 14px;
-    font-family: 'Museo Sans';
+    font-size: 15px;
+    font-family: 'museo_sans500';
     font-weight: 100;
     margin: 0;
     margin-bottom: 7px;
@@ -326,9 +340,9 @@ input[type="button"] {
 .sidebarTitle p {
     padding-left: 34px;
     font-size: 18px;
-    font-family: 'Museo Sans';
+    font-family: 'museo_sans500';
     font-weight: 500;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 /*    background-color: rgba(0, 0, 0, 0.25);*/
     color: #fff;
     height: 34px;
@@ -363,20 +377,12 @@ input[type="button"] {
     margin-top: 0;
     margin: 0;
 }
-/*#projectList {
-    height: auto;
-}
-.projectListItem {
-    padding-left: 34px;
-    color: #fff;
-    fill: rgba(0, 0, 0, 0.25) !important;
-    width: 100%;
-}
+
 .projectListItem tspan.listitem {
-    padding-left: 34px;
+    padding: 5px;
     fill: #fff;
+    font-size: 10pt;
 }
-*/
 
 .appHeader {
     width: 100%;
@@ -392,8 +398,8 @@ input[type="button"] {
     margin: 0;
     line-height: 60px;
     height: 60px;
-    font-size: 22px;
-    font-family: 'Museo Sans';
+    font-size: 17px;
+    font-family: 'museo_sans500';
     font-weight: 500;
     text-align: left;
     padding-left: 34px;
@@ -422,8 +428,8 @@ body {
     border-radius: 0;
     line-height: 34px;
     height: 34px;
-    font-size: 18px;
-    font-family: 'Museo Sans';
+    font-size: 15px;
+    font-family: 'museo_sans500';
     font-weight: 100;
     padding: 0 24px;
     margin: 0;

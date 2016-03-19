@@ -1783,6 +1783,7 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
       return d.dy / 2;
     })
     .attr("dy", ".35em")
+    .attr("class", "sankeyLabel")
     .attr("text-anchor", "end")
     .attr("transform", null)
     .text(function(d) {
@@ -2020,13 +2021,13 @@ function rerun(currentChartType) {
     }
 
     var margin = {
-      top: 5,
+      top: 10,
       right: 10,
-      bottom: 5,
-      left: 10
+      bottom: 10,
+      left: 10,
     }
     listwidth = document.getElementById("projectList").offsetWidth - margin.left - margin.right,
-      listheight = window.innerHeight * 0.6
+    listheight = window.innerHeight
 
 
     // append the svg canvas to the page
@@ -2035,7 +2036,7 @@ function rerun(currentChartType) {
       .attr("width", listwidth)
       .attr("height", listheight)
       .append("g")
-      .attr("transform", "translate( " +  0 + "," + 0 + ")");
+      .attr("transform", "translate( " +  10 + ", -" +  10 + ")");
       //Use line beloe and "text-anchor:middle" for centered text
       //.attr("transform", "translate( " +  listwidth /2 + "," + 0 + ")");
 
@@ -2046,7 +2047,6 @@ function rerun(currentChartType) {
       .attr("x", 0)
       .attr("dx", 0)
       .attr("dy", 0)
-      .style("fill", colorNormal)
       .style("cursor","pointer")
       .attr("y", function(d, i) {
         return 40 * i + 40
