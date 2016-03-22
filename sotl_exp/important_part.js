@@ -16,10 +16,7 @@
 // }
 // scrollToElement($('#NumberOfProjects'))
 
-//oldblue = "#002145"
-
-colors = ["#C3D0DB", "#98B2C3", "#5E869F", "#2F5D7C"]; //UBC blue greys
-//colors = ["#818e82", "647065", "#485149", "#363c36"]; //greys
+//UBCblue = "#002145"
 
 //Change me when updating impact category names
 colorscheme = d3.scale.ordinal()
@@ -32,9 +29,7 @@ grey = "#b8b8b8"
 var opacityNormal = 0.7,
   opacityLow = 0.2,
   opacityHigh = 1,
-  colorLow = colors[1],
-  colorNormal = colors[2],
-  colorHigh = colors[3],
+  colorHigh = "#5E869F",
   widthNormal = "1px",
   widthHigh = "3px";
 
@@ -109,10 +104,10 @@ var update_sankey_selection = function() {
     .each(function(l) {
       if (projectSelectionTracker[l.projectTitle]) {
         no_project_selected = false
-        d3.select(this).call(highlight_link, colorHigh, opacityHigh)
+        d3.select(this).call(highlight_link, opacityHigh)
         highlightProjectInList(l.projectTitle)
       } else {
-        d3.select(this).call(highlight_link, colorLow, opacityLow)
+        d3.select(this).call(highlight_link, opacityLow)
       }
     })
   if (no_project_selected){
@@ -144,11 +139,11 @@ var highlight_project_sankey = function(link, title) {
   d3.selectAll(".link")
     .each(function(l) {
       if (l.projectTitle == title) {
-        d3.select(this).call(highlight_link, colorHigh, opacityHigh)
+        d3.select(this).call(highlight_link, opacityHigh)
         highlightProjectInList(l.projectTitle)
       //} else if (projectSelectionTracker[l.projectTitle]!=true){
       } else {
-        d3.select(this).call(highlight_link, colorLow, opacityLow)
+        d3.select(this).call(highlight_link, opacityLow)
       }
     })
 }
@@ -165,7 +160,7 @@ var highlight_project_heatmap = function(card, title) {
     })
 }
 
-var highlight_link = function(selection, color, opacity, widthChanger) {
+var highlight_link = function(selection, opacity, widthChanger) {
   selection
     .transition()
     .ease("linear")
@@ -192,7 +187,7 @@ var remove_highlight_card = function() {
 
 var remove_highlight_link = function() {
   d3.selectAll(".link")
-    .call(highlight_link, colorNormal, opacityNormal)
+    .call(highlight_link, opacityNormal)
 }
 
 var remove_highlight_list_item = function() {
@@ -1772,7 +1767,7 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
       if (check_middle(d)) {
         return colorscheme(d.name)
       } else{
-        return colorNormal
+        return grey
       }
     })
 
@@ -2262,7 +2257,6 @@ function click_button(button) {
     .ease("linear")
     .duration(highlightTime)
     .attr("class", "big_button clicked")
-    //.style("background", colorNormal)
 }
 
 //chartType buttons:    

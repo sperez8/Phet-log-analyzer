@@ -182,15 +182,6 @@ div.tooltip, div.tooltip-inner {
 display:none;
 }
 
-.filter{
-    float:left;
-    width:auto;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    margin-left: 5px;
-    margin-right: 10px;
-}
-
 select { 
     width: auto;
     height: 25px;
@@ -233,36 +224,23 @@ input[type="button"] {
 }
 
 #Resetbutton {
-    border: 5px solid #104b6d;
-    background-color: rgba(0, 0, 0, 0.5);
+    border: 0px;
+    background-color: #002145;
     border-radius: 0;
     margin: 0;
-    margin-left: 10%;
+    margin-left: 25%;
     width: auto;
     float: left;
-    height: 34px;
-    line-height: 50%;
+    height: 30px;
     font-size: 13px;
     font-family: 'museo_sans500';
     font-weight: 100;
     text-align: left;
     padding: 0 10px;
-    color: #166A9A;
 }
 
 .big_button {
     font-size: 14pt;
-}
-
-#chartTypeButtons {
-    width: 100%;
-    float: right;
-    text-align: center;
-    margin-top: 5px;
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    background: #002145;
 }
 
 
@@ -283,11 +261,7 @@ input[type="button"] {
 }
 .filter {
     float: left;
-    width: 80%;
-/*    margin-top: 2px;
-    margin-bottom: 2px;
-    margin-left: 5px;
-    margin-right: 10px;*/
+    width: 185px;
     margin: 0;
     display: block;
     margin-bottom: 15px;
@@ -332,31 +306,35 @@ input[type="button"] {
     width: 100%;
     padding: 0;
     margin: 0;
-    background-color: #104b6d;
+    background-color: #166a9a;
     color: #fff;
     overflow: hidden;
-    margin-top: 10px;
+    margin-top: 7px;
+    border-width: 0px;
+    border-bottom-width: 3px;
+    border-bottom-color: #002145;
+    border-bottom-style: solid;
 }
 .sidebarTitle p {
-    padding-left: 34px;
+    padding-left: 12px;
     font-size: 18px;
     font-family: 'museo_sans500';
     font-weight: 500;
     /*text-transform: uppercase;*/
 /*    background-color: rgba(0, 0, 0, 0.25);*/
     color: #fff;
-    height: 34px;
-    line-height: 34px;
+    height: 30px;
+    line-height: 30px;
 /*    width: 230px;*/
     float: left;
     margin: 0;
 }
 .openclose {
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
     float: right;
-    background-color: rgba(0, 0, 0, 0.5);
-    line-height: 34px;
+    background-color: #002145;
+    line-height: 30px;
     text-align: center;
     font-size: 24px;
     font-weight: 500;
@@ -364,9 +342,7 @@ input[type="button"] {
 }
 .sidebars {
     height:100%;
-    width: 20%;
-    min-width:250px;
-    max-width: 300px;
+    width: 230px;
     float: left;
 }
 #listItems {
@@ -402,7 +378,7 @@ input[type="button"] {
     font-family: 'museo_sans500';
     font-weight: 500;
     text-align: left;
-    padding-left: 34px;
+    padding-left: 30px;
 }
 .commonPageHeader img {
     display: block;
@@ -420,14 +396,15 @@ body {
     background: none;
     float: left;
     padding: 0;
-    margin-top: 10px;
+    margin-top: 7px;
+    text-align: center;
 }
 #chartTypeButtons input[type="button"] {
     border: 0;
     background-color: #166A9A;
     border-radius: 0;
-    line-height: 34px;
-    height: 34px;
+    line-height: 30px;
+    height: 30px;
     font-size: 15px;
     font-family: 'museo_sans500';
     font-weight: 100;
@@ -438,7 +415,7 @@ body {
 }
 #chartTypeButtons input[type="button"]:hover, #chartTypeButtons input[type="button"].clicked {
     /*background-color: rgba(22, 106, 154, 0.75);*/
-    background-color: #0b354e;
+    background-color: #002145;
 }
 #chartTypeButtons input[type="button"]:focus {
     outline: 0;
