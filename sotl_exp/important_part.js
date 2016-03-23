@@ -72,6 +72,12 @@ var remove_tooltip = function() {
 
 var highlightTime = 500 //milliseconds
 
+var reset_projects =function(){
+  unselect_all_projects()
+  update_sankey_selection()
+  update_heatmap_selection()
+}
+
 var get_selected_projects = function() {
   selected_projects = []
   for (var key in projectSelectionTracker) {
@@ -582,21 +588,22 @@ var units = "Project Facet";
 var margin = {
   sankey: {
     top: 20,
-    right: 10,
+    right: 0,
     bottom: 10,
-    left: 25
+    left: 0
   },
   heatmap: {
     top: 60,
     right: 0,
     bottom: 0,
-    left: 160
+    left: 150
   }
 };
 
 //width = 1200 - margin.sankey.left - margin.sankey.right,
 //height = 800 - margin.sankey.top - margin.sankey.bottom;
-width = document.getElementById("allCharts").offsetWidth*0.95
+width = document.getElementById("allCharts").offsetWidth
+width = (window.innerWidth - document.getElementById("sidebars").offsetWidth)*0.84
 height = window.innerHeight*0.7
 
 var formatNumber = d3.format(",.0f"), // zero decimal places
@@ -892,18 +899,6 @@ var heatmapInnovationImpact = function(n) {
 
   dataRollUp = [];
 
-  if (typeof heatMapNest === "undefined") {
-    console.log("no projects found!")
-      //Filters return no projects
-        svg.append("text")
-               .attr("x", 10)             
-               .attr("y", height/2)
-               //.attr("text-anchor", "start")  
-               .attr("class","heading")
-               .text("No projects were found! Maybe it's time to launch a new project to address this gap ;)");  
-    return []
-  }
-
   heatMapNest.forEach(function(d, v) {
     v.forEach(function(d2, v2) {
       dataRollUp.push({
@@ -990,7 +985,7 @@ var heatmapInnovationImpact = function(n) {
     .attr("class", "innovationLabel")
     .style("text-anchor", "end")
     .style("vertical-align", "middle")
-    .call(wrapx, margin.heatmap.left - 30);
+    .call(wrapx, margin.heatmap.left);
 
   // var colorScale = d3.scale.quantile()
   //   //.domain([0,5,10,30,40])
@@ -1280,18 +1275,6 @@ var heatmapImpactApproach = function(n) {
     .map(heatMapdata, d3.map).get("impactXapproach");
 
   dataRollUp = [];
-
-  if (typeof heatMapNest === "undefined") {
-    console.log("no projects found!")
-      //Filters return no projects
-        svg.append("text")
-               .attr("x", 10)             
-               .attr("y", height/2)
-               //.attr("text-anchor", "start")  
-               .attr("class","heading")
-               .text("No projects were found! Maybe it's time to launch a new project to address this gap ;)");  
-    return []
-  }
 
   heatMapNest.forEach(function(d, v) {
     v.forEach(function(d2, v2) {
@@ -1585,18 +1568,6 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
     .attr("class", "sankey" + n)
     .attr("transform", "translate(4,42)") //translate so the top label is not half hidden and left side of nodes is good
     .style("visibility", "block");
-
-  if (data1.length == 0) {
-    console.log("no projects found!")
-      //Filters return no projects
-        svg.append("text")
-               .attr("x", 10)             
-               .attr("y", height/2)
-               //.attr("text-anchor", "start")  
-               .attr("class","heading")
-               .text("No projects were found! Maybe it's time to launch a new project to address this gap ;)");  
-    return []
-  }
 
   svg.append("text").text("Innovation")
     .attr("class", "heading")
@@ -2016,12 +1987,13 @@ function rerun(currentChartType) {
     }
 
     var margin = {
-      top: 10,
+      top: 0,
       right: 10,
-      bottom: 10,
+      bottom: 0,
       left: 10,
     }
     listwidth = document.getElementById("projectList").offsetWidth - margin.left - margin.right,
+    console.log(listwidth)
     listheight = window.innerHeight
 
 
@@ -2031,7 +2003,7 @@ function rerun(currentChartType) {
       .attr("width", listwidth)
       .attr("height", listheight)
       .append("g")
-      .attr("transform", "translate( " +  10 + ", -" +  10 + ")");
+      .attr("transform", "translate( " +  0 + ", -" +  10 + ")");
       //Use line beloe and "text-anchor:middle" for centered text
       //.attr("transform", "translate( " +  listwidth /2 + "," + 0 + ")");
 
@@ -2049,7 +2021,7 @@ function rerun(currentChartType) {
       .text(function(d, i) {
         return "- " + capitalizeFirstLetter(d.toLowerCase())
       })
-      .call(wrap, listwidth, listheight)
+      .call(wrap, listwidth-margin.left-margin.right-5, listheight)
     .on("click", function (d){
       if (projectSelectionTracker[d]){
         unselect_all_projects()

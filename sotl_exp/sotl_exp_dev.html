@@ -14,42 +14,47 @@
 <div class="appHeader">
 	<div id="NumberOfProjects" class = "heading"></div>
 </div>
-<div class="sidebars">
-	<div class="sidebarTitle filters">
-		<p>Filters</p>
-		<form action="">
-			<input value="Reset" id="Resetbutton" onclick="reset_filters();" type="button"/>
-		</form>
-		<div class="openclose" onclick="toggleFilterSidebar()">-</div>
-	</div>
-	<div id="allFilters">
-		<div class="filterLabel"><p>Context</p></div>
-		<div class="filter" id="context-filter-faculty"></div>
-		<div class="filter"  id="context-filter-courseLevel"></div>
-		<div class="filterLabel"><p>Project Details</p></div>
-		<div class="filter"  id="context-filter-projectType"></div>
-		<div class="filter"  id="context-filter-projectStage"></div>
-		<div class="filter"  id="context-filter-yearAwarded"></div>
-		<div class="filterLabel"><p>Charting Parameters</p></div>
-		<div class="filter"  id="context-filter-innovation"></div>
-		<div class="filter"  id="context-filter-impact"></div>
-		<div class="filter"  id="context-filter-evaluation"></div>
-	</div>
-	<div class="sidebarTitle projects">
-		<p>Projects</p>
-		<div class="openclose" onclick="toggleProjectSidebar()">+</div>
-	</div>
-	<div id="listItems">
-		<div id="projectList" class = "heading"></div>
-	</div>
-</div>
 <div class="contentArea">
-	<div id="chartTypeButtons" ></div>
-	<div id="allCharts">
-		<div id="sankeyChart"></div>
-		<div id="innovationImpactChart"></div>
-		<div id="impactApproachChart"></div>
-		<div id="project-table"></div>
+	<div id="sidebars">
+		<div class="sidebarTitle filters">
+			<p>Filters</p>
+			<form action="">
+				<input value="Reset" id="ResetbuttonF" onclick="reset_filters();" type="button"/>
+			</form>
+			<div class="openclose" onclick="toggleFilterSidebar()">-</div>
+		</div>
+		<div id="allFilters">
+			<div class="filterLabel"><p>Context</p></div>
+			<div class="filter" id="context-filter-faculty"></div>
+			<div class="filter"  id="context-filter-courseLevel"></div>
+			<div class="filterLabel"><p>Project Details</p></div>
+			<div class="filter"  id="context-filter-projectType"></div>
+			<div class="filter"  id="context-filter-projectStage"></div>
+			<div class="filter"  id="context-filter-yearAwarded"></div>
+			<div class="filterLabel"><p>Charting Parameters</p></div>
+			<div class="filter"  id="context-filter-innovation"></div>
+			<div class="filter"  id="context-filter-impact"></div>
+			<div class="filter"  id="context-filter-evaluation"></div>
+		</div>
+		<div class="sidebarTitle projects">
+			<p>Projects</p>
+			<form action="">
+				<input value="Reset" id="ResetbuttonP" onclick="reset_projects();" type="button"/>
+			</form>
+			<div class="openclose" onclick="toggleProjectSidebar()">+</div>
+		</div>
+		<div id="listItems">
+			<div id="projectList" class = "heading"></div>
+		</div>
+	</div>
+	<div id= "viz">
+		<div id="chartTypeButtons" ></div>
+		<div id="allCharts">
+			<div id="sankeyChart"></div>
+			<div id="innovationImpactChart"></div>
+			<div id="impactApproachChart"></div>
+			<div id="project-table"></div>
+		</div>
 	</div>
 </div>
 <div id="data-here">Question ID	Question	Response	Comment	Score	Date/Time	Status	Internal ID	Language	Created At	Updated At	Location	Username	GET Variables	Referrer	Number of Saves	Weighted Score	Page Path	Completion Time	IP Address	Invite Code	Invite Email	Invite Name	Collector	project_Title	Name of PI or project lead(s)	Please enter your name	Type of Project	Project Stage	Year Awarded	Faculty_School	Department	Short description of project	Course Format	Course_Level	Course Type	Enrolment Cap	Course Location	source	target	source long name	target long name	value	matrix
