@@ -36,7 +36,7 @@ var opacityNormal = 0.7,
 
 // Project selection tracker
 
-var projectSelectionTracker = []; 
+var projectSelectionTracker = new Array();
 
 //reloads page if the window is resized so the viz is always at optimal size
 // window.onresize = function(){ location.reload(); }
@@ -73,6 +73,7 @@ var remove_tooltip = function() {
 var highlightTime = 500 //milliseconds
 
 var reset_projects =function(){
+  remove_highlight_list_item()
   unselect_all_projects()
   update_sankey_selection()
   update_heatmap_selection()
@@ -142,6 +143,7 @@ var update_heatmap_selection = function() {
 }
 
 var highlight_project_sankey = function(link, title) {
+  if (get_selected_projects()[0] != "getUnique" && get_selected_projects().length > 0) {return null} //not sure why this happens on first load but it works...
   d3.selectAll(".link")
     .each(function(l) {
       if (l.projectTitle == title) {
@@ -155,6 +157,7 @@ var highlight_project_sankey = function(link, title) {
 }
 
 var highlight_project_heatmap = function(card, title) {
+  if (get_selected_projects()[0] != "getUnique" && get_selected_projects().length > 0) {return null} //not sure why this happens on first load but it works...
   d3.selectAll(".card")
     .each(function(l) {
       if ($.inArray(title, l.projects) != -1) {
@@ -198,15 +201,15 @@ var remove_highlight_link = function() {
 
 var remove_highlight_list_item = function() {
   d3.select("#projectList").selectAll(".projectListItem")
-    .call(highlight_list_item, colorHigh, "none")
+    .call(highlight_list_item, opacityNormal, "none")
 }
 
-var highlight_list_item = function(selection, color, boldness) {
+var highlight_list_item = function(selection, opacity, boldness) {
   selection
     .transition()
     .ease("linear")
     .duration(highlightTime * 2)
-    .style("fill", color)
+    .style("opacity", opacity)
     .attr("font-weight", boldness)
 };
 
@@ -215,7 +218,9 @@ var highlightProjectInList = function(project) {
   d3.select("#projectList").selectAll(".projectListItem")
     .each(function(t) {
       if (t == project) {
-        d3.select(this).call(highlight_list_item, colorHigh, "bold")
+        d3.select(this).call(highlight_list_item, opacityHigh, "bold")
+      } else {
+        d3.select(this).call(highlight_list_item, opacityNormal, null)
       }
     })
 }
@@ -226,7 +231,7 @@ var highlightMultipleProjectInList = function(projects) {
   d3.select("#projectList").selectAll(".projectListItem")
     .each(function(t) {
       if ($.inArray(t, projects) != -1) {
-        d3.select(this).call(highlight_list_item, colorHigh, "bold")
+        d3.select(this).call(highlight_list_item, opacityHigh, "bold")
       }
     })
 }
@@ -1993,7 +1998,6 @@ function rerun(currentChartType) {
       left: 10,
     }
     listwidth = document.getElementById("projectList").offsetWidth - margin.left - margin.right,
-    console.log(listwidth)
     listheight = window.innerHeight
 
 
@@ -2205,10 +2209,7 @@ evaluationPicker.selectAll("option").data(evaluationList).enter().append("option
 allprojects = get_filterOptions("project_Title")
 
 for (var i = allprojects.length - 1; i >= 0; i--) {
-  projectSelectionTracker.push({
-      key:  allprojects[i],
-      value: false,
-  });
+  projectSelectionTracker[allprojects[i]] = false
 }
 
 function unclick_buttons() {

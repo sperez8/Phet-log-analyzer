@@ -69,7 +69,7 @@ svg {
 
 .projectListItem {
     width:100%;
-    font-size: 11pt;
+    font-size: 9pt;
 }
 
 /*.listitem {
@@ -95,7 +95,7 @@ svg {
 div.tooltip, div.tooltip-inner {
     font-family: "museo_sans500"; /*used to be Helvetica Neue*/
     font-style: normal;
-    font-size: 11pt;
+    font-size: 10pt;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5px;  
@@ -139,7 +139,7 @@ div.tooltip, div.tooltip-inner {
 .heading {
     font-family: "museo_sans500"; /*used to be Helvetica Neue*/
     font-style: normal;
-    font-size: 17pt;
+    font-size: 14pt;
     fill: #002145;
 }
 
@@ -230,7 +230,7 @@ input[type="button"] {
     width: auto;
     float: left;
     height: 30px;
-    font-size: 13px;
+    font-size: 11px;
     font-family: 'museo_sans500';
     font-weight: 100;
     text-align: left;
@@ -246,7 +246,7 @@ input[type="button"] {
     width: auto;
     float: left;
     height: 30px;
-    font-size: 13px;
+    font-size: 11px;
     font-family: 'museo_sans500';
     font-weight: 100;
     text-align: left;
@@ -282,7 +282,7 @@ input[type="button"] {
     margin-bottom: 15px;
 }
 .filter select {
-    font-size: 15px;
+    font-size: 13px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -307,7 +307,7 @@ input[type="button"] {
 }
 .filterLabel p {
     color: #fff;
-    font-size: 15px;
+    font-size: 13px;
     font-family: 'museo_sans500';
     font-weight: 100;
     margin: 0;
@@ -332,7 +332,7 @@ input[type="button"] {
 }
 .sidebarTitle p {
     padding-left: 12px;
-    font-size: 18px;
+    font-size: 16px;
     font-family: 'museo_sans500';
     font-weight: 500;
     /*text-transform: uppercase;*/
@@ -374,7 +374,7 @@ input[type="button"] {
 .projectListItem tspan.listitem {
     padding: 5px;
     fill: #fff;
-    font-size: 10pt;
+    font-size: 8.5pt;
 }
 
 .appHeader {
