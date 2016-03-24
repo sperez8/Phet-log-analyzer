@@ -220,7 +220,7 @@ var highlightProjectInList = function(project) {
       if (t == project) {
         d3.select(this).call(highlight_list_item, opacityHigh, "bold")
       } else {
-        d3.select(this).call(highlight_list_item, opacityNormal, null)
+        d3.select(this).call(highlight_list_item, opacityLow, null)
       }
     })
 }
@@ -232,6 +232,8 @@ var highlightMultipleProjectInList = function(projects) {
     .each(function(t) {
       if ($.inArray(t, projects) != -1) {
         d3.select(this).call(highlight_list_item, opacityHigh, "bold")
+      } else {
+        d3.select(this).call(highlight_list_item, opacityLow, null)
       }
     })
 }
@@ -862,14 +864,13 @@ var heatmapInnovationImpact = function(n) {
 
   filterData(); //get the keys before you filter the data to get the whole original lists. 
 
-
   // append the svg canvas to the page
   d3.select("#innovationImpactChart").append("svg")
     .attr("width", width + margin.heatmap.left + margin.heatmap.right)
     .attr("height", height + margin.heatmap.top + margin.heatmap.bottom)
     .append("g")
     .attr("transform",
-      "translate(" + margin.heatmap.left + "," + margin.heatmap.top + ")");
+      "translate(" + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right) + "," + margin.heatmap.top + ")");
 
   var svg = d3.select("#innovationImpactChart").selectAll("g")
     .append("g")
@@ -1559,14 +1560,15 @@ var heatmapImpactApproach = function(n) {
 var sankeyChart = function(n) { //this is used to hide the previous chart. Should be replaced with .exit().remove() if possible! 
 
   filterData();
-
+  oldwidth = width
+  wdith = width + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)
   // append the svg canvas to the page
   d3.select("#sankeyChart").append("svg")
-    .attr("width", width + margin.sankey.left + margin.sankey.right)
+    .attr("width", width + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right))
     .attr("height", height + margin.sankey.top + margin.sankey.bottom)
     .append("g")
     .attr("transform",
-      "translate(" + margin.sankey.left + "," + margin.sankey.top + ")");
+      "translate(" + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)/2 + "," + margin.sankey.top + ")");
 
   var svg = d3.select("#sankeyChart").selectAll("g")
     .append("g")

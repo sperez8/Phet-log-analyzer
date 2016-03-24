@@ -25,7 +25,7 @@ body {
     margin-top: 5px;
 }
 
-svg {
+svg, {
     display:block;
     margin:auto;
 }
@@ -279,7 +279,7 @@ input[type="button"] {
     width: 185px;
     margin: 0;
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 .filter select {
     font-size: 13px;
@@ -294,7 +294,7 @@ input[type="button"] {
     padding: 6 16px;
     display: block;
     height: auto;
-    line-height: 30px;
+    line-height: 22px;
     font-family: 'museo_sans500';
     font-weight: 100;
     /*text-transform: capitalize;*/
@@ -311,7 +311,7 @@ input[type="button"] {
     font-family: 'museo_sans500';
     font-weight: 100;
     margin: 0;
-    margin-bottom: 7px;
+    margin-bottom: 3px;
 }
 .filterLabel p:first-child {
     margin-top: -7px;
@@ -382,10 +382,23 @@ input[type="button"] {
     overflow: hidden;
 }
 #NumberOfProjects {
-    width: 100%;
-    float: none;
+    width: 200px;
+    height: 30px;
+    margin: 0;
+    float: left;
 }
 #NumberOfProjects p {
+    margin-top: 7px;
+    color: #002145;
+    line-height: 30px;
+    height: 30px;
+    font-size: 15px;
+    font-family: 'museo_sans500';
+    font-weight: 500;
+    text-align: center;
+}
+
+.appHeader p {
     background: #002145;
     color: white;    
     margin: 0;
@@ -397,6 +410,8 @@ input[type="button"] {
     text-align: left;
     padding-left: 30px;
 }
+
+
 .commonPageHeader img {
     display: block;
 }
@@ -414,10 +429,11 @@ body {
 }
 
 #chartTypeButtons {
-    width: 100%;
+    width: auto;
+    padding-left: 10px;
     margin: 0 auto; 
     background: none;
-    float: left;
+    float: right;
     padding: 0;
     margin-top: 7px;
     text-align: center;
