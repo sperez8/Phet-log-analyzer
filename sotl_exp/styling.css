@@ -19,6 +19,7 @@ body {
     font-style: normal;
     font-size: 9pt;
     width: 100%;
+    min-width: 1200px;
     height:100%;
     margin-left: auto;
     margin-right: auto;
@@ -49,18 +50,6 @@ svg, {
     padding-right: 10px;
     padding-left: 10px;
 }
-
-/*#NumberOfProjects {
-    width:20%;
-    float:left;
-    vertical-align: center;
-}
-
- #NumberOfProjects p {
-    text-align: center;
-    background: #002145;
-    color: white;
-}*/
 
 #projectList {
     height: 80%;
@@ -383,6 +372,8 @@ input[type="button"] {
 }
 #NumberOfProjects {
     width: 200px;
+    margin-left: auto;
+    margin-right: auto;
     height: 30px;
     margin: 0;
     float: left;
@@ -428,16 +419,18 @@ body {
     display:table;
 }
 
+
 #chartTypeButtons {
     width: auto;
+    margin-left: auto;
+    margin-right: auto;
     padding-left: 10px;
-    margin: 0 auto; 
     background: none;
-    float: right;
     padding: 0;
     margin-top: 7px;
     text-align: center;
 }
+
 #chartTypeButtons input[type="button"] {
     border: 0;
     background-color: #166A9A;

@@ -610,7 +610,7 @@ var margin = {
 //width = 1200 - margin.sankey.left - margin.sankey.right,
 //height = 800 - margin.sankey.top - margin.sankey.bottom;
 width = document.getElementById("allCharts").offsetWidth
-width = (window.innerWidth - document.getElementById("sidebars").offsetWidth)*0.84
+width = (document.body.clientWidth - document.getElementById("sidebars").offsetWidth)*0.84
 height = window.innerHeight*0.7
 
 var formatNumber = d3.format(",.0f"), // zero decimal places
@@ -2256,7 +2256,7 @@ d3.select("#chartTypeButtons") //Sankey
 
 d3.select("#chartTypeButtons") //heatmapInnovationImpact
   .append("input")
-  .attr("value", "Frequency of Innovation x Impact")
+  .attr("value", "Innovation x Impact")
   .attr("type", "button")
   .attr("class", function (){
   //.style("background",  function() {
@@ -2275,7 +2275,7 @@ d3.select("#chartTypeButtons") //heatmapInnovationImpact
 
 d3.select("#chartTypeButtons")
   .append("input")
-  .attr("value", "Frequency of Impact x Evaluation")
+  .attr("value", "Impact x Evaluation")
   .attr("type", "button")
   .attr("class", function (){
   //.style("background",  function() {
