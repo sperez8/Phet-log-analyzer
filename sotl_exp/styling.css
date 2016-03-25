@@ -58,7 +58,7 @@ svg, {
 
 .projectListItem {
     width:100%;
-    font-size: 9pt;
+    font-size: 10pt;
 }
 
 /*.listitem {
@@ -71,6 +71,16 @@ svg, {
     vertical-align: middle;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+td {
+    color: #002145;
+    font-size: 12px;
+}
+
+th {
+    color: #166a9a;
+    font-size: 13px;
 }
 
 .rowNotShaded{
@@ -271,7 +281,7 @@ input[type="button"] {
     margin-bottom: 12px;
 }
 .filter select {
-    font-size: 13px;
+    font-size: 12px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -296,7 +306,7 @@ input[type="button"] {
 }
 .filterLabel p {
     color: #fff;
-    font-size: 13px;
+    font-size: 12px;
     font-family: 'museo_sans500';
     font-weight: 100;
     margin: 0;
@@ -321,7 +331,7 @@ input[type="button"] {
 }
 .sidebarTitle p {
     padding-left: 12px;
-    font-size: 16px;
+    font-size: 15px;
     font-family: 'museo_sans500';
     font-weight: 500;
     /*text-transform: uppercase;*/

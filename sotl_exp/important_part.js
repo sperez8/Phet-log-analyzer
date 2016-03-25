@@ -126,6 +126,15 @@ var update_heatmap_selection = function() {
   no_project_selected = true
   remove_highlight_card()
   selected_projects = get_selected_projects()
+  // d3.selectAll(".card")
+  //   .each(function(l) {
+  //     if (non_zero_intersection(selected_projects,l.projects)) {
+  //       no_project_selected = false
+  //       d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh,1)
+  //     } else {
+  //       d3.select(this).call(highlight_card, opacityLow, "white", widthNormal,1)
+  //     }
+  //   })
   d3.selectAll(".card")
     .each(function(l) {
       if (non_zero_intersection(selected_projects,l.projects)) {
@@ -611,7 +620,7 @@ var margin = {
 //height = 800 - margin.sankey.top - margin.sankey.bottom;
 width = document.getElementById("allCharts").offsetWidth
 width = (document.body.clientWidth - document.getElementById("sidebars").offsetWidth)*0.84
-height = window.innerHeight*0.7
+height = window.innerHeight - 200
 
 var formatNumber = d3.format(",.0f"), // zero decimal places
   format = function(d) {
@@ -1409,8 +1418,22 @@ var heatmapImpactApproach = function(n) {
     .attr("width", gridSizeX)
     .attr("height", gridSizeY / 2)
     .style("cursor","pointer")
-    .style("fill", "white")
-    .style("stroke", "white")
+    .style("fill", function(d){
+      if (d.impact != "Total"){
+        return colorscheme(d.impact)
+      } else {
+      return grey
+      }
+    })
+    .style("fill-opacity", function(d){
+      if (d.impact != "Total" && d.approach != "Total"){
+        return opacityScale(d.value)
+      } else {
+        return opacityScale(max)
+      }
+    })
+    .style("stroke", "#ffffff")
+    .style("stroke-width", "1px")
     .on("mouseover", function(l) {
       var cx = d3.event.pageX
       var cy = d3.event.pageY
@@ -1431,27 +1454,20 @@ var heatmapImpactApproach = function(n) {
       remove_tooltip()
       remove_highlight_list_item()
       remove_highlight_card()
+      update_heatmap_selection()
+    })
+    .on("click", function (l){
+      selected_projects = get_selected_projects()
+      if (non_zero_intersection(selected_projects,l.projects)) {
+        unselect_all_projects()
+      } else{
+        unselect_all_projects()
+        for (var i = l.projects.length - 1; i >= 0; i--) {
+          projectSelectionTracker[l.projects[i]] = true
+        }
+      }
+      update_heatmap_selection()
     });
-
-  cards.transition()
-    .ease("linear")
-    .duration(500) //slows it down! 
-    .style("fill", function(d){
-      if (d.impact != "Total"){
-        return colorscheme(d.impact)
-      } else {
-      return grey
-      }
-    })
-    .style("fill-opacity", function(d){
-      if (d.impact != "Total" && d.approach != "Total"){
-        return opacityScale(d.value)
-      } else {
-        return opacityScale(max)
-      }
-    })
-    .style("stroke", "#ffffff")
-    .style("stroke-width", "1px");
 
 
   //draw boxes
@@ -1865,7 +1881,7 @@ var tabulate = function() {
     var cells = rows.selectAll("td")
       .data(function(row) {
         return columns.map(function(column) {
-          return {
+          return {  
             column: column,
             value: row[column]
           };
@@ -1921,7 +1937,7 @@ var projectsOpen = false;
 
 function toggleProjectSidebar (argument) {
   $('#projectList').toggle();
-  projectsOpen = !projectsOpen;
+  //projectsOpen = !projectsOpen;
   // if (argument){projectsOpen=argument}
   if (projectsOpen)
     $('.sidebarTitle.projects .openclose').text('-');
@@ -2009,7 +2025,7 @@ function rerun(currentChartType) {
       .attr("width", listwidth)
       .attr("height", listheight)
       .append("g")
-      .attr("transform", "translate( " +  0 + ", -" +  10 + ")");
+      .attr("transform", "translate( " +  margin.left + ", -" +  10 + ")");
       //Use line beloe and "text-anchor:middle" for centered text
       //.attr("transform", "translate( " +  listwidth /2 + "," + 0 + ")");
 
@@ -2022,12 +2038,12 @@ function rerun(currentChartType) {
       .attr("dy", 0)
       .style("cursor","pointer")
       .attr("y", function(d, i) {
-        return 40 * i + 40
+        return 33 * i + 33
       })
       .text(function(d, i) {
-        return "- " + capitalizeFirstLetter(d.toLowerCase())
+        return capitalizeFirstLetter(d.toLowerCase())
       })
-      .call(wrap, listwidth-margin.left-margin.right-5, listheight)
+      .call(wrap, listwidth-margin.left*2-margin.right*2, listheight)
     .on("click", function (d){
       if (projectSelectionTracker[d]){
         unselect_all_projects()
@@ -2287,7 +2303,8 @@ d3.select("#chartTypeButtons")
     unclick_buttons()
     d3.select(this).call(click_button)
     setChartType = "impactApproachChart";
-    rerun(setChartType); //redraw previously selected chart 
+    rerun(setChartType); //redraw previously selected chart
+    update_heatmap_selection()
   });
 
 
