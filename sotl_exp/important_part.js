@@ -29,7 +29,6 @@ grey = "#b8b8b8"
 var opacityNormal = 0.7,
   opacityLow = 0.2,
   opacityHigh = 1,
-  colorHigh = "#5E869F",
   widthNormal = "1px",
   widthHigh = "3px";
 
@@ -130,7 +129,7 @@ var update_heatmap_selection = function() {
   //   .each(function(l) {
   //     if (non_zero_intersection(selected_projects,l.projects)) {
   //       no_project_selected = false
-  //       d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh,1)
+  //       d3.select(this).call(highlight_card, opacityHigh, grey, widthHigh,1)
   //     } else {
   //       d3.select(this).call(highlight_card, opacityLow, "white", widthNormal,1)
   //     }
@@ -139,7 +138,7 @@ var update_heatmap_selection = function() {
     .each(function(l) {
       if (non_zero_intersection(selected_projects,l.projects)) {
         no_project_selected = false
-        d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh,1)
+        d3.select(this).call(highlight_card, opacityHigh, grey, widthHigh,1)
       } else {
         d3.select(this).call(highlight_card, opacityLow, "white", widthNormal,1)
       }
@@ -170,7 +169,7 @@ var highlight_project_heatmap = function(card, title) {
   d3.selectAll(".card")
     .each(function(l) {
       if ($.inArray(title, l.projects) != -1) {
-        d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh,1)
+        d3.select(this).call(highlight_card, opacityHigh, grey, widthHigh,1)
         highlightProjectInList(title)
       } else {
         d3.select(this).call(highlight_card, opacityLow, null, widthNormal, opacityLow)
@@ -1093,7 +1092,7 @@ var heatmapInnovationImpact = function(n) {
         .style("top", (cy - 28) + "px");
       tooltip
         .style("opacity", tooltipOpacity);
-      d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh,1)
+      d3.select(this).call(highlight_card, opacityHigh, grey, widthHigh,1)
       highlightMultipleProjectInList(l.projects)
     })
     .on("mouseout", function() {
@@ -1468,7 +1467,7 @@ var heatmapImpactApproach = function(n) {
         .style("top", (cy - 28) + "px");
       tooltip
         .style("opacity", tooltipOpacity);
-      d3.select(this).call(highlight_card, opacityHigh, colorHigh, widthHigh,1)
+      d3.select(this).call(highlight_card, opacityHigh, grey, widthHigh,1)
       highlightMultipleProjectInList(l.projects)
     })
     .on("mouseout", function() {
@@ -1777,7 +1776,6 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
       return d.dy;
     })
     .attr("width", sankey.nodeWidth())
-    //.style("fill", colorHigh)
     .style("fill", function(d) { //color nodes if they are in the middle, otherwise grey
       if (check_middle(d)) {
         return colorscheme(d.name)
@@ -1979,7 +1977,7 @@ function rerun(currentChartType) {
   projects = ChartType[currentChartType](1)
 
   //Show the number of projects displayed in Sankey and HeatMap
-  var revealNumberOfProjects = function(total, highlightTime) {
+  var revealNumberOfProjects = function(total, numberselected, highlightTime) {
     var removeReveal = function() {
       d3.select("#NumberOfProjects").selectAll("p")
         .remove();
@@ -1988,8 +1986,8 @@ function rerun(currentChartType) {
     d3.select("#NumberOfProjects").append("p")
       .html(function(){
         if (total==0){return "No projects given current filters"}
-        else if (total==1){return "Showing " + total + " project"}
-        else {return "Showing " + total + " projects"}
+        else if (total==1){return "Showing " + numberselected + " project"}
+        else {return "Showing " + numberselected + " projects"}
       })
   };
 
@@ -2094,8 +2092,9 @@ function rerun(currentChartType) {
   }
 
   total = projects.length
+  numberselectedprojects = get_selected_projects().length
   var highlightTime = 200 //milliseconds
-  revealNumberOfProjects(total, highlightTime)
+  revealNumberOfProjects(total, numberselectedprojects, highlightTime)
   updateprojectList(projects)
 
 }
@@ -2266,7 +2265,6 @@ function unclick_buttons() {
         .ease("linear")
         .duration(highlightTime)
         .attr("class", "big_button unclicked")
-        //.style("background", colorHigh)
     })
 }
 
