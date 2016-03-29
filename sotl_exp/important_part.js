@@ -267,7 +267,7 @@ var highlightMultipleProjectInList = function(projects) {
 d3.sankey = function() {
   var sankey = {},
     //nodeWidth = 500,
-    nodePadding = 80,
+    nodePadding = 800,
     size = [4, 1],
     nodes = [],
     links = [];
@@ -280,7 +280,7 @@ d3.sankey = function() {
 
   sankey.nodePadding = function(_) {
     if (!arguments.length) return nodePadding;
-    nodePadding = +_;
+    nodePadding = +_+7;
     return sankey;
   };
 
@@ -620,7 +620,7 @@ var margin = {
 //height = 800 - margin.sankey.top - margin.sankey.bottom;
 width = document.getElementById("allCharts").offsetWidth
 width = (document.body.clientWidth - document.getElementById("sidebars").offsetWidth)*0.84
-height = window.innerHeight - 200
+height = window.innerHeight - 140
 
 var formatNumber = d3.format(",.0f"), // zero decimal places
   format = function(d) {
@@ -879,7 +879,7 @@ var heatmapInnovationImpact = function(n) {
     .attr("height", height + margin.heatmap.top + margin.heatmap.bottom)
     .append("g")
     .attr("transform",
-      "translate(" + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right) + "," + margin.heatmap.top + ")");
+      "translate(" + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)*1.25 + "," + margin.heatmap.top + ")");
 
   var svg = d3.select("#innovationImpactChart").selectAll("g")
     .append("g")
@@ -1616,17 +1616,17 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
   svg.append("text").text("Innovation")
     .attr("class", "heading")
     .attr("x", 0)
-    .attr("y", -10)
+    .attr("y", -25)
     .attr("text-anchor", "start");
   svg.append("text").text("Area of impact")
     .attr("class", "heading")
     .attr("x", width / 2)
-    .attr("y", -10)
+    .attr("y", -25)
     .attr("text-anchor", "middle");
   svg.append("text").text("Evaluation approach")
     .attr("class", "heading")
     .attr("x", width)
-    .attr("y", -10)
+    .attr("y", -25)
     .attr("text-anchor", "end");
 
 
@@ -1788,22 +1788,28 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
 
   // add in the title for the nodes
   node.append("text")
-    .attr("x", -6)
     .attr("y", function(d) {
-      return d.dy / 2;
+      return -5;
     })
     .attr("dy", ".35em")
-    .attr("class", "sankeyLabel")
-    .attr("text-anchor", "end")
+    .attr("vertical-align","top")
     .attr("transform", null)
     .text(function(d) {
       return d.name;
     })
-    .filter(function(d) {
-      return d.x < width / 2;
+    // .filter(function(d) {
+    //   return d.x < width / 2;
+    // })
+    .attr("x", function(d) {
+      if (d.x == 0) {return 0}
+      if (d.x < width/2) {return sankey.nodeWidth()/2}
+      else {return sankey.nodeWidth()}
     })
-    .attr("x", 6 + sankey.nodeWidth())
-    .attr("text-anchor", "start");
+    .attr("text-anchor", function(d) {
+      if (d.x == 0) {return "start"}
+      if (d.x < width/2) {return "middle"}
+      else {return "end"}
+    });
 
   return graph.links.map(function(d) {
     return d["projectTitle"]
@@ -1864,8 +1870,10 @@ var tabulate = function() {
     tableData = heatMapdata
     columns = tableColumns
 
+    margin_table_left = 15
+    margin_table_right = 15
     var table = d3.select("#project-table").append("table")
-                  .attr("width", width + margin.heatmap.left + margin.heatmap.right)
+                  .attr("width", width + margin.heatmap.left + margin.heatmap.right-margin_table_left-margin_table_right)
     thead = table.append("thead"),
       tbody = table.append("tbody");
 
@@ -1958,12 +1966,11 @@ var projectsOpen = false;
 
 function toggleProjectSidebar (argument) {
   $('#projectList').toggle();
-  //projectsOpen = !projectsOpen;
-  // if (argument){projectsOpen=argument}
   if (projectsOpen)
     $('.sidebarTitle.projects .openclose').text('-');
   else
     $('.sidebarTitle.projects .openclose').text('+');
+  projectsOpen = !projectsOpen;
 }
 
 

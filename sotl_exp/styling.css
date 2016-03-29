@@ -67,8 +67,10 @@ svg, {
 
 #project-table {
     vertical-align: middle;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 table { 
@@ -139,8 +141,8 @@ div.tooltip, div.tooltip-inner {
     pointer-events: none;
     font-family: "museo_sans500"; /*used to be Helvetica Neue*/
     font-style: normal;
-    font-size: 10pt;
-    color: #ff7f0e;
+    font-size: 9pt;
+    fill: #002145;
 }
 
 .link {
@@ -175,19 +177,19 @@ div.tooltip, div.tooltip-inner {
 }
 
 .innovationLabel{
-    color: #ff7f0e;
+    fill: #002145;
     text-align: center;
     alignment-baseline: central;
 }
 
 .impactLabel{
-    color: #ff7f0e;
+    fill: #002145;
     text-align: center;
     alignment-baseline: central;
 }
 
 .approachLabel{
-    color: #ff7f0e;
+    fill: #002145;
     text-align: center;
     alignment-baseline: central;
 }
