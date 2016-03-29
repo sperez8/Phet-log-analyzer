@@ -609,7 +609,7 @@ var margin = {
     left: 0
   },
   heatmap: {
-    top: 60,
+    top: 90,
     right: 0,
     bottom: 0,
     left: 150
@@ -1011,6 +1011,17 @@ var heatmapInnovationImpact = function(n) {
     .domain([1, max])
     .range([0.3,0.7,1])
 
+  svg.append("text").text("Innovation")
+    .attr("class", "heading")
+    .attr("x", -10)
+    .attr("y", -20)
+    .attr("text-anchor", "end");
+  svg.append("text").text("Area of impact")
+    .attr("class", "heading")
+    .attr("x", 0)
+    .attr("y", -margin.heatmap.top/2-5)
+    .attr("text-anchor", "start");
+
   //x-axis
   var impactLabels = svg.selectAll(".impactLabel")
     .data(areasOfImpact)
@@ -1346,6 +1357,16 @@ var heatmapImpactApproach = function(n) {
   evaluationApproach.push("Total")
   areasOfImpact.push("Total")
 
+  svg.append("text").text("Area of impact")
+    .attr("class", "heading")
+    .attr("x", -10)
+    .attr("y", -20)
+    .attr("text-anchor", "end");
+  svg.append("text").text("Evaluation approach")
+    .attr("class", "heading")
+    .attr("x", 0)
+    .attr("y", -margin.heatmap.top/2-5)
+    .attr("text-anchor", "start");
 
   var impactLabel = svg.selectAll("g")
     .data(areasOfImpact)
@@ -1597,12 +1618,12 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
     .attr("x", 0)
     .attr("y", -10)
     .attr("text-anchor", "start");
-  svg.append("text").text("Area of Impact")
+  svg.append("text").text("Area of impact")
     .attr("class", "heading")
     .attr("x", width / 2)
     .attr("y", -10)
     .attr("text-anchor", "middle");
-  svg.append("text").text("Evaluation Approach")
+  svg.append("text").text("Evaluation approach")
     .attr("class", "heading")
     .attr("x", width)
     .attr("y", -10)
