@@ -612,7 +612,7 @@ var margin = {
     top: 90,
     right: 0,
     bottom: 0,
-    left: 150
+    left: 140
   }
 };
 
@@ -1865,7 +1865,7 @@ var tabulate = function() {
     columns = tableColumns
 
     var table = d3.select("#project-table").append("table")
-                  .attr("style", "margin: 20px"),
+                  .attr("width", width + margin.heatmap.left + margin.heatmap.right)
     thead = table.append("thead"),
       tbody = table.append("tbody");
 

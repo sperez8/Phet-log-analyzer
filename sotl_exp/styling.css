@@ -66,16 +66,20 @@ svg, {
 }*/
 
 #project-table {
-    width:100%;
-    height: 30%;
     vertical-align: middle;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
+table { 
+    border-collapse: collapse; 
+}
+
 td {
     color: #002145;
     font-size: 12px;
+    border-left: 3px solid white;
+    border-right: 3px solid white;
 }
 
 th {
@@ -88,7 +92,16 @@ th {
 }
 
 .rowShaded{
-    background: #dfdfdf;
+    background: #e4edf2;
+}
+
+.rowselected{
+    background: #85aec8;
+}
+
+.rowselected input[type="td"]{
+    color: white;
+    border-left: 5px solid #002145;
 }
 
 div.tooltip, div.tooltip-inner {
@@ -139,7 +152,7 @@ div.tooltip, div.tooltip-inner {
     font-family: "museo_sans500"; /*used to be Helvetica Neue*/
     font-style: normal;
     font-size: 14pt;
-    fill: #002145;
+    fill: #166a9a;
 }
 
 #data-here{
@@ -360,6 +373,7 @@ input[type="button"] {
     height:100%;
     width: 230px;
     float: left;
+    margin-right: 10px;
 }
 #listItems {
     height: auto;
@@ -439,12 +453,14 @@ body {
     padding: 0;
     margin-top: 7px;
     text-align: center;
+    border-bottom: 3px;
+    border-bottom-style: solid;
+    border-bottom-radius: 0px;
+    border-bottom-color: #002145;
 }
 
 #chartTypeButtons input[type="button"] {
-    border: 0;
     background-color: #166A9A;
-    border-radius: 0;
     line-height: 30px;
     height: 30px;
     font-size: 15px;
@@ -454,11 +470,27 @@ body {
     margin: 0;
     margin-left: 10px;
     cursor: pointer;
+    border: 3px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #002145;
+    border-bottom-color: #166A9A;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
 #chartTypeButtons input[type="button"]:hover, #chartTypeButtons input[type="button"].clicked {
     /*background-color: rgba(22, 106, 154, 0.75);*/
     background-color: #002145;
+    border-bottom-color: #002145;
 }
+
+/*#chartTypeButtons input[type="button"].clicked {
+    border: 3px;
+    border-style: solid;
+    border-radius: 0px;
+    border-color: #166A9A;
+}
+*/
 #chartTypeButtons input[type="button"]:focus {
     outline: 0;
 }
