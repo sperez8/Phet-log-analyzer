@@ -32,6 +32,8 @@ var opacityNormal = 0.7,
   widthNormal = "1px",
   widthHigh = "3px";
 
+var highlightTime = 200; //milliseconds
+
 
 // Project selection tracker
 
@@ -76,6 +78,9 @@ var reset_projects =function(){
   unselect_all_projects()
   update_sankey_selection()
   update_heatmap_selection()
+  console.log(projectSelectionTracker, projectSelectionTracker.length)
+  total = projectSelectionTracker.length
+  updateprojectList(total)
 }
 
 var get_selected_projects = function() {
@@ -963,6 +968,12 @@ var heatmapInnovationImpact = function(n) {
     });   
   }
 
+  projectdata = []
+  heatMapdata.forEach(function(d) {
+    projectdata.push(d.project_Title);
+  });
+  // return only the distinct / unique nodes
+  projectdata = projectdata.getUnique()
   areasOfInnovation.push("Total")
   areasOfImpact.push("Total")
 
@@ -1112,6 +1123,7 @@ var heatmapInnovationImpact = function(n) {
         }
       }
       update_heatmap_selection()
+      revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
     });
 
   //draw boxes
@@ -1190,12 +1202,6 @@ var heatmapInnovationImpact = function(n) {
     });
 
   }
-  projectdata = []
-  heatMapdata.forEach(function(d) {
-    projectdata.push(d.project_Title);
-  });
-  // return only the distinct / unique nodes
-  projectdata = projectdata.getUnique()
   return projectdata
 }; //end heatmapInnovationImpact
 
@@ -1353,6 +1359,13 @@ var heatmapImpactApproach = function(n) {
     });   
   }
 
+  projectdata = []
+  heatMapdata.forEach(function(d) {
+    projectdata.push(d.project_Title);
+  });
+  // return only the distinct / unique nodes
+  projectdata = projectdata.getUnique()
+
   evaluationApproach.push("Total")
   areasOfImpact.push("Total")
 
@@ -1487,6 +1500,7 @@ var heatmapImpactApproach = function(n) {
         }
       }
       update_heatmap_selection()
+      revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
     });
 
 
@@ -1566,12 +1580,6 @@ var heatmapImpactApproach = function(n) {
     });
   }
 
-  projectdata = []
-  heatMapdata.forEach(function(d) {
-    projectdata.push(d.project_Title);
-  });
-  // return only the distinct / unique nodes
-  projectdata = projectdata.getUnique()
   return projectdata
 }; //end heatmapImpactApproach
 
@@ -1671,6 +1679,10 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
     };
   });
 
+  totalprojects = graph.links.map(function(d) {
+      return d["projectTitle"]
+    }).getUnique()
+
   sankey
     .nodes(graph.nodes)
     .links(graph.links)
@@ -1741,6 +1753,7 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
         projectSelectionTracker[l.projectTitle] = true
       }
       update_sankey_selection()
+      revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
     })
     .on("mouseover", function(l) {
       d3.select(this)
@@ -1809,9 +1822,7 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
       else {return "end"}
     });
 
-  return graph.links.map(function(d) {
-    return d["projectTitle"]
-  }).getUnique()
+  return totalprojects
 }
 
 
@@ -1971,132 +1982,138 @@ function toggleProjectSidebar (argument) {
   projectsOpen = !projectsOpen;
 }
 
+function get_number_of_selected_projects() {
+  //$.inArray(a[i], b)
+  console.log(get_selected_projects())
+  if ($.inArray("getUnique", get_selected_projects())) {
+    numberselectedprojects = get_selected_projects().length
+  } else {
+    numberselectedprojects = 0
+  }
+  return numberselectedprojects
+}
 
+//Show the number of projects displayed in Sankey and HeatMap
+var revealNumberOfProjects = function(total, numberselected, highlightTime) {
+  console.log(total,numberselectedprojects,get_selected_projects())
+  var removeReveal = function() {
+    d3.select("#NumberOfProjects").selectAll("p")
+      .remove();
+  };
+  removeReveal()
+  d3.select("#NumberOfProjects").append("p")
+    .html(function(){
+      if (total==0){return "No projects given current filters"}
+      else if (total==1){return "Selected " + numberselected + " out of " + total + " project shown"}
+      else {return "Selected " + numberselected + " out of " + total + " projects shown"}
+    })
+};
+
+
+var updateprojectList = function(projectdata) {
+  total = projects.length
+  var removeReveal = function() {
+    d3.select("#projectList").selectAll("svg")
+      .remove();
+  };
+  removeReveal()
+
+  function wrap(text, width, listheight) {
+    text.each(function() {
+      var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0,
+        lineHeight = 1.1, // ems
+        y = text.attr("y"),
+        dy = parseFloat(text.attr("dy")),
+        tspan = text.text(null).append("tspan").attr("class", "listitem").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+      if (y > listheight) {
+        return
+      }
+      spans = 0
+      while (word = words.pop()) {
+        line.push(word);
+        tspan.text(line.join(" "));
+        if (tspan.node().getComputedTextLength() > width) {
+          line.pop();
+          if (spans == 1) {
+            line.pop()
+            line.push('...')
+            tspan.text(line.join(" "));
+            break
+          }
+          tspan.text(line.join(" "));
+          line = [word];
+          tspan = text.append("tspan").attr("class", "listitem").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+          spans = spans + 1
+        }
+      }
+    });
+  }
+
+  var margin = {
+    top: 0,
+    right: 10,
+    bottom: 0,
+    left: 10,
+  }
+  listwidth = document.getElementById("projectList").offsetWidth - margin.left - margin.right,
+  listheight = window.innerHeight
+
+  // append the svg canvas to the page
+  var svg = d3.select("#projectList").append("svg")
+    .attr("class", "list")
+    .attr("width", listwidth)
+    .attr("height", listheight)
+    .append("g")
+    .attr("transform", "translate( " +  margin.left + ", -" +  10 + ")");
+    //Use line beloe and "text-anchor:middle" for centered text
+    //.attr("transform", "translate( " +  listwidth /2 + "," + 0 + ")");
+
+  svg.selectAll(".text")
+    .data(projectdata)
+    .enter().append("text")
+    .attr("class", "projectListItem")
+    .attr("x", 0)
+    .attr("dx", 0)
+    .attr("dy", 0)
+    .style("cursor","pointer")
+    .attr("y", function(d, i) {
+      return 33 * i + 33
+    })
+    .text(function(d, i) {
+      return capitalizeFirstLetter(d.toLowerCase())
+    })
+    .call(wrap, listwidth-margin.left*2-margin.right*2, listheight)
+  .on("click", function (d){
+    if (projectSelectionTracker[d]){
+      unselect_all_projects()
+    } else {
+      unselect_all_projects()
+      projectSelectionTracker[d] = true
+    }
+    update_sankey_selection()
+    revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
+  })
+    .on("mouseover", function(d) {
+      highlightProjectInList(d)
+      d3.select("this").call(highlight_project_sankey, d)
+      d3.select("this").call(highlight_project_heatmap, d)
+    })
+    .on("mouseout", function() {
+      remove_highlight_list_item()
+      update_sankey_selection()
+      update_heatmap_selection()
+    });
+}
 
 function rerun(currentChartType) {
   projects = ChartType[currentChartType](1)
-
-  //Show the number of projects displayed in Sankey and HeatMap
-  var revealNumberOfProjects = function(total, numberselected, highlightTime) {
-    var removeReveal = function() {
-      d3.select("#NumberOfProjects").selectAll("p")
-        .remove();
-    };
-    removeReveal()
-    d3.select("#NumberOfProjects").append("p")
-      .html(function(){
-        if (total==0){return "No projects given current filters"}
-        else if (total==1){return "Showing " + numberselected + " project"}
-        else {return "Showing " + numberselected + " projects"}
-      })
-  };
-
-  var updateprojectList = function(projectdata) {
-
-    var removeReveal = function() {
-      d3.select("#projectList").selectAll("svg")
-        .remove();
-    };
-
-    removeReveal()
-
-    function wrap(text, width, listheight) {
-      text.each(function() {
-        var text = d3.select(this),
-          words = text.text().split(/\s+/).reverse(),
-          word,
-          line = [],
-          lineNumber = 0,
-          lineHeight = 1.1, // ems
-          y = text.attr("y"),
-          dy = parseFloat(text.attr("dy")),
-          tspan = text.text(null).append("tspan").attr("class", "listitem").attr("x", 0).attr("y", y).attr("dy", dy + "em");
-        if (y > listheight) {
-          return
-        }
-        spans = 0
-        while (word = words.pop()) {
-          line.push(word);
-          tspan.text(line.join(" "));
-          if (tspan.node().getComputedTextLength() > width) {
-            line.pop();
-            if (spans == 1) {
-              line.pop()
-              line.push('...')
-              tspan.text(line.join(" "));
-              break
-            }
-            tspan.text(line.join(" "));
-            line = [word];
-            tspan = text.append("tspan").attr("class", "listitem").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
-            spans = spans + 1
-          }
-        }
-      });
-    }
-
-    var margin = {
-      top: 0,
-      right: 10,
-      bottom: 0,
-      left: 10,
-    }
-    listwidth = document.getElementById("projectList").offsetWidth - margin.left - margin.right,
-    listheight = window.innerHeight
-
-
-    // append the svg canvas to the page
-    var svg = d3.select("#projectList").append("svg")
-      .attr("class", "list")
-      .attr("width", listwidth)
-      .attr("height", listheight)
-      .append("g")
-      .attr("transform", "translate( " +  margin.left + ", -" +  10 + ")");
-      //Use line beloe and "text-anchor:middle" for centered text
-      //.attr("transform", "translate( " +  listwidth /2 + "," + 0 + ")");
-
-    svg.selectAll(".text")
-      .data(projectdata)
-      .enter().append("text")
-      .attr("class", "projectListItem")
-      .attr("x", 0)
-      .attr("dx", 0)
-      .attr("dy", 0)
-      .style("cursor","pointer")
-      .attr("y", function(d, i) {
-        return 33 * i + 33
-      })
-      .text(function(d, i) {
-        return capitalizeFirstLetter(d.toLowerCase())
-      })
-      .call(wrap, listwidth-margin.left*2-margin.right*2, listheight)
-    .on("click", function (d){
-      if (projectSelectionTracker[d]){
-        unselect_all_projects()
-      } else {
-        unselect_all_projects()
-        projectSelectionTracker[d] = true
-      }
-      update_sankey_selection()
-    })
-      .on("mouseover", function(d) {
-        highlightProjectInList(d)
-        d3.select("this").call(highlight_project_sankey, d)
-        d3.select("this").call(highlight_project_heatmap, d)
-      })
-      .on("mouseout", function() {
-        remove_highlight_list_item()
-        update_sankey_selection()
-        update_heatmap_selection()
-      });
-  }
-
   total = projects.length
-  numberselectedprojects = get_selected_projects().length
-  var highlightTime = 200 //milliseconds
-  revealNumberOfProjects(total, numberselectedprojects, highlightTime)
+  revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
   updateprojectList(projects)
-
 }
 
 
