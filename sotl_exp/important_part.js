@@ -616,14 +616,14 @@ var margin = {
     top: 90,
     right: 0,
     bottom: 0,
-    left: 140
+    left: 160
   }
 };
 
 //width = 1200 - margin.sankey.left - margin.sankey.right,
 //height = 800 - margin.sankey.top - margin.sankey.bottom;
 width = document.getElementById("allCharts").offsetWidth
-width = (document.body.clientWidth - document.getElementById("sidebars").offsetWidth)*0.84
+width = (document.body.clientWidth - document.getElementById("sidebars").offsetWidth)*0.8
 height = window.innerHeight - 140
 
 var formatNumber = d3.format(",.0f"), // zero decimal places
@@ -2004,8 +2004,8 @@ var revealNumberOfProjects = function(total, numberselected, highlightTime) {
   d3.select("#NumberOfProjects").append("p")
     .html(function(){
       if (total==0){return "No projects given current filters"}
-      else if (total==1){return "Selected " + numberselected + " out of " + total + " project shown"}
-      else {return "Selected " + numberselected + " out of " + total + " projects shown"}
+      else if (total==1){return "Selected " + numberselected + " out of " + total + " project"}
+      else {return "Selected " + numberselected + " out of " + total + " projects"}
     })
 };
 
