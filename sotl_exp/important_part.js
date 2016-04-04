@@ -616,14 +616,14 @@ var margin = {
     top: 90,
     right: 0,
     bottom: 0,
-    left: 160
+    left: 140
   }
 };
 
 //width = 1200 - margin.sankey.left - margin.sankey.right,
 //height = 800 - margin.sankey.top - margin.sankey.bottom;
 width = document.getElementById("allCharts").offsetWidth
-width = (document.body.clientWidth - document.getElementById("sidebars").offsetWidth)*0.8
+width = (document.body.clientWidth - document.getElementById("sidebars").offsetWidth)*0.84
 height = window.innerHeight - 140
 
 var formatNumber = d3.format(",.0f"), // zero decimal places
@@ -1971,7 +1971,7 @@ function toggleFilterSidebar (argument) {
   filtersOpen = !filtersOpen;
 }
 
-var projectsOpen = false;
+var projectsOpen = true;
 
 function toggleProjectSidebar (argument) {
   $('#projectList').toggle();
