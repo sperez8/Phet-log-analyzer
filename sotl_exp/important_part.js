@@ -78,9 +78,8 @@ var reset_projects =function(){
   unselect_all_projects()
   update_sankey_selection()
   update_heatmap_selection()
-  console.log(projectSelectionTracker, projectSelectionTracker.length)
+  console.log('reseting',projectSelectionTracker, projectSelectionTracker.length)
   total = projectSelectionTracker.length
-  updateprojectList(total)
 }
 
 var get_selected_projects = function() {
@@ -623,7 +622,7 @@ var margin = {
 //width = 1200 - margin.sankey.left - margin.sankey.right,
 //height = 800 - margin.sankey.top - margin.sankey.bottom;
 width = document.getElementById("allCharts").offsetWidth
-width = (document.body.clientWidth - document.getElementById("sidebars").offsetWidth)*0.84
+width = (document.body.clientWidth - document.getElementById("sidebars").offsetWidth)*0.8
 height = window.innerHeight - 140
 
 var formatNumber = d3.format(",.0f"), // zero decimal places
@@ -974,6 +973,7 @@ var heatmapInnovationImpact = function(n) {
   });
   // return only the distinct / unique nodes
   projectdata = projectdata.getUnique()
+
   areasOfInnovation.push("Total")
   areasOfImpact.push("Total")
 
@@ -1983,8 +1983,6 @@ function toggleProjectSidebar (argument) {
 }
 
 function get_number_of_selected_projects() {
-  //$.inArray(a[i], b)
-  console.log(get_selected_projects())
   if ($.inArray("getUnique", get_selected_projects())) {
     numberselectedprojects = get_selected_projects().length
   } else {
