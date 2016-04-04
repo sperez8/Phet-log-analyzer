@@ -39,7 +39,7 @@ replacementsLongInnov = {
 					"In-class content delivery (e.g., demos)" : "Content - instructor generated (e.g., videos)",
 					"Other assessment (e.g., two-stage exam)" : "Assessment - other (e.g., two-stage exams, diagnostics)",
 					"Program level curricular modifications (e.g., learning outcomes alignment)" : "Program Structure (e.g., learning outcomes alignment)",
-					"Reduced seat time (e.g., fewer face-to-face contact hours)" : "Reduced seat time (e.g., reducing face-to-face contact hours)",
+					"Reduced seat time (e.g., fewer face-to-face contact hours)" : "Reduced seat time (reducing face-to-face contact hours)",
 					#not found "Support for faculty (e.g., professional development)" : "Instructional team enhancement (e.g., roles, support, professional development)",
 					"Roles of Teaching Assistants (e.g., adding teaching responsibilities)" : "Instructional Team (e.g., support, professional development, roles)",
 					"Technologies development (e.g., annotation systems)" : "Other Innovation",
@@ -75,14 +75,14 @@ replacementsShortInnov = {
 
 replacementsLongImpact = {
 					#AREA OF IMPACT
-					"Course/program specific knowledge (e.g., the French revolution, F=ma)":"Course/program specific knowledge (e.g., the French revolution, F=ma)",
-					"Generic Lifelong learning skills (e.g., collaboration, critical/interdisciplinary thinking)":"Professional and Lifelong learning skills (e.g., collaboration, critical/interdisciplinary thinking)",
-					"Professional competencies (e.g., appropriate use of procedural/clinical skills)":"Professional and Lifelong learning skills (e.g., collaboration, critical/interdisciplinary thinking)",
-					"Attitudes (e.g., perceptions about discipline)":"Attitudes and Motivation (e.g., perceptions about discipline, personal goals)",
-					"Motivation (e.g., personal goals)":"Attitudes and Motivation (e.g., perceptions about discipline, personal goals)",
+					"Course/program specific knowledge (e.g., the French revolution, F=ma)":"Course specific knowledge (including program specific knowledge, e.g., the French revolution, F=ma)",
+					"Generic Lifelong learning skills (e.g., collaboration, critical/interdisciplinary thinking)":"Lifelong skills (including professional skills, e.g., collaboration, critical/interdisciplinary thinking)",
+					"Professional competencies (e.g., appropriate use of procedural/clinical skills)":"Lifelong skills (including professional skills, e.g., collaboration, critical/interdisciplinary thinking)",
+					"Attitudes (e.g., perceptions about discipline)":"Attitudes and motivation (e.g., personal goals, perceptions about discipline).",
+					"Motivation (e.g., personal goals)":"Attitudes and motivation (e.g., personal goals, perceptions about discipline).",
 					"Actions and behaviours (e.g.,time on task, enrolment)":"Actions and behaviours (e.g.,time on task, enrolment)",
 					"Operations (e.g., finance, reputation)":"Operations (e.g., finance, reputation)",
-					"Instructional team (e.g., TA use of time)":"Instructional team roles and practices(e.g., TA use of time)",
+					"Instructional team (e.g., TA use of time)":"Instructional team practices (e.g., TA use of time)",
 }
 
 replacementsShortImpact = {
