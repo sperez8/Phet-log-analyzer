@@ -623,7 +623,7 @@ var margin = {
     top: 90,
     right: 0,
     bottom: 0,
-    left: 140
+    left: 150
   }
 };
 
@@ -2300,7 +2300,7 @@ function click_button(button) {
     .attr("class", "big_button clicked")
 }
 
-//chartType buttons:    
+//chartType buttons:
 d3.select("#chartTypeButtons") //Sankey
   .append("input")
   .attr("value", "Flow")
@@ -2376,6 +2376,33 @@ d3.select("#chartTypeButtons")
 
   });
 
+function runhelp() {
+  d3.select("#help").append("svg")
+    .attr("width", width + margin.heatmap.left + margin.heatmap.right)
+    .attr("height", height + margin.heatmap.top + margin.heatmap.bottom)
+    .append("g")
+    .attr("transform",
+      "translate(" + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)*1.25 + "," + margin.heatmap.top + ")");
+  return null
+}
+
+d3.select("#chartTypeButtons") //Help - info page
+  .append("input")
+  .attr("value", "?")
+  .attr("type", "button")
+  .attr("class", function (){
+  //.style("background",  function() {
+      if (currentChartType == "help"){
+        return "big_button clicked"
+      } else {return "big_button unclicked"}
+  })
+  .on("click", function() {
+    unclick_buttons()
+    d3.select(this).call(click_button)
+    setChartType = "help";
+    filterData()
+    runhelp()
+  });
 
 rerun(currentChartType); 
 
