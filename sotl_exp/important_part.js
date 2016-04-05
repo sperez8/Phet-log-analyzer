@@ -192,6 +192,28 @@ var highlight_project_heatmap = function(card, title) {
     })
 }
 
+var highlight_project_table = function(row, title) {
+  if (get_selected_projects()[0] != "getUnique" && get_selected_projects().length > 0) {return null} //not sure why this happens on first load but it works...
+  d3.selectAll(".rowShaded")
+    .each(function(l) {
+      if (l.project_Title == title) {
+        d3.select(this).call(highlight_row,'#85aec8')
+        highlightProjectInList(l.project_Title)
+      } else {
+        d3.select(this).call(highlight_row,null)
+      }
+    })
+    d3.selectAll(".rowNotShaded")
+    .each(function(l) {
+      if (l.project_Title == title) {
+        d3.select(this).call(highlight_row,'#85aec8')
+        highlightProjectInList(l.project_Title)
+      } else {
+        d3.select(this).call(highlight_row,null)
+      }
+    })
+}
+
 var highlight_link = function(selection, opacity, widthChanger) {
   selection
     .transition()
@@ -210,6 +232,14 @@ var highlight_card = function(selection, opacity, color, width, stroke_opacity) 
     //.style("fill",color)
     .style("opacity",opacity)
     .style("stroke-opacity",stroke_opacity)
+};
+
+var highlight_row = function(selection, color) {
+  selection
+    .transition()
+    .ease("linear")
+    .duration(highlightTime)
+    .style("background", color)
 };
 
 var remove_highlight_card = function() {
@@ -1960,6 +1990,16 @@ var tabulate = function() {
       .attr("class", function(d,i) {
         if (i % 2 === 0  ) {return "rowNotShaded"}
         else {return "rowShaded"}
+      })
+      .on("mouseover", function(l) {
+        console.log(l.project_Title)
+        d3.select(this)
+          .call(highlight_project_table, l.project_Title)
+      })
+      .on("mouseout", function() {
+        // remove_highlight_list_item()
+        // remove_highlight_link()
+        // update_sankey_selection()
       });
 
     // create a cell in each row for each column
@@ -2047,7 +2087,7 @@ var revealNumberOfProjects = function(total, numberselected, highlightTime) {
   removeReveal()
   d3.select("#NumberOfProjects").append("p")
     .html(function(){
-      if (total==0){return "No projects given current filters"}
+      if (total==0){return "No projects given filters"}
       else if (total==1){return "Selected " + numberselected + " out of " + total + " project"}
       else {return "Selected " + numberselected + " out of " + total + " projects"}
     })

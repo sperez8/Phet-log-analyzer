@@ -91,15 +91,17 @@ th {
 
 .rowNotShaded{
     background: white;
+    cursor: pointer;
 }
 
 .rowShaded{
     background: #e4edf2;
+    cursor: pointer;
 }
 
-.rowselected{
+/*.rowselected{
     background: #85aec8;
-}
+}*/
 
 .rowselected input[type="td"]{
     color: white;
