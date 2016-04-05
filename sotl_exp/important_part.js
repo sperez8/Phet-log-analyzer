@@ -2034,12 +2034,11 @@ var tabulate = function() {
         update_table_selection()
       })
       .on("click", function (l){
-      selected_projects = get_selected_projects()
-      if (non_zero_intersection(selected_projects,l.projects)) {
+      if (projectSelectionTracker[l.project_Title]) {
         unselect_all_projects()
       } else{
         unselect_all_projects()
-          projectSelectionTracker[l.project_Title] = true
+        projectSelectionTracker[l.project_Title] = true
       }
       update_table_selection()
       revealNumberOfProjects(totalnumberprojects, get_number_of_selected_projects(), highlightTime)
