@@ -75,11 +75,12 @@ var highlightTime = 500 //milliseconds
 
 var reset_projects =function(){
   remove_highlight_list_item()
-  unselect_all_projects()
+  total = unselect_all_projects()
   update_sankey_selection()
   update_heatmap_selection()
   console.log('reseting',projectSelectionTracker, projectSelectionTracker.length)
-  total = projectSelectionTracker.length
+  //total = projectSelectionTracker.length
+  revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
 }
 
 var get_selected_projects = function() {
@@ -93,9 +94,14 @@ var get_selected_projects = function() {
 }
 
 var unselect_all_projects = function() {
+  total = 0
   for(var key in projectSelectionTracker) {
-    projectSelectionTracker[key] = false;
+    if (key != 'getUnique'){
+      total = total +1
+      projectSelectionTracker[key] = false;
+    }
   }
+  return total
 }
 
 var non_zero_intersection = function(a,b) {
@@ -110,18 +116,20 @@ var non_zero_intersection = function(a,b) {
 var update_sankey_selection = function() {
   no_project_selected = true
   remove_highlight_link()
+  selected_projects = get_selected_projects()
   d3.selectAll(".link")
     .each(function(l) {
-      if (projectSelectionTracker[l.projectTitle]) {
+      if ($.inArray(l.projectTitle, selected_projects) != -1) {
         no_project_selected = false
         d3.select(this).call(highlight_link, opacityHigh)
-        highlightProjectInList(l.projectTitle)
       } else {
         d3.select(this).call(highlight_link, opacityLow)
       }
     })
   if (no_project_selected){
     remove_highlight_link()
+  } else {
+    highlightMultipleProjectInList(selected_projects)
   }
 }
 
@@ -622,6 +630,7 @@ var margin = {
 //width = 1200 - margin.sankey.left - margin.sankey.right,
 //height = 800 - margin.sankey.top - margin.sankey.bottom;
 width = document.getElementById("allCharts").offsetWidth
+console.log(document.body.clientWidth,document.getElementById("sidebars").offsetWidth,document.getElementById("viz").offsetWidth)
 width = (document.body.clientWidth - document.getElementById("sidebars").offsetWidth)*0.8
 height = window.innerHeight - 140
 
@@ -2009,7 +2018,7 @@ var revealNumberOfProjects = function(total, numberselected, highlightTime) {
 
 
 var updateprojectList = function(projectdata) {
-  total = projects.length
+  //total = projects.length
   var removeReveal = function() {
     d3.select("#projectList").selectAll("svg")
       .remove();
@@ -2092,7 +2101,6 @@ var updateprojectList = function(projectdata) {
       unselect_all_projects()
       projectSelectionTracker[d] = true
     }
-    update_sankey_selection()
     revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
   })
     .on("mouseover", function(d) {
@@ -2110,6 +2118,7 @@ var updateprojectList = function(projectdata) {
 function rerun(currentChartType) {
   projects = ChartType[currentChartType](1)
   total = projects.length
+  console.log('rerun', get_number_of_selected_projects(), total)
   revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
   updateprojectList(projects)
 }
@@ -2394,5 +2403,6 @@ function reset_filters() {
   d3.select("#context-filter-evaluation").selectAll("select").property({"value":evaluation})
 
   //rerun viz
+  unselect_all_projects()
   rerun(get_current_chart())
 }

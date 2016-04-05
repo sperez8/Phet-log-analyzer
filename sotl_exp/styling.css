@@ -19,7 +19,7 @@ body {
     font-style: normal;
     font-size: 10pt;
     width: 100%;
-    min-width: 1200px;
+    min-width: 1250px;
     height:100%;
     margin-left: auto;
     margin-right: auto;
@@ -34,7 +34,7 @@ svg, {
 /*#sankeyChart, #innovationImpactChart, #impactApproachChart {*/
 #allCharts {
     width: 100%;
-    min-width:700px;
+    min-width:800px;
     height: 100%;
     float: left;
     clear: right;
