@@ -22,7 +22,7 @@
 colorscheme = d3.scale.ordinal()
   .domain(["Course specific knowledge", "Lifelong learning skills", "Attitudes and motivation", "Actions and behaviours", "Other area of impact", "Instructional team practices", "Operations"])
   //.range(["#a6d854","#8da0cb","#fc8d62","#b3b3b3","#ffd92f","#66c2a5","#e78ac3"])
-  .range(["#686AF5","#80E633","#FA7140","#FAB03B","#e5fa3b","#05CE8E","#B8447C"])
+  .range(["#686AF5","#FA7140","#80E633","#FAB03B","#e5fa3b","#05CE8E","#B8447C"])
 
 grey = "#b8b8b8"
 darkbluetable = '#85aec8'
@@ -159,7 +159,7 @@ var update_heatmap_selection = function() {
 
 var update_table_selection = function() {
   no_project_selected = true
-  remove_highlight_row()
+  //remove_highlight_row()
   selected_projects = get_selected_projects()
   d3.selectAll(".rowShaded")
     .each(function(l) {
@@ -262,9 +262,9 @@ var highlight_card = function(selection, opacity, color, width, stroke_opacity) 
 
 var highlight_row = function(selection, color) {
   selection
-    .transition()
-    .ease("linear")
-    .duration(highlightTime)
+    // .transition()
+    // .ease("linear")
+    // .duration(highlightTime)
     .style("background", color)
 };
 
@@ -2031,7 +2031,6 @@ var tabulate = function() {
       })
       .on("mouseout", function() {
         remove_highlight_list_item()
-        remove_highlight_row()
         update_table_selection()
       })
       .on("click", function (l){
@@ -2223,6 +2222,9 @@ var updateprojectList = function(projectdata) {
       projectSelectionTracker[d] = true
     }
     revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
+    update_sankey_selection()
+    update_heatmap_selection()
+    update_table_selection()
   })
     .on("mouseover", function(d) {
       highlightProjectInList(d)
