@@ -132,13 +132,12 @@ div.tooltip, div.tooltip-inner {
 /*for sankey chart*/
 
 .node rect {
-  cursor: move;
+/*  cursor: move;*/
   fill-opacity: .9; 
   shape-rendering: crispEdges;
 }
 
 .node text {
-    pointer-events: none;
     font-family: "museo_sans500"; /*used to be Helvetica Neue*/
     font-style: normal;
     font-size: 10pt;

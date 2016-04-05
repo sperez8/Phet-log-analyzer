@@ -71,6 +71,17 @@ var remove_tooltip = function() {
   tooltip.style("opacity", 0);
 }
 
+var category_tooltip = function(info) {
+  var cx = d3.event.pageX
+  var cy = d3.event.pageY
+  tooltip.html(info)
+    .style("left", (cx + 5) + "px")
+    .style("top", (cy - 28) + "px");
+  tooltip
+    .style("opacity", tooltipOpacity);
+}
+
+
 var highlightTime = 500 //milliseconds
 
 var reset_projects =function(){
@@ -78,7 +89,6 @@ var reset_projects =function(){
   total = unselect_all_projects()
   update_sankey_selection()
   update_heatmap_selection()
-  console.log('reseting',projectSelectionTracker, projectSelectionTracker.length)
   //total = projectSelectionTracker.length
   revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
 }
@@ -828,6 +838,8 @@ var heatmapInnovationImpact = function(n) {
       matrix: d["matrix"],
       innovation: d["source"],
       impact: d["target"],
+      innovation_longname: d["source long name"],
+      impact_longname: d["target long name"],
       value: +d["value"],
       Course_Level: d["Course_Level"],
       Faculty_School: d["Faculty_School"],
@@ -843,16 +855,19 @@ var heatmapInnovationImpact = function(n) {
     };
   });
 
-  //
+  longnames = {}
+
   //Great nest learning tool: http://bl.ocks.org/shancarter/raw/4748131/ 
   var heatMapNest = d3.nest()
     .key(function(d) {
       return d.matrix;
     })
     .key(function(d) {
+      longnames[d.innovation] = d.innovation_longname
       return d.innovation;
     }) //innovation first for innovation keys
     .key(function(d) {
+      longnames[d.impact] = d.impact_longname
       return d.impact;
     })
     .rollup(function(x) {
@@ -1019,6 +1034,10 @@ var heatmapInnovationImpact = function(n) {
     .attr("class", "innovationLabel")
     .style("text-anchor", "end")
     .style("vertical-align", "middle")
+    .on("mouseover", function(d) {
+      category_tooltip(capitalizeFirstLetter(longnames[d].toLowerCase()))
+    })
+    .on("mouseout", function() {remove_tooltip()})
     .call(wrapx, margin.heatmap.left);
 
   // var colorScale = d3.scale.quantile()
@@ -1051,13 +1070,15 @@ var heatmapInnovationImpact = function(n) {
     .attr("x", function(d, i) {
       return ((i) * gridSizeX);
     })
-    //.attr("x", function (d, i) { return gridSizeX; })
     .attr("y", -10)
     .attr("dy", 0)
     .attr("dx", 0)
     .attr("class", "impactLabel")
     .style("text-anchor", "start")
-    //.attr("transform", "translate(6," + -1*gridSizeX/4  + ")")
+    .on("mouseover", function(d) {
+      category_tooltip(capitalizeFirstLetter(longnames[d].toLowerCase()))
+    })
+    .on("mouseout", function() {remove_tooltip()})
     .call(wrapy, gridSizeX);
 
 
@@ -1067,23 +1088,18 @@ var heatmapInnovationImpact = function(n) {
 
   cards.enter()
     .append("rect")
-    //.attr("y", function(d) { return ((areasOfInnovation.indexOf( d[1])) * gridSizeX/2); }) //array-works
     .attr("y", function(d) {
       return ((areasOfInnovation.indexOf(d.impact)) * gridSizeY / 2);
     })
-    //.attr("x", function(d) { return areasOfImpact.indexOf(d[0]) * gridSizeX; })  //array. works
     .attr("x", function(d) {
       return areasOfImpact.indexOf(d.innovation) * gridSizeX;
     })
-    //.attr("y", function(d,i) { return i * gridSizeX; })  
     .attr("rx", 6)
     .attr("ry", 6)
     .attr("class", "card")
     .attr("width", gridSizeX)
     .attr("height", gridSizeY / 2)
     .style("cursor","pointer")
-    //.style("fill", "white")
-    //.style("stroke", "white")
     .style("fill", function(d){
       if (d.innovation != "Total"){
         return colorscheme(d.innovation)
@@ -1221,8 +1237,10 @@ var heatmapImpactApproach = function(n) {
   heatMapdata = d3.tsv.parse(customData, function(d) { //type function
     return {
       matrix: d.matrix,
-      approach: d.source, // to coerce into a number or not!  + means yes
+      approach: d.source,
       impact: d.target,
+      approach_longname: d["source long name"],
+      impact_longname: d["target long name"],
       value: +d.value,
       Course_Level: d.Course_Level,
       Faculty_School: d.Faculty_School,
@@ -1238,15 +1256,19 @@ var heatmapImpactApproach = function(n) {
     };
   });
 
+  longnames = {}
+
   //Great nest learning tool: http://bl.ocks.org/shancarter/raw/4748131/ 
   var heatMapNest = d3.nest()
     .key(function(d) {
       return d.matrix;
     })
     .key(function(d) {
+      longnames[d.approach] = d.approach_longname
       return d.approach;
     }) //innovation first for innovation keys
     .key(function(d) {
+      longnames[d.impact] = d.impact_longname
       return d.impact;
     })
     .rollup(function(x) {
@@ -1416,6 +1438,10 @@ var heatmapImpactApproach = function(n) {
     .attr("class", "impactLabel")
     .style("text-anchor", "end")
     .style("vertical-align", "middle")
+    .on("mouseover", function(d) {
+      category_tooltip(capitalizeFirstLetter(longnames[d].toLowerCase()))
+    })
+    .on("mouseout", function() {remove_tooltip()})
     .call(wrapx, margin.heatmap.left - 30);
 
 
@@ -1438,7 +1464,10 @@ var heatmapImpactApproach = function(n) {
     .attr("dx", 0)
     .attr("class", "approachLabel")
     .style("text-anchor", "start")
-    //.attr("transform", "translate(6," + -1*gridSizeX/4  + ")")
+    .on("mouseover", function(d) {
+      category_tooltip(capitalizeFirstLetter(longnames[d].toLowerCase()))
+    })
+    .on("mouseout", function() {remove_tooltip()})
     .call(wrapy, gridSizeY);
 
 
@@ -1652,9 +1681,13 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
     "links": []
   };
 
+  longnames = {}
+
   data1.forEach(function(d) {
+    longnames[d.source] = d["source long name"]
+    longnames[d.target] = d["target long name"]
     graph.nodes.push({
-      "name": d.source
+      "name": d.source,
     });
     graph.nodes.push({
       "name": d.target
@@ -1783,6 +1816,15 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
     .attr("transform", function(d) {
       return "translate(" + d.x + "," + d.y + ")";
     })
+    .on("mouseover", function(d) {
+      category_tooltip(capitalizeFirstLetter(longnames[d.name].toLowerCase()))
+    })
+    .on("mouseout", function() {remove_tooltip()})
+    .attr("x", function(d) {
+      if (d.x == 0) {return 0}
+      if (d.x < width/2) {return sankey.nodeWidth()/2}
+      else {return sankey.nodeWidth()}
+    })
     // .call(d3.behavior.drag()
     //   .origin(function(d) {
     //     return d;
@@ -1813,22 +1855,22 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
     })
     .attr("dy", ".35em")
     .attr("vertical-align","top")
-    .attr("transform", null)
     .text(function(d) {
       return d.name;
-    })
-    // .filter(function(d) {
-    //   return d.x < width / 2;
-    // })
-    .attr("x", function(d) {
-      if (d.x == 0) {return 0}
-      if (d.x < width/2) {return sankey.nodeWidth()/2}
-      else {return sankey.nodeWidth()}
     })
     .attr("text-anchor", function(d) {
       if (d.x == 0) {return "start"}
       if (d.x < width/2) {return "middle"}
       else {return "end"}
+    })
+    .on("mouseover", function(d) {
+      category_tooltip(capitalizeFirstLetter(longnames[d.name].toLowerCase()))
+    })
+    .on("mouseout", function() {remove_tooltip()})
+    .attr("x", function(d) {
+      if (d.x == 0) {return 0}
+      if (d.x < width/2) {return sankey.nodeWidth()/2}
+      else {return sankey.nodeWidth()}
     });
 
   return totalprojects
@@ -2002,7 +2044,6 @@ function get_number_of_selected_projects() {
 
 //Show the number of projects displayed in Sankey and HeatMap
 var revealNumberOfProjects = function(total, numberselected, highlightTime) {
-  console.log(total,numberselectedprojects,get_selected_projects())
   var removeReveal = function() {
     d3.select("#NumberOfProjects").selectAll("p")
       .remove();
@@ -2118,7 +2159,6 @@ var updateprojectList = function(projectdata) {
 function rerun(currentChartType) {
   projects = ChartType[currentChartType](1)
   total = projects.length
-  console.log('rerun', get_number_of_selected_projects(), total)
   revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
   updateprojectList(projects)
 }
