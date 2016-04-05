@@ -84,19 +84,16 @@ var category_tooltip = function(info) {
 
 var highlightTime = 500 //milliseconds
 
-var reset_projects =function(){
-  remove_highlight_list_item()
-  total = unselect_all_projects()
-  update_sankey_selection()
-  update_heatmap_selection()
-  //total = projectSelectionTracker.length
-  revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
+var reset_projects = function (){
+  rerun(get_current_chart())
+  unselect_all_projects()
+  revealNumberOfProjects(total, 0, highlightTime)
 }
 
 var get_selected_projects = function() {
   selected_projects = []
   for (var key in projectSelectionTracker) {
-    if (projectSelectionTracker[key]) {
+    if (projectSelectionTracker[key] && key != 'getUnique') {
       selected_projects.push(key)
     }
   }
@@ -104,12 +101,8 @@ var get_selected_projects = function() {
 }
 
 var unselect_all_projects = function() {
-  total = 0
   for(var key in projectSelectionTracker) {
-    if (key != 'getUnique'){
-      total = total +1
       projectSelectionTracker[key] = false;
-    }
   }
   return total
 }
@@ -997,6 +990,7 @@ var heatmapInnovationImpact = function(n) {
   });
   // return only the distinct / unique nodes
   projectdata = projectdata.getUnique()
+  totalnumberprojects = projectdata.length
 
   areasOfInnovation.push("Total")
   areasOfImpact.push("Total")
@@ -1148,7 +1142,7 @@ var heatmapInnovationImpact = function(n) {
         }
       }
       update_heatmap_selection()
-      revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
+      revealNumberOfProjects(totalnumberprojects, get_number_of_selected_projects(), highlightTime)
     });
 
   //draw boxes
@@ -1396,6 +1390,7 @@ var heatmapImpactApproach = function(n) {
   });
   // return only the distinct / unique nodes
   projectdata = projectdata.getUnique()
+  totalnumberprojects = projectdata.length
 
   evaluationApproach.push("Total")
   areasOfImpact.push("Total")
@@ -1538,7 +1533,7 @@ var heatmapImpactApproach = function(n) {
         }
       }
       update_heatmap_selection()
-      revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
+      revealNumberOfProjects(totalnumberprojects, get_number_of_selected_projects(), highlightTime)
     });
 
 
@@ -1724,6 +1719,7 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
   totalprojects = graph.links.map(function(d) {
       return d["projectTitle"]
     }).getUnique()
+  totalnumberprojects = totalprojects.length
 
   sankey
     .nodes(graph.nodes)
@@ -1795,7 +1791,7 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
         projectSelectionTracker[l.projectTitle] = true
       }
       update_sankey_selection()
-      revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
+      revealNumberOfProjects(totalnumberprojects, get_number_of_selected_projects(), highlightTime)
     })
     .on("mouseover", function(l) {
       d3.select(this)
