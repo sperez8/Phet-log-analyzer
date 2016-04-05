@@ -744,6 +744,8 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
   d3.select("#innovationImpactChart").selectAll("svg").remove();
   d3.select("#impactApproachChart").selectAll("svg").remove();
   d3.select("#project-table").selectAll("tr").remove();
+  d3.select("#project-table").selectAll("svg").remove();
+  d3.select("#project-table").selectAll("th").remove();
 
   //all the single option filters are of type ==
   if (faculty != "Faculty (all)") {
@@ -995,6 +997,23 @@ var heatmapInnovationImpact = function(n) {
     .map(heatMapdata, d3.map).get("innovationXimpact");
 
 
+  projectdata = []
+  heatMapdata.forEach(function(d) {
+    projectdata.push(d.project_Title);
+  });
+  // return only the distinct / unique nodes
+  projectdata = projectdata.getUnique()
+  totalnumberprojects = projectdata.length
+
+  if (totalnumberprojects == 0) {
+    svg.append("text").text("No projects were found given those filters")
+      .attr("class", "heading")
+      .attr("x", width / 2)
+      .attr("y", 30)
+      .attr("text-anchor", "middle");
+    return totalprojects
+  } 
+
   dataRollUp = [];
 
   heatMapNest.forEach(function(d, v) {
@@ -1046,14 +1065,6 @@ var heatmapInnovationImpact = function(n) {
       projects: total.getUnique()
     });   
   }
-
-  projectdata = []
-  heatMapdata.forEach(function(d) {
-    projectdata.push(d.project_Title);
-  });
-  // return only the distinct / unique nodes
-  projectdata = projectdata.getUnique()
-  totalnumberprojects = projectdata.length
 
   areasOfInnovation.push("Total")
   areasOfImpact.push("Total")
@@ -1395,6 +1406,23 @@ var heatmapImpactApproach = function(n) {
 
   dataRollUp = [];
 
+  projectdata = []
+  heatMapdata.forEach(function(d) {
+    projectdata.push(d.project_Title);
+  });
+  // return only the distinct / unique nodes
+  projectdata = projectdata.getUnique()
+  totalnumberprojects = projectdata.length
+
+  if (totalnumberprojects == 0) {
+    svg.append("text").text("No projects were found given those filters")
+      .attr("class", "heading")
+      .attr("x", width / 2)
+      .attr("y", 30)
+      .attr("text-anchor", "middle");
+    return totalprojects
+  } 
+
   heatMapNest.forEach(function(d, v) {
     v.forEach(function(d2, v2) {
       dataRollUp.push({
@@ -1446,14 +1474,6 @@ var heatmapImpactApproach = function(n) {
       projects: total.getUnique()
     });   
   }
-
-  projectdata = []
-  heatMapdata.forEach(function(d) {
-    projectdata.push(d.project_Title);
-  });
-  // return only the distinct / unique nodes
-  projectdata = projectdata.getUnique()
-  totalnumberprojects = projectdata.length
 
   evaluationApproach.push("Total")
   areasOfImpact.push("Total")
@@ -1716,23 +1736,6 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
     .attr("transform", "translate(4,42)") //translate so the top label is not half hidden and left side of nodes is good
     .style("visibility", "block");
 
-  svg.append("text").text("Innovation")
-    .attr("class", "heading")
-    .attr("x", 0)
-    .attr("y", -25)
-    .attr("text-anchor", "start");
-  svg.append("text").text("Area of impact")
-    .attr("class", "heading")
-    .attr("x", width / 2)
-    .attr("y", -25)
-    .attr("text-anchor", "middle");
-  svg.append("text").text("Evaluation approach")
-    .attr("class", "heading")
-    .attr("x", width)
-    .attr("y", -25)
-    .attr("text-anchor", "end");
-
-
   //set up graph 
   graph = {
     "nodes": [],
@@ -1784,6 +1787,15 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
     }).getUnique()
   totalnumberprojects = totalprojects.length
 
+  if (totalnumberprojects == 0) {
+    svg.append("text").text("No projects were found given those filters")
+      .attr("class", "heading")
+      .attr("x", width / 2)
+      .attr("y", 30)
+      .attr("text-anchor", "middle");
+    return totalprojects
+  } 
+
   sankey
     .nodes(graph.nodes)
     .links(graph.links)
@@ -1822,6 +1834,22 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
 
   nodeNames = get_trait_values("name")
   nodeValues = get_numerical_trait_values("value")
+
+  svg.append("text").text("Innovation")
+    .attr("class", "heading")
+    .attr("x", 0)
+    .attr("y", -25)
+    .attr("text-anchor", "start");
+  svg.append("text").text("Area of impact")
+    .attr("class", "heading")
+    .attr("x", width / 2)
+    .attr("y", -25)
+    .attr("text-anchor", "middle");
+  svg.append("text").text("Evaluation approach")
+    .attr("class", "heading")
+    .attr("x", width)
+    .attr("y", -25)
+    .attr("text-anchor", "end");
 
   // add in the links
   var link = svg.append("g").selectAll(".link")
@@ -1996,6 +2024,32 @@ var tabulate = function() {
     thead = table.append("thead"),
       tbody = table.append("tbody");
 
+    var x = "_XX_"; //nothing should match this ;)
+    function unique(value) {
+      return_this = (x != value["project_Title"]);
+      x = value["project_Title"];
+      return return_this;
+    }
+    tableData = tableData.filter(unique);
+    totalnumberprojects = tableData.length
+
+    totalprojects = graph.links.map(function(d) {
+        return d["projectTitle"]
+      }).getUnique()
+    totalnumberprojects = totalprojects.length
+
+    if (totalnumberprojects == 0) {
+      svg = d3.select("#project-table").append("svg")
+              .attr("width", width + margin.heatmap.left + margin.heatmap.right-margin_table_left-margin_table_right)
+
+      svg.append("text").text("No projects were found given those filters")
+        .attr("class", "heading")
+        .attr("x", width / 2)
+        .attr("y", 30)
+        .attr("text-anchor", "middle");
+      return totalprojects
+    } 
+
     // append the header row
     thead.append("tr")
       .selectAll("th")
@@ -2005,15 +2059,6 @@ var tabulate = function() {
       .text(function(column) {
         return capitalizeFirstLetter(column.replace('_', ' '));
       });
-
-    var x = "_XX_"; //nothing should match this ;)
-    function unique(value) {
-      return_this = (x != value["project_Title"]);
-      x = value["project_Title"];
-      return return_this;
-    }
-    tableData = tableData.filter(unique);
-    totalnumberprojects = tableData.length
 
     // create a row for each object in the data
     var rows = tbody.selectAll("tr")
