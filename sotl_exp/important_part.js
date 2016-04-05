@@ -25,6 +25,7 @@ colorscheme = d3.scale.ordinal()
   .range(["#686AF5","#80E633","#FA7140","#FAB03B","#e5fa3b","#05CE8E","#B8447C"])
 
 grey = "#b8b8b8"
+darkbluetable = '#85aec8'
 
 var opacityNormal = 0.7,
   opacityLow = 0.2,
@@ -140,15 +141,6 @@ var update_heatmap_selection = function() {
   no_project_selected = true
   remove_highlight_card()
   selected_projects = get_selected_projects()
-  // d3.selectAll(".card")
-  //   .each(function(l) {
-  //     if (non_zero_intersection(selected_projects,l.projects)) {
-  //       no_project_selected = false
-  //       d3.select(this).call(highlight_card, opacityHigh, grey, widthHigh,1)
-  //     } else {
-  //       d3.select(this).call(highlight_card, opacityLow, "white", widthNormal,1)
-  //     }
-  //   })
   d3.selectAll(".card")
     .each(function(l) {
       if (non_zero_intersection(selected_projects,l.projects)) {
@@ -160,6 +152,40 @@ var update_heatmap_selection = function() {
     })
   if (no_project_selected){
     remove_highlight_card()
+  } else {
+    highlightMultipleProjectInList(selected_projects)
+  }
+}
+
+var update_table_selection = function() {
+  no_project_selected = true
+  remove_highlight_row()
+  selected_projects = get_selected_projects()
+  d3.selectAll(".rowShaded")
+    .each(function(l) {
+      if ($.inArray(l.project_Title, selected_projects) != -1) {
+        no_project_selected = false
+        d3.select(this).call(highlight_row, darkbluetable)
+      } else {
+        d3.select(this).call(highlight_row, null)
+      }
+    })
+  if (no_project_selected){
+    remove_highlight_row()
+  } else {
+    highlightMultipleProjectInList(selected_projects)
+  }
+  d3.selectAll(".rowNotShaded")
+    .each(function(l) {
+      if ($.inArray(l.project_Title, selected_projects) != -1) {
+        no_project_selected = false
+        d3.select(this).call(highlight_row, darkbluetable)
+      } else {
+        d3.select(this).call(highlight_row, null)
+      }
+    })
+  if (no_project_selected){
+    remove_highlight_row()
   } else {
     highlightMultipleProjectInList(selected_projects)
   }
@@ -197,7 +223,7 @@ var highlight_project_table = function(row, title) {
   d3.selectAll(".rowShaded")
     .each(function(l) {
       if (l.project_Title == title) {
-        d3.select(this).call(highlight_row,'#85aec8')
+        d3.select(this).call(highlight_row,darkbluetable)
         highlightProjectInList(l.project_Title)
       } else {
         d3.select(this).call(highlight_row,null)
@@ -206,7 +232,7 @@ var highlight_project_table = function(row, title) {
     d3.selectAll(".rowNotShaded")
     .each(function(l) {
       if (l.project_Title == title) {
-        d3.select(this).call(highlight_row,'#85aec8')
+        d3.select(this).call(highlight_row,darkbluetable)
         highlightProjectInList(l.project_Title)
       } else {
         d3.select(this).call(highlight_row,null)
@@ -250,6 +276,13 @@ var remove_highlight_card = function() {
 var remove_highlight_link = function() {
   d3.selectAll(".link")
     .call(highlight_link, opacityNormal)
+}
+
+var remove_highlight_row = function() {
+  d3.selectAll(".rowShaded")
+    .call(highlight_row, null)
+  d3.selectAll(".rowNotShaded")
+    .call(highlight_row, null)
 }
 
 var remove_highlight_list_item = function() {
@@ -1980,6 +2013,7 @@ var tabulate = function() {
       return return_this;
     }
     tableData = tableData.filter(unique);
+    totalnumberprojects = tableData.length
 
     // create a row for each object in the data
     var rows = tbody.selectAll("tr")
@@ -1992,15 +2026,25 @@ var tabulate = function() {
         else {return "rowShaded"}
       })
       .on("mouseover", function(l) {
-        console.log(l.project_Title)
         d3.select(this)
           .call(highlight_project_table, l.project_Title)
       })
       .on("mouseout", function() {
-        // remove_highlight_list_item()
-        // remove_highlight_link()
-        // update_sankey_selection()
-      });
+        remove_highlight_list_item()
+        remove_highlight_row()
+        update_table_selection()
+      })
+      .on("click", function (l){
+      selected_projects = get_selected_projects()
+      if (non_zero_intersection(selected_projects,l.projects)) {
+        unselect_all_projects()
+      } else{
+        unselect_all_projects()
+          projectSelectionTracker[l.project_Title] = true
+      }
+      update_table_selection()
+      revealNumberOfProjects(totalnumberprojects, get_number_of_selected_projects(), highlightTime)
+    });
 
     // create a cell in each row for each column
     var cells = rows.selectAll("td")
@@ -2184,11 +2228,13 @@ var updateprojectList = function(projectdata) {
       highlightProjectInList(d)
       d3.select("this").call(highlight_project_sankey, d)
       d3.select("this").call(highlight_project_heatmap, d)
+      d3.select("this").call(highlight_project_table, d)
     })
     .on("mouseout", function() {
       remove_highlight_list_item()
       update_sankey_selection()
       update_heatmap_selection()
+      update_table_selection()
     });
 }
 
@@ -2449,7 +2495,7 @@ d3.select("#chartTypeButtons")
     d3.select(this).call(click_button)
     setChartType = "project-table";
     rerun(setChartType); //redraw previously selected chart
-
+    update_table_selection()
   });
 
 function runhelp() {
