@@ -2034,11 +2034,6 @@ var tabulate = function() {
     tableData = tableData.filter(unique);
     totalnumberprojects = tableData.length
 
-    totalprojects = graph.links.map(function(d) {
-        return d["projectTitle"]
-      }).getUnique()
-    totalnumberprojects = totalprojects.length
-
     if (totalnumberprojects == 0) {
       svg = d3.select("#project-table").append("svg")
               .attr("width", width + margin.heatmap.left + margin.heatmap.right-margin_table_left-margin_table_right)
