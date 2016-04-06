@@ -25,6 +25,7 @@ colorscheme = d3.scale.ordinal()
   .range(["#686AF5","#FA7140","#80E633","#FAB03B","#e5fa3b","#05CE8E","#B8447C"])
 
 grey = "#b8b8b8"
+darkgrey = "#565656"
 darkbluetable = '#85aec8'
 
 var opacityNormal = 0.7,
@@ -145,7 +146,7 @@ var update_heatmap_selection = function() {
     .each(function(l) {
       if (non_zero_intersection(selected_projects,l.projects)) {
         no_project_selected = false
-        d3.select(this).call(highlight_card, opacityHigh, grey, widthHigh,1)
+        d3.select(this).call(highlight_card, opacityHigh, darkgrey, widthHigh,1)
       } else {
         d3.select(this).call(highlight_card, opacityLow, "white", widthNormal,1)
       }
@@ -210,7 +211,7 @@ var highlight_project_heatmap = function(card, title) {
   d3.selectAll(".card")
     .each(function(l) {
       if ($.inArray(title, l.projects) != -1) {
-        d3.select(this).call(highlight_card, opacityHigh, grey, widthHigh,1)
+        d3.select(this).call(highlight_card, opacityHigh, darkgrey, widthHigh,1)
         highlightProjectInList(title)
       } else {
         d3.select(this).call(highlight_card, opacityLow, null, widthNormal, opacityLow)
@@ -680,7 +681,7 @@ var units = "Project Facet";
 
 var margin = {
   sankey: {
-    top: 20,
+    top: 60,
     right: 0,
     bottom: 10,
     left: 0
@@ -1006,10 +1007,12 @@ var heatmapInnovationImpact = function(n) {
   totalnumberprojects = projectdata.length
 
   if (totalnumberprojects == 0) {
+    setwidth = 990.0/2 - Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)*1.25
+    setheight = 100
     svg.append("text").text("No projects were found given those filters")
       .attr("class", "heading")
-      .attr("x", width / 2)
-      .attr("y", 30)
+      .attr("x", setwidth)
+      .attr("y", setheight-margin.heatmap.top)
       .attr("text-anchor", "middle");
     return totalprojects
   } 
@@ -1196,7 +1199,7 @@ var heatmapInnovationImpact = function(n) {
         .style("top", (cy - 28) + "px");
       tooltip
         .style("opacity", tooltipOpacity);
-      d3.select(this).call(highlight_card, opacityHigh, grey, widthHigh,1)
+      d3.select(this).call(highlight_card, opacityHigh, darkgrey, widthHigh,1)
       highlightMultipleProjectInList(l.projects)
     })
     .on("mouseout", function() {
@@ -1373,7 +1376,7 @@ var heatmapImpactApproach = function(n) {
     .attr("height", height + margin.heatmap.top + margin.heatmap.bottom)
     .append("g")
     .attr("transform",
-      "translate(" + margin.heatmap.left + "," + margin.heatmap.top + ")");
+      "translate(" + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)*1.25 + "," + margin.heatmap.top + ")");
 
   var svg = d3.select("#impactApproachChart").selectAll("g")
     .append("g")
@@ -1415,10 +1418,12 @@ var heatmapImpactApproach = function(n) {
   totalnumberprojects = projectdata.length
 
   if (totalnumberprojects == 0) {
+    setwidth = 990.0/2 - Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)*1.25
+    setheight = 100 - margin.heatmap.top
     svg.append("text").text("No projects were found given those filters")
       .attr("class", "heading")
-      .attr("x", width / 2)
-      .attr("y", 30)
+      .attr("x", setwidth)
+      .attr("y", setheight)
       .attr("text-anchor", "middle");
     return totalprojects
   } 
@@ -1596,7 +1601,7 @@ var heatmapImpactApproach = function(n) {
         .style("top", (cy - 28) + "px");
       tooltip
         .style("opacity", tooltipOpacity);
-      d3.select(this).call(highlight_card, opacityHigh, grey, widthHigh,1)
+      d3.select(this).call(highlight_card, opacityHigh, darkgrey, widthHigh,1)
       highlightMultipleProjectInList(l.projects)
     })
     .on("mouseout", function() {
@@ -1723,18 +1728,12 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
   oldwidth = width
   wdith = width + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)
   // append the svg canvas to the page
-  d3.select("#sankeyChart").append("svg")
+  var svg = d3.select("#sankeyChart").append("svg")
     .attr("width", width + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right))
     .attr("height", height + margin.sankey.top + margin.sankey.bottom)
     .append("g")
     .attr("transform",
       "translate(" + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)/2 + "," + margin.sankey.top + ")");
-
-  var svg = d3.select("#sankeyChart").selectAll("g")
-    .append("g")
-    .attr("class", "sankey" + n)
-    .attr("transform", "translate(4,42)") //translate so the top label is not half hidden and left side of nodes is good
-    .style("visibility", "block");
 
   //set up graph 
   graph = {
@@ -1788,10 +1787,12 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
   totalnumberprojects = totalprojects.length
 
   if (totalnumberprojects == 0) {
+    setwidth = 990.0/2 - Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)/2
+    setheight = 100 -  margin.sankey.top
     svg.append("text").text("No projects were found given those filters")
       .attr("class", "heading")
-      .attr("x", width / 2)
-      .attr("y", 30)
+      .attr("x", setwidth)
+      .attr("y", setheight)
       .attr("text-anchor", "middle");
     return totalprojects
   } 
@@ -2041,11 +2042,12 @@ var tabulate = function() {
     if (totalnumberprojects == 0) {
       svg = d3.select("#project-table").append("svg")
               .attr("width", width + margin.heatmap.left + margin.heatmap.right-margin_table_left-margin_table_right)
-
+      setwidth = 990.0/2 -(margin_table_left)
+      setheight = 100 -15
       svg.append("text").text("No projects were found given those filters")
         .attr("class", "heading")
-        .attr("x", width / 2)
-        .attr("y", 30)
+        .attr("x", setwidth)
+        .attr("y", setheight)
         .attr("text-anchor", "middle");
       return totalprojects
     } 
@@ -2174,7 +2176,7 @@ var revealNumberOfProjects = function(total, numberselected, highlightTime) {
   removeReveal()
   d3.select("#NumberOfProjects").append("p")
     .html(function(){
-      if (total==0){return "No projects given filters"}
+      if (total==0){return "Selected 0 out of 0 project"}
       else if (total==1){return "Selected " + numberselected + " out of " + total + " project"}
       else {return "Selected " + numberselected + " out of " + total + " projects"}
     })
