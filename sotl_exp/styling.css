@@ -99,15 +99,6 @@ th {
     cursor: pointer;
 }
 
-/*.rowselected{
-    background: #85aec8;
-}*/
-
-.rowselected input[type="td"]{
-    color: white;
-    border-left: 5px solid #002145;
-}
-
 div.tooltip, div.tooltip-inner {
     font-family: "museo_sans500"; /*used to be Helvetica Neue*/
     font-style: normal;

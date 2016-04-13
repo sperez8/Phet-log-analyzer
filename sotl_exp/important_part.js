@@ -1336,6 +1336,7 @@ var heatmapImpactApproach = function(n) {
     })
     .key(function(d) {
       longnames[d.approach] = d.approach_longname
+      console.log(d.approach_longname)
       return d.approach;
     }) //innovation first for innovation keys
     .key(function(d) {
