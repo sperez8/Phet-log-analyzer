@@ -1106,7 +1106,11 @@ var heatmapInnovationImpact = function(n) {
     .style("text-anchor", "end")
     .style("vertical-align", "middle")
     .on("mouseover", function(d) {
-      category_tooltip(capitalizeFirstLetter(longnames[d].toLowerCase()))
+      if (d!="Total") {
+        category_tooltip(capitalizeFirstLetter(longnames[d].toLowerCase()))
+      } else {
+        category_tooltip("Total per area of impact")
+      }
     })
     .on("mouseout", function() {remove_tooltip()})
     .call(wrapx, margin.heatmap.left);
@@ -1147,7 +1151,11 @@ var heatmapInnovationImpact = function(n) {
     .attr("class", "impactLabel")
     .style("text-anchor", "start")
     .on("mouseover", function(d) {
-      category_tooltip(capitalizeFirstLetter(longnames[d].toLowerCase()))
+      if (d!="Total") {
+        category_tooltip(capitalizeFirstLetter(longnames[d].toLowerCase()))
+      } else {
+        category_tooltip("Total per innovation")
+      }
     })
     .on("mouseout", function() {remove_tooltip()})
     .call(wrapy, gridSizeX);
@@ -1523,7 +1531,11 @@ var heatmapImpactApproach = function(n) {
     .style("text-anchor", "end")
     .style("vertical-align", "middle")
     .on("mouseover", function(d) {
-      category_tooltip(capitalizeFirstLetter(longnames[d].toLowerCase()))
+      if (d!="Total") {
+        category_tooltip(capitalizeFirstLetter(longnames[d].toLowerCase()))
+      } else {
+        category_tooltip("Total per evaluation approach")
+      }
     })
     .on("mouseout", function() {remove_tooltip()})
     .call(wrapx, margin.heatmap.left - 30);
@@ -1549,7 +1561,11 @@ var heatmapImpactApproach = function(n) {
     .attr("class", "approachLabel")
     .style("text-anchor", "start")
     .on("mouseover", function(d) {
-      category_tooltip(capitalizeFirstLetter(longnames[d].toLowerCase()))
+      if (d!="Total") {
+        category_tooltip(capitalizeFirstLetter(longnames[d].toLowerCase()))
+      } else {
+        category_tooltip("Total per area of impact")
+      }
     })
     .on("mouseout", function() {remove_tooltip()})
     .call(wrapy, gridSizeY);
