@@ -40,6 +40,11 @@ svg, {
     clear: right;
 }
 
+#help img {
+    width:100%;
+    height:auto;
+}
+
 #listItems {
     width: 20%;
     height: 80%;

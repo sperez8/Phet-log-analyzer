@@ -2559,12 +2559,19 @@ d3.select("#chartTypeButtons")
   });
 
 function runhelp() {
-  d3.select("#help").append("svg")
-    .attr("width", width + margin.heatmap.left + margin.heatmap.right)
-    .attr("height", height + margin.heatmap.top + margin.heatmap.bottom)
-    .append("g")
-    .attr("transform",
-      "translate(" + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)*1.25 + "," + margin.heatmap.top + ")");
+  // d3.select("#help").append("svg")
+  //   .attr("width", width + margin.heatmap.left + margin.heatmap.right)
+  //   .attr("height", height + margin.heatmap.top + margin.heatmap.bottom)
+  //   .append("g")
+  //   .attr("transform",
+  //     "translate(" + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)*1.25 + "," + margin.heatmap.top + ")");
+  d3.select("#help").selectAll("img")
+      .remove();
+  var img = document.createElement("img");
+  img.src = "minihelp_noheader.svg";
+
+  var src = document.getElementById("help");
+  src.appendChild(img);
   return null
 }
 
