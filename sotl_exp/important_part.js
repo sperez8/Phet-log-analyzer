@@ -441,18 +441,9 @@ d3.sankey = function() {
         d3.sum(node.sourceLinks, value),
         d3.sum(node.targetLinks, value)
       );
-    //console.log(node.sourceLinks)
-    // source_projects = node.sourceLinks.map(function(d) {return d["projectTitle"]}).getUnique()
-    // target_projects = node.targetLinks.map(function(d) {return d["projectTitle"]}).getUnique()
-    // node.value = Math.max(source_projects.length, target_projects.length);
-    // console.log(node.value, target_projects)
     });
   }
 
-  // Iteratively assign the breadth (x-position) for each node.
-  // Nodes are assigned the maximum breadth of incoming neighbors plus one;
-  // nodes with no incoming links are assigned breadth zero, while
-  // nodes with no outgoing links are assigned the maximum breadth.
   function computeNodeBreadths() {
     var remainingNodes = nodes,
       nextNodes,
@@ -525,7 +516,6 @@ d3.sankey = function() {
 
     function initializeNodeDepth() {
       var ky = d3.min(nodesByBreadth, function(nodes) {
-        //console.log(nodes.length, nodePadding, d3.sum(nodes, value))
         return (size[1] - (nodes.length - 1) * nodePadding) / d3.sum(nodes, value);
       });
 
@@ -697,7 +687,6 @@ var margin = {
 //width = 1200 - margin.sankey.left - margin.sankey.right,
 //height = 800 - margin.sankey.top - margin.sankey.bottom;
 width = document.getElementById("allCharts").offsetWidth
-console.log(document.body.clientWidth,document.getElementById("sidebars").offsetWidth,document.getElementById("viz").offsetWidth)
 width = (document.body.clientWidth - document.getElementById("sidebars").offsetWidth)*0.8
 height = window.innerHeight - 140
 
@@ -1346,7 +1335,6 @@ var heatmapImpactApproach = function(n) {
     })
     .key(function(d) {
       longnames[d.approach] = d.approach_longname
-      console.log(d.approach_longname)
       return d.approach;
     }) //innovation first for innovation keys
     .key(function(d) {
@@ -2181,12 +2169,13 @@ function get_number_of_selected_projects() {
   return numberselectedprojects
 }
 
+var removeReveal = function() {
+  d3.select("#NumberOfProjects").selectAll("p")
+    .remove();
+};
+
 //Show the number of projects displayed in Sankey and HeatMap
 var revealNumberOfProjects = function(total, numberselected, highlightTime) {
-  var removeReveal = function() {
-    d3.select("#NumberOfProjects").selectAll("p")
-      .remove();
-  };
   removeReveal()
   d3.select("#NumberOfProjects").append("p")
     .html(function(){
@@ -2199,11 +2188,11 @@ var revealNumberOfProjects = function(total, numberselected, highlightTime) {
 
 var updateprojectList = function(projectdata) {
   //total = projects.length
-  var removeReveal = function() {
+  var removeprojectlist = function() {
     d3.select("#projectList").selectAll("svg")
       .remove();
   };
-  removeReveal()
+  removeprojectlist()
 
   function wrap(text, width, listheight) {
     text.each(function() {
@@ -2301,10 +2290,14 @@ var updateprojectList = function(projectdata) {
 }
 
 function rerun(currentChartType) {
-  projects = ChartType[currentChartType](1)
-  total = projects.length
-  revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
-  updateprojectList(projects)
+  projects = ChartType[currentChartType]()
+  if (projects != "help") {
+    total = projects.length
+    revealNumberOfProjects(total, get_number_of_selected_projects(), highlightTime)
+    updateprojectList(projects)
+  } else {
+    removeReveal()
+  }
 }
 
 
@@ -2382,15 +2375,16 @@ var ChartType = {
   "sankeyChart": sankeyChart,
   "innovationImpactChart": heatmapInnovationImpact,
   "impactApproachChart": heatmapImpactApproach,
-  "project-table": tabulate
+  "project-table": tabulate,
+  "help": runhelp
 };
 
 
-var currentChartType = "sankeyChart" //set the default chart type to be sankey
+var currentChartType = "help" //set the default chart type to be sankey
 
 function get_current_chart() {
   currentChart = ''
-  divs = ["sankeyChart","innovationImpactChart","impactApproachChart","project-table"]
+  divs = ["sankeyChart","innovationImpactChart","impactApproachChart","project-table","help"]
   for (var i = divs.length - 1; i >= 0; i--) {
     if ( $('#'+divs[i]).is(':empty') ) {
     } else { currentChart = divs[i]}
@@ -2561,6 +2555,7 @@ d3.select("#chartTypeButtons")
   });
 
 function runhelp() {
+  removeReveal()
   d3.select("#help").selectAll("img")
       .remove();
 
@@ -2570,7 +2565,8 @@ function runhelp() {
   img.src = "minihelp_noheader.svg";
 
   document.getElementById("help").appendChild(img);
-  return null
+
+  return "help"
 }
 
 d3.select("#chartTypeButtons") //Help - info page
