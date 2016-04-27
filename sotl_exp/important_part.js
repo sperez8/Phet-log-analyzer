@@ -745,8 +745,10 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
   d3.select("#innovationImpactChart").selectAll("svg").remove();
   d3.select("#impactApproachChart").selectAll("svg").remove();
   d3.select("#project-table").selectAll("tr").remove();
+  d3.select("#project-table").selectAll("table").remove();
   d3.select("#project-table").selectAll("svg").remove();
   d3.select("#project-table").selectAll("th").remove();
+  d3.select("#help").selectAll("img").remove();
 
   //all the single option filters are of type ==
   if (faculty != "Faculty (all)") {
@@ -2559,19 +2561,15 @@ d3.select("#chartTypeButtons")
   });
 
 function runhelp() {
-  // d3.select("#help").append("svg")
-  //   .attr("width", width + margin.heatmap.left + margin.heatmap.right)
-  //   .attr("height", height + margin.heatmap.top + margin.heatmap.bottom)
-  //   .append("g")
-  //   .attr("transform",
-  //     "translate(" + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)*1.25 + "," + margin.heatmap.top + ")");
   d3.select("#help").selectAll("img")
       .remove();
-  var img = document.createElement("img");
+
+  var img = document.createElement("img")
+  img.style.width = String(width + margin.heatmap.left + margin.heatmap.right)+"px"
+  // img.style.height = (width + margin.heatmap.left + margin.heatmap.right)*120/250;
   img.src = "minihelp_noheader.svg";
 
-  var src = document.getElementById("help");
-  src.appendChild(img);
+  document.getElementById("help").appendChild(img);
   return null
 }
 
