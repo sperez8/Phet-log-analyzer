@@ -925,123 +925,128 @@ rY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVopPG8T
 84xuupU2WDzN/wDyt//Z" transform="matrix(0.4995 0 0 0.4988 -4.882813e-004 0)">
 	</image>
 </g>
-<g id="text">
-	<rect x="364.171" y="200.257" fill="none" width="159" height="65"/>
-	<text transform="matrix(1 0 0 1 389.5308 214.2397)" fill="#F7931D" font-family="'Cambria-Bold'" font-size="20">Welcome to </text>
-	<text transform="matrix(1 0 0 1 375.0825 238.2397)" fill="#F7931D" font-family="'Cambria-Bold'" font-size="20">SoTL Explorer!</text>
-	<text transform="matrix(1 0 0 1 365.9097 258.6392)" fill="#0C2244" font-family="'Cambria'" font-size="17">Select a </text>
-	<text transform="matrix(1 0 0 1 424.5796 258.6392)" fill="#186A9B" font-family="'Cambria-Bold'" font-size="17">view</text>
-	<text transform="matrix(1 0 0 1 461.5439 258.6392)" fill="#0C2244" font-family="'Cambria'" font-size="17"> to start.</text>
-	<rect x="122.088" y="47.589" fill="none" width="218" height="25.5"/>
-	<text transform="matrix(1 0 0 1 122.0874 56.6772)" fill="#186A9B" font-family="'Cambria-Bold'" font-size="13">View flow</text>
-	<text transform="matrix(1 0 0 1 180.5874 56.6772)" fill="#0C2244" font-family="'Cambria'" font-size="13"> of projects from innovation </text>
-	<text transform="matrix(1 0 0 1 122.0874 72.2778)" fill="#0C2244" font-family="'Cambria'" font-size="13">to impact to evaluation approach</text>
-	<rect x="527.588" y="47.756" fill="none" width="283" height="34"/>
-	<text transform="matrix(1 0 0 1 527.5879 56.8452)" fill="#186A9B" font-family="'Cambria-Bold'" font-size="13">View frequencies </text>
-	<text transform="matrix(1 0 0 1 633.3096 56.8452)" fill="#0C2244" font-family="'Cambria'" font-size="13">of combinations of innovations, </text>
-	<text transform="matrix(1 0 0 1 527.5879 72.4448)" fill="#0C2244" font-family="'Cambria'" font-size="13">impacts and evaluation approaches</text>
-	<rect x="527.588" y="288.255" fill="none" width="298" height="14"/>
-	<text transform="matrix(1 0 0 1 527.5879 297.3452)" fill="#186A9B" font-family="'Cambria-Bold'" font-size="13">View table</text>
-	<text transform="matrix(1 0 0 1 590.3584 297.3452)" fill="#186A9B" font-family="'Cambria'" font-size="13"> </text>
-	<text transform="matrix(1 0 0 1 593.2227 297.3452)" fill="#0C2244" font-family="'Cambria'" font-size="13">of project details</text>
-	<rect x="122.088" y="191.589" fill="none" width="161" height="28"/>
-	<text transform="matrix(1 0 0 1 122.0874 200.6792)" fill="#0C2244" font-family="'Cambria-Bold'" font-size="13">Filter projects</text>
-	<text transform="matrix(1 0 0 1 206.6572 200.6792)" fill="#0C2244" font-family="'Cambria'" font-size="13"> and visualize </text>
-	<text transform="matrix(1 0 0 1 122.0874 216.2788)" fill="#0C2244" font-family="'Cambria'" font-size="13">projects of interest</text>
-	<rect x="122.088" y="288.255" fill="none" width="194" height="36"/>
-	<text transform="matrix(1 0 0 1 122.0874 297.3452)" fill="#0C2244" font-family="'Cambria-Bold'" font-size="13">View project titles </text>
-	<text transform="matrix(1 0 0 1 233.5771 297.3452)" fill="#0C2244" font-family="'Cambria'" font-size="13">and select </text>
-	<text transform="matrix(1 0 0 1 122.0874 312.9448)" fill="#0C2244" font-family="'Cambria'" font-size="13">projects of interest</text>
-	<rect x="130.088" y="325.08" fill="none" width="322.5" height="32.342"/>
-	<text transform="matrix(1 0 0 1 130.0879 331.3677)" font-family="'Cambria'" font-size="9">The project list shows the name of all current viewed projects. Click on any project </text>
-	<text transform="matrix(1 0 0 1 130.0879 342.1675)" font-family="'Cambria'" font-size="9">name displayed to select it. The visualizations will adapt to your selection by </text>
-	<text transform="matrix(1 0 0 1 130.0879 352.9673)" font-family="'Cambria'" font-size="9">highlighting relevant areas in the different visualization tabs. </text>
-	<rect x="130.088" y="226.578" fill="none" width="220" height="39.502"/>
-	<text transform="matrix(1 0 0 1 130.0879 232.8677)" font-family="'Cambria'" font-size="9">Use these filters to narrow down your search by Context </text>
-	<text transform="matrix(1 0 0 1 130.0879 243.6675)" font-family="'Cambria'" font-size="9">(faculty and course level), Project Details (project type, </text>
-	<text transform="matrix(1 0 0 1 130.0879 254.4673)" font-family="'Cambria'" font-size="9">project stage and year awarded) and Charting Param</text>
-	<text transform="matrix(1 0 0 1 332.834 254.4673)" font-family="'Cambria'" font-size="9">-</text>
-	<text transform="matrix(1 0 0 1 130.0879 265.2661)" font-family="'Cambria'" font-size="9">eters (innovation, impact and evaluation). </text>
-	<rect x="540.088" y="308.58" fill="none" width="273.5" height="47.842"/>
-	<text transform="matrix(1 0 0 1 540.0879 314.8677)" font-family="'Cambria'" font-size="9">View the table tab to obtain more detailed information about each </text>
-	<text transform="matrix(1 0 0 1 540.0879 325.6675)" font-family="'Cambria'" font-size="9">project, including enrollment cap and course location. The table </text>
-	<text transform="matrix(1 0 0 1 540.0879 336.4673)" font-family="'Cambria'" font-size="9">reflects selections that have been made using the Filters tab and the </text>
-	<text transform="matrix(1 0 0 1 540.0879 347.2661)" font-family="'Cambria'" font-size="9">Projects tab as well as any selections made using the visualization tabs. </text>
-	<rect x="128.088" y="136.579" fill="none" width="317.5" height="51.843"/>
-	<text transform="matrix(1 0 0 1 128.0879 142.8677)" font-family="'Cambria'" font-size="9">In this project example, short activities (innovation) were implemented to target </text>
-	<text transform="matrix(1 0 0 1 128.0879 153.6675)" font-family="'Cambria'" font-size="9">lifelong learning skills as well as attitudes and motivation (impacts). Observations </text>
-	<text transform="matrix(1 0 0 1 128.0879 164.4673)" font-family="'Cambria'" font-size="9">evaluation approach) were used to assess its effectiveness.</text>
-	<rect x="540.088" y="168.579" fill="none" width="278" height="64.843"/>
-	<text transform="matrix(1 0 0 1 540.0879 174.8677)" font-family="'Cambria'" font-size="9">In the Innovation x Impact and Impact x Evaluation tabs, the color </text>
-	<text transform="matrix(1 0 0 1 540.0879 185.6675)" font-family="'Cambria'" font-size="9">intensity of the boxes shows the number of projects with an intersection </text>
-	<text transform="matrix(1 0 0 1 540.0879 196.4673)" font-family="'Cambria'" font-size="9">of innovation and impact, or impact and evaluation. In this example, we </text>
-	<text transform="matrix(1 0 0 1 540.0879 207.2661)" font-family="'Cambria'" font-size="9">see that most projects use attitude surveys to evaluate the effect of </text>
-	<text transform="matrix(1 0 0 1 540.0879 218.0659)" font-family="'Cambria'" font-size="9">innovations on actions and behaviours  or on attitudes and motivation.</text>
-</g>
+<rect x="335.141" y="207.188" fill="none" width="209.092" height="85.33"/>
+<text transform="matrix(1.0017 0 0 1 357.9268 225.5444)" fill="#F7931D" font-family="'Cambria-Bold'" font-size="30">Welcome to </text>
+<text transform="matrix(1.0017 0 0 1 338.9268 257.0503)" fill="#F7931D" font-family="'Cambria-Bold'" font-size="30">SoTL Explorer!</text>
+<text transform="matrix(1.0017 0 0 1 334.9268 283.8306)" fill="#0C2244" font-family="'Cambria'" font-size="22">Select a </text>
+<text transform="matrix(1.0017 0 0 1 415.9268 283.8306)" fill="#186A9B" stroke="#186A9B" stroke-width="0.5" font-family="'Cambria'" font-size="22">view</text>
+<text transform="matrix(1.0017 0 0 1 466.9268 283.8306)" fill="#0C2244" font-family="'Cambria'" font-size="22"> to start.</text>
+<rect x="16.789" y="6.767" fill="none" width="286.68" height="33.476"/>
+<text transform="matrix(1.0017 0 0 1 16.7881 18.9185)" fill="#186A9B" stroke="#186A9B" stroke-width="0.5" font-family="'Cambria'" font-size="18">View flow</text>
+<text transform="matrix(1.0017 0 0 1 96.9268 18.1401)" fill="#0C2244" font-family="'Cambria'" font-size="17.0662"> of projects from innovation </text>
+<text transform="matrix(1.0017 0 0 1 16.7881 39.1782)" fill="#0C2244" font-family="'Cambria'" font-size="17.0662">to impact to evaluation approach</text>
+<rect x="550.042" y="6.986" fill="none" width="372.158" height="44.635"/>
+<text transform="matrix(1.0017 0 0 1 550.042 18.918)" fill="#186A9B" stroke="#186A9B" stroke-width="0.5" font-family="'Cambria'" font-size="18">View frequencies </text>
+<text transform="matrix(1.0017 0 0 1 686.9268 18.1406)" fill="#0C2244" font-family="'Cambria'" font-size="17.0662">of combinations of innovations, </text>
+<text transform="matrix(1.0017 0 0 1 550.042 39.3965)" fill="#0C2244" font-family="'Cambria'" font-size="17.0662">impacts and evaluation approaches</text>
+<rect x="550.042" y="322.71" fill="none" width="391.885" height="18.379"/>
+<text transform="matrix(1.0017 0 0 1 550.042 334.6431)" fill="#186A9B" stroke="#186A9B" stroke-width="0.5" font-family="'Cambria'" font-size="18">View a table</text>
+<text transform="matrix(1.0017 0 0 1 632.5889 334.6431)" fill="#186A9B" font-family="'Cambria'" font-size="17.0662"> </text>
+<text transform="matrix(1.0017 0 0 1 648.9268 334.5112)" fill="#0C2244" font-family="'Cambria'" font-size="17.0662">of project details</text>
+<rect x="16.789" y="195.809" fill="none" width="211.723" height="36.759"/>
+<text transform="matrix(1.0017 0 0 1 16.7881 207.7412)" fill="#0C2244" stroke="#0C2244" stroke-width="0.5" font-family="'Cambria'" font-size="18">Filter projects</text>
+<text transform="matrix(1.0017 0 0 1 128.9268 207.5112)" fill="#0C2244" font-family="'Cambria'" font-size="17.0662"> and visualize </text>
+<text transform="matrix(1.0017 0 0 1 16.7881 228.2202)" fill="#0C2244" font-family="'Cambria'" font-size="17.0662">projects of interest</text>
+<rect x="16.789" y="322.71" fill="none" width="255.12" height="47.262"/>
 <g>
-	<path fill="none" stroke="#F37243" stroke-width="13" stroke-opacity="0.7" d="M143.809,107.111
-		c122.875,0,13.653-6.08,136.528-6.08"/>
-	<path fill="none" stroke="#8CC63F" stroke-width="13" stroke-opacity="0.7" d="M143.809,119.749c122.875,0,13.653,0,136.528,0"/>
-	<text transform="matrix(0.9008 0 0 1 128.7734 100.6587)" fill="#0C2244" font-family="'Cambria'" font-size="9">Active learning - short activities</text>
-	<text transform="matrix(0.9008 0 0 1 246.9219 94.7183)" fill="#0C2244" font-family="'Cambria'" font-size="9">Lifelong learning skills</text>
-	<text transform="matrix(0.9008 0 0 1 243.8242 113.7749)" fill="#0C2244" font-family="'Cambria'" font-size="9">Attitudes and motivation</text>
-	<rect x="128.944" y="100.792" fill="#B9B8B9" fill-opacity="0.9" width="14.865" height="25.276"/>
-	<text transform="matrix(0.9008 0 0 1 400.5171 101.4019)" fill="#0C2244" font-family="'Cambria'" font-size="9">Observations</text>
-	<rect x="279.928" y="94.797" fill="#F37243" fill-opacity="0.9" width="14.865" height="12.638"/>
-	<rect x="280.338" y="113.43" fill="#8CC63F" fill-opacity="0.9" width="14.865" height="12.638"/>
-	<path fill="none" stroke="#F37243" stroke-width="13" stroke-opacity="0.7" d="M294.896,101.243
-		c122.875,0,13.653,6.08,136.527,6.08"/>
-	<path fill="none" stroke="#8CC63F" stroke-width="13" stroke-opacity="0.7" d="M294.896,119.961c122.875,0,13.653,0,136.527,0"/>
-	<rect x="431.339" y="101.248" fill="#B9B8B9" fill-opacity="0.9" width="14.865" height="25.276"/>
+	
+		<text transform="matrix(1 0 0 1 16.7881 334.6431)" fill="#0C2244" stroke="#0C2244" stroke-width="0.5" font-family="'Cambria'" font-size="18">View project titles </text>
 </g>
-<path fill="#B9B8B9" stroke="#FFFFFF" stroke-opacity="0.2" d="M701.389,139.388h45.246c1.924,0,3.48,1.559,3.48,3.48v9.862
-	c0,1.921-1.559,3.481-3.48,3.481h-45.246c-1.924,0-3.482-1.559-3.482-3.481v-9.862C697.906,140.948,699.465,139.388,701.389,139.388
+<text transform="matrix(1.0017 0 0 1 162.9268 334.5112)" fill="#0C2244" font-family="'Cambria'" font-size="17.0662">and select </text>
+<text transform="matrix(1.0017 0 0 1 16.7881 355.1226)" fill="#0C2244" font-family="'Cambria'" font-size="17.0662">projects of interest</text>
+<rect x="27.31" y="371.053" fill="none" width="424.103" height="42.458"/>
+<text transform="matrix(1.0017 0 0 1 27.3101 379.3081)" font-family="'Cambria'" font-size="11.8151">The project list shows the name of all current viewed projects. Click on any project </text>
+<text transform="matrix(1.0017 0 0 1 27.3101 393.4858)" font-family="'Cambria'" font-size="11.8151">name displayed to select it. The visualizations will adapt to your selection by </text>
+<text transform="matrix(1.0017 0 0 1 27.3101 407.6636)" font-family="'Cambria'" font-size="11.8151">highlighting relevant areas in the different visualization tabs. </text>
+<rect x="27.31" y="241.741" fill="none" width="289.311" height="51.857"/>
+<text transform="matrix(1.0017 0 0 1 27.3101 249.9985)" font-family="'Cambria'" font-size="11.8151">Use the filter tab to narrow down your search by Context </text>
+<text transform="matrix(1.0017 0 0 1 27.3101 264.1763)" font-family="'Cambria'" font-size="11.8151">(faculty and course level), Project Details (project type, </text>
+<text transform="matrix(1.0017 0 0 1 27.3101 278.354)" font-family="'Cambria'" font-size="11.8151">project stage and year awarded) and Charting Param</text>
+<text transform="matrix(1.0017 0 0 1 293.9307 278.354)" font-family="'Cambria'" font-size="11.8151">-</text>
+<text transform="matrix(1.0017 0 0 1 27.3101 292.5308)" font-family="'Cambria'" font-size="11.8151">eters (innovation, impact and evaluation). </text>
+<rect x="566.479" y="349.392" fill="none" width="359.666" height="62.807"/>
+<text transform="matrix(1.0017 0 0 1 566.4814 357.647)" font-family="'Cambria'" font-size="11.8151">Click on the table tab to obtain more detailed information about each </text>
+<text transform="matrix(1.0017 0 0 1 566.4814 371.8247)" font-family="'Cambria'" font-size="11.8151">project, including enrollment cap and course location. The table </text>
+<text transform="matrix(1.0017 0 0 1 566.4814 386.0024)" font-family="'Cambria'" font-size="11.8151">reflects selections that have been made using the Filters tab and the </text>
+<text transform="matrix(1.0017 0 0 1 566.4814 400.1792)" font-family="'Cambria'" font-size="11.8151">Projects tab as well as any selections made within the visualization tabs. </text>
+<rect x="24.679" y="123.592" fill="none" width="417.528" height="68.059"/>
+<text transform="matrix(1.0017 0 0 1 24.6797 134.4731)" font-family="'Cambria'" font-size="11.8151">In this project example, active learning through short activities (innovation) were</text>
+<text transform="matrix(1.0017 0 0 1 24.6797 148.6504)" font-family="'Cambria'" font-size="11.8151">implemented to target lifelong learning skills as well as attitudes and motivation (impacts).  </text>
+<text transform="matrix(1.0017 0 0 1 24.6797 162.8286)" font-family="'Cambria'" font-size="11.8151">Observations (evaluation approach) were used to assess its effectiveness.</text>
+<rect x="566.479" y="165.601" fill="none" width="365.584" height="85.125"/>
+<text transform="matrix(1.0017 0 0 1 566.4814 173.8564)" font-family="'Cambria'" font-size="11.8151">In the Innovation x Impact and Impact x Evaluation tabs, the color </text>
+<text transform="matrix(1.0017 0 0 1 566.4814 188.0342)" font-family="'Cambria'" font-size="11.8151">intensity of the boxes shows the number of projects where there is and</text>
+<text transform="matrix(1.0017 0 0 1 566.4814 202.2119)" font-family="'Cambria'" font-size="11.8151"> intersection  between an innovation and impact, or an impact and</text>
+<text transform="matrix(1.0017 0 0 1 566.4814 216.3882)" font-family="'Cambria'" font-size="11.8151">evaluation. In this example, most projects use attitude surveys to evaluate </text>
+<text transform="matrix(1.0017 0 0 1 566.4814 230.5659)" enable-background="new    "><tspan x="0" y="0" font-family="'Cambria'" font-size="11.8151">the effect of innovations on actions and behaviours or on attitudes and </tspan><tspan x="0" y="14.178" font-family="'Cambria'" font-size="11.8151">motivation.</tspan></text>
+<g>
+	<path fill="none" stroke="#F37243" stroke-width="13" stroke-opacity="0.7" d="M45.354,88.845
+		c161.587,0,17.954-7.981,179.541-7.981"/>
+	<path fill="none" stroke="#8CC63F" stroke-width="13" stroke-opacity="0.7" d="M45.354,105.436c161.587,0,17.954,0,179.541,0"/>
+	<text transform="matrix(0.9024 0 0 1 25.5815 80.374)" fill="#0C2244" font-family="'Cambria'" font-size="11.8151">Active learning - short activities</text>
+	<text transform="matrix(0.9024 0 0 1 180.9521 72.5757)" fill="#0C2244" font-family="'Cambria'" font-size="11.8151">Lifelong learning skills</text>
+	<text transform="matrix(0.9024 0 0 1 176.8789 97.5933)" fill="#0C2244" font-family="'Cambria'" font-size="11.8151">Attitudes and motivation</text>
+	<rect x="25.805" y="80.549" fill="#B9B8B9" fill-opacity="0.9" width="19.549" height="33.183"/>
+	<text transform="matrix(0.9024 0 0 1 382.9375 81.3496)" fill="#0C2244" font-family="'Cambria'" font-size="11.8151">Observations</text>
+	<rect x="224.356" y="72.68" fill="#F37243" fill-opacity="0.9" width="19.549" height="16.591"/>
+	<rect x="224.896" y="97.14" fill="#8CC63F" fill-opacity="0.9" width="19.547" height="16.592"/>
+	<path fill="none" stroke="#F37243" stroke-width="13" stroke-opacity="0.7" d="M244.041,81.142
+		c161.587,0,17.954,7.982,179.541,7.982"/>
+	<path fill="none" stroke="#8CC63F" stroke-width="13" stroke-opacity="0.7" d="M244.041,105.715c161.587,0,17.954,0,179.541,0"/>
+	<rect x="423.47" y="81.147" fill="#B9B8B9" fill-opacity="0.9" width="19.548" height="33.182"/>
+</g>
+<path fill="#B9B8B9" stroke="#FFFFFF" stroke-opacity="0.2" d="M778.597,127.28h59.502c2.529,0,4.576,2.046,4.576,4.568v12.947
+	c0,2.522-2.049,4.569-4.576,4.569h-59.502c-2.529,0-4.578-2.045-4.578-4.569v-12.947C774.019,129.328,776.067,127.28,778.597,127.28
 	z"/>
-<path fill="#B9B8B9" stroke="#FFFFFF" stroke-opacity="0.2" d="M648.563,139.388h45.246c1.924,0,3.48,1.559,3.48,3.48v9.862
-	c0,1.921-1.559,3.481-3.48,3.481h-45.246c-1.922,0-3.48-1.559-3.48-3.481v-9.862C645.08,140.948,646.639,139.388,648.563,139.388z"
-	/>
-<path fill="#B9B8B9" stroke="#FFFFFF" stroke-opacity="0.2" d="M596.354,139.388H641.6c1.924,0,3.48,1.559,3.48,3.48v9.862
-	c0,1.921-1.559,3.481-3.48,3.481h-45.246c-1.922,0-3.482-1.559-3.482-3.481v-9.862C592.873,140.948,594.432,139.388,596.354,139.388
+<path fill="#B9B8B9" stroke="#FFFFFF" stroke-opacity="0.2" d="M709.128,127.28h59.502c2.529,0,4.576,2.046,4.576,4.568v12.947
+	c0,2.522-2.049,4.569-4.576,4.569h-59.502c-2.525,0-4.576-2.045-4.576-4.569v-12.947C704.55,129.328,706.599,127.28,709.128,127.28z
+	"/>
+<path fill="#B9B8B9" stroke="#FFFFFF" stroke-opacity="0.2" d="M640.472,127.28h59.502c2.527,0,4.576,2.046,4.576,4.568v12.947
+	c0,2.522-2.051,4.569-4.576,4.569h-59.502c-2.525,0-4.578-2.045-4.578-4.569v-12.947C635.896,129.328,637.946,127.28,640.472,127.28
 	z"/>
-<text transform="matrix(1 0 0 1 720.623 152.0933)" opacity="0.73" fill="#FFFFFF" enable-background="new    " font-family="'Arial-BoldMT'" font-size="12.182">7</text>
-<text transform="matrix(1 0 0 1 667.7969 152.0933)" opacity="0.73" fill="#FFFFFF" enable-background="new    " font-family="'Arial-BoldMT'" font-size="12.182">3</text>
-<text transform="matrix(1 0 0 1 612.2012 152.0933)" opacity="0.73" fill="#FFFFFF" enable-background="new    " font-family="'Arial-BoldMT'" font-size="12.182">12</text>
+<text transform="matrix(1.0017 0 0 1 803.8916 143.9585)" opacity="0.73" fill="#FFFFFF" enable-background="new    " font-family="'Arial-BoldMT'" font-size="15.9924">7</text>
+<text transform="matrix(1.0017 0 0 1 734.4229 143.9585)" opacity="0.73" fill="#FFFFFF" enable-background="new    " font-family="'Arial-BoldMT'" font-size="15.9924">3</text>
+<text transform="matrix(1.0017 0 0 1 661.3115 143.9585)" opacity="0.73" fill="#FFFFFF" enable-background="new    " font-family="'Arial-BoldMT'" font-size="15.9924">12</text>
 <g>
-	<text transform="matrix(1 0 0 1 545.3682 112.5405)" fill="#0C2244" font-family="'Cambria'" font-size="9">Actions and</text>
-	<text transform="matrix(1 0 0 1 547.9385 121.019)" fill="#0C2244" font-family="'Cambria'" font-size="9">behaviours</text>
+	<text transform="matrix(1.0017 0 0 1 573.4229 92.0342)" fill="#0C2244" font-family="'Cambria'" font-size="11.8151">Actions and</text>
+	<text transform="matrix(1.0017 0 0 1 576.8037 103.165)" fill="#0C2244" font-family="'Cambria'" font-size="11.8151">behaviours</text>
 </g>
 <g>
-	<text transform="matrix(1 0 0 1 539.0879 130.2456)" fill="#0C2244" font-family="'Cambria'" font-size="9">Attitudes and</text>
-	<text transform="matrix(1 0 0 1 548.9512 138.7241)" fill="#0C2244" font-family="'Cambria'" font-size="9">motivation</text>
+	<text transform="matrix(1.0017 0 0 1 565.165 115.2773)" fill="#0C2244" font-family="'Cambria'" font-size="11.8151">Attitudes and</text>
+	<text transform="matrix(1.0017 0 0 1 578.1357 126.4077)" fill="#0C2244" font-family="'Cambria'" font-size="11.8151">motivation</text>
 </g>
-<text transform="matrix(1 0 0 1 595.208 103.1958)" fill="#0C2244" font-family="'Cambria'" font-size="9">surveys</text>
-<text transform="matrix(1 0 0 1 594.708 95.2183)" fill="#0C2244" font-family="'Cambria'" font-size="9">Attitude</text>
-<text transform="matrix(1 0 0 1 647.5664 103.1968)" fill="#0C2244" font-family="'Cambria'" font-size="9">Interviews</text>
-<path fill="#8CC63F" stroke="#FFFFFF" stroke-opacity="0.2" d="M596.354,122.543H641.6c1.924,0,3.48,1.559,3.48,3.479v9.862
-	c0,1.922-1.559,3.48-3.48,3.48h-45.246c-1.922,0-3.482-1.558-3.482-3.48v-9.862C592.873,124.101,594.432,122.543,596.354,122.543z"
+<text transform="matrix(1.0017 0 0 1 638.9658 79.7666)" fill="#0C2244" font-family="'Cambria'" font-size="11.8151">surveys</text>
+<text transform="matrix(1.0017 0 0 1 638.3076 69.2939)" fill="#0C2244" font-family="'Cambria'" font-size="11.8151">Attitude</text>
+<text transform="matrix(1.0017 0 0 1 707.8193 79.7676)" fill="#0C2244" font-family="'Cambria'" font-size="11.8151">Interviews</text>
+<path fill="#8CC63F" stroke="#FFFFFF" stroke-opacity="0.2" d="M640.472,105.166h59.502c2.527,0,4.576,2.046,4.576,4.567v12.947
+	c0,2.523-2.051,4.569-4.576,4.569h-59.502c-2.525,0-4.578-2.046-4.578-4.569v-12.947
+	C635.896,107.211,637.946,105.166,640.472,105.166z"/>
+<path fill="#8CC63F" fill-opacity="0.7" stroke="#FFFFFF" stroke-opacity="0.2" d="M709.128,105.166h59.502
+	c2.529,0,4.576,2.046,4.576,4.567v12.947c0,2.523-2.049,4.569-4.576,4.569h-59.502c-2.525,0-4.576-2.046-4.576-4.569v-12.947
+	C704.55,107.211,706.599,105.166,709.128,105.166z"/>
+<path fill="#FAB03C" stroke="#FFFFFF" stroke-opacity="0.2" d="M640.472,83.081h59.502c2.527,0,4.576,2.046,4.576,4.57v12.946
+	c0,2.522-2.051,4.569-4.576,4.569h-59.502c-2.525,0-4.578-2.046-4.578-4.569V87.65C635.896,85.126,637.946,83.081,640.472,83.081z"
 	/>
-<path fill="#8CC63F" fill-opacity="0.7" stroke="#FFFFFF" stroke-opacity="0.2" d="M648.563,122.543h45.246
-	c1.924,0,3.48,1.559,3.48,3.479v9.862c0,1.922-1.559,3.48-3.48,3.48h-45.246c-1.922,0-3.48-1.558-3.48-3.48v-9.862
-	C645.08,124.101,646.639,122.543,648.563,122.543z"/>
-<path fill="#FAB03C" stroke="#FFFFFF" stroke-opacity="0.2" d="M596.354,105.72H641.6c1.924,0,3.48,1.559,3.48,3.481v9.862
-	c0,1.921-1.559,3.48-3.48,3.48h-45.246c-1.922,0-3.482-1.559-3.482-3.48v-9.862C592.873,107.278,594.432,105.72,596.354,105.72z"/>
-<path fill="#FAB03C" fill-opacity="0.7" stroke="#FFFFFF" stroke-opacity="0.2" d="M648.563,105.72h45.246
-	c1.924,0,3.48,1.559,3.48,3.481v9.862c0,1.921-1.559,3.48-3.48,3.48h-45.246c-1.922,0-3.48-1.559-3.48-3.48v-9.862
-	C645.08,107.278,646.639,105.72,648.563,105.72z"/>
-<path fill="#8CC63F" stroke="#FFFFFF" stroke-opacity="0.2" d="M754.373,122.543h45.248c1.922,0,3.48,1.559,3.48,3.479v9.862
-	c0,1.922-1.559,3.48-3.48,3.48h-45.248c-1.922,0-3.48-1.558-3.48-3.48v-9.862C750.895,124.101,752.451,122.543,754.373,122.543z"/>
-<path fill="#FAB03C" stroke="#FFFFFF" stroke-opacity="0.2" d="M754.373,105.72h45.248c1.922,0,3.48,1.559,3.48,3.481v9.862
-	c0,1.921-1.559,3.48-3.48,3.48h-45.248c-1.922,0-3.48-1.559-3.48-3.48v-9.862C750.895,107.278,752.451,105.72,754.373,105.72z"/>
-<text transform="matrix(1 0 0 1 770.2227 135.2476)" opacity="0.73" fill="#FFFFFF" enable-background="new    " font-family="'Arial-BoldMT'" font-size="12.182">13</text>
-<text transform="matrix(1 0 0 1 770.2227 118.4253)" opacity="0.73" fill="#FFFFFF" enable-background="new    " font-family="'Arial-BoldMT'" font-size="12.182">10</text>
-<path fill="#8CC63F" stroke="#FFFFFF" stroke-opacity="0.2" d="M701.469,122.543h45.246c1.924,0,3.482,1.559,3.482,3.479v9.862
-	c0,1.922-1.559,3.48-3.482,3.48h-45.246c-1.924,0-3.48-1.558-3.48-3.48v-9.862C697.986,124.101,699.545,122.543,701.469,122.543z"/>
-<path fill="#FAB03C" fill-opacity="0.3" stroke="#FFFFFF" stroke-opacity="0.2" d="M701.469,105.72h45.246
-	c1.924,0,3.482,1.559,3.482,3.481v9.862c0,1.921-1.559,3.48-3.482,3.48h-45.246c-1.924,0-3.48-1.559-3.48-3.48v-9.862
-	C697.986,107.278,699.545,105.72,701.469,105.72z"/>
+<path fill="#FAB03C" fill-opacity="0.7" stroke="#FFFFFF" stroke-opacity="0.2" d="M709.128,83.081h59.502
+	c2.529,0,4.576,2.046,4.576,4.57v12.946c0,2.522-2.049,4.569-4.576,4.569h-59.502c-2.525,0-4.576-2.046-4.576-4.569V87.65
+	C704.55,85.126,706.599,83.081,709.128,83.081z"/>
+<path fill="#8CC63F" stroke="#FFFFFF" stroke-opacity="0.2" d="M848.274,105.166h59.506c2.525,0,4.576,2.046,4.576,4.567v12.947
+	c0,2.523-2.051,4.569-4.576,4.569h-59.506c-2.527,0-4.576-2.046-4.576-4.569v-12.947
+	C843.702,107.211,845.747,105.166,848.274,105.166z"/>
+<path fill="#FAB03C" stroke="#FFFFFF" stroke-opacity="0.2" d="M848.274,83.081h59.506c2.525,0,4.576,2.046,4.576,4.57v12.946
+	c0,2.522-2.051,4.569-4.576,4.569h-59.506c-2.527,0-4.576-2.046-4.576-4.569V87.65C843.702,85.126,845.747,83.081,848.274,83.081z"
+	/>
+<text transform="matrix(1.0017 0 0 1 869.1182 121.8433)" opacity="0.73" fill="#FFFFFF" enable-background="new    " font-family="'Arial-BoldMT'" font-size="15.9924">13</text>
+<text transform="matrix(1.0017 0 0 1 869.1182 99.7598)" opacity="0.73" fill="#FFFFFF" enable-background="new    " font-family="'Arial-BoldMT'" font-size="15.9924">10</text>
+<path fill="#8CC63F" stroke="#FFFFFF" stroke-opacity="0.2" d="M778.704,105.166h59.5c2.529,0,4.58,2.046,4.58,4.567v12.947
+	c0,2.523-2.051,4.569-4.58,4.569h-59.5c-2.529,0-4.578-2.046-4.578-4.569v-12.947C774.124,107.211,776.175,105.166,778.704,105.166z
+	"/>
+<path fill="#FAB03C" fill-opacity="0.3" stroke="#FFFFFF" stroke-opacity="0.2" d="M778.704,83.081h59.5
+	c2.529,0,4.58,2.046,4.58,4.57v12.946c0,2.522-2.051,4.569-4.58,4.569h-59.5c-2.529,0-4.578-2.046-4.578-4.569V87.65
+	C774.124,85.126,776.175,83.081,778.704,83.081z"/>
 <g>
-	<text transform="matrix(1 0 0 1 698.999 103.1958)" fill="#0C2244" font-family="'Cambria'" font-size="9">writing</text>
-	<text transform="matrix(1 0 0 1 698.999 94.7183)" fill="#0C2244" font-family="'Cambria'" font-size="9">Reflective</text>
+	<text transform="matrix(1.0017 0 0 1 775.4561 79.7666)" fill="#0C2244" font-family="'Cambria'" font-size="11.8151">writing</text>
+	<text transform="matrix(1.0017 0 0 1 775.4561 68.6377)" fill="#0C2244" font-family="'Cambria'" font-size="11.8151">Reflective</text>
 </g>
 <g id="arrows" display="none">
 	<path display="inline" fill="none" stroke="#186A9B" d="M411.686,77.118c0,6.205-37.583,11.226-84.034,11.226"/>
@@ -1055,6 +1060,9 @@ rY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVopPG8T
 	<path display="inline" fill="none" stroke="#186A9B" d="M944.354,191.118c0,66.12-84.229,119.627-188.332,119.627"/>
 	<path display="inline" fill="none" stroke="#0C2244" d="M214.853,274.373c-1.127-11.432-20.584-19.396-43.498-17.803"/>
 </g>
-<text transform="matrix(1 0 0 1 571.5449 150.2456)" fill="#0C2244" font-family="'Cambria'" font-size="9">Total</text>
-<text transform="matrix(1 0 0 1 753.0449 103.1968)" fill="#0C2244" font-family="'Cambria'" font-size="9">Total</text>
+<text transform="matrix(1.0017 0 0 1 607.8467 141.5327)" fill="#0C2244" font-family="'Cambria'" font-size="11.8151">Total</text>
+<text transform="matrix(1.0017 0 0 1 846.5283 79.7676)" fill="#0C2244" font-family="'Cambria'" font-size="11.8151">Total</text>
+<text transform="matrix(0.9395 0 0 1 27.3174 57.6118)" fill="#166A9A" font-family="'ArialMT'" font-size="13.1279">Innovation</text>
+<text transform="matrix(0.9395 0 0 1 192.2065 57.6104)" fill="#166A9A" font-family="'ArialMT'" font-size="13.1279">Area of impact</text>
+<text transform="matrix(0.9395 0 0 1 329.0352 57.6118)" fill="#166A9A" font-family="'ArialMT'" font-size="13.1279">Evaluation approach</text>
 </svg>
