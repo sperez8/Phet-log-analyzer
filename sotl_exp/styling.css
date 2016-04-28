@@ -1,21 +1,6 @@
 
-/*page setup*/
-
-@font-face {
-    font-family: 'museo_sans500';
-    src: url('MuseoSans_500-webfont.eot');
-    src: url('MuseoSans_500-webfont.eot?#iefix') format('embedded-opentype'),
-         url('MuseoSans_500-webfont.woff2') format('woff2'),
-         url('MuseoSans_500-webfont.woff') format('woff'),
-         url('MuseoSans_500-webfont.ttf') format('truetype'),
-         url('MuseoSans_500-webfont.svg#museo_sans500') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
 body {
-    font-family: "museo_sans500"; /*used to be Helvetica Neue*/
+    font-family: Futura, 'Trebuchet MS', Arial, sans-serif; /*used to be Helvetica Neue*/
     font-style: normal;
     font-size: 10pt;
     width: 100%;
@@ -31,10 +16,16 @@ svg, {
     margin:auto;
 }
 
+form {
+    width: 200px;
+    height: 1px;
+    margin: 0 0 0px;
+}
+
 /*#sankeyChart, #innovationImpactChart, #impactApproachChart {*/
 #allCharts {
     width: 100%;
-    min-width:800px;
+    min-width:900px;
     height: 100%;
     float: left;
     clear: right;
@@ -100,7 +91,7 @@ th {
 }
 
 div.tooltip, div.tooltip-inner {
-    font-family: "museo_sans500"; /*used to be Helvetica Neue*/
+    font-family: Futura, 'Trebuchet MS', Arial, sans-serif; /*used to be Helvetica Neue*/
     font-style: normal;
     font-size: 10pt;
     margin-left: auto;
@@ -131,7 +122,7 @@ div.tooltip, div.tooltip-inner {
 }
 
 .node text {
-    font-family: "museo_sans500"; /*used to be Helvetica Neue*/
+    font-family: Futura, 'Trebuchet MS', Arial, sans-serif; /*used to be Helvetica Neue*/
     font-style: normal;
     font-size: 10pt;
     fill: #002145;
@@ -143,7 +134,7 @@ div.tooltip, div.tooltip-inner {
 }
 
 .heading {
-    font-family: "museo_sans500"; /*used to be Helvetica Neue*/
+    font-family: Futura, 'Trebuchet MS', Arial, sans-serif; /*used to be Helvetica Neue*/
     font-style: normal;
     font-size: 14pt;
     fill: #166a9a;
@@ -192,6 +183,8 @@ select {
     margin-left: 2px;
     padding-right: 4px;
     padding-left: 4px;
+    padding-top: 0px;
+    padding-bottom: 0px;
     border: 1px solid #002145;
     color: #002145;
     background: transparent;
@@ -237,7 +230,7 @@ input[type="button"] {
     float: left;
     height: 30px;
     font-size: 10pt;
-    font-family: 'museo_sans500';
+    font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
     font-weight: 100;
     text-align: left;
     padding: 0 20px;
@@ -253,7 +246,7 @@ input[type="button"] {
     float: left;
     height: 30px;
     font-size: 10pt;
-    font-family: 'museo_sans500';
+    font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
     font-weight: 100;
     text-align: left;
     padding: 0 10px;
@@ -301,7 +294,7 @@ input[type="button"] {
     display: block;
     height: auto;
     line-height: 22px;
-    font-family: 'museo_sans500';
+    font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
     font-weight: 100;
     /*text-transform: capitalize;*/
 }
@@ -314,7 +307,7 @@ input[type="button"] {
 .filterLabel p {
     color: #fff;
     font-size: 10pt;
-    font-family: 'museo_sans500';
+    font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
     font-weight: 100;
     margin: 0;
     margin-bottom: 3px;
@@ -339,7 +332,7 @@ input[type="button"] {
 .sidebarTitle p {
     padding-left: 12px;
     font-size: 11pt;
-    font-family: 'museo_sans500';
+    font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
     font-weight: 500;
     /*text-transform: uppercase;*/
 /*    background-color: rgba(0, 0, 0, 0.25);*/
@@ -402,7 +395,7 @@ input[type="button"] {
     line-height: 30px;
     height: 30px;
     font-size: 11pt;
-    font-family: 'museo_sans500';
+    font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
     font-weight: 500;
     text-align: center;
 }
@@ -414,7 +407,7 @@ input[type="button"] {
     line-height: 60px;
     height: 60px;
     font-size: 17pt;
-    font-family: 'museo_sans500';
+    font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
     font-weight: 500;
     text-align: left;
     padding-left: 30px;
@@ -427,7 +420,7 @@ input[type="button"] {
 body {
     margin-top: 0;
 }
-.contentArea {
+#contentArea {
     display: table-cell;
     width: 100%;
 }
@@ -458,7 +451,7 @@ body {
     line-height: 30px;
     height: 30px;
     font-size: 11pt;
-    font-family: 'museo_sans500';
+    font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
     font-weight: 100;
     padding: 0 24px;
     margin: 0;

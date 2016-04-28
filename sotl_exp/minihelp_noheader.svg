@@ -945,7 +945,7 @@ rY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVopPG8T
 <text transform="matrix(1.0017 0 0 1 648.9268 334.5112)" fill="#0C2244" font-family="'Cambria'" font-size="17.0662">of project details</text>
 <rect x="16.789" y="195.809" fill="none" width="211.723" height="36.759"/>
 <text transform="matrix(1.0017 0 0 1 16.7881 207.7412)" fill="#0C2244" stroke="#0C2244" stroke-width="0.5" font-family="'Cambria'" font-size="18">Filter projects</text>
-<text transform="matrix(1.0017 0 0 1 128.9268 207.5112)" fill="#0C2244" font-family="'Cambria'" font-size="17.0662"> and visualize </text>
+<text transform="matrix(1.0017 0 0 1 128.9268 207.5117)" fill="#0C2244" font-family="'Cambria'" font-size="17.0662"> and visualize </text>
 <text transform="matrix(1.0017 0 0 1 16.7881 228.2202)" fill="#0C2244" font-family="'Cambria'" font-size="17.0662">projects of interest</text>
 <rect x="16.789" y="322.71" fill="none" width="255.12" height="47.262"/>
 <g>
@@ -1064,5 +1064,5 @@ rY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVrY5+qfVopPG8T
 <text transform="matrix(1.0017 0 0 1 846.5283 79.7676)" fill="#0C2244" font-family="'Cambria'" font-size="11.8151">Total</text>
 <text transform="matrix(0.9395 0 0 1 27.3174 57.6118)" fill="#166A9A" font-family="'ArialMT'" font-size="13.1279">Innovation</text>
 <text transform="matrix(0.9395 0 0 1 192.2065 57.6104)" fill="#166A9A" font-family="'ArialMT'" font-size="13.1279">Area of impact</text>
-<text transform="matrix(0.9395 0 0 1 329.0352 57.6118)" fill="#166A9A" font-family="'ArialMT'" font-size="13.1279">Evaluation approach</text>
+<text transform="matrix(0.9395 0 0 1 331.9268 57.6118)" fill="#166A9A" font-family="'ArialMT'" font-size="13.1279">Evaluation approach</text>
 </svg>

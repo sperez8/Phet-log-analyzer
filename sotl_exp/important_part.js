@@ -1,4 +1,8 @@
 // ****************************************************************** //
+//    WHAT TO DO TO PUT ON CMS:
+//    1. Uncomment window size using content div lin 6**
+//    2. Remove header and html tags
+//    
 // ****************************************************************** //
 // ****************************************************************** //
 // ****************************************************************** //
@@ -686,8 +690,9 @@ var margin = {
 
 //width = 1200 - margin.sankey.left - margin.sankey.right,
 //height = 800 - margin.sankey.top - margin.sankey.bottom;
-width = document.getElementById("allCharts").offsetWidth
+//width = document.getElementById("allCharts").offsetWidth
 width = (document.body.clientWidth - document.getElementById("sidebars").offsetWidth)*0.8
+//width = (document.getElementById("content").offsetWidth - document.getElementById("sidebars").offsetWidth)*0.8
 height = window.innerHeight - 140
 
 var formatNumber = d3.format(",.0f"), // zero decimal places
@@ -1733,7 +1738,7 @@ var sankeyChart = function(n) { //this is used to hide the previous chart. Shoul
 
   filterData();
   oldwidth = width
-  wdith = width + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)
+  wdith = oldwidth + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)
   // append the svg canvas to the page
   var svg = d3.select("#sankeyChart").append("svg")
     .attr("width", width + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right))
@@ -2562,9 +2567,17 @@ function runhelp() {
   var img = document.createElement("img")
   img.style.width = String(width + margin.heatmap.left + margin.heatmap.right)+"px"
   // img.style.height = (width + margin.heatmap.left + margin.heatmap.right)*120/250;
-  img.src = "minihelp_noheader.svg";
+  img.src = "https://files.workspace.ubc.ca/MyDevice/s/570/f1894b18-3aa5-492d-a6a1-84641dc87990/minihelp_noheader.svg";
 
   document.getElementById("help").appendChild(img);
+
+  if ( $('#projectList').is(':empty') ) {
+    projects = get_filterOptions("project_Title")
+    console.log('empty', projects)
+    updateprojectList(projects)
+  } else { 
+    console.log('full')
+  }
 
   return "help"
 }
