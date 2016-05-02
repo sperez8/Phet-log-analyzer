@@ -6,6 +6,8 @@
 	<link type="text/css" rel="stylesheet" href="styling.css"/>
 	<script src="jquery.min.js"></script>
 	<script src="d3.v3.min.js"></script>
+	<link href="chardinjs.css" rel="stylesheet">
+	<script src="chardinjs.min.js"></script>	
 	<!-- <script src="http://d3js.org/d3.v3.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
 </head>
@@ -16,10 +18,10 @@
 <div class="appHeader">
 	<p>SOTL Explorer</p>
 </div>
-<div class="contentArea">
+<div id="contentArea">
 	<div id="sidebars">
 		<div class="sidebarTitle filters">
-			<p>Filters</p>
+			<p data-intro="Filter projects." data-position="right">Filters</p>
 			<form action="">
 				<input value="Reset" id="ResetbuttonF" onclick="reset_filters();" type="button"/>
 			</form>
@@ -39,7 +41,7 @@
 			<div class="filter"  id="context-filter-evaluation"></div>
 		</div>
 		<div class="sidebarTitle projects">
-			<p>Projects</p>
+			<p data-intro="View title of shown projects." data-position="right">Projects</p>
 			<form action="">
 				<input value="Deselect" id="ResetbuttonP" onclick="reset_projects();" type="button"/>
 			</form>
@@ -51,14 +53,13 @@
 	</div>
 	<div id= "viz">
 		<div id="NumberOfProjects" class = "heading"></div>
-		<div id="chartTypeButtons" ></div>
+		<div id="chartTypeButtons" data-intro="Select a view." data-position="bottom"></div>
+		<div id="help"></div>
 		<div id="allCharts">
 			<div id="sankeyChart"></div>
 			<div id="innovationImpactChart"></div>
 			<div id="impactApproachChart"></div>
 			<div id="project-table"></div>
-			<div id="help">
-			</div>
 		</div>
 	</div>
 </div>

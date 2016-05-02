@@ -87,6 +87,15 @@ var category_tooltip = function(info) {
     .style("opacity", tooltipOpacity);
 }
 
+var help_tooltip = function(info) {
+  var cx = d3.event.pageX
+  var cy = d3.event.pageY
+  tooltip.html(info)
+    .style("left", (cx + 5) + "px")
+    .style("top", (cy - 28) + "px");
+  tooltip
+    .style("opacity", tooltipOpacity);
+}
 
 var highlightTime = 500 //milliseconds
 
@@ -2449,6 +2458,7 @@ var evaluationPicker = d3.select("#context-filter-evaluation").append("select").
 });
 
 
+
 facultyPicker.selectAll("option").data(facultyList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
 courseLevelPicker.selectAll("option").data(courseLevelList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
 projectTypePicker.selectAll("option").data(projectTypeList).enter().append("option").attr("value", function(d) {return d}).text(function(d) {return d});
@@ -2580,13 +2590,13 @@ function runhelp() {
 
 d3.select("#chartTypeButtons") //Help - info page
   .append("input")
-  .attr("value", "?")
+  .attr("value", "Help")
   .attr("type", "button")
   .attr("class", function (){
   //.style("background",  function() {
       if (currentChartType == "help"){
-        return "big_button clicked"
-      } else {return "big_button unclicked"}
+        return "help big_button clicked"
+      } else {return "help big_button unclicked"}
   })
   .on("click", function() {
     unclick_buttons()
@@ -2594,6 +2604,14 @@ d3.select("#chartTypeButtons") //Help - info page
     setChartType = "help";
     filterData()
     runhelp()
+  });
+
+d3.select("#chartTypeButtons").select(".help")
+  .on("mouseover", function() {
+    $('body').chardinJs('start')
+  })
+  .on("mouseout", function() {
+    $('body').chardinJs('stop')
   });
 
 rerun(currentChartType); 
