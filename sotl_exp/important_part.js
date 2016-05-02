@@ -87,16 +87,6 @@ var category_tooltip = function(info) {
     .style("opacity", tooltipOpacity);
 }
 
-var help_tooltip = function(info) {
-  var cx = d3.event.pageX
-  var cy = d3.event.pageY
-  tooltip.html(info)
-    .style("left", (cx + 5) + "px")
-    .style("top", (cy - 28) + "px");
-  tooltip
-    .style("opacity", tooltipOpacity);
-}
-
 var highlightTime = 500 //milliseconds
 
 var reset_projects = function (){
@@ -751,7 +741,7 @@ var filterData = function(n) { //Note that the d is different for the heatMapdat
   d3.select("#project-table").selectAll("table").remove();
   d3.select("#project-table").selectAll("svg").remove();
   d3.select("#project-table").selectAll("th").remove();
-  d3.select("#help").selectAll("img").remove();
+  //d3.select("#help").selectAll("img").remove();
 
   //all the single option filters are of type ==
   if (faculty != "Faculty (all)") {
@@ -970,7 +960,7 @@ var heatmapInnovationImpact = function(n) {
     .attr("height", height + margin.heatmap.top + margin.heatmap.bottom)
     .append("g")
     .attr("transform",
-      "translate(" + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)*1.25 + "," + margin.heatmap.top + ")");
+      "translate(" + Math.max(margin.sankey.left + margin.sankey.right,margin.heatmap.left + margin.heatmap.right)*1.25 + "," + margin.heatmap.top + ")")
 
   var svg = d3.select("#innovationImpactChart").selectAll("g")
     .append("g")
@@ -1133,7 +1123,7 @@ var heatmapInnovationImpact = function(n) {
     .attr("class", "heading")
     .attr("x", -10)
     .attr("y", -20)
-    .attr("text-anchor", "end");
+    .attr("text-anchor", "end")
   svg.append("text").text("Area of impact")
     .attr("class", "heading")
     .attr("x", 0)
@@ -2390,11 +2380,11 @@ var ChartType = {
   "innovationImpactChart": heatmapInnovationImpact,
   "impactApproachChart": heatmapImpactApproach,
   "project-table": tabulate,
-  "help": runhelp
+  // "help": runhelp
 };
 
 
-var currentChartType = "help" //set the default chart type to be sankey
+var currentChartType = "sankeyChart" //set the default chart type to be sankey
 
 function get_current_chart() {
   currentChart = ''
@@ -2498,6 +2488,8 @@ d3.select("#chartTypeButtons") //Sankey
   .append("input")
   .attr("value", "Flow")
   .attr("type", "button")
+  // .attr("data-intro","Flow of projects.")
+  // .attr("data-position","bottom")
   .attr("class", function (){
   //.style("background",  function() {
       if (currentChartType == "sankeyChart"){
@@ -2517,6 +2509,8 @@ d3.select("#chartTypeButtons") //heatmapInnovationImpact
   .append("input")
   .attr("value", "Innovation x Impact")
   .attr("type", "button")
+  // .attr("data-intro","Heatmap of Innovation x Impact frequency.")
+  // .attr("data-position","bottom")
   .attr("class", function (){
   //.style("background",  function() {
       if (currentChartType == "innovationImpactChart"){
@@ -2536,6 +2530,8 @@ d3.select("#chartTypeButtons")
   .append("input")
   .attr("value", "Impact x Evaluation")
   .attr("type", "button")
+  // .attr("data-intro","Heatmap of Impact x Evaluation frequency.")
+  // .attr("data-position","bottom")
   .attr("class", function (){
   //.style("background",  function() {
       if (currentChartType == "impactApproachChart"){
@@ -2555,6 +2551,8 @@ d3.select("#chartTypeButtons")
   .append("input")
   .attr("value", "Table")
   .attr("type", "button")
+  .attr("data-intro","See project details")
+  .attr("data-position","bottom")
   .attr("class", function (){
   //.style("background",  function() {
       if (currentChartType == "project-table"){
@@ -2569,50 +2567,66 @@ d3.select("#chartTypeButtons")
     update_table_selection()
   });
 
-function runhelp() {
-  removeReveal()
-  d3.select("#help").selectAll("img")
-      .remove();
+// function runhelp() {
+//   removeReveal()
+//   d3.select("#help").selectAll("img")
+//       .remove();
 
-  var img = document.createElement("img")
-  img.style.width = String(width + margin.heatmap.left + margin.heatmap.right)+"px"
-  // img.style.height = (width + margin.heatmap.left + margin.heatmap.right)*120/250;
-  img.src = "https://files.workspace.ubc.ca/MyDevice/s/570/f1894b18-3aa5-492d-a6a1-84641dc87990/minihelp_noheader.svg";
+//   var img = document.createElement("img")
+//   img.style.width = String(width + margin.heatmap.left + margin.heatmap.right)+"px"
+//   // img.style.height = (width + margin.heatmap.left + margin.heatmap.right)*120/250;
+//   img.src = "https://files.workspace.ubc.ca/MyDevice/s/570/f1894b18-3aa5-492d-a6a1-84641dc87990/minihelp_noheader.svg";
 
-  document.getElementById("help").appendChild(img);
+//   document.getElementById("help").appendChild(img);
 
-  if ( $('#projectList').is(':empty') ) {
-    projects = get_filterOptions("project_Title")
-    updateprojectList(projects)
-  }
-  return "help"
-}
+//   if ( $('#projectList').is(':empty') ) {
+//     projects = get_filterOptions("project_Title")
+//     updateprojectList(projects)
+//   }
+//   return "help"
+// }
+
+// d3.select("#chartTypeButtons") //Help - info page
+//   .append("input")
+//   .attr("value", "Help")
+//   .attr("type", "button")
+//   .attr("class", function (){
+//   //.style("background",  function() {
+//       if (currentChartType == "help"){
+//         return "help big_button clicked"
+//       } else {return "help big_button unclicked"}
+//   })
+//   .on("click", function() {
+//     unclick_buttons()
+//     d3.select(this).call(click_button)
+//     setChartType = "help";
+//     filterData()
+//     runhelp()
+//   });
+
 
 d3.select("#chartTypeButtons") //Help - info page
   .append("input")
   .attr("value", "Help")
   .attr("type", "button")
-  .attr("class", function (){
-  //.style("background",  function() {
-      if (currentChartType == "help"){
-        return "help big_button clicked"
-      } else {return "help big_button unclicked"}
-  })
-  .on("click", function() {
-    unclick_buttons()
-    d3.select(this).call(click_button)
-    setChartType = "help";
-    filterData()
-    runhelp()
-  });
-
-d3.select("#chartTypeButtons").select(".help")
+  .attr("data-intro","Hover for help")
+  .attr("data-position","bottom")
   .on("mouseover", function() {
     $('body').chardinJs('start')
+    setTimeout(function() { $('.chardinjs-overlay').css('opacity', 0.7); }, 100);
   })
   .on("mouseout", function() {
     $('body').chardinJs('stop')
   });
+
+
+// d3.select("#chartTypeButtons").select("#helpbutton")
+//   .on("mouseover", function() {
+//     $('body').chardinJs('start')
+//   })
+//   .on("mouseout", function() {
+//     $('body').chardinJs('stop')
+//   });
 
 rerun(currentChartType); 
 
