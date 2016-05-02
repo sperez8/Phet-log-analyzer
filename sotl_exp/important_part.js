@@ -2573,12 +2573,8 @@ function runhelp() {
 
   if ( $('#projectList').is(':empty') ) {
     projects = get_filterOptions("project_Title")
-    console.log('empty', projects)
     updateprojectList(projects)
-  } else { 
-    console.log('full')
   }
-
   return "help"
 }
 

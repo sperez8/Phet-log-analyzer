@@ -1,6 +1,5 @@
 
 body {
-    font-family: Futura, 'Trebuchet MS', Arial, sans-serif; /*used to be Helvetica Neue*/
     font-style: normal;
     font-size: 10pt;
     width: 100%;
@@ -69,6 +68,7 @@ table {
 }
 
 td {
+    font-family: Futura, 'Trebuchet MS', Arial, sans-serif; /*used to be Helvetica Neue*/
     color: #002145;
     font-size: 10pt;
     border-left: 3px solid white;
