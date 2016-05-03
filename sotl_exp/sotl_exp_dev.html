@@ -1,23 +1,24 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<html>
-<head>
-	<title>Sotl Explorer Beta</title>
-	<link type="text/css" rel="stylesheet" href="styling.css"/>
-	<script src="jquery.min.js"></script>
-	<script src="d3.v3.min.js"></script>
-	<link href="chardinjs.css" rel="stylesheet">
-	<script src="chardinjs.min.js"></script>	
+<!DOCTYPE html><!-- remove -->
+<meta charset="utf-8"><!-- remove -->
+<html><!-- remove -->
+<head><!-- remove -->
+	<title>Sotl Explorer Beta</title><!-- remove -->
+	<link type="text/css" rel="stylesheet" href="styling.css"/><!-- remove -->
+	<script src="jquery.min.js"></script><!-- remove -->
+	<script src="d3.v3.min.js"></script><!-- remove -->
+	<link href="chardinjs.css" rel="stylesheet"><!-- remove -->
+	<script src="chardinjs.js"></script><!-- remove -->
 	<!-- <script src="http://d3js.org/d3.v3.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
-</head>
-<body>
-<div class="commonPageHeader">
-	<img src="sotl_page_header.png" alt="">
-</div>
-<div class="appHeader">
-	<p>SOTL Explorer</p>
-</div>
+</head><!-- remove -->
+<!-- <script src="http://d3js.org/d3.v3.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> --><body>
+<div class="commonPageHeader"><!-- remove -->
+	<img src="sotl_page_header.png" alt=""><!-- remove -->
+</div><!-- remove -->
+<div class="appHeader"><!-- remove -->
+	<p>SOTL Explorer</p><!-- remove -->
+</div><!-- remove -->
 <div id="contentArea">
 	<div id="sidebars">
 		<div class="sidebarTitle filters">
@@ -41,7 +42,7 @@
 			<div class="filter"  id="context-filter-evaluation"></div>
 		</div>
 		<div class="sidebarTitle projects">
-			<p data-intro="View title of shown projects." data-position="right">Projects</p>
+			<p data-intro="View title of shown projects and select projects." data-position="right">Projects</p>
 			<form action="">
 				<input value="Deselect" id="ResetbuttonP" onclick="reset_projects();" type="button"/>
 			</form>
@@ -53,7 +54,7 @@
 	</div>
 	<div id= "viz">
 		<div id="NumberOfProjects" class = "heading"></div>
-		<div id="chartTypeButtons" data-intro="Select a view." data-position="bottom"></div>
+		<div id="chartTypeButtons" data-intro="Pick a view. Select projects. Explore." data-position="superbottom"></div>
 		<div id="allCharts">
 			<div id="sankeyChart"></div>
 			<div id="innovationImpactChart"></div>
@@ -379,8 +380,6 @@ Blending fundamental and useful genetics	Rosemary Redfield	Adriana Briseno (with
 "Flipped transformation of BIOL 112: Biology of the Cell and BIOL 121: Genetics, Evolution and Ecology"	Shona Ellis 	Adriana Briseno (with data shared by Gillian Gerhard)	FL/Large TLEF	In progress	2013	"Science, Faculty of"	Biology	"  This project aims to transform two courses, Biology of the Cell (BIOL 112) and Genetics, Evolution and Ecology (BIOL 121), into flipped or blended classrooms, where some course content is delivered online and some content is delivered didactically in lecture, with substantial class time devoted to the application of knowledge, data analysis, and problem solving. In addition to developing a flipped and blended pedagogy and associated resources for BIOL 112 and BIOL 121, the project will also identify high priority modular content for vertical integration in the Biology curriculum and prepare artefacts for the stand-alone resource bank for biology. Pilots will be offered in September 2013 and January 2014, and delivery of the fully transformed courses will take place in September 2014."	"Lecture, Tutorial"	100	N/A	High (more than 150 students)	On campus (NOT blended)	Operations	Secondary data	"Operations (e.g., finance, reputation)"	Secondary data	1	impactXapproach
 "Flipped transformation of BIOL 112: Biology of the Cell and BIOL 121: Genetics, Evolution and Ecology"	Shona Ellis 	Adriana Briseno (with data shared by Gillian Gerhard)	FL/Large TLEF	In progress	2013	"Science, Faculty of"	Biology	"  This project aims to transform two courses, Biology of the Cell (BIOL 112) and Genetics, Evolution and Ecology (BIOL 121), into flipped or blended classrooms, where some course content is delivered online and some content is delivered didactically in lecture, with substantial class time devoted to the application of knowledge, data analysis, and problem solving. In addition to developing a flipped and blended pedagogy and associated resources for BIOL 112 and BIOL 121, the project will also identify high priority modular content for vertical integration in the Biology curriculum and prepare artefacts for the stand-alone resource bank for biology. Pilots will be offered in September 2013 and January 2014, and delivery of the fully transformed courses will take place in September 2014."	"Lecture, Tutorial"	100	N/A	High (more than 150 students)	On campus (NOT blended)	Instructional team practices	Observations	"Instructional team roles and practices(e.g., TA use of time)"	Observations	1	impactXapproach
 "Flipped transformation of BIOL 112: Biology of the Cell and BIOL 121: Genetics, Evolution and Ecology"	Shona Ellis 	Adriana Briseno (with data shared by Gillian Gerhard)	FL/Large TLEF	In progress	2013	"Science, Faculty of"	Biology	"  This project aims to transform two courses, Biology of the Cell (BIOL 112) and Genetics, Evolution and Ecology (BIOL 121), into flipped or blended classrooms, where some course content is delivered online and some content is delivered didactically in lecture, with substantial class time devoted to the application of knowledge, data analysis, and problem solving. In addition to developing a flipped and blended pedagogy and associated resources for BIOL 112 and BIOL 121, the project will also identify high priority modular content for vertical integration in the Biology curriculum and prepare artefacts for the stand-alone resource bank for biology. Pilots will be offered in September 2013 and January 2014, and delivery of the fully transformed courses will take place in September 2014."	"Lecture, Tutorial"	100	N/A	High (more than 150 students)	On campus (NOT blended)	Instructional team practices	Reflective writing	"Instructional team roles and practices(e.g., TA use of time)"	Reflective writing	1	impactXapproach</div>
-<script type="d3_sankey.js"></script>
-<script type="d3_stuff.js"></script>
-<script src="important_part.js"></script>
+<script src="important_part.js"></script><!-- remove -->
 </body>
-</html>
+</html><!-- remove -->

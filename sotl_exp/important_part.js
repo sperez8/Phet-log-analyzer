@@ -2488,8 +2488,8 @@ d3.select("#chartTypeButtons") //Sankey
   .append("input")
   .attr("value", "Flow")
   .attr("type", "button")
-  // .attr("data-intro","Flow of projects.")
-  // .attr("data-position","bottom")
+  .attr("data-intro","View and compare projects.")
+  .attr("data-position","bottom")
   .attr("class", function (){
   //.style("background",  function() {
       if (currentChartType == "sankeyChart"){
@@ -2509,8 +2509,8 @@ d3.select("#chartTypeButtons") //heatmapInnovationImpact
   .append("input")
   .attr("value", "Innovation x Impact")
   .attr("type", "button")
-  // .attr("data-intro","Heatmap of Innovation x Impact frequency.")
-  // .attr("data-position","bottom")
+  .attr("data-intro","View the frequency of targeted impacts.")
+  .attr("data-position","bottom")
   .attr("class", function (){
   //.style("background",  function() {
       if (currentChartType == "innovationImpactChart"){
@@ -2530,8 +2530,8 @@ d3.select("#chartTypeButtons")
   .append("input")
   .attr("value", "Impact x Evaluation")
   .attr("type", "button")
-  // .attr("data-intro","Heatmap of Impact x Evaluation frequency.")
-  // .attr("data-position","bottom")
+  .attr("data-intro","View the frequency of evaluations used.")
+  .attr("data-position","bottom")
   .attr("class", function (){
   //.style("background",  function() {
       if (currentChartType == "impactApproachChart"){
@@ -2551,7 +2551,7 @@ d3.select("#chartTypeButtons")
   .append("input")
   .attr("value", "Table")
   .attr("type", "button")
-  .attr("data-intro","See project details")
+  .attr("data-intro","View project details.")
   .attr("data-position","bottom")
   .attr("class", function (){
   //.style("background",  function() {
@@ -2607,16 +2607,20 @@ d3.select("#chartTypeButtons")
 
 d3.select("#chartTypeButtons") //Help - info page
   .append("input")
-  .attr("value", "Help")
+  .attr("value", "?")
+  .attr("class", "helpbutton")
   .attr("type", "button")
-  .attr("data-intro","Hover for help")
+  .attr("data-intro","Click for additional help")
   .attr("data-position","bottom")
   .on("mouseover", function() {
     $('body').chardinJs('start')
     setTimeout(function() { $('.chardinjs-overlay').css('opacity', 0.7); }, 100);
   })
-  .on("mouseout", function() {
-    $('body').chardinJs('stop')
+  // .on("mouseout", function() {
+  //   $('body').chardinJs('stop')
+  // })
+ .on("click", function(){
+  window.open("http://sotl-explorer.sites.olt.ubc.ca/help/")
   });
 
 
