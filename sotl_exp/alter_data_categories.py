@@ -98,6 +98,26 @@ replacementsShortImpact = {
 					"Other Area of Impact": "Other area of impact",
 }
 
+replacementsCourse = {
+	'200':'200-400',
+	'300':'200-400',
+	'400':'200-400',
+	'100, 200':'A combination thereof',
+	'200, 300':'200-400',
+	'300, 400':'200-400',
+	'200, 400':'200-400',
+	'Lecture':'Lecture, seminar, tutorial, capstone project',
+	'Seminar':'Lecture, seminar, tutorial, capstone project',
+	'Lecture, Seminar':'Lecture, seminar, tutorial, capstone project',
+	'Capstone / project based, Lecture, Seminar':'Lecture, seminar, tutorial, capstone project',
+	'Capstone / project based':'Lecture, seminar, tutorial, capstone project',
+	'Lecture, Tutorial':'Lecture, seminar, tutorial, capstone project',
+	'Clinical, Lab, Lecture':'A combination thereof',
+	'Community based, internship':'Clinical, community based, internship',
+	'Other, please specify...':'Other',
+	'':'N/A'
+}
+
 inputfile = open(datafile,'r')
 outputfile = open(outfile, 'w')
 countShort = {k : 0 for k in replacementsShortImpact.keys()}
@@ -124,6 +144,8 @@ for line in inputfile:
 			newpart = replacementsLongInnov[part]
 		elif part in replacementsShortEva.keys():
 			newpart = replacementsShortEva[part]
+		elif part in replacementsCourse.keys():
+			newpart = replacementsCourse[part]
 		else:
 			newpart = part
 		newparts.append(newpart)

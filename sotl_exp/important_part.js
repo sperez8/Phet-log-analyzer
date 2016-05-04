@@ -901,8 +901,6 @@ var heatmapInnovationImpact = function(n) {
       department: d["Department"],
       enrolment_Cap: d["Enrolment Cap"],
       course_Format: d["Course Format"],
-      Course_Type: d["Course Type"],
-      course_Location: d["Course Location"],
       project_Type: d["Type of Project"],
       project_Stage: d["Project Stage"],
       year_awarded: d["Year Awarded"]
@@ -1322,8 +1320,6 @@ var heatmapImpactApproach = function(n) {
       department: d.Department,
       enrolment_Cap: d["Enrolment Cap"],
       course_Format: d["Course Format"],
-      Course_Type: d["Course Type"],
-      course_Location: d["Course Location"],
       project_Type: d["Type of Project"],
       project_Stage: d["Project Stage"],
       year_awarded: d["Year Awarded"]
@@ -2014,8 +2010,6 @@ var tabulate = function() {
           department: d["Department"],
           enrolment_Cap: d["Enrolment Cap"],
           course_Format: d["Course Format"],
-          Course_Type: d["Course Type"],
-          course_Location: d["Course Location"],
           project_Type: d["Type of Project"],
           project_Stage: d["Project Stage"],
           year_awarded: d["Year Awarded"]
@@ -2362,7 +2356,7 @@ var impactList = ["Impact (all)"].concat(get_filterCategoryOptions("Impact"))
 var evaluationList = ["Evaluation (all)"].concat(get_filterCategoryOptions("Evaluation"))
 
 //columns to display for table
-var tableColumns = ["project_Title", "project_lead","department","enrolment_Cap", "Course_Level", "course_Format", "Course_Type", "course_Location", "project_Type", "year_awarded"];
+var tableColumns = ["project_Title", "project_lead","department","enrolment_Cap", "Course_Level", "course_Format", "project_Type", "year_awarded"];
 
 //set default start values
 faculty = "Faculty (all)";
@@ -2616,9 +2610,9 @@ d3.select("#chartTypeButtons") //Help - info page
     $('body').chardinJs('start')
     setTimeout(function() { $('.chardinjs-overlay').css('opacity', 0.7); }, 100);
   })
-  // .on("mouseout", function() {
-  //   $('body').chardinJs('stop')
-  // })
+  .on("mouseout", function() {
+    $('body').chardinJs('stop')
+  })
  .on("click", function(){
   window.open("http://sotl-explorer.sites.olt.ubc.ca/help/")
   });
