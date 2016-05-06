@@ -901,8 +901,6 @@ var heatmapInnovationImpact = function(n) {
       department: d["Department"],
       enrolment_Cap: d["Enrolment Cap"],
       course_Format: d["Course Format"],
-      Course_Type: d["Course Type"],
-      course_Location: d["Course Location"],
       project_Type: d["Type of Project"],
       project_Stage: d["Project Stage"],
       year_awarded: d["Year Awarded"]
@@ -1322,8 +1320,6 @@ var heatmapImpactApproach = function(n) {
       department: d.Department,
       enrolment_Cap: d["Enrolment Cap"],
       course_Format: d["Course Format"],
-      Course_Type: d["Course Type"],
-      course_Location: d["Course Location"],
       project_Type: d["Type of Project"],
       project_Stage: d["Project Stage"],
       year_awarded: d["Year Awarded"]
@@ -2014,8 +2010,6 @@ var tabulate = function() {
           department: d["Department"],
           enrolment_Cap: d["Enrolment Cap"],
           course_Format: d["Course Format"],
-          Course_Type: d["Course Type"],
-          course_Location: d["Course Location"],
           project_Type: d["Type of Project"],
           project_Stage: d["Project Stage"],
           year_awarded: d["Year Awarded"]
@@ -2362,7 +2356,7 @@ var impactList = ["Impact (all)"].concat(get_filterCategoryOptions("Impact"))
 var evaluationList = ["Evaluation (all)"].concat(get_filterCategoryOptions("Evaluation"))
 
 //columns to display for table
-var tableColumns = ["project_Title", "project_lead","department","enrolment_Cap", "Course_Level", "course_Format", "Course_Type", "course_Location", "project_Type", "year_awarded"];
+var tableColumns = ["project_Title", "project_lead","department","enrolment_Cap", "Course_Level", "course_Format", "project_Type", "year_awarded"];
 
 //set default start values
 faculty = "Faculty (all)";
@@ -2488,8 +2482,8 @@ d3.select("#chartTypeButtons") //Sankey
   .append("input")
   .attr("value", "Flow")
   .attr("type", "button")
-  // .attr("data-intro","Flow of projects.")
-  // .attr("data-position","bottom")
+  .attr("data-intro","View and compare projects.")
+  .attr("data-position","bottom")
   .attr("class", function (){
   //.style("background",  function() {
       if (currentChartType == "sankeyChart"){
@@ -2509,8 +2503,8 @@ d3.select("#chartTypeButtons") //heatmapInnovationImpact
   .append("input")
   .attr("value", "Innovation x Impact")
   .attr("type", "button")
-  // .attr("data-intro","Heatmap of Innovation x Impact frequency.")
-  // .attr("data-position","bottom")
+  .attr("data-intro","View the frequency of targeted impacts.")
+  .attr("data-position","bottom")
   .attr("class", function (){
   //.style("background",  function() {
       if (currentChartType == "innovationImpactChart"){
@@ -2530,8 +2524,8 @@ d3.select("#chartTypeButtons")
   .append("input")
   .attr("value", "Impact x Evaluation")
   .attr("type", "button")
-  // .attr("data-intro","Heatmap of Impact x Evaluation frequency.")
-  // .attr("data-position","bottom")
+  .attr("data-intro","View the frequency of evaluations used.")
+  .attr("data-position","bottom")
   .attr("class", function (){
   //.style("background",  function() {
       if (currentChartType == "impactApproachChart"){
@@ -2551,7 +2545,7 @@ d3.select("#chartTypeButtons")
   .append("input")
   .attr("value", "Table")
   .attr("type", "button")
-  .attr("data-intro","See project details")
+  .attr("data-intro","View project details.")
   .attr("data-position","bottom")
   .attr("class", function (){
   //.style("background",  function() {
@@ -2607,9 +2601,10 @@ d3.select("#chartTypeButtons")
 
 d3.select("#chartTypeButtons") //Help - info page
   .append("input")
-  .attr("value", "Help")
+  .attr("value", "?")
+  .attr("class", "helpbutton")
   .attr("type", "button")
-  .attr("data-intro","Hover for help")
+  .attr("data-intro","Click for additional help")
   .attr("data-position","bottom")
   .on("mouseover", function() {
     $('body').chardinJs('start')
@@ -2617,6 +2612,9 @@ d3.select("#chartTypeButtons") //Help - info page
   })
   .on("mouseout", function() {
     $('body').chardinJs('stop')
+  })
+ .on("click", function(){
+  window.open("http://sotl-explorer.sites.olt.ubc.ca/help/")
   });
 
 

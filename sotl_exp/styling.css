@@ -374,7 +374,7 @@ input[type="button"] {
 .projectListItem tspan.listitem {
     padding: 5px;
     fill: #fff;
-    font-size: 8.5pt;
+    font-size: 9pt;
 }
 
 .appHeader {
@@ -488,4 +488,29 @@ body {
 */
 #chartTypeButtons input[type="button"]:focus {
     outline: 0;
+}
+
+#chartTypeButtons input.helpbutton{
+    background-color: white;
+    line-height: 27px;
+    height: 29px;
+    font-size: 11pt;
+    font-family: Arial, sans-serif;
+    font-weight: 600;
+    padding: 0 8px;
+    margin: 0;
+    margin-left: 10px;
+    float:right;
+    cursor: pointer;
+    border: 3px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #166A9A;
+    color:#166A9A;
+}
+
+#chartTypeButtons input.helpbutton:hover {
+    background-color: #166A9A;
+    border-color: white;
+    color:white;
 }
