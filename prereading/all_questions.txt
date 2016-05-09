@@ -1,0 +1,26 @@
+q1 - How does the colour of a star compare to the sun if it is significantly colder than the sun? Answer: Redder
+q2 - By filling in the blanks; order the objects according to the total power emitted through radiation; from smallest to largest. Answer: 2;<;1;<;3
+q3 - By filling in the blanks; order the objects according to the wavelength of the maximum in their blackbody curves (peak wavelength); from smallest to largest. Answer: 1;=;3;<;2 (or 3;=;1;<;2)
+q4 - By filling in the blanks; order the systems according to their periods of oscillation; from smallest to largest. Answer: 1;=;3;<;2 (or 3;=;1;<;2)
+q5 - By filling in the blanks; order the systems according to the amplitude of their oscillation; from smallest to largest. Answer: 1;=;2;<;3 (or 2;=;1;<;3)
+q6 - A sinusoidal force is applied to an oscillator. To obtain the largest possible amplitude of the oscillator; the oscillation frequency of the applied force should be: Answer: The same as the natural frequency of the oscillator.
+q7 - A block on a spring is a damped oscillator due to the air friction. A sinusoidal force is applied to it.  The energy dissipated by damping is supplied by: Answer: The applied force.
+q8 - An oscillator is subjected to a damping force. A sinusoidal force is applied to it. After a long time: Answer: Its amplitude is constant.
+q8 - How does the colour of a star compare to the sun if it is significantly colder than the sun? Answer: Redder
+q9 - By filling in the blanks; order the objects according to the total power emitted through radiation; from smallest to largest. Answer: 2;<;1;<;3
+q10 - By filling in the blanks; order the objects according to the wavelength of the maximum in their blackbody curves (peak wavelength); from smallest to largest. Answer: 1;=;3;<;2 (or 3;=;1;<;2)
+q3 - By filling in the blanks; order the systems according to their periods of oscillation; from smallest to largest. Answer: 1;=;3;<;2 (or 3;=;1;<;2)
+q4 - By filling in the blanks; order the systems according to the amplitude of their oscillation; from smallest to largest. Answer: 1;=;2;<;3 (or 2;=;1;<;3)
+q3 - A sinusoidal force is applied to an oscillator. To obtain the largest possible amplitude of the oscillator; the oscillation frequency of the applied force should be: Answer: The same as the natural frequency of the oscillator.
+q4 - A block on a spring is a damped oscillator due to the air friction. A sinusoidal force is applied to it.  The energy dissipated by damping is supplied by: Answer: The applied force.
+q5 - An oscillator is subjected to a damping force. A sinusoidal force is applied to it. After a long time: Answer: Its amplitude is constant.
+q1.1 - Which two forms of energy is the Sun mainly radiating? Answer D
+q1.2 - How do the temperatures of Rigel and Betelgeuse compare? Answer C
+q1.3 - Object at higher temperature? Answer B
+q2.1 - Mass pulled further; oscillation frequency? Answer C
+q2.2 - Which system has the largest period? Answer B
+q2.3 - Increase the period by à ? Answer B
+q2.4 - At point P the mass hasà ? Answer B
+q3.1 - Double driving frequency; what will happen? Answer D
+q3.2 - Increase driving frequency; what will happen? Answer E
+q3.3 - Decrease driving frequency by 10? Answer A
