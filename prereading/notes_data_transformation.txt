@@ -4,6 +4,7 @@ removed first two rows and empty columns
 change all commas to ;
 convert to csv
 removed weird space replace by '?' using Sublime text
+Clickerscore.Blackbody -> ClickerScore.Blackbody
 
 
 
@@ -13,7 +14,7 @@ removed first two rows and empty columns
 change all commas to ;
 convert to csv
 N\A, #NA and <Unanswered> converted to NA
-since we have missing data for the blackbody topic, added two question columns for time on text and time on phet for Blackbody (data all NA)
+since we have missing data for the blackbody topic, added two question columns for time on text and time on phet for Blackbody (data all NA), and a column for "encountered before" question
 removed some data points: someone spent 41200 minutes on phet...
 cleaned time : siwtched ranges to numbers (25-30 to 30) and removed "min","minutes"
 

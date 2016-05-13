@@ -10,6 +10,11 @@ import numpy as np
 import sys
 import getpass
 
+calculated_survey = (float(conv_neg[str(row['q2 - For me personally; PhET Sims are usually boring.']).split('<')[0]])+
+                    float(conv_neg[str(row['q5 - For me personally; PhET Sims are usually useless.']).split('<')[0]])+
+                    float(conv_pos[str(row['q4 - For me personally; PhET Sims are usually fun.']).split('<')[0]])+
+                    float(conv_pos[str(row['q3 - For me personally; PhET Sims are usually productive.']).split('<')[0]]))/4.0
+
 def get_df():
     # from scipy import stats 
     dfraw = pd.read_csv('C:\Users\\'+getpass.getuser()+'\Desktop\Clean-data_160217_JBS_removed_empty_columns.csv')
