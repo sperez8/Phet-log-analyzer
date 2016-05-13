@@ -1,0 +1,51 @@
+------------------------------------------------------------
+TODO!!! iN order
+----------------
+
+add encountered column
+remove "for topic"
+add clicker score
+
+redo engagement boxplots with tertial engagement
+
+perform all 8 t-tests
+
+build model for clickerscore
+
+compare clickerscore to postscore.
+
+
+
+calculate overall attitude about phet
+make PCA of attitude, knowledge of phet and pre-knowledge
+
+------------------------------------------------------------
+MEETING NOTES
+----------------
+
+
+tertile engagement?
+
+QUESTIONS (t-tests to do )
+	-if they already encountered the topic were they more likely to be engaged?
+	-if they already encountered the topic were they more likely to have a high prescore?
+	-if they enjoyed the activity, were they more likely to be engaged?
+	-if they benefitted from the activity, were they more likely to be engaged?
+
+	-> redo per condition
+
+
+How is engagement*condition related to the outcome?
+-building model for postscore
+-building model for Clickscore
+
+
+Hypothesis: the reading assgignment aided certain students:
+	-by attitude (high versus low)
+	-by pre-knowledge
+	-by engagement
+-> look into the potential of an equalizing force
+
+
+did the assignment prepare them for class? ie. what is the difference between clickerscore and postscore?
+
