@@ -21,6 +21,14 @@ form {
     margin: 0 0 0px;
 }
 
+.invisible{
+    display: none;
+}
+
+.visible{
+    display: inline;
+}
+
 /*#sankeyChart, #innovationImpactChart, #impactApproachChart {*/
 #allCharts {
     width: 100%;

@@ -2378,7 +2378,7 @@ var ChartType = {
 };
 
 
-var currentChartType = "sankeyChart" //set the default chart type to be sankey
+var currentChartType = "innovationImpactChart" //set the default chart type to be sankey
 
 function get_current_chart() {
   currentChart = ''
@@ -2478,27 +2478,6 @@ function click_button(button) {
 }
 
 //chartType buttons:
-d3.select("#chartTypeButtons") //Sankey
-  .append("input")
-  .attr("value", "Flow")
-  .attr("type", "button")
-  .attr("data-intro","View and compare projects.")
-  .attr("data-position","bottom")
-  .attr("class", function (){
-  //.style("background",  function() {
-      if (currentChartType == "sankeyChart"){
-        return "big_button clicked"
-      } else {return "big_button unclicked"}
-  })
-  .on("click", function() {
-    unclick_buttons()
-    d3.select(this).call(click_button)
-    setChartType = "sankeyChart";
-    rerun(setChartType); //redraw previously selected chart 
-    update_sankey_selection()
-  });
-
-
 d3.select("#chartTypeButtons") //heatmapInnovationImpact
   .append("input")
   .attr("value", "Innovation x Impact")
@@ -2540,10 +2519,29 @@ d3.select("#chartTypeButtons")
     update_heatmap_selection()
   });
 
+d3.select("#chartTypeButtons") //Sankey
+  .append("input")
+  .attr("value", "Flow")
+  .attr("type", "button")
+  .attr("data-intro","View and compare projects.")
+  .attr("data-position","bottom")
+  .attr("class", function (){
+  //.style("background",  function() {
+      if (currentChartType == "sankeyChart"){
+        return "big_button clicked"
+      } else {return "big_button unclicked"}
+  })
+  .on("click", function() {
+    unclick_buttons()
+    d3.select(this).call(click_button)
+    setChartType = "sankeyChart";
+    rerun(setChartType); //redraw previously selected chart 
+    update_sankey_selection()
+  });
 
 d3.select("#chartTypeButtons")
   .append("input")
-  .attr("value", "Table")
+  .attr("value", "Project details")
   .attr("type", "button")
   .attr("data-intro","View project details.")
   .attr("data-position","bottom")
@@ -2561,62 +2559,47 @@ d3.select("#chartTypeButtons")
     update_table_selection()
   });
 
-// function runhelp() {
-//   removeReveal()
-//   d3.select("#help").selectAll("img")
-//       .remove();
 
-//   var img = document.createElement("img")
-//   img.style.width = String(width + margin.heatmap.left + margin.heatmap.right)+"px"
-//   // img.style.height = (width + margin.heatmap.left + margin.heatmap.right)*120/250;
-//   img.src = "https://files.workspace.ubc.ca/MyDevice/s/570/f1894b18-3aa5-492d-a6a1-84641dc87990/minihelp_noheader.svg";
-
-//   document.getElementById("help").appendChild(img);
-
-//   if ( $('#projectList').is(':empty') ) {
-//     projects = get_filterOptions("project_Title")
-//     updateprojectList(projects)
-//   }
-//   return "help"
+// function close_help() {
+//   button = document.getElementById("helpbutton").className = 'invisible helpbutton'
+//   $('body').chardinJs('stop')
 // }
 
-// d3.select("#chartTypeButtons") //Help - info page
-//   .append("input")
-//   .attr("value", "Help")
-//   .attr("type", "button")
-//   .attr("class", function (){
-//   //.style("background",  function() {
-//       if (currentChartType == "help"){
-//         return "help big_button clicked"
-//       } else {return "help big_button unclicked"}
-//   })
-//   .on("click", function() {
-//     unclick_buttons()
-//     d3.select(this).call(click_button)
-//     setChartType = "help";
-//     filterData()
-//     runhelp()
-//   });
-
-
-d3.select("#chartTypeButtons") //Help - info page
+window.onload = function() {
+  d3.select("#chartTypeButtons") //Help - info page
   .append("input")
   .attr("value", "?")
   .attr("class", "helpbutton")
   .attr("type", "button")
-  .attr("data-intro","Click for additional help")
+  .attr("data-intro","Click to dismiss help")
   .attr("data-position","bottom")
-  .on("mouseover", function() {
-    $('body').chardinJs('start')
-    setTimeout(function() { $('.chardinjs-overlay').css('opacity', 0.7); }, 100);
-  })
-  .on("mouseout", function() {
-    $('body').chardinJs('stop')
-  })
  .on("click", function(){
-  window.open("http://sotl-explorer.sites.olt.ubc.ca/help/")
+    $('body').chardinJs('stop')
+    //window.open("http://sotl-explorer.sites.olt.ubc.ca/help/")
+    d3.select("#chartTypeButtons").selectAll(".helpbutton").remove();
+    d3.select("#chartTypeButtons") //Help - info page
+    .append("input")
+    .attr("value", "?")
+    .attr("class", "helpbutton")
+    .attr("type", "button")
+    .attr("data-intro","Click for additional help")
+    .attr("data-position","bottom")
+    .on("mouseover", function() {
+      $('body').chardinJs('start')
+      setTimeout(function() { $('.chardinjs-overlay').css('opacity', 0.7); }, 100);
+    })
+    .on("mouseout", function() {
+      $('body').chardinJs('stop')
+    })
+   .on("click", function(){
+      window.open("http://sotl-explorer.sites.olt.ubc.ca/help/")
+    });
   });
 
+  $('body').chardinJs('start')
+  setTimeout(function() { $('.chardinjs-overlay').css('opacity', 0.7); }, 100);
+  // button = document.getElementById("helpbutton").className = 'visible helpbutton'
+};
 
 // d3.select("#chartTypeButtons").select("#helpbutton")
 //   .on("mouseover", function() {

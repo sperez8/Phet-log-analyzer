@@ -33,6 +33,7 @@
     /*border-bottom: solid white 1px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;*/
+    text-align:center;
     padding-bottom: 180px;}
   .chardinjs-helper-layer.chardinjs-top {
     border-top: solid white 1px;
@@ -56,9 +57,9 @@
     margin-bottom: -50px;
     padding-top: 10px; }
   .chardinjs-tooltip.chardinjs-superbottom {
-    margin-bottom: -50px;
+    margin-bottom: 0px;
     padding-top: 10px;
-    max-width: 500px; }
+    max-width: 550px; }
   .chardinjs-tooltip.chardinjs-top {
     margin-top: -50px;
     padding-bottom: 10px; }
