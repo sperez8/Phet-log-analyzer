@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 import sys
 import getpass
+import matplotlib
+import matplotlib.pyplot as plt
 
 df = pd.read_csv('C:\Users\\'+getpass.getuser()+'\\Google Drive\Sarah Ido folder\data\CCK\MATCHING_phet_cck_user_actions+sophistication_WITHPAUSE_anonymized.txt')
 df_scores = pd.read_csv('C:\Users\\'+getpass.getuser()+'\\Google Drive\Sarah Ido folder\data\CCK\MATCHING_phet_cck_user_data_anonymized.txt')
@@ -30,6 +32,8 @@ def get_students(attribute=None, level=None):
     return students
 
 def get_action_pairs(sequences, normalize=True):
+    families = ["Start"]
+    families.extend(list(set(df['Family'])))
     data = np.zeros((len(families),len(families)), dtype='f')
     def get_i(family): return families.index(family)
     for sequence in sequences.values():
@@ -43,6 +47,8 @@ def get_action_pairs(sequences, normalize=True):
     return df_actions
 
 def get_action_pairs_blocks(sequences, normalize=True):
+    families = ["Start"]
+    families.extend(list(set(df['Family'])))
     data = np.zeros((len(families),len(families)), dtype='f')
     def get_i(family): return families.index(family)
     for sequence in sequences.values():
@@ -68,7 +74,7 @@ def plot_heatmap(actions, ax, title):
 def get_circuits(df, students):
     circuits = {key:set() for key in students}
     circuit_columns = ["#circuits","#loops","#components","#battery","#circuitSwitch","#grabBagResistor","#lightBulb","#resistor"]
-    circuit_indices = [list(df2.keys()).index(x) for x in circuit_columns]
+    circuit_indices = [list(df.keys()).index(x) for x in circuit_columns]
     for student in students:
         for circuit in df[df["student"]==student].dropna().iterrows():
             circuits[student].add("".join([str(int(circuit[1][element])) for element in circuit_indices]))
