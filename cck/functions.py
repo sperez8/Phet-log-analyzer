@@ -5,6 +5,9 @@ import getpass
 import matplotlib
 import matplotlib.pyplot as plt
 import re
+from collections import Counter
+from pymarkovchain import MarkovChain
+import networkx as nx
 
 df = pd.read_csv('C:\Users\\'+getpass.getuser()+'\\Google Drive\Sarah Ido folder\data\CCK\MATCHING_phet_cck_user_actions+sophistication_WITHPAUSE_anonymized.txt')
 df_scores = pd.read_csv('C:\Users\\'+getpass.getuser()+'\\Google Drive\Sarah Ido folder\data\CCK\MATCHING_phet_cck_user_data_anonymized.txt')
