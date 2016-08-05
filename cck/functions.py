@@ -16,6 +16,19 @@ df["student"] = df["student"].astype('category')
 df_scores["student"] = df_scores["student"].astype('category')
 df["Family"]=df["Family"].str.capitalize()
 
+def label_learning (row,column):
+    if row[column] >= median_learning: return 'high'
+    else: return 'low'
+
+df_scores['learning1score'] = (df_scores["post t1"] - df_scores["pre"])/(df_scores["pre"])
+median_learning = np.median(df_scores['learning1score'])
+df_scores['learning1'] = df_scores.apply (lambda row: label_learning (row,"learning1score"),axis=1)
+
+df_scores['learning2score'] = (df_scores["post t2"] - df_scores["pre"])/(df_scores["pre"])
+median_learning = np.median(df_scores['learning2score'])
+df_scores['learning2'] = df_scores.apply (lambda row: label_learning (row,"learning2score"),axis=1)
+
+
 
 
 #get sequence by student
@@ -149,6 +162,15 @@ def select_frequencies(frequencies, attribute, level):
             new_frequencies[student] = f
     return new_frequencies
 
+def select_blocks(blocks, attribute, level):
+    new_blocks = {}
+    '''gets blocks of students given an attribute of the student'''
+    relevant_students =  set(df_scores[df_scores[attribute]==level]['student'])
+    for student, b in blocks.iteritems():
+        if student in relevant_students:
+            new_blocks[student] = b
+    return new_blocks
+
 def mega_process(activity='a1', level='scaffolding', value1='scaff', value2='not', shortest=3, longest=10, keep = None):
     df2 = df[df.Activity == activity]
     blocks = get_blocks(df2,get_students())
@@ -188,3 +210,4 @@ def difference(seqs1,seqs2,N=10):
     print "\nSequence: count = seq2 - seq1\n----------------------------"
     for seq,count in diff:
         print "{0}: \t {1} = {2} - {3} ".format(seq, count, seqs2[seq], seqs1[seq])
+
