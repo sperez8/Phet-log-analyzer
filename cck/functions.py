@@ -29,8 +29,6 @@ median_learning = np.median(df_scores['learning2score'])
 df_scores['learning2'] = df_scores.apply (lambda row: label_learning (row,"learning2score"),axis=1)
 
 
-
-
 #get sequence by student
 def get_sequence(df, students):
     '''gets sequence data for a list of students'''
@@ -103,6 +101,8 @@ def get_blocks(df, students, add_spaces = False):
     def convert(action):
         if action == 'Reset':
             return 'X'
+        elif action == 'ConstructWithFeedback':
+            return 'F'
         else: 
             return action[0]
     
