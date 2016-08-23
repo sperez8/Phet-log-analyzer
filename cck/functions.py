@@ -96,7 +96,7 @@ def get_circuits(df, students):
             circuits[student].add("".join([str(int(circuit[1][element])) for element in circuit_indices]))
     return circuits  
 
-def get_blocks(df, students, add_spaces = False, ignore = None, start = True):
+def get_blocks(df, students, add_spaces = False, ignore = [], start = True):
     '''gets blocks of sequences a list of students'''
     def convert(action,ignore):
         if action[0] in ignore:
