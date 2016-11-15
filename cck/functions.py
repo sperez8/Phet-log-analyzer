@@ -9,8 +9,8 @@ from collections import Counter
 import copy
 import networkx as nx
 
-df = pd.read_csv('C:\Users\\'+getpass.getuser()+'\\Google Drive\Sarah Ido folder\data\CCK\MATCHING_phet_cck_user_actions+sophistication_WITHPAUSE_anonymized.txt')
-df_scores = pd.read_csv('C:\Users\\'+getpass.getuser()+'\\Google Drive\Sarah Ido folder\data\CCK\MATCHING_phet_cck_user_data_anonymized.txt')
+df = pd.read_csv('C:\Users\\'+getpass.getuser()+'\\Google Drive\Jonathan Sarah Ido folder\data\CCK\MATCHING_phet_cck_user_actions+sophistication_WITHPAUSE_anonymized.txt')
+df_scores = pd.read_csv('C:\Users\\'+getpass.getuser()+'\\Google Drive\Jonathan Sarah Ido folder\data\CCK\MATCHING_phet_cck_user_data_anonymized.txt')
 df["student"] = df["student"].astype('category')
 df_scores["student"] = df_scores["student"].astype('category')
 df["Family"]=df["Family"].str.capitalize()
