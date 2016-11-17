@@ -95,8 +95,9 @@ def get_circuits(df, students):
             circuits[student].add("".join([str(int(circuit[1][element])) for element in circuit_indices]))
     return circuits  
 
+
 def get_blocks(df, students, add_spaces = False, ignore = [], start = True):
-    '''gets blocks of sequences a list of students'''
+    '''gets blocks of sequences for a list of students'''
     def convert(action,ignore):
         if action[0] in ignore:
             return ''
@@ -124,6 +125,38 @@ def get_blocks(df, students, add_spaces = False, ignore = [], start = True):
         else:
             blocks[student] += block
     return blocks
+
+
+def get_non_blocks(df, students, add_spaces = False, ignore = [], start = True):
+    '''gets blocks of sequences for a list of students'''
+    def convert(action,ignore):
+        if action[0] in ignore:
+            return ''
+        elif action == 'Reset':
+            return 'X'
+        elif action == 'ConstructWithFeedback':
+            return 'F'
+        else: 
+            return action[0]
+    if start:
+        if add_spaces:
+            blocks = {student:'S ' for student in students}
+        else:
+            blocks = {student:'S' for student in students}
+    else:
+        blocks = {student:'' for student in students}
+    for student in students:
+        sequence =  list(df[df['student']==student]['Family'])
+        block = ''.join([convert(action,ignore) for action in sequence])
+        if add_spaces:
+            spaced_block = block[0]
+            for b in block[1:]:
+                spaced_block += ' '+b
+            blocks[student] += spaced_block
+        else:
+            blocks[student] += block
+    return blocks
+
 
 def get_frequencies(blocks, shortest=3, longest=11):
     frequencies = {student:Counter() for student in blocks.keys()}
