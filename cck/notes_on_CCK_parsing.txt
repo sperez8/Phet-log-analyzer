@@ -1,0 +1,165 @@
+WHY NO ADD BATTERY AT TIME .....128
+
+Parser/files from C:\Users\Sarah\Google Drive\Sarah and Ido Folder\Other folders (less used)\Support in PhET Sims\log files\sophistication
+
+---
+Notes on generate_cck_csV_REWRITTEN.py
+
+The ignored lines are often model events such as battery current change. But sometimes they are also when connections are formed by testing tools. Maybe ignored because time between actions was really low?
+Simply looking at "grabresistor, addedcomponent" actions that were ignored, seems like the magic time elapsed threshold is 0.016 seconds...
+
+Actions that I think should not be ignored (SEE BELOW:
+Any component:
+	currentChanged
+	endDrag
+	startDrag
+	removedComponent
+	AddComponent
+
+Ignore_flag =1 when
+	current change on battery, ammeters
+	fire is start or ended in different places
+	dialog boxes are opened/closed
+	start and ned drag on battery resistance, resistivity
+	if last drag value is really small
+	movedComponent if immediately followed by junction formed
+	adding grabbag resistor
+
+
+
+
+
+script can draw graphs
+
+I renamed variables which seemed o have several names and were beind called without declaration...
+
+I made it such that circuit info is always print. WARNING: Graph was updated after writing but is no longer.
+
+To "count" the number of circuits now, before it simply check for closed loops in the subgraph. Now it checks for closed loops and at least 1 battery.
+
+Sometimes, junctions are splits or items are removedfrom graph which arent there. These are either bugs due to adding grabresistor using a different action then other items or bugs in raw code.
+
+#loops always gives the number of loops of the circuit (with battery or not) where the component of that action is.
+
+
+WATCHING the THU AM video, Here is what actions I wouldlike to capture
+Adding components
+Building
+created 1 connected circuit
+testing ammeter
+testing voltmeter
+removed element, implicit feedback from voltmeter
+created 1 connected circuit, implicit feedback from voltmeter (since it's connected)
+testing voltmeter
+pause
+removed component
+created 1 connected circuit, implicit feedback 
+testing ammeter
+changing component - implicit feedback (fire) and from voltemeter and ammeter
+testing ammeter
+changing component - implicit feedback (fire) and from voltemeter and ammeter
+testing voltmeter
+changing component - implicit feedback (fire) and from voltemeter and ammeter
+pause
+build
+complete 2 ciruits
+complete 1 circuit
+testing voltemter
+remove component
+testing voltmeter on 2 circuits
+
+build crcuit 1
+build circuit 2
+
+
+
+
+
+
+HERE are all the action for which we see an IGNORED!!
+
+ battery	 connection	 fireEnded
+ battery	 connection	 fireStarted
+ battery	 modelElement	 currentChanged
+ battery	 sprite	 movedComponent
+ battery	 sprite	 removedComponent
+ batteryResistanceEditor	 editor	 activated
+ batteryResistanceEditor	 editor	 deactivated
+ batteryResistanceEditor	 editor	 windowClosing
+ batteryResistanceEditor.slider	 editor	 endDrag
+ batteryResistanceEditor.slider	 editor	 startDrag
+ blackProbe	 sprite	 drag
+ blackProbe	 sprite	 endDrag
+ blackProbe	 sprite	 startDrag
+ break	 break	 merge
+ bulbResistorEditor	 editor	 activated
+ bulbResistorEditor	 editor	 deactivated
+ bulbResistorEditor	 editor	 windowClosing
+ bulbResistorEditor.slider	 editor	 endDrag
+ bulbResistorEditor.slider	 editor	 startDrag
+ circuitSwitch	 connection	 fireEnded
+ circuitSwitch	 connection	 fireStarted
+ circuitSwitch	 sprite	 movedComponent
+ circuitSwitch	 sprite	 removedComponent
+ dataCollectionLogMenuItem	 menuItem	 pressed
+ fileMenu	 menu	 pressed
+ grabBagResistor	 sprite	 addedComponent
+ grabBagResistor	 sprite	 movedComponent
+ grabBagResistor	 sprite	 removedComponent
+ grabBagResistor	 connection	 fireStarted
+ helpMenu	 menu	 pressed
+ hideAdvancedControlsButton	 button	 pressed
+ lightBulb	 connection	 fireEnded
+ lightBulb	 connection	 fireStarted
+ lightBulb	 sprite	 movedComponent
+ lightBulb	 sprite	 removedComponent
+ loadButton	 button	 pressed
+ nonContactAmmeter	 sprite	 drag
+ nonContactAmmeter	 sprite	 endDrag
+ nonContactAmmeter	 sprite	 startDrag
+ nonContactAmmeterModel	 modelElement	 connectionBroken
+ nonContactAmmeterModel	 modelElement	 connectionFormed
+ nonContactAmmeterModel	 modelElement	 measuredCurrentChanged
+ phetFrame	 window	 activated
+ phetFrame	 window	 deactivated
+ phetFrame	 window	 resized
+ redProbe	 sprite	 drag
+ redProbe	 sprite	 endDrag
+ redProbe	 sprite	 startDrag
+ resetAllButton	 button	 pressed
+ resetAllConfirmationDialog	 dialog	 windowOpened
+ resetAllConfirmationDialogNoButton	 button	 pressed
+ resistivitySlider	 slider	 startDrag
+ resistor	 connection	 fireEnded
+ resistor	 connection	 fireStarted
+ resistor	 sprite	 movedComponent
+ resistor	 sprite	 removedComponent
+ resistorEditor	 editor	 activated
+ resistorEditor	 editor	 deactivated
+ resistorEditor	 editor	 windowClosing
+ resistorEditor.slider	 editor	 endDrag
+ resistorEditor.slider	 editor	 startDrag
+ saveButton	 button	 pressed
+ seriesAmmeter	 connection	 fireEnded
+ seriesAmmeter	 connection	 fireStarted
+ seriesAmmeter	 modelElement	 measuredCurrentChanged
+ seriesAmmeter	 sprite	 movedComponent
+ seriesAmmeter	 sprite	 removedComponent
+ showAdvancedControlsButton	 button	 pressed
+ simsharingManager	 simsharingManager	 sentEvent
+ voltageEditor	 editor	 activated
+ voltageEditor	 editor	 deactivated
+ voltageEditor	 editor	 windowClosing
+ voltageEditor.slider	 editor	 endDrag
+ voltageEditor.slider	 editor	 startDrag
+ voltmeterBlackLeadModel	 modelElement	 connectionBroken
+ voltmeterBlackLeadModel	 modelElement	 connectionFormed
+ voltmeterModel	 modelElement	 measuredVoltageChanged
+ voltmeterRedLeadModel	 modelElement	 connectionBroken
+ voltmeterRedLeadModel	 modelElement	 connectionFormed
+ wire	 connection	 fireEnded
+ wire	 connection	 fireStarted
+ wire	 sprite	 movedComponent
+ wire	 sprite	 removedComponent
+		
+

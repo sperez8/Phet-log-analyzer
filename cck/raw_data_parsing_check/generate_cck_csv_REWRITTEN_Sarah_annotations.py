@@ -4,11 +4,11 @@ source = "parser_log_user_pause.txt"
 f_out_actions_withpause = open("phet_cck_user_actions+sophistication_WITHPAUSE.csv", 'w')
 f_out_actions_nopause = open("phet_cck_user_actions+sophistication_NOPAUSE.csv", 'w')
 
-to_write = ["Activity", "Student#", "Time Stamp", "Family", "Action", "Component", "Outcome", "#circuits", "#loops", "#components"]
-to_write += ["#battery", "#circuitSwitch", "#grabBagResistor", "#lightBulb", "#resistor", "#seriesAmmeter"]
+header = ["Activity", "Student#", "Time Stamp", "Family", "Action", "Component", "Outcome", "#circuits", "#loops", "#components"]
+header += ["#battery", "#circuitSwitch", "#grabBagResistor", "#lightBulb", "#resistor", "#seriesAmmeter"]
 
-f_out_actions_withpause.write(",".join(to_write) + "\n")
-f_out_actions_nopause.write(",".join(to_write) + "\n")
+f_out_actions_withpause.write(",".join(header) + "\n")
+f_out_actions_nopause.write(",".join(header) + "\n")
 
 ALWAYS_WRITE_CIRCUIT_INFO = True
 
@@ -46,13 +46,6 @@ colors = {
     'grabBagResistor': 'purple',
     'seriesAmmeter': 'pink'
 }
-
-# GRABBAGRESISTORS = ['grabBagItemButton.Paper Clip','grabBagItemButton.Dollar Bill','grabBagItemButton.Penny','grabBagItemButton.Hand','grabBagItemButton.Dog','grabBagItemButton.Pencil Lead','grabBagItemButton.Eraser']
-# def check_if_added_grab_bag_resistor(line):
-#     for resistor in GRABBAGRESISTORS:
-#         if resistor in line:
-#             return True
-#     return False
 
 def update_graph(G,index,line,user,activity,count_remove_error,count_split_error):
     if "addedComponent" in line:
@@ -298,12 +291,13 @@ for index, line in enumerate(lines):
         continue
     split_line = line.split(",")
     
+    if "circuitSwitch" in line: sys.exit()
+
     if "IGNORED" in line: #mostly model events,such as change current in battery, but also happens when voltmeter voltage changes...
         continue
 
     testing = False
 
-    #Here determine if testing and with what instrument - except that's already been determined so I am commenting out
     if "'connectionFormed', 'connections = " in line and "connections = junction" not in line: #for voltmeter
         component = line.split(",")[5].replace("'connections = branch: ", "").replace("'", "").replace(" ", "")
         testing = True
@@ -323,6 +317,7 @@ for index, line in enumerate(lines):
         component=line.split("->")[2].split(",")[3].strip()
         stuff_to_write = True
     except:
+        print "NOT PARSING...:", line
         stuff_to_write = False
         pass
     if "pause" in line:
@@ -332,7 +327,7 @@ for index, line in enumerate(lines):
             pause = True
             family = "pause"
             action = "pause"
-            c="pause"
+            component="pause"
             outcome = "pause"
         else:
             pass
@@ -357,17 +352,19 @@ for index, line in enumerate(lines):
         loop_count = 0
 
         for graph in subgraphs:
-            if len(nx.cycle_basis(graph)) >= 1: #checks if there's a closed loop in a graph, and adds to circuit count
-                count += 1
+            print 'Found subgraphs', graph.nodes(), G.nodes(),'\n', line
+            if len(nx.cycle_basis(graph)) >= 1: #checks if there's a closed loop in a graph and at least one battery and adds to circuit count
+                if sum([1 for component in graph.nodes() if "battery" in component]) >0:
+                    count += 1
                 # print 'here', index, line
-            component_count = 0
-            lightBulb_count = 0
-            battery_count = 0
-            circuitSwitch_count = 0
-            resistor_count = 0
-            grabBagResistor_count = 0
-            seriesAmmeter_count = 0
-            loop_count = 0
+            # component_count = 0
+            # lightBulb_count = 0
+            # battery_count = 0
+            # circuitSwitch_count = 0
+            # resistor_count = 0
+            # grabBagResistor_count = 0
+            # seriesAmmeter_count = 0
+            # loop_count = 0
 
             for component_item in graph.nodes():
                 if "lightBulb" in component_item:
@@ -395,7 +392,7 @@ for index, line in enumerate(lines):
             to_write = [activity, user, t, family, action, component, outcome]
             to_write += [count, loop_count, component_count]
             to_write += [battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count]
-
+            print to_write
             f_out_actions_withpause.write(",".join([str(item) for item in to_write]) + "\n")
             f_out_actions_nopause.write(",".join([str(item) for item in to_write]) + "\n")
     else:
