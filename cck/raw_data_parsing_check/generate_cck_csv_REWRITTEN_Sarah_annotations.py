@@ -1,16 +1,17 @@
-source = "parser_log_user_pause.txt"
-#source = "parsedData\\60076128_a1.txt"
+"""
+This scripts was developed by Sarah Perez (sperez8) and 
+works off of Lauren's parser which works off of parsed data developed by Samad
+created by Sarah, Nov 25th 2016
+"""
 
-f_out_actions_withpause = open("phet_cck_user_actions+sophistication_WITHPAUSE.csv", 'w')
-f_out_actions_nopause = open("phet_cck_user_actions+sophistication_NOPAUSE.csv", 'w')
+import networkx as nx
+import matplotlib.pyplot as plt
+# import pygraphviz
+import copy
+import sys
+import re
 
-to_write = ["Activity", "Student#", "Time Stamp", "Family", "Action", "Component", "Outcome", "#circuits", "#loops", "#components"]
-to_write += ["#battery", "#circuitSwitch", "#grabBagResistor", "#lightBulb", "#resistor", "#seriesAmmeter"]
-
-f_out_actions_withpause.write(",".join(to_write) + "\n")
-f_out_actions_nopause.write(",".join(to_write) + "\n")
-
-ALWAYS_WRITE_CIRCUIT_INFO = True
+#Output will look like:
 
 """1. session ID
 2. Student #
@@ -19,19 +20,26 @@ ALWAYS_WRITE_CIRCUIT_INFO = True
 5. Action
 6. outcome
 7. component
-8. # of circuits (testing only makes sense; for all sophistication features).
-9. # of loops - are circuits whole circuits, and loops are loops within circuits? 
-10. average # of components by type (your suggestion below)."""
+8. # of circuits (ie. graphs with 1+ loop and 1+ battery)
+9. # of loops - total, regardless of graphs having batteries 
+10. # of components by type
+11. 1 if current component (weither added, removed, or connected measuring device...) is a closed circuit with battery, 0 otherwise
+12. # loops of current circuit
+13. # of components by type of current circuit
+"""
 
-import networkx as nx
-import matplotlib.pyplot as plt
-# import pygraphviz
-import copy
-import sys
+source = "parser_log_user_pause.txt"
+#source = "parsedData\\60076128_a1.txt"
 
+f_out_actions_withpause = open("phet_cck_user_actions+sophistication_WITHPAUSE.csv", 'w')
+f_out_actions_nopause = open("phet_cck_user_actions+sophistication_NOPAUSE.csv", 'w')
 
-statistics = {}
+header = ["Activity", "Student#", "Time Stamp", "Family", "Action", "Component", "Outcome"]
+header += ["#circuits", "#loops", "#components","#battery", "#circuitSwitch", "#grabBagResistor", "#lightBulb", "#resistor", "#seriesAmmeter"]
+header += ["current_is_circuit","current_#loops", "current_#components", "current_#battery", "current_#circuitSwitch", "current_#grabBagResistor", "current_#lightBulb", "current_#resistor", "current_#seriesAmmeter"]
 
+f_out_actions_withpause.write(",".join(header) + "\n")
+f_out_actions_nopause.write(",".join(header) + "\n")
 
 f_in = open(source, 'rU')
 
@@ -47,18 +55,30 @@ colors = {
     'seriesAmmeter': 'pink'
 }
 
-# GRABBAGRESISTORS = ['grabBagItemButton.Paper Clip','grabBagItemButton.Dollar Bill','grabBagItemButton.Penny','grabBagItemButton.Hand','grabBagItemButton.Dog','grabBagItemButton.Pencil Lead','grabBagItemButton.Eraser']
-# def check_if_added_grab_bag_resistor(line):
-#     for resistor in GRABBAGRESISTORS:
-#         if resistor in line:
-#             return True
-#     return False
+component_regex = re.compile("component = [a-z]+\.[0-9]+")
+voltmeter_regex = re.compile("branch: [a-z]+\.[0-9]+")
+def find_a_current_component(line):
+    if "voltmeter" in line:
+        r = voltmeter_regex.search(line)
+        try:
+            component = r.group(0).replace("branch: ","")
+            return component
+        except:
+            return None
+    else:
+        r = component_regex.search(line)
+        try:
+            component = r.group(0).replace("component = ","")
+            return component
+        except:
+            return None
 
 def update_graph(G,index,line,user,activity,count_remove_error,count_split_error):
+    split_line = line.split(',')
     if "addedComponent" in line:
         addedComponent=split_line[2][2:-1]
-        component=split_line[2][2:-1].split(".")[0]
-        G.add_node(addedComponent, color=colors[component])
+        type_component=split_line[2][2:-1].split(".")[0]
+        G.add_node(addedComponent, color=colors[type_component])
         # print index, 'Added:', addedComponent
     elif "removedComponent" in line:
         removedComponent=split_line[2][2:-1]
@@ -278,43 +298,22 @@ for index, line in enumerate(lines):
         activity = log_file.split("_")[1][:2]
         new_user_line = index
         G=nx.Graph()
-        components_dict = {
-            'lightBulb_count': [],
-            'battery_count': [],
-            'circuitSwitch_count': [],
-            'resistor_count': [],
-            'grabBagResistor_count': [],
-            'seriesAmmeter_count': []
-        }
-
-        trace_voltmeter_actions = 0
-        contact_voltmeter_actions = 0
         continue
 
-    #FOR TESTING PURPOSES
-    # if "10009106" not in user:
-    #     continue
     if activity == 'a3':
         continue
     split_line = line.split(",")
-    
+
     if "IGNORED" in line: #mostly model events,such as change current in battery, but also happens when voltmeter voltage changes...
         continue
 
-    testing = False
-
-    #Here determine if testing and with what instrument - except that's already been determined so I am commenting out
     if "'connectionFormed', 'connections = " in line and "connections = junction" not in line: #for voltmeter
         component = line.split(",")[5].replace("'connections = branch: ", "").replace("'", "").replace(" ", "")
-        testing = True
     if "'connectionFormed', 'component = " in line: #for ammeter
         component = line.split("\\n")[0].split(",")[5].replace("'component = ", "").replace(" ", "")
-        testing = True
     if "Test,startMeasure,seriesAmmeter" in line: #for series ammeter
         component = line.split("\\n")[0].split(",")[5].replace("component = ",'').replace(".endJunction", '').replace(".startJunction", '').replace("'", "").replace(" ", "")
-        testing = True
         
-    ### HERE WE WILL WRITE TO FILE
     pause = False
     try:
         outcome = line.split("->")[2].split(",")[0].strip()
@@ -322,7 +321,9 @@ for index, line in enumerate(lines):
         action = line.split("->")[2].split(",")[2].strip()
         component=line.split("->")[2].split(",")[3].strip()
         stuff_to_write = True
+        print 'parsed component:', component
     except:
+        print "NOT PARSING...:", line
         stuff_to_write = False
         pass
     if "pause" in line:
@@ -332,82 +333,109 @@ for index, line in enumerate(lines):
             pause = True
             family = "pause"
             action = "pause"
-            c="pause"
+            component="pause"
             outcome = "pause"
         else:
             pass
     else:
         t = long(line.split(",")[0][1:])
 
-    if testing or ALWAYS_WRITE_CIRCUIT_INFO:
-        G,message,count_remove_error,count_split_error = update_graph(G,index,line,user,activity,count_remove_error,count_split_error)
-        if message == "continue":
-            continue
 
-        subgraphs = nx.connected_component_subgraphs(G)
+    G,message,count_remove_error,count_split_error = update_graph(G,index,line,user,activity,count_remove_error,count_split_error)
+    if message == "continue":
+        continue
 
-        count = 0
-        component_count = 0
-        lightBulb_count = 0
-        battery_count = 0
-        circuitSwitch_count = 0
-        resistor_count = 0
-        grabBagResistor_count = 0
-        seriesAmmeter_count = 0
-        loop_count = 0
+    # #for testing sections of the code
+    # if t< 1363978755831L:
+    #     continue
+    # elif t> 1363978786440L:
+    #     sys.exit()
 
-        for graph in subgraphs:
-            if len(nx.cycle_basis(graph)) >= 1: #checks if there's a closed loop in a graph, and adds to circuit count
+    subgraphs = nx.connected_component_subgraphs(G)
+
+    count = 0
+    component_count = 0
+    lightBulb_count = 0
+    battery_count = 0
+    circuitSwitch_count = 0
+    resistor_count = 0
+    grabBagResistor_count = 0
+    seriesAmmeter_count = 0
+    loop_count = 0
+
+    current_is_circuit = 0
+    current_component_count = 0
+    current_lightBulb_count = 0
+    current_battery_count = 0
+    current_circuitSwitch_count = 0
+    current_resistor_count = 0
+    current_grabBagResistor_count = 0
+    current_seriesAmmeter_count = 0
+    current_loop_count = 0
+
+    for graph in subgraphs:
+        #Add up all elements in ALL CIRCUITS, closed or not, in the sim.
+        print 'Found subgraph:', graph.nodes(),'from graph:', G.nodes(),'\n', line[:-1]
+        loop_count += len(nx.cycle_basis(graph))
+        if len(nx.cycle_basis(graph)) >= 1: #checks if there's a closed loop in this graph and at least one battery, then add to circuit count
+            if sum([1 for c in graph.nodes() if "battery" in c]) >0:
                 count += 1
-                # print 'here', index, line
-            component_count = 0
-            lightBulb_count = 0
-            battery_count = 0
-            circuitSwitch_count = 0
-            resistor_count = 0
-            grabBagResistor_count = 0
-            seriesAmmeter_count = 0
-            loop_count = 0
+                print "Found closed circuit with", component
+            # print 'here', index, line
+
+        for component_item in graph.nodes():
+            if "lightBulb" in component_item:
+                lightBulb_count += 1
+            elif "battery" in component_item:
+                battery_count += 1
+            elif "circuitSwitch" in component_item:
+                circuitSwitch_count += 1
+            elif "grabBagResistor" in component_item:
+                grabBagResistor_count += 1
+            elif "resistor" in component_item:
+                resistor_count += 1
+            elif "seriesAmmeter" in component_item:
+                seriesAmmeter_count += 1
+
+            if "wire" not in component_item:
+                component_count += 1
+
+        #for the component of the current action, we save the information of ONLY THAT circuit
+        a_current_component =  find_a_current_component(line) #getting battery.0 instead of just battery
+        print "current component", a_current_component, graph
+        if a_current_component in graph.nodes(): 
+            current_loop_count = len(nx.cycle_basis(graph))
+            if current_loop_count >= 1: #checks if there's a closed loop in this graph and at least one battery, then add to circuit count
+                if sum([1 for c in graph.nodes() if "battery" in c]) >0:
+                    current_is_circuit = 1
 
             for component_item in graph.nodes():
                 if "lightBulb" in component_item:
-                    lightBulb_count += 1
+                    current_lightBulb_count += 1
                 elif "battery" in component_item:
-                    battery_count += 1
+                    current_battery_count += 1
                 elif "circuitSwitch" in component_item:
-                    circuitSwitch_count += 1
+                    current_circuitSwitch_count += 1
                 elif "grabBagResistor" in component_item:
-                    grabBagResistor_count += 1
+                    current_grabBagResistor_count += 1
                 elif "resistor" in component_item:
-                    resistor_count += 1
+                    current_resistor_count += 1
                 elif "seriesAmmeter" in component_item:
-                    seriesAmmeter_count += 1
+                    current_seriesAmmeter_count += 1
+
                 if "wire" not in component_item:
-                    component_count += 1
+                    current_component_count += 1
 
-            if component in graph.nodes():
-                loop_count = len(nx.cycle_basis(graph))
-                break  
 
-        last_activity = "test"
-        if stuff_to_write:
-            # print activity, user, t, family, action, component, outcome, count, loop_count, component_count,battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count
-            to_write = [activity, user, t, family, action, component, outcome]
-            to_write += [count, loop_count, component_count]
-            to_write += [battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count]
-
-            f_out_actions_withpause.write(",".join([str(item) for item in to_write]) + "\n")
-            f_out_actions_nopause.write(",".join([str(item) for item in to_write]) + "\n")
-    else:
-        last_activity = ""
-        #write here if non-test, no sophistication features
-        if stuff_to_write:
-            to_write = [activity, user, t, family, action, component, outcome]
-            if pause:
-                f_out_actions_withpause.write(",".join([str(item) for item in to_write]) + "\n")
-            else:
-                f_out_actions_withpause.write(",".join([str(item) for item in to_write]) + "\n")
-                f_out_actions_nopause.write(",".join([str(item) for item in to_write]) + "\n")
+    last_activity = "test"
+    if stuff_to_write:
+        # print activity, user, t, family, action, component, outcome, count, loop_count, component_count,battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count
+        to_write = [activity, user, t, family, action, component, outcome]
+        to_write += [count, loop_count, component_count, battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count]
+        to_write += ['N', current_is_circuit, current_loop_count, current_component_count, current_battery_count, current_circuitSwitch_count, current_grabBagResistor_count, current_lightBulb_count, current_resistor_count, current_seriesAmmeter_count]
+        print "WRITING", to_write,'\n'
+        f_out_actions_withpause.write(",".join([str(item) for item in to_write]) + "\n")
+        f_out_actions_nopause.write(",".join([str(item) for item in to_write]) + "\n")
 
 # print count_remove_error
 # print count_split_error
