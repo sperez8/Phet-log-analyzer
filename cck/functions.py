@@ -1,7 +1,8 @@
 import numpy as np
 import pandas as pd
 import sys
-import getpass
+import getpass  #this might not be needed anymore
+import os
 import matplotlib
 import matplotlib.pyplot as plt
 import re
@@ -9,8 +10,15 @@ from collections import Counter
 import copy
 import networkx as nx
 
-df = pd.read_csv('C:\Users\\'+getpass.getuser()+'\\Google Drive\Jonathan Sarah Ido folder\data\CCK\MATCHING_phet_cck_user_actions+sophistication_WITHPAUSE_anonymized_DONT_TOUCH_ME.txt')
-df_scores = pd.read_csv('C:\Users\\'+getpass.getuser()+'\\Google Drive\Jonathan Sarah Ido folder\data\CCK\MATCHING_phet_cck_user_data_anonymized.txt')
+if os.name == 'posix':
+    data_path=os.environ['HOME']+'/Google Drive/Jonathan Sarah Ido folder/data/CCK/'
+elif os.name == 'nt':
+    data_path=os.environ['HOME']+'\\Google Drive\Jonathan Sarah Ido folder\data\CCK\\'
+else:
+    raise Exception('OS not recongnized. I\'m confused.')
+    
+df = pd.read_csv(data_path + 'MATCHING_phet_cck_user_actions+sophistication_WITHPAUSE_anonymized_DONT_TOUCH_ME.txt')
+df_scores = pd.read_csv(data_path + 'MATCHING_phet_cck_user_data_anonymized.txt')
 df["student"] = df["student"].astype('category')
 df_scores["student"] = df_scores["student"].astype('category')
 df["Family"]=df["Family"].str.capitalize()
