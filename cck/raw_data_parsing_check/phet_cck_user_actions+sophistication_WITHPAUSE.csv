@@ -1,26 +1,8 @@
-Activity,Student#,Time Stamp,Family,Action,Component,Outcome,#circuits,#loops,#components,#battery,#circuitSwitch,#grabBagResistor,#lightBulb,#resistor,#seriesAmmeter
-a1,10009106,1363978501425,Build,add,lightBulb,None,0,0,1,0,0,0,1,0,0
-a1,10009106,1363978503940,Organize,organizeWorkspace,junction,None,0,0,1,0,0,0,1,0,0
-a1,10009106,1363978506034,Organize,organizeWorkspace,junction,None,0,0,1,0,0,0,1,0,0
-a1,10009106,1363978508034,Organize,organizeWorkspace,junction,None,0,0,1,0,0,0,1,0,0
-a1,10009106,1363978509800,Organize,organizeWorkspace,lightBulb,None,0,0,1,0,0,0,1,0,0
-a1,10009106,1363978515753,Build,add,wire,None,0,0,1,0,0,0,1,0,0
-a1,10009106,1363978525284,Build,join,wire,None,0,0,1,0,0,0,1,0,0
-a1,10009106,1363978527659,Organize,organizeWorkspace,junction,None,0,0,1,0,0,0,1,0,0
-a1,10009106,1363978534331,Build,add,wire,None,0,0,1,0,0,0,1,0,0
-a1,10009106,1363978536612,Build,joinX,wire.0,None,0,1,1,0,0,0,1,0,0
-a1,10009106,1363978540409,Organize,organizeWorkspace,wire.0,None,0,1,1,0,0,0,1,0,0
-a1,10009106,1363978542925,Organize,organizeWorkspace,wire.0,None,0,1,1,0,0,0,1,0,0
-a1,10009106,1363978547940,Organize,organizeWorkspace,wire.0,None,0,1,1,0,0,0,1,0,0
-a1,10009106,1363978551440,Organize,organizeWorkspace,wire.0,None,0,1,1,0,0,0,1,0,0
-a1,10009106,1363978556675,Organize,organizeWorkspace,wire.0,None,0,1,1,0,0,0,1,0,0
-a1,10009106,1363978558878,Organize,organizeWorkspace,wire.0,None,0,1,1,0,0,0,1,0,0
-a1,10009106,1363978563128,Build,add,wire.0,None,0,1,2,1,0,0,1,0,0
-a1,10009106,1363978565159,Build,join,wire.0,None,1,1,2,1,0,0,1,0,0
-a1,10009106,1363978567065,Organize,organizeWorkspace,wire.0,None,1,1,2,1,0,0,1,0,0
-a1,10009106,1363978568659,Organize,organizeWorkspace,wire.0,None,1,1,2,1,0,0,1,0,0
-a1,10009106,1363978570565,Organize,organizeWorkspace,wire.0,None,1,1,2,1,0,0,1,0,0
-a1,10009106,1363978571784,Revise,split,junction,None,0,0,2,1,0,0,1,0,0
-a1,10009106,1363978573425,Build,join,lightBulb,None,0,0,2,1,0,0,1,0,0
-a1,10009106,1363978576222,Build,join,wire,None,0,0,2,1,0,0,1,0,0
-a1,10009106,1363978580112,Organize,organizeWorkspace,junction,None,0,0,2,1,0,0,1,0,0
+Activity,Student#,Time Stamp,Family,Action,Component,Outcome,#circuits,#loops,#components,#battery,#circuitSwitch,#grabBagResistor,#lightBulb,#resistor,#seriesAmmeter,current_is_circuit,current_#loops,current_#components,current_#battery,current_#circuitSwitch,current_#grabBagResistor,current_#lightBulb,current_#resistor,current_#seriesAmmeter
+a1,10009106,1363978760644,Test,startMeasure,nonContactAmmeter,deliberate_measure,1,1,2,1,0,0,1,0,0,N,1,1,2,1,0,0,1,0,0
+a1,10009106,1363978761253,Test,endMeasure,nonContactAmmeter,None,1,1,2,1,0,0,1,0,0,N,0,0,0,0,0,0,0,0,0
+a1,10009106,1363978761487,Test,startMeasure,nonContactAmmeter,deliberate_measure,1,1,2,1,0,0,1,0,0,N,1,1,2,1,0,0,1,0,0
+a1,10009106,1363978762222,pause,pause,pause,pause,1,1,2,1,0,0,1,0,0,N,0,0,0,0,0,0,0,0,0
+a1,10009106,1363978784315,Organize,organizeWorkspace,wire,None,1,1,2,1,0,0,1,0,0,N,0,0,0,0,0,0,0,0,0
+a1,10009106,1363978786440,Revise,split,junction,light_intensity,0,0,2,1,0,0,1,0,0,N,0,0,2,1,0,0,1,0,0
+a1,10009106,1363978786440,Test,startMeasure,nonContactAmmeter,light_intensity,0,0,2,1,0,0,1,0,0,N,0,0,2,1,0,0,1,0,0

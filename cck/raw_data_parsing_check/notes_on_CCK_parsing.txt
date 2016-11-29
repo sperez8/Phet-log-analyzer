@@ -1,4 +1,12 @@
-WHY NO ADD BATTERY AT TIME .....128
+TODO
+--------
+Need to change how grab-bag resistor is logged. it's only added to cricuit once connected. ALso need to take note if current flows through it or not.
+
+
+
+
+
+
 
 Parser/files from C:\Users\Sarah\Google Drive\Sarah and Ido Folder\Other folders (less used)\Support in PhET Sims\log files\sophistication
 
