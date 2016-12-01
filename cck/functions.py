@@ -13,9 +13,9 @@ import networkx as nx
 if os.name == 'posix':
     data_path=os.environ['HOME']+'/Google Drive/Jonathan Sarah Ido folder/data/CCK/'
 elif os.name == 'nt':
-    data_path=os.environ['HOME']+'\\Google Drive\Jonathan Sarah Ido folder\data\CCK\\'
+    data_path=os.environ['USERPROFILE']+'\\Google Drive\Jonathan Sarah Ido folder\data\CCK\\'
 else:
-    raise Exception('OS not recongnized. I\'m confused.')
+    raise Exception('OS not recognized. I\'m confused.')
     
 df = pd.read_csv(data_path + 'MATCHING_phet_cck_user_actions+sophistication_WITHPAUSE_anonymized_DONT_TOUCH_ME.txt')
 df_scores = pd.read_csv(data_path + 'MATCHING_phet_cck_user_data_anonymized.txt')
