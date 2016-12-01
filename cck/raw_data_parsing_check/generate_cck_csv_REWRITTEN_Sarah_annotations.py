@@ -289,6 +289,8 @@ count_remove_error = 0
 count_split_error = 0
 last_activity = ""
 cur_sequence = ""
+
+previous_t = None
 for index, line in enumerate(lines):
     if "current_file" in line: #new file data
         # parsing the user id, activity, initializing variables, and creating a new graph
@@ -300,6 +302,8 @@ for index, line in enumerate(lines):
         G=nx.Graph()
         continue
 
+    if user != '94792123':
+        continue
     if activity == 'a3':
         continue
     split_line = line.split(",")
@@ -323,12 +327,13 @@ for index, line in enumerate(lines):
         stuff_to_write = True
         print 'parsed component:', component
     except:
-        print "NOT PARSING...:", line
+        print "NOT PARSING AS ACTION...:", line
         stuff_to_write = False
         pass
     if "pause" in line:
         if line.startswith("pause"):
-            t = long(line.split(",")[0].split("<")[1])
+            #t = long(line.split(",")[0].split("<")[1])
+            t = previous_t+1
             stuff_to_write = True
             pause = True
             family = "pause"
@@ -341,14 +346,15 @@ for index, line in enumerate(lines):
         t = long(line.split(",")[0][1:])
 
 
+
     G,message,count_remove_error,count_split_error = update_graph(G,index,line,user,activity,count_remove_error,count_split_error)
     if message == "continue":
         continue
 
     # #for testing sections of the code
-    # if t< 1363978755831L:
+    # if t< 1363905654199L:
     #     continue
-    # elif t> 1363978786440L:
+    # elif t> 1363907154604L:
     #     sys.exit()
 
     subgraphs = nx.connected_component_subgraphs(G)
@@ -436,6 +442,9 @@ for index, line in enumerate(lines):
         print "WRITING", to_write,'\n'
         f_out_actions_withpause.write(",".join([str(item) for item in to_write]) + "\n")
         f_out_actions_nopause.write(",".join([str(item) for item in to_write]) + "\n")
+
+    previous_t = t
+    print 'here is t:',t
 
 # print count_remove_error
 # print count_split_error
