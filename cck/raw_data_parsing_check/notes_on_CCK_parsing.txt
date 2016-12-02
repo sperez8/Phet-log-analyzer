@@ -1,10 +1,18 @@
 TODO
 --------
-Need to change how grab-bag resistor is logged. it's only added to cricuit once connected. ALso need to take note if current flows through it or not.
+add "voltmeter attached to working circuit" column
+add "contact ammeter attached to working circuit" column
+add "series ammeter attached to working circuit" column
+fix reset all: currently all removal actions are considered user actions. Need to set it so after a Reset actions, ignore all actions until an "add component" action -NOT A SUPER BIG DEAL SINCE EFFECTIVELY STUDENT IS REMOVING THUS BUILDING
+parse short pauses
+sometimes remove component is an Organize action... WTF
+there are 2 wires that are removed but never added... see below for details
 
 
 
-
+only paper clip and penny conduct and their resistance is zero or very low because fire starts
+dog, hand, pencil, eraser, and dollar bill don't
+need to track this? 
 
 
 
@@ -16,7 +24,7 @@ Notes on generate_cck_csV_REWRITTEN.py
 The ignored lines are often model events such as battery current change. But sometimes they are also when connections are formed by testing tools. Maybe ignored because time between actions was really low?
 Simply looking at "grabresistor, addedcomponent" actions that were ignored, seems like the magic time elapsed threshold is 0.016 seconds...
 
-Actions that I think should not be ignored (SEE BELOW:
+Actions that I think should not be ignored (SEE BELOW for all ignored actions):
 Any component:
 	currentChanged
 	endDrag
@@ -35,19 +43,34 @@ Ignore_flag =1 when
 
 
 
+WHat has been done
 
+	script can draw graphs
 
-script can draw graphs
+	I renamed variables which seemed o have several names and were beind called without declaration...
 
-I renamed variables which seemed o have several names and were beind called without declaration...
+	I made it such that circuit info is always print. WARNING: Graph was updated after writing but is no longer.
 
-I made it such that circuit info is always print. WARNING: Graph was updated after writing but is no longer.
+	Added a "count" of the number of circuits with at least 1 battery.
 
-To "count" the number of circuits now, before it simply check for closed loops in the subgraph. Now it checks for closed loops and at least 1 battery.
+	Sometimes, junctions are splits or items are removed from graph which arent there. These are either bugs due to adding grabresistor using a different action then other items or bugs in raw code.
 
-Sometimes, junctions are splits or items are removedfrom graph which arent there. These are either bugs due to adding grabresistor using a different action then other items or bugs in raw code.
+	#loops always gives the number of loops of the circuit (with battery or not) where the component of that action is. No longer. Now both are outputed: all circuit currently built, and currently worked on.	
 
-#loops always gives the number of loops of the circuit (with battery or not) where the component of that action is.
+	Grabbagresistors now added to circuit properly so there is no error when they are removed.
+
+ERRORS I haven't figured out:
+	user:48107113
+	activity:a1
+	line:[1373574192992L, 'user', 'wire.6', 'sprite', 'removedComponent', '\n']-> 1373574192992:removedComponent.wire -> None,Organize,organizeWorkspace,wire
+	error: there is no wire.6 to be removed from graph...
+
+	User:80308126
+	activity:a2
+	line:[1373408048438L, 'user', 'wire.10', 'sprite', 'removedComponent', '\n']-> 1373408048438:removedComponent.wire -> None,Revise,remove,wire
+	error: same
+
+	seems to have something to do with "parser break" actions
 
 
 WATCHING the THU AM video, Here is what actions I wouldlike to capture
