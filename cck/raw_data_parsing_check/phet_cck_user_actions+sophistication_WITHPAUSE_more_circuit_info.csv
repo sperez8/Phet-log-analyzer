@@ -1,0 +1,5 @@
+Activity,Student#,Time Stamp,Family,Action,Component,Outcome,#circuits,#circuits_w_battery,#loops,#components,#battery,#circuitSwitch,#grabBagResistor,#lightBulb,#resistor,#seriesAmmeter,current_is_circuit,current_#loops,current_#components,current_#battery,current_#circuitSwitch,current_#grabBagResistor,current_#lightBulb,current_#resistor,current_#seriesAmmeter
+a2,10009106,1363981428815,Construct,organizeWorkspace,junction,None,4,3,5,14,6,0,0,0,8,0,N,0,2,2,0,0,0,0,2,0
+a2,10009106,1363981428862,Construct,join,wire,None,4,4,5,14,6,0,0,0,8,0,N,1,2,3,1,0,0,0,2,0
+a2,10009106,1363981430081,Construct,add,wire,None,4,4,5,14,6,0,0,0,8,0,N,0,0,0,0,0,0,0,0,0
+a2,10009106,1363981432081,Construct,join,wire,None,4,4,5,14,6,0,0,0,8,0,N,1,2,3,1,0,0,0,2,0

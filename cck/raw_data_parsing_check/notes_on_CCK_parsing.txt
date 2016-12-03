@@ -3,22 +3,25 @@ TODO
 add "voltmeter attached to working circuit" column
 add "contact ammeter attached to working circuit" column
 add "series ammeter attached to working circuit" column
+
+
 fix reset all: currently all removal actions are considered user actions. Need to set it so after a Reset actions, ignore all actions until an "add component" action -NOT A SUPER BIG DEAL SINCE EFFECTIVELY STUDENT IS REMOVING THUS BUILDING
-parse short pauses
+parse short pauses - can be done in Jupyter
 sometimes remove component is an Organize action... WTF
-there are 2 wires that are removed but never added... see below for details
+there are 2 wires that are removed but never added... see below for details (in activity 2, there are a dozen in activity 1)
 
-
+take a closer look at ignored lines
 
 only paper clip and penny conduct and their resistance is zero or very low because fire starts
 dog, hand, pencil, eraser, and dollar bill don't
 need to track this? 
 
 
+(?s)startMeasure[a-zA-Z0-9,\[\]\'\s=:\\\.\-\>]+Build
 
+----
 Parser/files from C:\Users\Sarah\Google Drive\Sarah and Ido Folder\Other folders (less used)\Support in PhET Sims\log files\sophistication
-
----
+----
 Notes on generate_cck_csV_REWRITTEN.py
 
 The ignored lines are often model events such as battery current change. But sometimes they are also when connections are formed by testing tools. Maybe ignored because time between actions was really low?
@@ -32,14 +35,14 @@ Any component:
 	removedComponent
 	AddComponent
 
-Ignore_flag =1 when
-	current change on battery, ammeters
-	fire is start or ended in different places
-	dialog boxes are opened/closed
-	start and ned drag on battery resistance, resistivity
-	if last drag value is really small
-	movedComponent if immediately followed by junction formed
-	adding grabbag resistor
+Ignore_flag =1 when:
+feedback		current change on battery, ammeters
+feedback		fire is start or ended in different places
+ignore		dialog boxes are opened/closed
+building		start and ned drag on battery resistance, resistivity
+ignore		if last drag value is really small
+ignore		movedComponent if immediately followed by junction formed
+building		adding grabbag resistor
 
 
 
@@ -59,19 +62,8 @@ WHat has been done
 
 	Grabbagresistors now added to circuit properly so there is no error when they are removed.
 
-ERRORS I haven't figured out:
-	user:48107113
-	activity:a1
-	line:[1373574192992L, 'user', 'wire.6', 'sprite', 'removedComponent', '\n']-> 1373574192992:removedComponent.wire -> None,Organize,organizeWorkspace,wire
-	error: there is no wire.6 to be removed from graph...
-
-	User:80308126
-	activity:a2
-	line:[1373408048438L, 'user', 'wire.10', 'sprite', 'removedComponent', '\n']-> 1373408048438:removedComponent.wire -> None,Revise,remove,wire
-	error: same
-
-	seems to have something to do with "parser break" actions
-
+Random other notes
+-----------------------------------------------
 
 WATCHING the THU AM video, Here is what actions I wouldlike to capture
 Adding components
@@ -194,3 +186,59 @@ HERE are all the action for which we see an IGNORED!!
  wire	 sprite	 removedComponent
 		
 
+ERRORS in activity 1, I haven't figured out: (seems to have something to do with "parser break" actions)
+		REMOVE ERROR
+		80308126 a2 176284
+		[1373408055344L, 'user', 'wire.4', 'sprite', 'removedComponent', '\n']-> 1373408055344:removedComponent.wire -> None,Organize,organizeWorkspace,wire
+
+		SPLIT ERROR
+		82243121 180971
+		[1020934992421L, 'model', 'junction.55', 'junction', 'junctionSplit', 'component = resistor.0.startJunction', 'component = wire.4.endJunction\n']-> 1020934992421:junctionSplit.junction -> reading_updated,Revise,split,junction
+
+		REMOVE ERROR
+		82243121 a1 180975
+		[1020934995984L, 'user', 'resistor.0', 'sprite', 'removedComponent', '\n']-> 1020934995984:removedComponent.resistor -> None,Organize,organizeWorkspace,resistor
+
+		REMOVE ERROR
+		82243121 a1 181044
+		[1020935035156L, 'user', 'circuitSwitch.0', 'sprite', 'removedComponent', '\n']-> 1020935035156:removedComponent.circuitSwitch -> None,Organize,organizeWorkspace,circuitSwitch
+
+		REMOVE ERROR
+		85458129 a1 201297
+		[1363887724543L, 'user', 'lightBulb.0', 'sprite', 'removedComponent', '\n']-> 1363887724543:removedComponent.lightBulb -> None,Organize,organizeWorkspace,lightBulb
+
+		REMOVE ERROR
+		85458129 a1 201324
+		[1363887770472L, 'user', 'battery.0', 'sprite', 'removedComponent', '\n']-> 1363887770472:removedComponent.battery -> None,Organize,organizeWorkspace,battery
+
+		REMOVE ERROR
+		85458129 a1 201326
+		[1363887773615L, 'user', 'wire.0', 'sprite', 'removedComponent', '\n']-> 1363887773615:removedComponent.wire -> None,Organize,organizeWorkspace,wire
+
+		SPLIT ERROR
+		91203122 230472
+		[1363903572360L, 'model', 'junction.72', 'junction', 'junctionSplit', 'component = wire.2.startJunction', 'component = wire.8.startJunction\n']-> pause
+
+		SPLIT ERROR
+		91203122 230475
+		[1363903573985L, 'model', 'junction.62', 'junction', 'junctionSplit', 'component = wire.1.endJunction', 'component = wire.5.endJunction\n']-> pause
+
+		SPLIT ERROR
+		91203122 230578
+		[1363903880698L, 'model', 'junction.65', 'junction', 'junctionSplit', 'component = wire.3.endJunction', 'component = wire.5.startJunction', 'component = wire.6.startJunction\n']-> 1363903880698:junctionSplit.junction -> reading_updated,Revise,split,junction
+
+		SPLIT ERROR
+		91203122 230581
+		[1363903882260L, 'model', 'junction.81', 'junction', 'junctionSplit', 'component = wire.4.startJunction', 'component = wire.8.endJunction', 'component = wire.10.startJunction\n']-> 1363903882260:junctionSplit.junction -> None,Revise,split,junction
+
+		REMOVE ERROR
+		91203122 a1 230587
+		[1363903899538L, 'user', 'lightBulb.1', 'sprite', 'removedComponent', '\n']-> 1363903899538:removedComponent.lightBulb -> None,Organize,organizeWorkspace,lightBulb
+
+		REMOVE ERROR
+		91203122 a1 230588
+		[1363903900538L, 'user', 'wire.3', 'sprite', 'removedComponent', '\n']-> 1363903900538:removedComponent.wire -> None,Organize,organizeWorkspace,wire
+
+		REMOVE ERROR
+		91203122 a1 230589
+		[1363903901475L, 'user', 'wire.4', 'sprite', 'removedComponent', '\n']-> 1363903901475:removedComponent.wire -> None,Organize,organizeWorkspace,wire

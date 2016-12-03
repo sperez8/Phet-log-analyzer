@@ -31,15 +31,15 @@ import re
 source = "parser_log_user_pause.txt"
 #source = "parsedData\\60076128_a1.txt"
 
-f_out_actions_withpause = open("phet_cck_user_actions+sophistication_WITHPAUSE.csv", 'w')
-f_out_actions_nopause = open("phet_cck_user_actions+sophistication_NOPAUSE.csv", 'w')
+f_out_actions_withpause = open("phet_cck_user_actions+sophistication_WITHPAUSE_more_circuit_info.csv", 'w')
+# f_out_actions_nopause = open("phet_cck_user_actions+sophistication_NOPAUSE.csv", 'w')
 
 header = ["Activity", "Student#", "Time Stamp", "Family", "Action", "Component", "Outcome"]
 header += ["#circuits","#circuits_w_battery", "#loops", "#components","#battery", "#circuitSwitch", "#grabBagResistor", "#lightBulb", "#resistor", "#seriesAmmeter"]
 header += ["current_is_circuit","current_#loops", "current_#components", "current_#battery", "current_#circuitSwitch", "current_#grabBagResistor", "current_#lightBulb", "current_#resistor", "current_#seriesAmmeter"]
 
 f_out_actions_withpause.write(",".join(header) + "\n")
-f_out_actions_nopause.write(",".join(header) + "\n")
+# f_out_actions_nopause.write(",".join(header) + "\n")
 
 f_in = open(source, 'rU')
 
@@ -85,11 +85,11 @@ def update_graph(G,index,line,user,activity,count_remove_error,count_split_error
         try:
             G.remove_node(removedComponent)
         except:
-            if index not in [176284,176281]: #these are known errors and are ignored
+            if index not in [99145,176281,176284]: #these are known errors and are ignored
                 print "\n\nREMOVE ERROR"
-                print user, index
+                print user, activity, index
                 print line
-                sys.exit()
+                # sys.exit()
             else:
                 pass
     elif "junctionFormed" in line:
@@ -267,7 +267,7 @@ def update_graph(G,index,line,user,activity,count_remove_error,count_split_error
                 raise "more than 6 remove"
         except:
             print "SPLIT ERROR"
-            print user, index
+            print user, activity, index
             print line
             # count_split_error += 1
             pass
@@ -303,10 +303,10 @@ for index, line in enumerate(lines):
         G=nx.Graph()
         continue
 
-    # # if user != '94792123':
-    # if user != '12235124':
+    # # # # if user != '94792123':
+    # if user != '10009106':
     #     continue
-    if activity != 'a2':
+    if activity == 'a3':
         continue
     split_line = line.split(",")
 
@@ -331,9 +331,9 @@ for index, line in enumerate(lines):
         action = line.split("->")[2].split(",")[2].strip()
         component=line.split("->")[2].split(",")[3].strip()
         stuff_to_write = True
-        #S#print 'parsed component:', component
+        #S# print 'parsed component:', component
     except:
-        #S#print "NOT PARSING AS ACTION...:", line
+        #S# print "NOT PARSING AS ACTION...:", line
         stuff_to_write = False
         pass
     if "pause" in line:
@@ -354,12 +354,19 @@ for index, line in enumerate(lines):
     if message == "continue":
         continue
 
-    # # for testing sections of the code (will still update graphs but not write out)
-    # if t< 1363823236238L:
-    #     previous_t = t
-    #     continue
-    # elif t> 1363823249706L:
-    #     sys.exit()
+    # for testing sections of the code (will still update graphs but not write out)
+    if t< 1363981428815:
+        previous_t = t
+        continue
+    elif t> 1363981432081:
+        #S# print "DONE TESTING. Exiting...\n\n\n"
+        print line
+        for g in  nx.connected_component_subgraphs(G):
+            print g.nodes()
+            print g.edges()
+            print '\n'
+
+        sys.exit()
 
     #Graphs metrics calculated and written out here
     subgraphs = nx.connected_component_subgraphs(G)
@@ -387,14 +394,14 @@ for index, line in enumerate(lines):
 
     for graph in subgraphs:
         #Add up all elements in ALL CIRCUITS, closed or not, in the sim.
-        #S#print 'Found subgraph:', graph.nodes(),'from graph:', G.nodes(),'\n', line[:-1]
+        #S# print 'Found subgraph:', graph.nodes(),'from graph:', G.nodes(),'\n', line[:-1]
         loop_count += len(nx.cycle_basis(graph))
         if len(nx.cycle_basis(graph)) >= 1: #checks if there's a closed loop in this graph and at least one battery, then add to circuit count
             circuit_w_battery_count += 1
             if sum([1 for c in graph.nodes() if "battery" in c]) >0:
                 circuit_count += 1
-                #S#print "Found closed circuit with", component
-            ## #S#print 'here', index, line
+                #S# print "Found closed circuit with", component
+            ## #S# print 'here', index, line
 
         for component_item in graph.nodes():
             if "lightBulb" in component_item:
@@ -415,7 +422,7 @@ for index, line in enumerate(lines):
 
         #for the component of the current action, we save the information of ONLY THAT circuit
         a_current_component =  find_a_current_component(line) #getting battery.0 instead of just battery
-        #S#print "current component", a_current_component, graph
+        #S# print "current component", a_current_component, graph
         if a_current_component in graph.nodes(): 
             current_loop_count = len(nx.cycle_basis(graph))
             if current_loop_count >= 1: #checks if there's a closed loop in this graph and at least one battery, then add to circuit count
@@ -439,16 +446,50 @@ for index, line in enumerate(lines):
                 if "wire" not in component_item:
                     current_component_count += 1
 
+
+    #Now that we have all the information, we can make all the action family changes we want. Yahoo!
+    # do nothing to Reset, Interface, Pause actions
+    if family in ['Organize','Build','Extra','Revise']:
+        if outcome == 'reading_updated' or current_seriesAmmeter_count >1:
+            family = 'ConstructwithFeedback' #check that this is the right way to do it
+        elif outcome == 'fire_started':
+            family = 'ConstructwithFire' #check that this is the right way to do it
+        else:
+            family = 'Construct' # we can split Construct with feedback later
+
+    #check what's up with current circuit to qualify the testing action
+    if family == 'Test':
+        if current_grabBagResistor_count > 0 or current_is_circuit == 0: #some unproductive behavior
+            family = 'Test_other'
+        elif current_lightBulb_count > 0: #productive in activity 1, wrong focus for activity 2
+            family = 'Test_lightbulb'
+        elif current_is_circuit and current_battery_count == 1: #we have a simple circuit ;)
+            if current_loop_count == 1 and current_resistor_count == 1: #basic circuit!
+                family = 'Testing_basic'
+            elif current_loop_count == 1 and current_resistor_count == 2:
+                family = 'Testing_series' 
+            elif current_loop_count == 2 and current_resistor_count == 2:
+                family = 'Testing_parallel'
+            else: 
+                family = 'Testing_complex'
+        family = family+'_'+component
+
+
+#what to do with circuit switch?
+#check loop counter
+#do we care if series ammeter is in current circuit or not?
+
+
     if stuff_to_write:
-        ## #S#print activity, user, t, family, action, component, outcome, count, loop_count, component_count,battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count
+        ## #S# print activity, user, t, family, action, component, outcome, count, loop_count, component_count,battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count
         to_write = [activity, user, t, family, action, component, outcome]
         to_write += [circuit_w_battery_count, circuit_count, loop_count, component_count, battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count]
         to_write += ['N', current_is_circuit, current_loop_count, current_component_count, current_battery_count, current_circuitSwitch_count, current_grabBagResistor_count, current_lightBulb_count, current_resistor_count, current_seriesAmmeter_count]
-        #S#print "WRITING", to_write,'\n'
+        print "WRITING", to_write,'\n'
         f_out_actions_withpause.write(",".join([str(item) for item in to_write]) + "\n")
-        f_out_actions_nopause.write(",".join([str(item) for item in to_write]) + "\n")
+        # f_out_actions_nopause.write(",".join([str(item) for item in to_write]) + "\n")
 
     previous_t = t
 
-## #S#print count_remove_error
-## #S#print count_split_error
+## #S# print count_remove_error
+## #S# print count_split_error
