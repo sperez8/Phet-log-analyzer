@@ -1,11 +1,5 @@
 TODO
 --------
-add "voltmeter attached to working circuit" column
-add "contact ammeter attached to working circuit" column
-add "series ammeter attached to working circuit" column
-
-
-reset all: currently all removal actions are considered user actions but are ignored.
 parse short pauses - can be done in Jupyter
 sometimes remove component is an Organize action... WTF
 there are 2 wires that are removed but never added... see below for details (in activity 2, there are a dozen in activity 1)
@@ -29,9 +23,9 @@ thoughts on logging different kinds of tests:
 for now, keeping only "deliberate _measure" - ignores some "endMeasure", and all startmeasures with no actual outcomes
 note that currently "PlayPause" is a kind of test
 NEED TO FIX DATA GIVEN THAT SOME STUDENTS HAVE DIFFERENT IDS IN BOTH DATAFRAMES. see load_data.ipynb
-somehow lost pauses
 keep track of exceptions. ex: Test+other can be a lot of things
 
+reset all: currently all removal actions are considered user actions but are ignored. considered as construct
 ----
 Parser/files from C:\Users\Sarah\Google Drive\Sarah and Ido Folder\Other folders (less used)\Support in PhET Sims\log files\sophistication
 ----
