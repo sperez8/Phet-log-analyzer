@@ -73,6 +73,15 @@ def find_a_current_component(line):
         except:
             return None
 
+def count_loops(G):
+    count = 0
+    for cycle in nx.cycle_basis(graph):
+        if any([True for node in cycle if "wire" not in node]):
+            count += 1
+    return count
+
+
+
 def update_graph(G,index,line,user,activity,count_remove_error,count_split_error):
     split_line = line.split(',')
     if "addedComponent" in line:
@@ -303,8 +312,8 @@ for index, line in enumerate(lines):
         G=nx.Graph()
         continue
 
-    if user != '94792123':
-        continue
+    # if user != '94792123':
+    #     continue
     if activity != 'a2':
         continue
     split_line = line.split(",")
@@ -352,12 +361,12 @@ for index, line in enumerate(lines):
     else:
         t = long(line.split(",")[0][1:])
 
-    # # for testing sections of the code (will still update graphs but not write out)
-    # if t< 1363981428815:
+    # for testing sections of the code (will still update graphs but not write out)
+    # if t< 1363906174413:
     #     previous_t = t
     #     continue
-    # elif t> 1363981432081:
-        # #S# print "DONE TESTING. Exiting...\n\n\n"
+    # elif t> 1363906223315:
+    #     #S# print "DONE TESTING. Exiting...\n\n\n"
     #     #S# print line
     #     for g in  nx.connected_component_subgraphs(G):
     #         #S# print g.nodes()
@@ -393,8 +402,8 @@ for index, line in enumerate(lines):
     for graph in subgraphs:
         #Add up all elements in ALL CIRCUITS, closed or not, in the sim.
         #S# print 'Found subgraph:', graph.nodes(),'from graph:', G.nodes(),'\n', line[:-1]
-        loop_count += len(nx.cycle_basis(graph))
-        if len(nx.cycle_basis(graph)) >= 1: #checks if there's a closed loop in this graph and at least one battery, then add to circuit count
+        loop_count += count_loops(graph)
+        if count_loops(graph) >= 1: #checks if there's a closed loop in this graph and at least one battery, then add to circuit count
             circuit_w_battery_count += 1
             if sum([1 for c in graph.nodes() if "battery" in c]) >0:
                 circuit_count += 1
@@ -420,7 +429,7 @@ for index, line in enumerate(lines):
         a_current_component =  find_a_current_component(line) #getting battery.0 instead of just battery
         #S# print "current component", a_current_component, graph
         if a_current_component in graph.nodes(): 
-            current_loop_count = len(nx.cycle_basis(graph))
+            current_loop_count = count_loops(graph)
             if current_loop_count >= 1: #checks if there's a closed loop in this graph and at least one battery, then add to circuit count
                 if sum([1 for c in graph.nodes() if "battery" in c]) >0:
                     current_is_circuit = 1
