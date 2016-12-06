@@ -5,7 +5,7 @@ add "contact ammeter attached to working circuit" column
 add "series ammeter attached to working circuit" column
 
 
-fix reset all: currently all removal actions are considered user actions. Need to set it so after a Reset actions, ignore all actions until an "add component" action -NOT A SUPER BIG DEAL SINCE EFFECTIVELY STUDENT IS REMOVING THUS BUILDING
+reset all: currently all removal actions are considered user actions but are ignored.
 parse short pauses - can be done in Jupyter
 sometimes remove component is an Organize action... WTF
 there are 2 wires that are removed but never added... see below for details (in activity 2, there are a dozen in activity 1)
@@ -18,6 +18,15 @@ need to track this?
 
 
 (?s)startMeasure[a-zA-Z0-9,\[\]\'\s=:\\\.\-\>]+Build
+
+----
+thoughts on logging different kinds of tests:
+
+#what to do with circuit switch?
+#check loop counter
+#do we care if series ammeter is in current circuit or not?
+
+
 
 ----
 Parser/files from C:\Users\Sarah\Google Drive\Sarah and Ido Folder\Other folders (less used)\Support in PhET Sims\log files\sophistication

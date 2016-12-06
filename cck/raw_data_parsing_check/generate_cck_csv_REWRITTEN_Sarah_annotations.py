@@ -306,7 +306,7 @@ for index, line in enumerate(lines):
     # # # # if user != '94792123':
     # if user != '10009106':
     #     continue
-    if activity == 'a3':
+    if activity != 'a2':
         continue
     split_line = line.split(",")
 
@@ -323,8 +323,11 @@ for index, line in enumerate(lines):
         component = line.split("\\n")[0].split(",")[5].replace("'component = ", "").replace(" ", "")
     if "Test,startMeasure,seriesAmmeter" in line: #for series ammeter
         component = line.split("\\n")[0].split(",")[5].replace("component = ",'').replace(".endJunction", '').replace(".startJunction", '').replace("'", "").replace(" ", "")
-        
-    pause = False
+
+    G,message,count_remove_error,count_split_error = update_graph(G,index,line,user,activity,count_remove_error,count_split_error)
+    if message == "continue":
+        continue
+
     try:
         outcome = line.split("->")[2].split(",")[0].strip()
         family = line.split("->")[2].split(",")[1].strip()
@@ -334,8 +337,7 @@ for index, line in enumerate(lines):
         #S# print 'parsed component:', component
     except:
         #S# print "NOT PARSING AS ACTION...:", line
-        stuff_to_write = False
-        pass
+        continue
     if "pause" in line:
         if line.startswith("pause"):
             #t = long(line.split(",")[0].split("<")[1])
@@ -350,23 +352,19 @@ for index, line in enumerate(lines):
     else:
         t = long(line.split(",")[0][1:])
 
-    G,message,count_remove_error,count_split_error = update_graph(G,index,line,user,activity,count_remove_error,count_split_error)
-    if message == "continue":
-        continue
+    # # for testing sections of the code (will still update graphs but not write out)
+    # if t< 1363981428815:
+    #     previous_t = t
+    #     continue
+    # elif t> 1363981432081:
+    #     #S# print "DONE TESTING. Exiting...\n\n\n"
+    #     print line
+    #     for g in  nx.connected_component_subgraphs(G):
+    #         print g.nodes()
+    #         print g.edges()
+    #         print '\n'
 
-    # for testing sections of the code (will still update graphs but not write out)
-    if t< 1363981428815:
-        previous_t = t
-        continue
-    elif t> 1363981432081:
-        #S# print "DONE TESTING. Exiting...\n\n\n"
-        print line
-        for g in  nx.connected_component_subgraphs(G):
-            print g.nodes()
-            print g.edges()
-            print '\n'
-
-        sys.exit()
+    #     sys.exit()
 
     #Graphs metrics calculated and written out here
     subgraphs = nx.connected_component_subgraphs(G)
@@ -475,19 +473,13 @@ for index, line in enumerate(lines):
         family = family+'_'+component
 
 
-#what to do with circuit switch?
-#check loop counter
-#do we care if series ammeter is in current circuit or not?
-
-
-    if stuff_to_write:
-        ## #S# print activity, user, t, family, action, component, outcome, count, loop_count, component_count,battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count
-        to_write = [activity, user, t, family, action, component, outcome]
-        to_write += [circuit_w_battery_count, circuit_count, loop_count, component_count, battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count]
-        to_write += ['N', current_is_circuit, current_loop_count, current_component_count, current_battery_count, current_circuitSwitch_count, current_grabBagResistor_count, current_lightBulb_count, current_resistor_count, current_seriesAmmeter_count]
-        print "WRITING", to_write,'\n'
-        f_out_actions_withpause.write(",".join([str(item) for item in to_write]) + "\n")
-        # f_out_actions_nopause.write(",".join([str(item) for item in to_write]) + "\n")
+    ## #S# print activity, user, t, family, action, component, outcome, count, loop_count, component_count,battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count
+    to_write = [activity, user, t, family, action, component, outcome]
+    to_write += [circuit_w_battery_count, circuit_count, loop_count, component_count, battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count]
+    to_write += ['N', current_is_circuit, current_loop_count, current_component_count, current_battery_count, current_circuitSwitch_count, current_grabBagResistor_count, current_lightBulb_count, current_resistor_count, current_seriesAmmeter_count]
+    #S# print "WRITING", to_write,'\n'
+    f_out_actions_withpause.write(",".join([str(item) for item in to_write]) + "\n")
+    # f_out_actions_nopause.write(",".join([str(item) for item in to_write]) + "\n")
 
     previous_t = t
 
