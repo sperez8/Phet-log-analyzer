@@ -26,7 +26,10 @@ thoughts on logging different kinds of tests:
 #check loop counter
 #do we care if series ammeter is in current circuit or not?
 
-
+for now, keeping only "deliberate _measure" - ignores some "endMeasure", and all startmeasures with no actual outcomes
+note that currently "PlayPause" is a kind of test
+NEED TO FIX DATA GIVEN THAT SOME STUDENTS HAVE DIFFERENT IDS IN BOTH DATAFRAMES. see load_data.ipynb
+somehow lost pauses
 
 ----
 Parser/files from C:\Users\Sarah\Google Drive\Sarah and Ido Folder\Other folders (less used)\Support in PhET Sims\log files\sophistication

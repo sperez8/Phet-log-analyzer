@@ -31,10 +31,10 @@ import re
 source = "parser_log_user_pause.txt"
 #source = "parsedData\\60076128_a1.txt"
 
-f_out_actions_withpause = open("phet_cck_user_actions+sophistication_WITHPAUSE_more_circuit_info.csv", 'w')
+f_out_actions_withpause = open("phet_cck_user_actions+sophistication_WITHPAUSE_more_circuit_info.txt", 'w')
 # f_out_actions_nopause = open("phet_cck_user_actions+sophistication_NOPAUSE.csv", 'w')
 
-header = ["Activity", "Student#", "Time Stamp", "Family", "Action", "Component", "Outcome"]
+header = ["Activity", "student", "Time Stamp", "Family", "Action", "Component", "Outcome"]
 header += ["#circuits","#circuits_w_battery", "#loops", "#components","#battery", "#circuitSwitch", "#grabBagResistor", "#lightBulb", "#resistor", "#seriesAmmeter"]
 header += ["current_is_circuit","current_#loops", "current_#components", "current_#battery", "current_#circuitSwitch", "current_#grabBagResistor", "current_#lightBulb", "current_#resistor", "current_#seriesAmmeter"]
 
@@ -56,7 +56,7 @@ colors = {
 }
 
 component_regex = re.compile("component = [a-z]+\.[0-9]+")
-voltmeter_regex = re.compile("branch: [a-z]+\.[0-9]+")
+voltmeter_regex = re.compile("branche?s?: [a-z]+\.[0-9]+")
 def find_a_current_component(line):
     if "voltmeter" in line:
         r = voltmeter_regex.search(line)
@@ -461,16 +461,21 @@ for index, line in enumerate(lines):
             family = 'Test_other'
         elif current_lightBulb_count > 0: #productive in activity 1, wrong focus for activity 2
             family = 'Test_lightbulb'
-        elif current_is_circuit and current_battery_count == 1: #we have a simple circuit ;)
+        elif current_battery_count == 1: #we have simple circuit ;)
             if current_loop_count == 1 and current_resistor_count == 1: #basic circuit!
-                family = 'Testing_basic'
+                family = 'Test_basic'
             elif current_loop_count == 1 and current_resistor_count == 2:
-                family = 'Testing_series' 
+                family = 'Test_series' 
             elif current_loop_count == 2 and current_resistor_count == 2:
-                family = 'Testing_parallel'
-            else: 
-                family = 'Testing_complex'
+                family = 'Test_parallel'
+        else: 
+            family = 'Test_complex'
         family = family+'_'+component
+
+
+    #We don't want all test actions, let's filter some out
+    if action == "endMeasure" or (action == 'startMeasure' and outcome != 'deliberate_measure'):
+        continue
 
 
     ## #S# print activity, user, t, family, action, component, outcome, count, loop_count, component_count,battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count
