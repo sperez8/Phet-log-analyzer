@@ -303,9 +303,8 @@ for index, line in enumerate(lines):
         G=nx.Graph()
         continue
 
-    # # # # if user != '94792123':
-    # if user != '10009106':
-    #     continue
+    if user != '94792123':
+        continue
     if activity != 'a2':
         continue
     split_line = line.split(",")
@@ -327,7 +326,6 @@ for index, line in enumerate(lines):
     G,message,count_remove_error,count_split_error = update_graph(G,index,line,user,activity,count_remove_error,count_split_error)
     if message == "continue":
         continue
-
     try:
         outcome = line.split("->")[2].split(",")[0].strip()
         family = line.split("->")[2].split(",")[1].strip()
@@ -337,7 +335,8 @@ for index, line in enumerate(lines):
         #S# print 'parsed component:', component
     except:
         #S# print "NOT PARSING AS ACTION...:", line
-        continue
+        stuff_to_write = False
+        pass
     if "pause" in line:
         if line.startswith("pause"):
             #t = long(line.split(",")[0].split("<")[1])
@@ -347,6 +346,7 @@ for index, line in enumerate(lines):
             action = "pause"
             component="pause"
             outcome = "pause"
+
         else:
             pass
     else:
@@ -357,12 +357,12 @@ for index, line in enumerate(lines):
     #     previous_t = t
     #     continue
     # elif t> 1363981432081:
-    #     #S# print "DONE TESTING. Exiting...\n\n\n"
-    #     print line
+        # #S# print "DONE TESTING. Exiting...\n\n\n"
+    #     #S# print line
     #     for g in  nx.connected_component_subgraphs(G):
-    #         print g.nodes()
-    #         print g.edges()
-    #         print '\n'
+    #         #S# print g.nodes()
+    #         #S# print g.edges()
+    #         #S# print '\n'
 
     #     sys.exit()
 
@@ -398,8 +398,6 @@ for index, line in enumerate(lines):
             circuit_w_battery_count += 1
             if sum([1 for c in graph.nodes() if "battery" in c]) >0:
                 circuit_count += 1
-                #S# print "Found closed circuit with", component
-            ## #S# print 'here', index, line
 
         for component_item in graph.nodes():
             if "lightBulb" in component_item:
@@ -444,49 +442,51 @@ for index, line in enumerate(lines):
                 if "wire" not in component_item:
                     current_component_count += 1
 
+    if stuff_to_write:
 
-    #Now that we have all the information, we can make all the action family changes we want. Yahoo!
-    # do nothing to Reset, Interface, Pause actions
-    if family in ['Organize','Build','Extra','Revise']:
-        if outcome == 'reading_updated' or current_seriesAmmeter_count >1:
-            family = 'ConstructwithFeedback' #check that this is the right way to do it
-        elif outcome == 'fire_started':
-            family = 'ConstructwithFire' #check that this is the right way to do it
-        else:
-            family = 'Construct' # we can split Construct with feedback later
+        #Now that we have all the information, we can make all the action family changes we want. Yahoo!
+        # do nothing to Reset, Interface, Pause actions
+        if family in ['Reset','Organize','Build','Extra','Revise']:
+            if outcome == 'reading_updated' or current_seriesAmmeter_count >1:
+                family = 'ConstructwithFeedback' #check that this is the right way to do it
+            elif outcome == 'fire_started':
+                family = 'ConstructwithFire' #check that this is the right way to do it
+            else:
+                family = 'Construct' # we can split Construct with feedback later
 
-    #check what's up with current circuit to qualify the testing action
-    if family == 'Test':
-        if current_grabBagResistor_count > 0 or current_is_circuit == 0: #some unproductive behavior
-            family = 'Test_other'
-        elif current_lightBulb_count > 0: #productive in activity 1, wrong focus for activity 2
-            family = 'Test_lightbulb'
-        elif current_battery_count == 1: #we have simple circuit ;)
-            if current_loop_count == 1 and current_resistor_count == 1: #basic circuit!
-                family = 'Test_basic'
-            elif current_loop_count == 1 and current_resistor_count == 2:
-                family = 'Test_series' 
-            elif current_loop_count == 2 and current_resistor_count == 2:
-                family = 'Test_parallel'
-        else: 
-            family = 'Test_complex'
-        family = family+'_'+component
+        #check what's up with current circuit to qualify the testing action
+        if family == 'Test':
+            if current_grabBagResistor_count > 0: #some unproductive behavior
+                family = 'Test_other'
+            elif  current_is_circuit == 0:
+                family = 'Test_other'
+            elif current_lightBulb_count > 0: #productive in activity 1, wrong focus for activity 2
+                family = 'Test_lightbulb'
+            elif current_battery_count == 1: #we have simple circuit ;)
+                if current_loop_count == 1 and current_resistor_count == 1: #basic circuit!
+                    family = 'Test_basic' + '_' + component
+                elif current_loop_count == 1 and current_resistor_count == 2:
+                    family = 'Test_series'  + '_' + component
+                elif current_loop_count == 2 and current_resistor_count == 2:
+                    family = 'Test_parallel' + '_' + component
+                else: 
+                    family = 'Test_complex' + '_' + component
+            else: 
+                family = 'Test_complex' + '_' + component
 
+        #We don't want all test actions, let's filter some out
+        if action == "endMeasure" or (action == 'startMeasure' and outcome != 'deliberate_measure'):
+            continue
 
-    #We don't want all test actions, let's filter some out
-    if action == "endMeasure" or (action == 'startMeasure' and outcome != 'deliberate_measure'):
-        continue
-
-
-    ## #S# print activity, user, t, family, action, component, outcome, count, loop_count, component_count,battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count
-    to_write = [activity, user, t, family, action, component, outcome]
-    to_write += [circuit_w_battery_count, circuit_count, loop_count, component_count, battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count]
-    to_write += ['N', current_is_circuit, current_loop_count, current_component_count, current_battery_count, current_circuitSwitch_count, current_grabBagResistor_count, current_lightBulb_count, current_resistor_count, current_seriesAmmeter_count]
-    #S# print "WRITING", to_write,'\n'
-    f_out_actions_withpause.write(",".join([str(item) for item in to_write]) + "\n")
-    # f_out_actions_nopause.write(",".join([str(item) for item in to_write]) + "\n")
-
+        to_write = [activity, user, t, family, action, component, outcome]
+        to_write += [circuit_w_battery_count, circuit_count, loop_count, component_count, battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count]
+        to_write += ['N', current_is_circuit, current_loop_count, current_component_count, current_battery_count, current_circuitSwitch_count, current_grabBagResistor_count, current_lightBulb_count, current_resistor_count, current_seriesAmmeter_count]
+        #S# print line
+        #S# print "WRITING", to_write,'\n'
+        f_out_actions_withpause.write(",".join([str(item) for item in to_write]) + "\n")
+        # f_out_actions_nopause.write(",".join([str(item) for item in to_write]) + "\n") 
+    
     previous_t = t
 
-## #S# print count_remove_error
-## #S# print count_split_error
+# print count_remove_error
+# print count_split_error

@@ -30,6 +30,7 @@ for now, keeping only "deliberate _measure" - ignores some "endMeasure", and all
 note that currently "PlayPause" is a kind of test
 NEED TO FIX DATA GIVEN THAT SOME STUDENTS HAVE DIFFERENT IDS IN BOTH DATAFRAMES. see load_data.ipynb
 somehow lost pauses
+keep track of exceptions. ex: Test+other can be a lot of things
 
 ----
 Parser/files from C:\Users\Sarah\Google Drive\Sarah and Ido Folder\Other folders (less used)\Support in PhET Sims\log files\sophistication
