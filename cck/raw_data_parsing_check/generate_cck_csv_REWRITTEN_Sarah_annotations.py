@@ -61,7 +61,7 @@ def find_a_current_component(line):
     if "voltmeter" in line:
         r = voltmeter_regex.search(line)
         try:
-            component = r.group(0).replace("branch: ","")
+            component = r.group(0).split(': ')[1]
             return component
         except:
             return None
@@ -80,7 +80,8 @@ def count_loops(G):
             count += 1
     return count
 
-
+DEFAULT_RESISTOR_VALUE = 10.0
+resistor_regex = re.compile("value = [0-9]{0,3}\.[0-9]{1,2}")
 
 def update_graph(G,resistorValues,index,line,user,activity,count_remove_error,count_split_error):
     split_line = line.split(',')
@@ -90,7 +91,19 @@ def update_graph(G,resistorValues,index,line,user,activity,count_remove_error,co
         G.add_node(addedComponent, color=colors[type_component])
         # print index, 'Added:', addedComponent
         if 'resistor' in addedComponent:
-            resistorValues[addedComponent] = 10 #need to get value here
+            resistorValues[addedComponent] = DEFAULT_RESISTOR_VALUE #= 10.0
+    elif "changeResistance" in line:
+        r = resistor_regex.search(line)
+        try:
+            newvalue = float(r.group(0).replace("value = ",""))
+            print "got resistor value", newvalue
+        except:
+            print "Couldn't parse resistor value"
+            sys.exit()
+        changedResistor = find_a_current_component(line)
+        resistorValues[changedResistor] = newvalue
+        print line
+        print changedResistor, newvalue
     elif "removedComponent" in line:
         removedComponent=split_line[2][2:-1]
         try:
@@ -315,8 +328,8 @@ for index, line in enumerate(lines):
         resistorValues = {}
         continue
 
-    # if user != '94792123':
-    #     continue
+    if user != '94792123':
+        continue
     if activity != 'a2':
         continue
     split_line = line.split(",")
@@ -497,8 +510,10 @@ for index, line in enumerate(lines):
         to_write += ['N', current_is_circuit, current_loop_count, current_component_count, current_battery_count, current_circuitSwitch_count, current_grabBagResistor_count, current_lightBulb_count, current_resistor_count, current_seriesAmmeter_count]
         #S# print line
         #S# print "WRITING", to_write,'\n'
+        #S# print resistorValues
         f_out_actions_withpause.write(",".join([str(item) for item in to_write]) + "\n")
         # f_out_actions_nopause.write(",".join([str(item) for item in to_write]) + "\n") 
+
     
     previous_t = t
 
