@@ -82,13 +82,15 @@ def count_loops(G):
 
 
 
-def update_graph(G,index,line,user,activity,count_remove_error,count_split_error):
+def update_graph(G,resistorValues,index,line,user,activity,count_remove_error,count_split_error):
     split_line = line.split(',')
     if "addedComponent" in line:
         addedComponent=split_line[2][2:-1]
         type_component=split_line[2][2:-1].split(".")[0]
         G.add_node(addedComponent, color=colors[type_component])
         # print index, 'Added:', addedComponent
+        if 'resistor' in addedComponent:
+            resistorValues[addedComponent] = 10 #need to get value here
     elif "removedComponent" in line:
         removedComponent=split_line[2][2:-1]
         try:
@@ -104,7 +106,7 @@ def update_graph(G,index,line,user,activity,count_remove_error,count_split_error
     elif "junctionFormed" in line:
         num_components = line.count("component =")
         if num_components == 0 or num_components == 1:
-            return G,"continue",0,0
+            return G,resistorValues,"continue",0,0
         elif num_components == 2:
             component1 = split_line[5].replace("component = ",'').replace(".endJunction", '').replace(".startJunction", '')[2:-1]
             temp_component2 = split_line[6].replace("component = ",'').split(".")
@@ -206,7 +208,7 @@ def update_graph(G,index,line,user,activity,count_remove_error,count_split_error
         num_components = line.count("component =")
         try:
             if num_components == 0 or num_components == 1:
-                return G,"continue",0,0
+                return G,resistorValues,"continue",0,0
             elif num_components == 2:
                 component1 = split_line[5].replace("component = ",'').replace(".endJunction", '').replace(".startJunction", '')[2:-1]
                 temp_component2 = split_line[6].replace("component = ",'').split(".")
@@ -280,7 +282,7 @@ def update_graph(G,index,line,user,activity,count_remove_error,count_split_error
             print line
             # count_split_error += 1
             pass
-    return G,'',count_remove_error,count_split_error
+    return G,resistorValues,'',count_remove_error,count_split_error
 
     #if "10009106" in user:
     #A = nx.to_agraph(G)
@@ -310,6 +312,7 @@ for index, line in enumerate(lines):
         activity = log_file.split("_")[1][:2]
         new_user_line = index
         G=nx.Graph()
+        resistorValues = {}
         continue
 
     # if user != '94792123':
@@ -332,7 +335,7 @@ for index, line in enumerate(lines):
     if "Test,startMeasure,seriesAmmeter" in line: #for series ammeter
         component = line.split("\\n")[0].split(",")[5].replace("component = ",'').replace(".endJunction", '').replace(".startJunction", '').replace("'", "").replace(" ", "")
 
-    G,message,count_remove_error,count_split_error = update_graph(G,index,line,user,activity,count_remove_error,count_split_error)
+    G,resistorValues, message,count_remove_error,count_split_error = update_graph(G,resistorValues,index,line,user,activity,count_remove_error,count_split_error)
     if message == "continue":
         continue
     try:
@@ -398,6 +401,7 @@ for index, line in enumerate(lines):
     current_grabBagResistor_count = 0
     current_seriesAmmeter_count = 0
     current_loop_count = 0
+    diff_values = 0
 
     for graph in subgraphs:
         #Add up all elements in ALL CIRCUITS, closed or not, in the sim.
@@ -450,6 +454,7 @@ for index, line in enumerate(lines):
 
                 if "wire" not in component_item:
                     current_component_count += 1
+                
 
     if stuff_to_write:
 
