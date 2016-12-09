@@ -36,7 +36,7 @@ f_out_actions_withpause = open("phet_cck_user_actions+sophistication_WITHPAUSE_m
 
 header = ["Activity", "student", "Time Stamp", "Family", "Action", "Component", "Outcome"]
 header += ["#circuits","#circuits_w_battery", "#loops", "#components","#battery", "#circuitSwitch", "#grabBagResistor", "#lightBulb", "#resistor", "#seriesAmmeter"]
-header += ["current_is_circuit","current_#loops", "current_#components", "current_#battery", "current_#circuitSwitch", "current_#grabBagResistor", "current_#lightBulb", "current_#resistor", "current_#seriesAmmeter"]
+header += ["current_is_circuit","current_#loops", "current_#components", "current_#battery", "current_#circuitSwitch", "current_#grabBagResistor", "current_#lightBulb", "current_#resistor", "current_#seriesAmmeter", "non_default_resistor_values"]
 
 f_out_actions_withpause.write(",".join(header) + "\n")
 # f_out_actions_nopause.write(",".join(header) + "\n")
@@ -96,14 +96,11 @@ def update_graph(G,resistorValues,index,line,user,activity,count_remove_error,co
         r = resistor_regex.search(line)
         try:
             newvalue = float(r.group(0).replace("value = ",""))
-            print "got resistor value", newvalue
         except:
             print "Couldn't parse resistor value"
             sys.exit()
         changedResistor = find_a_current_component(line)
         resistorValues[changedResistor] = newvalue
-        print line
-        print changedResistor, newvalue
     elif "removedComponent" in line:
         removedComponent=split_line[2][2:-1]
         try:
@@ -328,8 +325,8 @@ for index, line in enumerate(lines):
         resistorValues = {}
         continue
 
-    if user != '94792123':
-        continue
+    # if user != '94792123':
+    #     continue
     if activity != 'a2':
         continue
     split_line = line.split(",")
@@ -462,6 +459,8 @@ for index, line in enumerate(lines):
                     current_grabBagResistor_count += 1
                 elif "resistor" in component_item:
                     current_resistor_count += 1
+                    if resistorValues[component_item] != DEFAULT_RESISTOR_VALUE:
+                        diff_values = 1
                 elif "seriesAmmeter" in component_item:
                     current_seriesAmmeter_count += 1
 
@@ -474,32 +473,43 @@ for index, line in enumerate(lines):
         #Now that we have all the information, we can make all the action family changes we want. Yahoo!
         # do nothing to Reset, Interface, Pause actions
         if family in ['Reset','Organize','Build','Extra','Revise']:
-            if outcome == 'reading_updated' or current_seriesAmmeter_count >1:
-                family = 'ConstructwithFeedback' #check that this is the right way to do it
-            elif outcome == 'fire_started':
-                family = 'ConstructwithFire' #check that this is the right way to do it
-            else:
-                family = 'Construct' # we can split Construct with feedback later
+            family = 'Construct'
+            # if outcome == 'reading_updated' or current_seriesAmmeter_count >1:
+            #     family = 'ConstructwithFeedback' #check that this is the right way to do it
+            # elif outcome == 'fire_started':
+            #     family = 'ConstructwithFire' #check that this is the right way to do it
+            # else:
+            #     family = 'Construct'
 
         #check what's up with current circuit to qualify the testing action
         if family == 'Test':
-            if current_grabBagResistor_count > 0: #some unproductive behavior
-                family = 'Test_other'
-            elif  current_is_circuit == 0:
-                family = 'Test_other'
-            elif current_lightBulb_count > 0: #productive in activity 1, wrong focus for activity 2
-                family = 'Test_lightbulb'
-            elif current_battery_count == 1: #we have simple circuit ;)
-                if current_loop_count == 1 and current_resistor_count == 1: #basic circuit!
-                    family = 'Test_basic' + '_' + component
-                elif current_loop_count == 1 and current_resistor_count == 2:
-                    family = 'Test_series'  + '_' + component
-                elif current_loop_count == 2 and current_resistor_count == 2:
-                    family = 'Test_parallel' + '_' + component
-                else: 
-                    family = 'Test_complex' + '_' + component
+            if diff_values == 1:
+                default_resistors = "default"
             else: 
-                family = 'Test_complex' + '_' + component
+                default_resistors = "not"
+
+            if current_loop_count < 1:
+                #If they aren't testing on a closed loop then they are probably
+                # simply moving the probes in a way to outputs a "Test" action - we ignore
+                continue
+            elif current_grabBagResistor_count > 0: #some unproductive behavior
+                family =  '_'.join(['Test_other', default_resistors])
+            elif  current_is_circuit == 0: 
+                #it's a loop but not a circuit, ie has no battery
+                family = '_'.join(['Test_other', default_resistors])
+            elif current_lightBulb_count > 0: 
+                #productive in activity 1, wrong focus for activity 2
+                family = '_'.join(['Test_other', default_resistors])
+            elif current_battery_count == 1: 
+                #we have a simple circuit ;)
+                if current_loop_count == 1 and current_resistor_count == 1: #basic circuit!
+                    family = '_'.join(['Test_basic',default_resistors,component])
+                elif (current_loop_count == 1 or current_loop_count == 2) and current_resistor_count == 2:
+                    family = '_'.join(['Test_simple' ,default_resistors,component])
+                else: 
+                    family = '_'.join(['Test_complex',default_resistors])
+            else: 
+                family = '_'.join(['Test_complex',default_resistors])
 
         #We don't want all test actions, let's filter some out
         if action == "endMeasure" or (action == 'startMeasure' and outcome != 'deliberate_measure'):
@@ -507,10 +517,13 @@ for index, line in enumerate(lines):
 
         to_write = [activity, user, t, family, action, component, outcome]
         to_write += [circuit_w_battery_count, circuit_count, loop_count, component_count, battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count]
-        to_write += ['N', current_is_circuit, current_loop_count, current_component_count, current_battery_count, current_circuitSwitch_count, current_grabBagResistor_count, current_lightBulb_count, current_resistor_count, current_seriesAmmeter_count]
+        to_write += [current_is_circuit, current_loop_count, current_component_count, current_battery_count, current_circuitSwitch_count, current_grabBagResistor_count, current_lightBulb_count, current_resistor_count, current_seriesAmmeter_count, diff_values]
+        if len(to_write) != len(header):
+            print "Mismatch in number of columns. Please fix!"
+            print len(header), header
+            print len(to_write), to_write
         #S# print line
         #S# print "WRITING", to_write,'\n'
-        #S# print resistorValues
         f_out_actions_withpause.write(",".join([str(item) for item in to_write]) + "\n")
         # f_out_actions_nopause.write(",".join([str(item) for item in to_write]) + "\n") 
 

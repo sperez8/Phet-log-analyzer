@@ -1,31 +1,36 @@
-TODO
+TODO (maybe)
 --------
 parse short pauses - can be done in Jupyter
-sometimes remove component is an Organize action... WTF
+sometimes remove component is an Organize action... WTF? Maybe when time between actions is really short? Hmmm....
 there are 2 wires that are removed but never added... see below for details (in activity 2, there are a dozen in activity 1)
 
 take a closer look at ignored lines
+
+NEED TO FIX DATA GIVEN THAT SOME STUDENTS HAVE DIFFERENT IDS IN BOTH DATAFRAMES. see load_data.ipynb
+
+remove Test on 0 circuits
+----
+Notes on new categories
+-----------------------
+thoughts on logging different kinds of tests:
+
+	#what to do with circuit switch?
+	#checked loop counter: now dismisses short circuits
+	#do we care if series ammeter is in current circuit or not?
+
+for now, keeping only "deliberate _measure" - ignores some "endMeasure", and all startmeasures with no actual outcomes
+note that currently "PlayPause" is a kind of test
+
+keep track of exceptions. ex: Test+other can be a lot of things
+
+reset all: currently all removal actions are considered user actions but are ignored. considered as construct
 
 only paper clip and penny conduct and their resistance is zero or very low because fire starts
 dog, hand, pencil, eraser, and dollar bill don't
 need to track this? 
 
+Series ammeter counts as “Test” action when connected, afterwards it’s a construct with feedback
 
-(?s)startMeasure[a-zA-Z0-9,\[\]\'\s=:\\\.\-\>]+Build
-
-----
-thoughts on logging different kinds of tests:
-
-#what to do with circuit switch?
-#check loop counter
-#do we care if series ammeter is in current circuit or not?
-
-for now, keeping only "deliberate _measure" - ignores some "endMeasure", and all startmeasures with no actual outcomes
-note that currently "PlayPause" is a kind of test
-NEED TO FIX DATA GIVEN THAT SOME STUDENTS HAVE DIFFERENT IDS IN BOTH DATAFRAMES. see load_data.ipynb
-keep track of exceptions. ex: Test+other can be a lot of things
-
-reset all: currently all removal actions are considered user actions but are ignored. considered as construct
 ----
 Parser/files from C:\Users\Sarah\Google Drive\Sarah and Ido Folder\Other folders (less used)\Support in PhET Sims\log files\sophistication
 ----
