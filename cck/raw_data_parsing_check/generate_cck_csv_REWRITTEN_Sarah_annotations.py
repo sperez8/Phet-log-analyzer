@@ -1,5 +1,5 @@
 """
-This scripts was developed by Sarah Perez (sperez8) and 
+This script was developed by Sarah Perez (sperez8) and 
 works off of Lauren's parser which works off of parsed data developed by Samad
 created by Sarah, Nov 25th 2016
 """
@@ -29,17 +29,15 @@ import re
 """
 
 source = "parser_log_user_pause.txt"
-#source = "parsedData\\60076128_a1.txt"
 
 f_out_actions_withpause = open("phet_cck_user_actions+sophistication_WITHPAUSE_more_circuit_info.txt", 'w')
 # f_out_actions_nopause = open("phet_cck_user_actions+sophistication_NOPAUSE.csv", 'w')
 
-header = ["Activity", "student", "Time Stamp", "Family", "Action", "Component", "Outcome"]
+header = ["Activity", "student", "Time Stamp", "Family", "Family_tool", "Family_default", "Family_both", "Action", "Component", "Outcome"]
 header += ["#circuits","#circuits_w_battery", "#loops", "#components","#battery", "#circuitSwitch", "#grabBagResistor", "#lightBulb", "#resistor", "#seriesAmmeter"]
 header += ["current_is_circuit","current_#loops", "current_#components", "current_#battery", "current_#circuitSwitch", "current_#grabBagResistor", "current_#lightBulb", "current_#resistor", "current_#seriesAmmeter", "non_default_resistor_values"]
 
 f_out_actions_withpause.write(",".join(header) + "\n")
-# f_out_actions_nopause.write(",".join(header) + "\n")
 
 f_in = open(source, 'rU')
 
@@ -351,6 +349,9 @@ for index, line in enumerate(lines):
     try:
         outcome = line.split("->")[2].split(",")[0].strip()
         family = line.split("->")[2].split(",")[1].strip()
+        family_t = family 
+        family_d = family 
+        family_b = family
         action = line.split("->")[2].split(",")[2].strip()
         component=line.split("->")[2].split(",")[3].strip()
         stuff_to_write = True
@@ -365,6 +366,9 @@ for index, line in enumerate(lines):
             t = previous_t+1 #gets the previous time of a user action (not an ignore action)
             stuff_to_write = True
             family = "pause"
+            family_t = "pause" 
+            family_d = "pause" 
+            family_b = "pause"
             action = "pause"
             component="pause"
             outcome = "pause"
@@ -469,11 +473,18 @@ for index, line in enumerate(lines):
                 
 
     if stuff_to_write:
+        family_s = family
+        family_t = family
+        family_d = family
+        family_b = family
 
         #Now that we have all the information, we can make all the action family changes we want. Yahoo!
         # do nothing to Reset, Interface, Pause actions
         if family in ['Reset','Organize','Build','Extra','Revise']:
             family = 'Construct'
+            family_t = family
+            family_d = family
+            family_b = family
             # if outcome == 'reading_updated' or current_seriesAmmeter_count >1:
             #     family = 'ConstructwithFeedback' #check that this is the right way to do it
             # elif outcome == 'fire_started':
@@ -484,38 +495,66 @@ for index, line in enumerate(lines):
         #check what's up with current circuit to qualify the testing action
         if family == 'Test':
             if diff_values == 1:
-                default_resistors = "default"
-            else: 
                 default_resistors = "not"
+            else: 
+                default_resistors = "default"
 
             if current_loop_count < 1:
                 #If they aren't testing on a closed loop then they are probably
                 # simply moving the probes in a way to outputs a "Test" action - we ignore
                 continue
             elif current_grabBagResistor_count > 0: #some unproductive behavior
-                family =  '_'.join(['Test_other', default_resistors])
+                family = 'Test_other'
+                family_t = '_'.join(['Test_other',component])
+                family_d = '_'.join(['Test_other',default_resistors])
+                family_b = '_'.join(['Test_other',component,default_resistors])
             elif  current_is_circuit == 0: 
                 #it's a loop but not a circuit, ie has no battery
-                family = '_'.join(['Test_other', default_resistors])
+                family = 'Test_other'
+                family_t = '_'.join(['Test_other',component])
+                family_d = '_'.join(['Test_other',default_resistors])
+                family_b = '_'.join(['Test_other',component,default_resistors])
             elif current_lightBulb_count > 0: 
-                #productive in activity 1, wrong focus for activity 2
-                family = '_'.join(['Test_other', default_resistors])
+                if current_resistor_count == 0:
+                    #productive in activity 1, wrong focus for activity 2
+                    family = 'Test_other'
+                    family_t = '_'.join(['Test_other',component])
+                    family_d = '_'.join(['Test_other',default_resistors])
+                    family_b = '_'.join(['Test_other',component,default_resistors])
+                else:
+                    #so they have a circuit with a battery, at least one resistor and a lightbulb so we consider it complex
+                    family = 'Test_complex'
+                    family_t = '_'.join(['Test_complex',component])
+                    family_d = '_'.join(['Test_complex',default_resistors])
+                    family_b = '_'.join(['Test_complex',component,default_resistors])
             elif current_battery_count == 1: 
                 #we have a simple circuit ;)
                 if current_loop_count == 1 and current_resistor_count == 1: #basic circuit!
-                    family = '_'.join(['Test_basic',default_resistors,component])
+                    family = 'Test_basic'
+                    family_t = '_'.join(['Test_basic',component]) 
+                    family_d = '_'.join(['Test_basic',default_resistors]) 
+                    family_b = '_'.join(['Test_basic',component,default_resistors])
                 elif (current_loop_count == 1 or current_loop_count == 2) and current_resistor_count == 2:
-                    family = '_'.join(['Test_simple' ,default_resistors,component])
+                    family = 'Test_simple'
+                    family_t = '_'.join(['Test_simple',component]) 
+                    family_d = '_'.join(['Test_simple',default_resistors]) 
+                    family_b = '_'.join(['Test_simple',component,default_resistors])
                 else: 
-                    family = '_'.join(['Test_complex',default_resistors])
+                    family = 'Test_complex'
+                    family_t = '_'.join(['Test_complex',component]) 
+                    family_d = '_'.join(['Test_complex',default_resistors]) 
+                    family_b = '_'.join(['Test_complex',component,default_resistors])
             else: 
-                family = '_'.join(['Test_complex',default_resistors])
+                family = 'Test_complex'
+                family_t = '_'.join(['Test_complex',component]) 
+                family_d = '_'.join(['Test_complex',default_resistors]) 
+                family_b = '_'.join(['Test_complex',component,default_resistors])
 
         #We don't want all test actions, let's filter some out
         if action == "endMeasure" or (action == 'startMeasure' and outcome != 'deliberate_measure'):
             continue
 
-        to_write = [activity, user, t, family, action, component, outcome]
+        to_write = [activity, user, t, family, family_t, family_d, family_b, action, component, outcome]
         to_write += [circuit_w_battery_count, circuit_count, loop_count, component_count, battery_count, circuitSwitch_count, grabBagResistor_count, lightBulb_count, resistor_count, seriesAmmeter_count]
         to_write += [current_is_circuit, current_loop_count, current_component_count, current_battery_count, current_circuitSwitch_count, current_grabBagResistor_count, current_lightBulb_count, current_resistor_count, current_seriesAmmeter_count, diff_values]
         if len(to_write) != len(header):
@@ -525,7 +564,6 @@ for index, line in enumerate(lines):
         #S# print line
         #S# print "WRITING", to_write,'\n'
         f_out_actions_withpause.write(",".join([str(item) for item in to_write]) + "\n")
-        # f_out_actions_nopause.write(",".join([str(item) for item in to_write]) + "\n") 
 
     
     previous_t = t

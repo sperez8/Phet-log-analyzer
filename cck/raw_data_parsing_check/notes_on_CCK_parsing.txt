@@ -5,10 +5,6 @@ sometimes remove component is an Organize action... WTF? Maybe when time between
 there are 2 wires that are removed but never added... see below for details (in activity 2, there are a dozen in activity 1)
 
 take a closer look at ignored lines
-
-NEED TO FIX DATA GIVEN THAT SOME STUDENTS HAVE DIFFERENT IDS IN BOTH DATAFRAMES. see load_data.ipynb
-
-remove Test on 0 circuits
 ----
 Notes on new categories
 -----------------------
@@ -31,6 +27,7 @@ need to track this?
 
 Series ammeter counts as “Test” action when connected, afterwards it’s a construct with feedback
 
+removed Test on 0 circuits
 ----
 Parser/files from C:\Users\Sarah\Google Drive\Sarah and Ido Folder\Other folders (less used)\Support in PhET Sims\log files\sophistication
 ----

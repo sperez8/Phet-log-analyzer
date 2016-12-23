@@ -1,0 +1,20 @@
+Given our expert knowledge, we came up with the following categories
+so far, nothing different in terms of mean use of categories per student in different groups
+what about sequence?
+
+
+
+
+Test_basic_not_noncontactammeter                        
+Test_basic_not_voltmeter         
+Test_simple_not_voltmeter        
+Test_complex_default       
+Test_simple_not_noncontactammeter
+Test_other_default          
+Test_complex_not                 
+Test_basic_default_voltmeter     
+Test_other_not                   
+Test_basic_default_noncontactammeter
+Interface                        
+Test_simple_default_noncontactammeter
+Test_simple_default_voltmeter
