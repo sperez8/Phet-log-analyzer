@@ -173,14 +173,14 @@ def get_frequencies(blocks, shortest=3, longest=11):
             frequencies[student] += Counter(sequence[i:i+seq_length] for i in range(len(sequence)-seq_length-1))  # counts string matches for every string of the current length
     return frequencies
 
-def remove_rare_frequencies(frequencies, N=2):
+def remove_rare_frequencies(frequencies, N):
     new_frequencies = copy.copy(frequencies)
     for k in list(new_frequencies):
             if new_frequencies[k] < N:
                 del new_frequencies[k]
     return new_frequencies
 
-def remove_omni_frequencies(frequencies, N=96):
+def remove_omni_frequencies(frequencies, N):
     new_frequencies = copy.copy(frequencies)
     for k in list(new_frequencies):
             if new_frequencies[k] == N:
@@ -257,4 +257,6 @@ def difference(seqs1,seqs2,N=10):
     print "\nSequence: count = seq2 - seq1\n----------------------------"
     for seq,count in diff:
         print "{0}: \t {1} = {2} - {3} ".format(seq, count, seqs2[seq], seqs1[seq])
+
+
 
