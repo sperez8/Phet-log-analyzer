@@ -4,96 +4,9 @@ import numpy as np
 import pandas as pd
 import sys
 import re
+import math
 from functions import *
 from collections import Counter
-
-def plot_heat_map(data, ylabels, DisplayXProb = True, DisplayYProb = True, show_cbar=True):
-
-    ''' 
-    This function plots a heat map given a 2D numpy array.  The array elements relate 
-    to the amount of times a certain sequence of actions is used by students belonging to a 
-    certain group at a certain time segment of their activity.
-    
-    Arguments:
-    data: 2D numpy array (data.shape = n*m, where n is len(ylabels) and m is whatever time segment resolution used)
-    
-    ylabels: list of strings to label the y-axis of heat-map (i.e. the 2 student groups compared)
-    By default plot_heat_map will also display the probabilities used in entropy calc corresponding
-    to each row and column of data array (on the side of the plot opposite the x/ylabels).
-    i.e. probabilities that sequence is used by a certain group over all time 
-    and probabilities that sequence is used for a certain time segment over all groups 
-    
-    show_cbar: show colorbar to the left of plot
-    '''
-
-    fig, ax = plt.subplots()
-    heatmap = ax.pcolor(data, cmap=plt.cm.Blues, alpha=0.8)
-
-    # put the major ticks at the middle of each cell
-    ax.set_yticks(np.arange(data.shape[0]) + 0.5)
-    ax.set_xticks(np.arange(data.shape[1]) + 0.5)
-
-    # Set the labels
-    xlabels = map(str, np.arange(data.shape[1])+1) 
-    ax.set_xticklabels(xlabels, fontweight='bold')
-    ax.set_yticklabels(ylabels, fontweight='bold')
-
-    # Create new axes that will show probability that sequence is used by a certain group over all time 
-    total = np.sum(data).astype(float) #total number of students that used sequence
-    if DisplayXProb == True:
-        probx = np.sum(data, axis=0)/total
-        xlabels2 = list("%.2f" % px for px in probx)
-        ax2 = ax.twiny()
-        ax2.xaxis.tick_bottom()
-        ax2.invert_yaxis()
-        ax2.set_frame_on(False)
-        ax2.set_xlim(ax.get_xlim())
-        ax2.set_xticks(np.arange(data.shape[1]) + 0.5)
-        ax2.set_xticklabels(xlabels2)
-        ax2.tick_params(
-            axis='x',           # changes apply to both the x and y-axis
-            which='both',       # both major and minor ticks are affected
-            bottom='off',       # ticks along the those edges are off
-            top='off') 
-
-    # Create new axes that will show probability that sequence is used for a certain time segment over all groups 
-    if DisplayYProb == True:
-        proby = np.sum(data, axis=1)/total
-        ylabels3 = list("%.2f" % py for py in proby)
-        ax3 = ax.twinx()
-        ax3.set_frame_on(False)
-        ax3.set_ylim(ax.get_ylim())
-        ax3.set_yticks(np.arange(data.shape[0]) + 0.5)
-        ax3.set_yticklabels(ylabels3)	
-        ax3.tick_params(
-            axis='y',           # changes apply to both the x and y-axis
-            which='both',       # both major and minor ticks are affected
-            right='off',        # ticks along the those edges are off
-            left='off') 
-
-    # put time labels on top
-    ax.xaxis.tick_top()
-    # figure size 
-    fig.set_size_inches(8, 2)
-    # turn off the frame
-    ax.set_frame_on(False)
-    # rotate the xticks labels if needed
-    # plt.xticks(rotation=90)
-    # Turn off all the ticks
-    ax.tick_params(
-        axis='both',        # changes apply to both the x and y-axis
-        which='both',       # both major and minor ticks are affected
-        bottom='off',       # ticks along the those edges are off
-        right='off', 
-        left='off',
-        top='off') 
-    
-    if show_cbar == True: # Add colorbar
-        cbaxes = fig.add_axes([1, 0.1, 0.02, 0.8])  # [left, bottom, width, height]
-        cbar = fig.colorbar(heatmap, cax=cbaxes)
-        cbarticks = [np.amin(data),(np.amin(data)+np.amax(data))/2,np.amax(data)]
-        cbar.set_ticks(cbarticks)
-        cbar.set_ticklabels(map(str, cbarticks))
 
 def calc_entropy(data,axesnum=None):
     ''' 
@@ -110,10 +23,19 @@ def calc_entropy(data,axesnum=None):
     total = np.sum(data).astype(float)
     prob_0 = np.sum(data, axis=0)/total
     prob_1 = np.sum(data, axis=1)/total
+    
+    prob_0 = [d for d in prob_0 if d !=0] #ignore zero probabilities
+    prob_1 = [d for d in prob_1 if d !=0] #ignore zero probabilities
+    
+    entropy_0 = -np.sum( prob_0 * np.log2(prob_0))
+    entropy_1 = -np.sum( prob_1 * np.log2(prob_1))
 
-    entropy_0 = -np.sum( prob_0 * np.log(prob_0) / np.log(2) )
-    entropy_1 = -np.sum( prob_1 * np.log(prob_1) / np.log(2) )
-
+    if math.isnan(entropy_0):
+        raise Exception("Entropy of data by axis 0 is NaN.")
+        
+    if math.isnan(entropy_1):
+        raise Exception("Entropy of data by axis 1 is NaN.")
+        
     if axesnum == 0:
         return entropy_0
     elif axesnum == 1:
@@ -122,7 +44,6 @@ def calc_entropy(data,axesnum=None):
         return entropy_0 + entropy_1
     else:
         raise Exception("Invalid value for argument: axesnum can be 0,1 or None ")
-        
 
 converter =  {"Construct" : "C",
 "Interface" : "I",
