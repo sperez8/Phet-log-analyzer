@@ -50,39 +50,39 @@ converter =  {"Construct" : "C",
 "Pause" : "P",
 "Test_basic" : "Tb",
 "Test_basic_default" : "Tbd",
-"Test_basic_nonContactAmmeter" : "Tba",
-"Test_basic_nonContactAmmeter_default" : "Tbad",
-"Test_basic_nonContactAmmeter_not" : "Tban",
+"Test_basic_noncontactammeter" : "Tba",
+"Test_basic_noncontactammeter_default" : "Tbad",
+"Test_basic_noncontactammeter_not" : "Tban",
 "Test_basic_not" : "Tbn",
 "Test_basic_voltmeter" : "Tbv",
 "Test_basic_voltmeter_default" : "Tbvd",
 "Test_basic_voltmeter_not" : "Tbvn",
 "Test_complex" : "Tc",
 "Test_complex_default" : "Tcd",
-"Test_complex_nonContactAmmeter" : "Tca",
-"Test_complex_nonContactAmmeter_default" : "Tcad",
-"Test_complex_nonContactAmmeter_not" : "Tcan",
+"Test_complex_noncontactammeter" : "Tca",
+"Test_complex_noncontactammeter_default" : "Tcad",
+"Test_complex_noncontactammeter_not" : "Tcan",
 "Test_complex_not" : "Tcn",
-"Test_complex_seriesAmmeter" : "Tc",
-"Test_complex_seriesAmmeter_default" : "Tcd",
-"Test_complex_seriesAmmeter_not" : "Tcn",
+"Test_complex_seriesammeter" : "Tc",
+"Test_complex_seriesammeter_default" : "Tcd",
+"Test_complex_seriesammeter_not" : "Tcn",
 "Test_complex_voltmeter" : "Tcv",
 "Test_complex_voltmeter_default" : "Tcvd",
 "Test_complex_voltmeter_not" : "Tcvn",
 "Test_other" : "To",
 "Test_other_default" : "Tod",
-"Test_other_nonContactAmmeter" : "Toa",
-"Test_other_nonContactAmmeter_default" : "Toad",
-"Test_other_nonContactAmmeter_not" : "Toan",
+"Test_other_noncontactammeter" : "Toa",
+"Test_other_noncontactammeter_default" : "Toad",
+"Test_other_noncontactammeter_not" : "Toan",
 "Test_other_not" : "Ton",
 "Test_other_voltmeter_not" : "Tovn",
 "Test_other_voltmeter" : "Tov",
 "Test_other_voltmeter_default" : "Tovd",
 "Test_simple" : "Ts",
 "Test_simple_default" : "Tsd",
-"Test_simple_nonContactAmmeter" : "Tsa",
-"Test_simple_nonContactAmmeter_default" : "Tsad",
-"Test_simple_nonContactAmmeter_not" : "Tsan",
+"Test_simple_noncontactammeter" : "Tsa",
+"Test_simple_noncontactammeter_default" : "Tsad",
+"Test_simple_noncontactammeter_not" : "Tsan",
 "Test_simple_not" : "Tsn",
 "Test_simple_voltmeter" : "Tsv",
 "Test_simple_voltmeter_default" : "Tsvd",
@@ -90,16 +90,16 @@ converter =  {"Construct" : "C",
     }
 
 
-
-def get_blocks_withTime_new(df, students, as_list = True, ignore = [], start = False):
+def get_blocks_withTime_new(df, students, category_column, as_list = True, ignore = [], start = False):
     '''gets blocks of sequences for a list of students
-    From the column "Family" in the dataframe, each action family is converted to a string in
+    From the column "Family", "Family_tool", "Family_default" or "Family_both" in the dataframe, each action family is converted to a string in
     the format with at least one capitalized character: 'C', or 'Cccc'.
     To facilitate sequence mining. The sequence is exported as a list:
     ['Ta', 'C','Tb',.....].
     
     Arguments:
         students: list with student ids to generate blocks for
+        category_column: the column of the dataframe from which cetagories are taken from
         as_list: by default true. returns sequences as a list of strings instead of a single string
         ignore: list of actions to ignore
         start: if we want a start action to find the first sequence of action of every student   
@@ -118,7 +118,7 @@ def get_blocks_withTime_new(df, students, as_list = True, ignore = [], start = F
 
     time_coords = {student:[] for student in students}
     for student in students:
-        sequence =  list(df[df['student']==student]['Family'])
+        sequence =  list(df[df['student']==student][category_column])
         time_stamps =  list(df[df['student']==student]['Time Stamp'])
         time_stamps = (time_stamps - min(time_stamps))/1000.  #human readable seconds
         time_coord=[]  #coordinate array for broken bar plot, takes array of (start time, duration)
@@ -241,13 +241,13 @@ def count_use_per_group_per_bin(allfrequencies, frequencies_by_bin, B, attribute
                     counts[seq][group][b] += 1
     return counts
 
-def get_sequence_use_by_timebin(df,students, B, attribute, level1, level2, shortest_seq_length, longest_seq_length, N):
+def get_sequence_use_by_timebin(df, students, category_column, B, attribute, level1, level2, shortest_seq_length, longest_seq_length, N):
     '''
     '''
     
     print """Getting sequence use over {3} time bins for {0} students split by {1}. 
             Keeping only sequences used once by at least {2} students.""".format(len(students),attribute,N,B)
-    blocks, time_coords =  get_blocks_withTime_new(df,students,start=False)
+    blocks, time_coords =  get_blocks_withTime_new(df, students, category_column, start=False)
     frequencies = get_frequencies(blocks, shortest = shortest_seq_length, longest = longest_seq_length)
     frequencies_by_bin = get_frequencies_by_bin(blocks, students, time_coords, B, shortest = shortest_seq_length, longest = longest_seq_length)
     counts_frequencies = Counter({f:sum([ 1 if f in freq else 0 for freq in frequencies.values()]) for f in list(sum(frequencies.values(),Counter()))})
