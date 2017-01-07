@@ -90,6 +90,21 @@ converter =  {"Construct" : "C",
     }
 
 
+
+def get_sequence_use_by_timebin(df, students, category_column, B, attribute, level1, level2, shortest_seq_length, longest_seq_length, N):
+    '''
+    '''
+    
+    print """Getting sequence use over {3} time bins for {0} students split by {1}. 
+            Keeping only sequences used once by at least {2} students.""".format(len(students),attribute,N,B)
+    blocks, time_coords =  get_blocks_withTime_new(df, students, category_column, start=False, ignore = ['I'])
+    frequencies = get_frequencies(blocks, shortest = shortest_seq_length, longest = longest_seq_length)
+    frequencies_by_bin = get_frequencies_by_bin(blocks, students, time_coords, B, shortest = shortest_seq_length, longest = longest_seq_length)
+    counts_frequencies = Counter({f:sum([ 1 if f in freq else 0 for freq in frequencies.values()]) for f in list(sum(frequencies.values(),Counter()))})
+    cleaned_frequencies = remove_rare_frequencies(counts_frequencies, N)
+    counts = count_use_per_group_per_bin(cleaned_frequencies, frequencies_by_bin, B, attribute, level1, level2)
+    return counts
+
 def get_blocks_withTime_new(df, students, category_column, as_list = True, ignore = [], start = False):
     '''gets blocks of sequences for a list of students
     From the column "Family", "Family_tool", "Family_default" or "Family_both" in the dataframe, each action family is converted to a string in
@@ -108,7 +123,7 @@ def get_blocks_withTime_new(df, students, category_column, as_list = True, ignor
      blocks = {student_1_id: ['Ta', 'C','Tb',.....], student_2_id: [...]}    
      time_coords = {student_1_id: [(start_of_action_1, duration), (start_of_action_2, duration),...], student_2_id: [...]}    
     '''
-    def convert(action,ignore):
+    def convert(action):
         return converter[action]
     
     if start:
@@ -123,11 +138,11 @@ def get_blocks_withTime_new(df, students, category_column, as_list = True, ignor
         time_stamps = (time_stamps - min(time_stamps))/1000.  #human readable seconds
         time_coord=[]  #coordinate array for broken bar plot, takes array of (start time, duration)
         p = re.compile(r'([A-Z][a-z]{0,3})\1*')  #this regex finds all action blocks of length 1+
-        #print ''.join([convert(action,ignore) for action in sequence])
+        #print ''.join([convert(action) for action in sequence])
         #print time_stamps
         #use finditer to return a sequence of matches as an iterator
         previous_start = 0
-        for match in p.finditer(''.join([convert(action,ignore) for action in sequence])):
+        for match in p.finditer(''.join([convert(action) for action in sequence])):
             ind = match.span()  #this gives start and end of matched block
             #for matches of action denoted by more than 1 letter, need to correct the span
             ind = (previous_start, previous_start + (ind[1]-ind[0])/len(set(match.group())))
@@ -142,7 +157,8 @@ def get_blocks_withTime_new(df, students, category_column, as_list = True, ignor
             time_coord.append((time_stamps[ind[0]],duration))
             #print match.group(), match.span(), duration
         #actual regex that converts block of similar actions to just one action
-        block = re.sub(r'([A-Z][a-z]{0,3})\1+', r'\1',''.join([convert(action,ignore) for action in sequence]))
+        block = re.sub(r'([A-Z][a-z]{0,3})\1+', r'\1',''.join([convert(action) for action in sequence]))
+        block = [b for b in block if b not in ignore]
         if as_list:            
             list_block = block[0] + ''.join([' ' + c if c.isupper() else c for c in block[1:]])
             blocks[student] = list_block.split(' ')

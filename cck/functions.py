@@ -27,13 +27,24 @@ def label_learning (row,column):
     if row[column] >= median_learning: return 'high'
     else: return 'low'
 
+
+def label_learning (median,row,column):
+    if row[column] >= median: return 'high'
+    else: return 'low'
+
+median_pre = np.median(df_scores['pre'])
+df_scores['incoming_knowledge'] = df_scores.apply (lambda row: label_learning (median_pre,row,"pre"),axis=1)
+
+median_T0_PoCC = np.median(df_scores['T0_PoCC'])
+df_scores['incoming_attitude'] = df_scores.apply (lambda row: label_learning (median_T0_PoCC,row,"T0_PoCC"),axis=1)
+
 df_scores['learning1score'] = (df_scores["post t1"] - df_scores["pre"])/(df_scores["pre"])
-median_learning = np.median(df_scores['learning1score'])
-df_scores['learning1'] = df_scores.apply (lambda row: label_learning (row,"learning1score"),axis=1)
+median_learning1 = np.median(df_scores['learning1score'])
+df_scores['learning1'] = df_scores.apply (lambda row: label_learning (median_learning1,row,"learning1score"),axis=1)
 
 df_scores['learning2score'] = (df_scores["post t2"] - df_scores["pre"])/(df_scores["pre"])
-median_learning = np.median(df_scores['learning2score'])
-df_scores['learning2'] = df_scores.apply (lambda row: label_learning (row,"learning2score"),axis=1)
+median_learning2 = np.median(df_scores['learning2score'])
+df_scores['learning2'] = df_scores.apply (lambda row: label_learning (median_learning2,row,"learning2score"),axis=1)
 
 
 #get sequence by student
