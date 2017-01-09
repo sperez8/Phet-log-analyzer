@@ -23,27 +23,148 @@ def calc_entropy(data,axesnum=None):
     total = np.sum(data).astype(float)
     prob_0 = np.sum(data, axis=0)/total
     prob_1 = np.sum(data, axis=1)/total
+    prob_both = data.flatten()/total
     
     prob_0 = [d for d in prob_0 if d !=0] #ignore zero probabilities
     prob_1 = [d for d in prob_1 if d !=0] #ignore zero probabilities
+    prob_both = [d for d in prob_both if d !=0] #ignore zero probabilities
     
     entropy_0 = -np.sum( prob_0 * np.log2(prob_0))
     entropy_1 = -np.sum( prob_1 * np.log2(prob_1))
+    entropy_both = -np.sum( prob_both * np.log2(prob_both)) 
 
     if math.isnan(entropy_0):
         raise Exception("Entropy of data by axis 0 is NaN.")
         
     if math.isnan(entropy_1):
         raise Exception("Entropy of data by axis 1 is NaN.")
+
+    if math.isnan(entropy_both):
+        raise Exception("Entropy of data by both axes is NaN.")
         
     if axesnum == 0:
         return entropy_0
     elif axesnum == 1:
         return entropy_1
     elif axesnum == None:
-        return entropy_0 + entropy_1
+        return entropy_both
+        raise Exception("Invalid value for argument: axesnum can be 0,1 or None ")
+
+def calc_infogain(data,B,axesnum=None):
+    ''' 
+    This function calculates the information gain of 2D numpy array. By default, it does not ignore one of the axis.
+    
+    Arguments:
+    data: 2D numpy array
+    axesnum: By default, will calculate cumulative information gain over both axes.  
+    If 0, then information gain along axis=0 of data is calculated, i.e. for arrangement over time segments over all groups
+    If 1, then information gain for arrangement over groups over all time is calculated.
+    '''
+    max_order_data = np.array([[1.0 for i in range(B)] for j in range(2)])
+    entropy = calc_entropy(data,axesnum)
+    if axesnum == 0 or axesnum == 1 or axesnum == None:
+        max_entropy = calc_entropy(max_order_data,axesnum)
+        infogain = max_entropy - entropy
+        if infogain >= 0:
+            return infogain
+        else:
+            raise Exception("Negative infogain.")
     else:
         raise Exception("Invalid value for argument: axesnum can be 0,1 or None ")
+
+def plot_heat_map(data, title, ylabels, DisplayXProb = True, DisplayYProb = True, show_cbar=True):
+
+    ''' 
+    This function plots a heat map given a 2D numpy array.  The array elements relate 
+    to the amount of times a certain sequence of actions is used by students belonging to a 
+    certain group at a certain time segment of their activity.
+    
+    Arguments:
+    data: 2D numpy array (data.shape = n*m, where n is len(ylabels) and m is whatever time segment resolution used)
+    
+    ylabels: list of strings to label the y-axis of heat-map (i.e. the 2 student groups compared)
+    By default plot_heat_map will also display the probabilities used in entropy calc corresponding
+    to each row and column of data array (on the side of the plot opposite the x/ylabels).
+    i.e. probabilities that sequence is used by a certain group over all time 
+    and probabilities that sequence is used for a certain time segment over all groups 
+    
+    show_cbar: show colorbar to the left of plot
+    '''
+
+    fig, ax = plt.subplots()
+    heatmap = ax.pcolor(data, cmap=plt.cm.Blues, alpha=0.8)
+
+    #set title
+    ax.set_title(title,y=1,loc='left',fontsize=14)
+
+    # put the major ticks at the middle of each cell
+    ax.set_yticks(np.arange(data.shape[0]) + 0.5)
+    ax.set_xticks(np.arange(data.shape[1]) + 0.5)
+
+    # Set the labels
+    xlabels = map(str, np.arange(data.shape[1])+1) 
+#     ax.set_xticklabels(xlabels, fontweight='bold')
+    ax.set_xticklabels([],)
+    ax.set_yticklabels(ylabels, fontweight='bold')
+
+    # Create new axes that will show probability that sequence is used by a certain group over all time 
+    total = np.sum(data).astype(float) #total number of students that used sequence
+    if DisplayXProb == True:
+        probx = np.sum(data, axis=0)/total
+        xlabels2 = list("%.2f" % px for px in probx)
+        ax2 = ax.twiny()
+        ax2.xaxis.tick_bottom()
+        ax2.invert_yaxis()
+        ax2.set_frame_on(False)
+        ax2.set_xlim(ax.get_xlim())
+        ax2.set_xticks(np.arange(data.shape[1]) + 0.5)
+        ax2.set_xticklabels(xlabels2)
+        ax2.tick_params(
+            axis='x',           # changes apply to both the x and y-axis
+            which='both',       # both major and minor ticks are affected
+            bottom='off',       # ticks along the those edges are off
+            top='off') 
+
+    # Create new axes that will show probability that sequence is used for a certain time segment over all groups 
+    if DisplayYProb == True:
+        proby = np.sum(data, axis=1)/total
+        ylabels3 = list("%.2f" % py for py in proby)
+        ax3 = ax.twinx()
+        ax3.set_frame_on(False)
+        ax3.set_ylim(ax.get_ylim())
+        ax3.set_yticks(np.arange(data.shape[0]) + 0.5)
+        ax3.set_yticklabels(ylabels3)	
+        ax3.tick_params(
+            axis='y',           # changes apply to both the x and y-axis
+            which='both',       # both major and minor ticks are affected
+            right='off',        # ticks along the those edges are off
+            left='off') 
+
+    # put time labels on top
+    ax.xaxis.tick_top()
+    # figure size 
+    fig.set_size_inches(10, 4)
+    # turn off the frame
+    ax.set_frame_on(False)
+    # rotate the xticks labels if needed
+    # plt.xticks(rotation=90)
+    # Turn off all the ticks
+    ax.tick_params(
+        axis='both',        # changes apply to both the x and y-axis
+        which='both',       # both major and minor ticks are affected
+        bottom='off',       # ticks along the those edges are off
+        right='off', 
+        left='off',
+        top='off') 
+    
+    if show_cbar == True: # Add colorbar
+        cbaxes = fig.add_axes([0.95, 0.1, 0.02, 0.8])  # [left, bottom, width, height]
+        cbar = fig.colorbar(heatmap, cax=cbaxes)
+        cbarticks = [np.amin(data),(np.amin(data)+np.amax(data))/2,np.amax(data)]
+        cbar.set_ticks(cbarticks)
+        cbar.set_ticklabels(map(str, cbarticks))
+    
+    return fig
 
 converter =  {"Construct" : "C",
 "Interface" : "I",
@@ -88,22 +209,6 @@ converter =  {"Construct" : "C",
 "Test_simple_voltmeter_default" : "Tsvd",
 "Test_simple_voltmeter_not" : "Tsvn",
     }
-
-
-
-def get_sequence_use_by_timebin(df, students, category_column, B, attribute, level1, level2, shortest_seq_length, longest_seq_length, N):
-    '''
-    '''
-    
-    print """Getting sequence use over {3} time bins for {0} students split by {1}. 
-            Keeping only sequences used once by at least {2} students.""".format(len(students),attribute,N,B)
-    blocks, time_coords =  get_blocks_withTime_new(df, students, category_column, start=False, ignore = ['I'])
-    frequencies = get_frequencies(blocks, shortest = shortest_seq_length, longest = longest_seq_length)
-    frequencies_by_bin = get_frequencies_by_bin(blocks, students, time_coords, B, shortest = shortest_seq_length, longest = longest_seq_length)
-    counts_frequencies = Counter({f:sum([ 1 if f in freq else 0 for freq in frequencies.values()]) for f in list(sum(frequencies.values(),Counter()))})
-    cleaned_frequencies = remove_rare_frequencies(counts_frequencies, N)
-    counts = count_use_per_group_per_bin(cleaned_frequencies, frequencies_by_bin, B, attribute, level1, level2)
-    return counts
 
 def get_blocks_withTime_new(df, students, category_column, as_list = True, ignore = [], start = False):
     '''gets blocks of sequences for a list of students
@@ -263,7 +368,7 @@ def get_sequence_use_by_timebin(df, students, category_column, B, attribute, lev
     
     print """Getting sequence use over {3} time bins for {0} students split by {1}. 
             Keeping only sequences used once by at least {2} students.""".format(len(students),attribute,N,B)
-    blocks, time_coords =  get_blocks_withTime_new(df, students, category_column, start=False)
+    blocks, time_coords =  get_blocks_withTime_new(df, students, category_column, start=False, ignore = ['I'])
     frequencies = get_frequencies(blocks, shortest = shortest_seq_length, longest = longest_seq_length)
     frequencies_by_bin = get_frequencies_by_bin(blocks, students, time_coords, B, shortest = shortest_seq_length, longest = longest_seq_length)
     counts_frequencies = Counter({f:sum([ 1 if f in freq else 0 for freq in frequencies.values()]) for f in list(sum(frequencies.values(),Counter()))})
