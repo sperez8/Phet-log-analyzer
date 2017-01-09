@@ -262,8 +262,7 @@ def get_blocks_withTime_new(df, students, category_column, as_list = True, ignor
             time_coord.append((time_stamps[ind[0]],duration))
             #print match.group(), match.span(), duration
         #actual regex that converts block of similar actions to just one action
-        block = re.sub(r'([A-Z][a-z]{0,3})\1+', r'\1',''.join([convert(action) for action in sequence]))
-        block = [b for b in block if b not in ignore]
+        block = re.sub(r'([A-Z][a-z]{0,3})\1+', r'\1',''.join([convert(action) for action in sequence if convert(action) not in ignore]))
         if as_list:            
             list_block = block[0] + ''.join([' ' + c if c.isupper() else c for c in block[1:]])
             blocks[student] = list_block.split(' ')

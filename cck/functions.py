@@ -23,10 +23,6 @@ df["student"] = df["student"].astype('category')
 df_scores["student"] = df_scores["student"].astype('category')
 df["Family"]=df["Family"].str.capitalize()
 
-def label_learning (row,column):
-    if row[column] >= median_learning: return 'high'
-    else: return 'low'
-
 
 def label_learning (median,row,column):
     if row[column] >= median: return 'high'
