@@ -246,12 +246,13 @@ def get_blocks_withTime_new(df, students, category_column, as_list = True, ignor
         #print ''.join([convert(action) for action in sequence])
         #print time_stamps
         #use finditer to return a sequence of matches as an iterator
-        previous_start = 0
-        for match in p.finditer(''.join([convert(action) for action in sequence])):
+        previous_end = 0
+        for match in p.finditer(''.join([convert(action) for action in sequence if convert(action) not in ignore])):
             ind = match.span()  #this gives start and end of matched block
             #for matches of action denoted by more than 1 letter, need to correct the span
-            ind = (previous_start, previous_start + (ind[1]-ind[0])/len(set(match.group())))
-            previous_start = ind[1]
+            ind = (previous_end, previous_end + (ind[1]-ind[0])/len(set(match.group())))
+            #save the end time of one action as the start action of the next
+            previous_end = ind[1]
             #print match.group(), ind
             if ind[1] >= len(time_stamps):  #block location offset from real index by 1
                 duration = time_stamps[ind[1]-1] - time_stamps[ind[0]]  #time duration of block
@@ -335,8 +336,8 @@ def get_frequencies_by_bin(blocks, students, time_coords, B,shortest=3, longest=
         for seq_length in range(shortest, longest+1):  # loops through different possible sequence lengths
             for j,(start_action,end_action) in enumerate(action_bins[student]): 
                 #since we want to find sequence THAT START in bin, we remove the parts of the sequence that fall in previous bins
-                portion_of_sequence = sequence[start_action:end_action]
-                frequencies[student][j] += Counter(''.join(portion_of_sequence[i:i+seq_length]) for i in range(len(portion_of_sequence)-seq_length+1))  # counts string matches for every string of the current length
+                portion_of_sequence = sequence[start_action:end_action+seq_length-1]
+                frequencies[student][j] += Counter(''.join(portion_of_sequence[i:i+seq_length]) for i in range(end_action-start_action))  # counts string matches for every string of the current length
     return frequencies
 
 def count_use_per_group_per_bin(allfrequencies, frequencies_by_bin, B, attribute, level1, level2):
