@@ -362,16 +362,27 @@ def count_use_per_group_per_bin(allfrequencies, frequencies_by_bin, B, attribute
                     counts[seq][group][b] += 1
     return counts
 
-def get_sequence_use_by_timebin(df, students, category_column, B, attribute, level1, level2, shortest_seq_length, longest_seq_length, N):
+def get_sequence_use_by_timebin(df, students, category_column, B, attribute, level1, level2, shortest_seq_length, longest_seq_length, cut_off):
     '''
     '''
     
     print """Getting sequence use over {3} time bins for {0} students split by {1}. 
-            Keeping only sequences used once by at least {2} students.""".format(len(students),attribute,N,B)
+    Keeping only sequences used once by at least {2}% of students 
+    in each group and overall.""".format(len(students),attribute,int(cut_off*100),B)
+
+    #get all seqs per student per time bin
     blocks, time_coords =  get_blocks_withTime_new(df, students, category_column, start=False, ignore = ['I'])
-    frequencies = get_frequencies(blocks, shortest = shortest_seq_length, longest = longest_seq_length)
     frequencies_by_bin = get_frequencies_by_bin(blocks, students, time_coords, B, shortest = shortest_seq_length, longest = longest_seq_length)
-    counts_frequencies = Counter({f:sum([ 1 if f in freq else 0 for freq in frequencies.values()]) for f in list(sum(frequencies.values(),Counter()))})
-    cleaned_frequencies = remove_rare_frequencies(counts_frequencies, N)
+
+    cleaned_frequencies = Counter()
+    for attribute,level in [(attribute,level1),(attribute,level2),(None,None)]:
+        students = get_students(attribute,level)
+        N = int(cut_off*len(students))
+        blocks, time_coords =  get_blocks_withTime_new(df, students, category_column, start=False, ignore = ['I'])
+        #find all sequences to consider for analysis, given that they have been used by enough students
+        frequencies = get_frequencies(blocks, shortest = shortest_seq_length, longest = longest_seq_length)
+        counts_frequencies = Counter({f:sum([ 1 if f in freq else 0 for freq in frequencies.values()]) for f in list(sum(frequencies.values(),Counter()))})
+        cleaned_frequencies += remove_rare_frequencies(counts_frequencies, N)
+    
     counts = count_use_per_group_per_bin(cleaned_frequencies, frequencies_by_bin, B, attribute, level1, level2)
     return counts
