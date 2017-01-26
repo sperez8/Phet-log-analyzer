@@ -71,7 +71,6 @@ def calc_infogain(data,B,axesnum=None):
             raise Exception("Negative infogain.")
     else:
         raise Exception("Invalid value for argument: axesnum can be 0,1 or None ")
-
 def plot_heat_map(data, title, ylabels, DisplayXProb = True, DisplayYProb = True, show_cbar=True):
 
     ''' 
@@ -92,7 +91,7 @@ def plot_heat_map(data, title, ylabels, DisplayXProb = True, DisplayYProb = True
     '''
 
     fig, ax = plt.subplots()
-    heatmap = ax.pcolor(data, cmap=plt.cm.Blues, alpha=0.8)
+    heatmap = ax.pcolor(data, cmap=plt.cm.Blues, alpha=0.8, vmin=0)
 
     #set title
     ax.set_title(title,y=1,loc='left',fontsize=14)
@@ -133,7 +132,7 @@ def plot_heat_map(data, title, ylabels, DisplayXProb = True, DisplayYProb = True
         ax3.set_frame_on(False)
         ax3.set_ylim(ax.get_ylim())
         ax3.set_yticks(np.arange(data.shape[0]) + 0.5)
-        ax3.set_yticklabels(ylabels3)	
+        ax3.set_yticklabels(ylabels3)   
         ax3.tick_params(
             axis='y',           # changes apply to both the x and y-axis
             which='both',       # both major and minor ticks are affected
@@ -160,9 +159,9 @@ def plot_heat_map(data, title, ylabels, DisplayXProb = True, DisplayYProb = True
     if show_cbar == True: # Add colorbar
         cbaxes = fig.add_axes([0.95, 0.1, 0.02, 0.8])  # [left, bottom, width, height]
         cbar = fig.colorbar(heatmap, cax=cbaxes)
-        cbarticks = [np.amin(data),(np.amin(data)+np.amax(data))/2,np.amax(data)]
-        cbar.set_ticks(cbarticks)
-        cbar.set_ticklabels(map(str, cbarticks))
+#         cbarticks = [np.amin(data),(np.amin(data)+np.amax(data))/2,np.amax(data)]
+#         cbar.set_ticks(cbarticks)
+#         cbar.set_ticklabels(map(str, cbarticks))
     
     return fig
 
@@ -376,7 +375,7 @@ def get_sequence_use_by_timebin(df, students, category_column, B, attribute, lev
     frequencies_by_bin = get_frequencies_by_bin(blocks, students, time_coords, B, shortest = shortest_seq_length, longest = longest_seq_length)
 
     cleaned_frequencies = Counter()
-    for attr,level in [(attribute,level1),(attribute,level2),(None,None)]:
+    for attr,level in [(attribute,level1),(attribute,level2)]:
         students_in_group = get_students(attr,level)
         N = int(cut_off*len(students_in_group))
         blocks, time_coords =  get_blocks_withTime_new(df, students_in_group, category_column, start=False, ignore = ['I'])
