@@ -71,7 +71,6 @@ def calc_infogain(data,B,axesnum=None):
             raise Exception("Negative infogain.")
     else:
         raise Exception("Invalid value for argument: axesnum can be 0,1 or None ")
-
 def plot_heat_map(data, title, ylabels, DisplayXProb = True, DisplayYProb = True, show_cbar=True):
 
     ''' 
@@ -92,7 +91,7 @@ def plot_heat_map(data, title, ylabels, DisplayXProb = True, DisplayYProb = True
     '''
 
     fig, ax = plt.subplots()
-    heatmap = ax.pcolor(data, cmap=plt.cm.Blues, alpha=0.8)
+    heatmap = ax.pcolor(data, cmap=plt.cm.Blues, alpha=0.8, vmin=0)
 
     #set title
     ax.set_title(title,y=1,loc='left',fontsize=14)
@@ -133,7 +132,7 @@ def plot_heat_map(data, title, ylabels, DisplayXProb = True, DisplayYProb = True
         ax3.set_frame_on(False)
         ax3.set_ylim(ax.get_ylim())
         ax3.set_yticks(np.arange(data.shape[0]) + 0.5)
-        ax3.set_yticklabels(ylabels3)	
+        ax3.set_yticklabels(ylabels3)   
         ax3.tick_params(
             axis='y',           # changes apply to both the x and y-axis
             which='both',       # both major and minor ticks are affected
@@ -160,9 +159,9 @@ def plot_heat_map(data, title, ylabels, DisplayXProb = True, DisplayYProb = True
     if show_cbar == True: # Add colorbar
         cbaxes = fig.add_axes([0.95, 0.1, 0.02, 0.8])  # [left, bottom, width, height]
         cbar = fig.colorbar(heatmap, cax=cbaxes)
-        cbarticks = [np.amin(data),(np.amin(data)+np.amax(data))/2,np.amax(data)]
-        cbar.set_ticks(cbarticks)
-        cbar.set_ticklabels(map(str, cbarticks))
+#         cbarticks = [np.amin(data),(np.amin(data)+np.amax(data))/2,np.amax(data)]
+#         cbar.set_ticks(cbarticks)
+#         cbar.set_ticklabels(map(str, cbarticks))
     
     return fig
 
@@ -246,12 +245,13 @@ def get_blocks_withTime_new(df, students, category_column, as_list = True, ignor
         #print ''.join([convert(action) for action in sequence])
         #print time_stamps
         #use finditer to return a sequence of matches as an iterator
-        previous_start = 0
-        for match in p.finditer(''.join([convert(action) for action in sequence])):
+        previous_end = 0
+        for match in p.finditer(''.join([convert(action) for action in sequence if convert(action) not in ignore])):
             ind = match.span()  #this gives start and end of matched block
             #for matches of action denoted by more than 1 letter, need to correct the span
-            ind = (previous_start, previous_start + (ind[1]-ind[0])/len(set(match.group())))
-            previous_start = ind[1]
+            ind = (previous_end, previous_end + (ind[1]-ind[0])/len(set(match.group())))
+            #save the end time of one action as the start action of the next
+            previous_end = ind[1]
             #print match.group(), ind
             if ind[1] >= len(time_stamps):  #block location offset from real index by 1
                 duration = time_stamps[ind[1]-1] - time_stamps[ind[0]]  #time duration of block
@@ -335,8 +335,8 @@ def get_frequencies_by_bin(blocks, students, time_coords, B,shortest=3, longest=
         for seq_length in range(shortest, longest+1):  # loops through different possible sequence lengths
             for j,(start_action,end_action) in enumerate(action_bins[student]): 
                 #since we want to find sequence THAT START in bin, we remove the parts of the sequence that fall in previous bins
-                portion_of_sequence = sequence[start_action:end_action]
-                frequencies[student][j] += Counter(''.join(portion_of_sequence[i:i+seq_length]) for i in range(len(portion_of_sequence)-seq_length+1))  # counts string matches for every string of the current length
+                portion_of_sequence = sequence[start_action:end_action+seq_length-1]
+                frequencies[student][j] += Counter(''.join(portion_of_sequence[i:i+seq_length]) for i in range(end_action-start_action))  # counts string matches for every string of the current length
     return frequencies
 
 def count_use_per_group_per_bin(allfrequencies, frequencies_by_bin, B, attribute, level1, level2):
@@ -361,16 +361,28 @@ def count_use_per_group_per_bin(allfrequencies, frequencies_by_bin, B, attribute
                     counts[seq][group][b] += 1
     return counts
 
-def get_sequence_use_by_timebin(df, students, category_column, B, attribute, level1, level2, shortest_seq_length, longest_seq_length, N):
+
+def get_sequence_use_by_timebin(df, students, category_column, B, attribute, level1, level2, shortest_seq_length, longest_seq_length, cut_off):
     '''
     '''
     
     print """Getting sequence use over {3} time bins for {0} students split by {1}. 
-            Keeping only sequences used once by at least {2} students.""".format(len(students),attribute,N,B)
+    Keeping only sequences used once by at least {2}% of students 
+    in each group and overall.""".format(len(students),attribute,int(cut_off*100),B)
+
+    #get all seqs per student per time bin
     blocks, time_coords =  get_blocks_withTime_new(df, students, category_column, start=False, ignore = ['I'])
-    frequencies = get_frequencies(blocks, shortest = shortest_seq_length, longest = longest_seq_length)
     frequencies_by_bin = get_frequencies_by_bin(blocks, students, time_coords, B, shortest = shortest_seq_length, longest = longest_seq_length)
-    counts_frequencies = Counter({f:sum([ 1 if f in freq else 0 for freq in frequencies.values()]) for f in list(sum(frequencies.values(),Counter()))})
-    cleaned_frequencies = remove_rare_frequencies(counts_frequencies, N)
+
+    cleaned_frequencies = Counter()
+    for attr,level in [(attribute,level1),(attribute,level2)]:
+        students_in_group = get_students(attr,level)
+        N = int(cut_off*len(students_in_group))
+        blocks, time_coords =  get_blocks_withTime_new(df, students_in_group, category_column, start=False, ignore = ['I'])
+        #find all sequences to consider for analysis, given that they have been used by enough students
+        frequencies = get_frequencies(blocks, shortest = shortest_seq_length, longest = longest_seq_length)
+        counts_frequencies = Counter({f:sum([ 1 if f in freq else 0 for freq in frequencies.values()]) for f in list(sum(frequencies.values(),Counter()))})
+        cleaned_frequencies += remove_rare_frequencies(counts_frequencies, N)    
+    
     counts = count_use_per_group_per_bin(cleaned_frequencies, frequencies_by_bin, B, attribute, level1, level2)
     return counts
