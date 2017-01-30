@@ -42,6 +42,10 @@ df_scores['learning2score'] = (df_scores["post t2"] - df_scores["pre"])/(df_scor
 median_learning2 = np.median(df_scores['learning2score'])
 df_scores['learning2'] = df_scores.apply (lambda row: label_learning (median_learning2,row,"learning2score"),axis=1)
 
+median_learning1 = 0.45
+df_scores['split pre'] = df_scores.apply (lambda row: label_learning (median_learning1,row,"z pre"),axis=1)
+median_learning1 = np.median(df_scores[df_scores['split pre']=='low']['z post t2'])
+df_scores['split post t2'] = df_scores.apply (lambda row: label_learning (median_learning1,row,"z post t2"),axis=1)
 
 pre_threshold = 0.6
 df_scores['split pre'] = df_scores.apply (lambda row: label_learning (pre_threshold,row,"pre"),axis=1)
