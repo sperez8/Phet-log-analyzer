@@ -47,6 +47,11 @@ df_scores['split pre'] = df_scores.apply (lambda row: label_learning (median_lea
 median_learning1 = np.median(df_scores[df_scores['split pre']=='low']['z post t2'])
 df_scores['split post t2'] = df_scores.apply (lambda row: label_learning (median_learning1,row,"z post t2"),axis=1)
 
+pre_threshold = 0.6
+df_scores['split pre'] = df_scores.apply (lambda row: label_learning (pre_threshold,row,"pre"),axis=1)
+post_threshold = np.median(df_scores[df_scores["pre"]<0.6]['z post t2'])
+df_scores['split post t2'] = df_scores.apply (lambda row: label_learning (post_threshold,row,"z post t2"),axis=1)
+
 #get sequence by student
 def get_sequence(df, students):
     '''gets sequence data for a list of students'''
