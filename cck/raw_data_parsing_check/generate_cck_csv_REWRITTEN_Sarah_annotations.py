@@ -325,7 +325,7 @@ for index, line in enumerate(lines):
 
     # if user != '94792123':
     #     continue
-    if activity != 'a2':
+    if activity not in ['a2','a3']:
         continue
     split_line = line.split(",")
 
@@ -463,8 +463,13 @@ for index, line in enumerate(lines):
                     current_grabBagResistor_count += 1
                 elif "resistor" in component_item:
                     current_resistor_count += 1
-                    if resistorValues[component_item] != DEFAULT_RESISTOR_VALUE:
-                        diff_values = 1
+                    try:
+                        if resistorValues[component_item] != DEFAULT_RESISTOR_VALUE:
+                            diff_values = 1
+                    except:
+                        print "\n\nFAILED RESISTOR LOGGING"
+                        print user, activity, index
+                        print line
                 elif "seriesAmmeter" in component_item:
                     current_seriesAmmeter_count += 1
 
