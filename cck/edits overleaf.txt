@@ -1,0 +1,49 @@
+1. move to overleaf
+
+2. make mega figure: cck screenshot, prepost, all seqs over time
+(test figures in grey scale)
+
+3.add refs
+4. full read through for content
+5. print and full read through for formatting issues
+
+6. check consistent use of
+       sim - virtual lab
+       ll, lh learners or students
+       behaviours
+       colours
+
+7. Little things:
+	come clean with lightbulbs
+	review theory in discussion
+	review title
+		I no longer lies "pausing matters". It reduces our findings to one element.
+
+		We find that LH test simple, pause afterwords, and iterative. LL do not do these. Furthermore, both groups pause the same # of times. 
+
+		So, this is a very rich paper, with fancy methodology, unconventional and wise decisions (ignore HH group), and we should not over simplify it by saying that pausing matters. There are a lot of things that matter. Focusing on pausing only distorts our paper.
+
+		I am glad for a more catchy title, but one that does justice with the work.
+		Show less
+		Ido Roll	
+		Ido Roll
+		11:07 PM Yesterday
+		Inquiry learning in virtual labs: the secrets are when to pause and what to test.
+		Ido Roll	
+		Ido Roll
+		11:08 PM Yesterday
+		Mining for sequences in virtual labs to uncover productive inquiry strategies
+		<= I like this. And yes, Sara, close to what you had initial.
+		Ido Roll	
+		Ido Roll
+		11:09 PM Yesterday
+		(or the flip): Identifying productive inquiry in virtual labs by applying sequence mining.
+	thinkalouds: when did those occur? retrospective seems to imply sometime after having done the study. or maybe in a pilot before the study after watching a screencast. my point is that these TA are mentioned a lot and so should be introduced in the method clearly
+	convince J about Lightbulbs
+	remove historial perspectice on categories
+	add figure T2, Tm
+	discuss why simplest circuit tested early (check)
+	35%
+		i can't be sure, but i thought i had written some sort of sentence that summarized the point of picking precisely 35%... sure we explain what happens at other thresholds but i feel it's missing a sentence to bring it all together in the context of finding "meaningful" sequences
+	%on lba manuals: instead or in addition to lab manuals can we link this back to inquiry learning models as per my intro?
+
