@@ -1,0 +1,33 @@
+
+open('all data v3.xlsx'):
+	header, table = open sheet "iLab data.txt"
+
+	return header, table
+
+#filter incorrect actions
+
+#filter down to "Savannah Savannah Penguin Gorilla"
+
+def get_methods(table, header):
+	use_mean = []
+	use_median = []
+	use_range = []
+	use_sum = []
+	use_all = []
+	use_N = []
+	old_method = ''
+	for row in table:
+		method1 = table['Method_Recognised_1_Copied']
+		method2 = table['Method_Recognised_2_Copied']
+		detected = detect_method(method1,method2)
+		if detected not in old_method:
+			---
+		else:
+			---
+		ef delte:
+			---e
+		
+
+
+
+
