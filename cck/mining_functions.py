@@ -483,7 +483,7 @@ def count_use_per_group_per_bin(allfrequencies, frequencies_by_bin, B, attribute
 #     counts = count_use_per_group_per_bin(cleaned_frequencies, frequencies_by_bin, B, attribute, level1, level2)
 #     return counts
 
-def get_sequence_use_by_timebin(df, students, category_column, B, attribute, level1, level2, shortest_seq_length, longest_seq_length, cut_off,remove_actions = []):
+def get_sequence_use_by_timebin(df, students, category_column, B, attribute, level1, level2, shortest_seq_length, longest_seq_length, cut_off,remove_actions = [],ignore=['I']):
     '''
     '''
     
@@ -492,14 +492,14 @@ def get_sequence_use_by_timebin(df, students, category_column, B, attribute, lev
     in each group and overall.""".format(len(students),attribute,int(cut_off*100),B)
 
     #get all seqs per student per time bin        
-    blocks, time_coords =  get_blocks_withTime_new(df, students, category_column, start=False, ignore = ['I'], remove_actions = remove_actions)
+    blocks, time_coords =  get_blocks_withTime_new(df, students, category_column, start=False, ignore=ignore, remove_actions = remove_actions)
     frequencies_by_bin = get_frequencies_by_bin(blocks, students, time_coords, B, shortest = shortest_seq_length, longest = longest_seq_length)
 
     cleaned_frequencies = Counter()
     for attr,level in [(attribute,level1),(attribute,level2)]:
         students_in_group = get_students(attr,level)
         N = int(cut_off*len(students_in_group))
-        blocks, time_coords =  get_blocks_withTime_new(df, students_in_group, category_column, start=False, ignore = ['I'], remove_actions = remove_actions)
+        blocks, time_coords =  get_blocks_withTime_new(df, students_in_group, category_column, start=False, ignore=ignore, remove_actions = remove_actions)
         #find all sequences to consider for analysis, given that they have been used by enough students
         frequencies = get_frequencies(blocks, shortest = shortest_seq_length, longest = longest_seq_length)
         counts_frequencies = Counter({f:sum([ 1 if f in freq else 0 for freq in frequencies.values()]) for f in list(sum(frequencies.values(),Counter()))})
