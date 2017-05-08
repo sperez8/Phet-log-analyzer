@@ -54,7 +54,7 @@ df_scores['split post t2'] = df_scores.apply (lambda row: label_learning (post_t
 
 
 def label_3_groups (row):
-    if row['split pre']  == 'high':
+    if row['split pre']  == 'high' and row['split post t2'] == 'high':
         return 'H*'
     elif row['split post t2'] == 'high':
         return 'LH'
