@@ -52,6 +52,16 @@ df_scores['split pre'] = df_scores.apply (lambda row: label_learning (pre_thresh
 post_threshold = np.median(df_scores[df_scores["pre"]<0.6]['z post t2'])
 df_scores['split post t2'] = df_scores.apply (lambda row: label_learning (post_threshold,row,"z post t2"),axis=1)
 
+
+def label_3_groups (row):
+    if row['split pre']  == 'high':
+        return 'H*'
+    elif row['split post t2'] == 'high':
+        return 'LH'
+    else: 
+        return 'LL'
+df_scores['three groups'] = df_scores.apply (lambda row: label_3_groups (row),axis=1)
+
 #get sequence by student
 def get_sequence(df, students):
     '''gets sequence data for a list of students'''

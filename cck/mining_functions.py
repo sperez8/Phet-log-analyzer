@@ -60,7 +60,7 @@ def calc_infogain(data,B,axesnum=None):
     If 0, then information gain along axis=0 of data is calculated, i.e. for arrangement over time segments over all groups
     If 1, then information gain for arrangement over groups over all time is calculated.
     '''
-    max_order_data = np.array([[1.0 for i in range(B)] for j in range(2)])
+    max_order_data = np.array([[1.0 for i in range(B)] for j in range(data.shape[0])])
     entropy = calc_entropy(data,axesnum)
     if axesnum == 0 or axesnum == 1 or axesnum == None:
         max_entropy = calc_entropy(max_order_data,axesnum)
@@ -71,6 +71,7 @@ def calc_infogain(data,B,axesnum=None):
             raise Exception("Negative infogain.")
     else:
         raise Exception("Invalid value for argument: axesnum can be 0,1 or None ")
+        
 def plot_heat_map(data, title, ylabels, DisplayXProb = True, DisplayYProb = True, show_cbar=True):
 
     ''' 
@@ -408,6 +409,7 @@ def get_bins_per_student(students,time_coords, B):
 #                 frequencies[student][j] += Counter(''.join(portion_of_sequence[i:i+seq_length]) for i in range(end_action-start_action))  # counts string matches for every string of the current length
 #     return frequencies
 
+
 def get_frequencies_by_bin(blocks, students, time_coords, B,shortest=3, longest=11):
     '''
     Given blocks of actions and a range of sequence lengths, we can find the frequency of sequence
@@ -435,14 +437,20 @@ def get_frequencies_by_bin(blocks, students, time_coords, B,shortest=3, longest=
                 frequencies[student][j] += Counter(''.join(portion_of_sequence[i:i+seq_length]) for i in range(end_action-start_action))  # counts string matches for every string of the current length
     return frequencies
 
-def count_use_per_group_per_bin(allfrequencies, frequencies_by_bin, B, attribute, level1, level2):
+def count_use_per_group_per_bin(allfrequencies, frequencies_by_bin, B, attribute, level1, level2, level3 = None):
     '''
     '''
     sequences = allfrequencies.keys()
-    counts = {seq : np.zeros((2,B)) for seq in sequences} #initialize empty array for each sequence
     
     student_group_1 = get_students(attribute, level1)
     student_group_2 = get_students(attribute, level2)
+    if level3:
+        student_group_3 = get_students(attribute, level3)
+        number_of_groups = 3
+    else:
+        number_of_groups = 2
+
+    counts = {seq : np.zeros((number_of_groups,B)) for seq in sequences} #initialize empty array for each sequence
     
     for student,f_by_bin in frequencies_by_bin.iteritems():
         for b,counter in enumerate(f_by_bin): 
@@ -452,38 +460,14 @@ def count_use_per_group_per_bin(allfrequencies, frequencies_by_bin, B, attribute
                         group = 0
                     elif student in student_group_2: 
                         group = 1
+                    elif level3 and student in student_group_3:
+                        group = 2
                     else:
-                        raise Exception("Student not found in groups:{0}".format(stdeunt))
+                        raise Exception("Student not found in groups:{0}".format(student))
                     counts[seq][group][b] += 1
     return counts
 
-
-# def get_sequence_use_by_timebin(df, students, category_column, B, attribute, level1, level2, shortest_seq_length, longest_seq_length, cut_off,use_blocks = {}):
-#     '''
-#     '''
-    
-#     print """Getting sequence use over {3} time bins for {0} students split by {1}. 
-#     Keeping only sequences used once by at least {2}% of students 
-#     in each group and overall.""".format(len(students),attribute,int(cut_off*100),B)
-
-#     #get all seqs per student per time bin
-#     blocks, time_coords =  get_blocks_withTime_new(df, students, category_column, start=False, ignore = ['I'])
-#     frequencies_by_bin = get_frequencies_by_bin(blocks, students, time_coords, B, shortest = shortest_seq_length, longest = longest_seq_length)
-
-#     cleaned_frequencies = Counter()
-#     for attr,level in [(attribute,level1),(attribute,level2)]:
-#         students_in_group = get_students(attr,level)
-#         N = int(cut_off*len(students_in_group))
-#         blocks, time_coords =  get_blocks_withTime_new(df, students_in_group, category_column, start=False, ignore = ['I'])
-#         #find all sequences to consider for analysis, given that they have been used by enough students
-#         frequencies = get_frequencies(blocks, shortest = shortest_seq_length, longest = longest_seq_length)
-#         counts_frequencies = Counter({f:sum([ 1 if f in freq else 0 for freq in frequencies.values()]) for f in list(sum(frequencies.values(),Counter()))})
-#         cleaned_frequencies += remove_rare_frequencies(counts_frequencies, N)    
-    
-#     counts = count_use_per_group_per_bin(cleaned_frequencies, frequencies_by_bin, B, attribute, level1, level2)
-#     return counts
-
-def get_sequence_use_by_timebin(df, students, category_column, B, attribute, level1, level2, shortest_seq_length, longest_seq_length, cut_off,remove_actions = [],ignore=['I']):
+def get_sequence_use_by_timebin(df, students, category_column, B, attribute, level1, level2, shortest_seq_length, longest_seq_length, cut_off,level3 = None, remove_actions = [],ignore=['I']):
     '''
     '''
     
@@ -496,8 +480,10 @@ def get_sequence_use_by_timebin(df, students, category_column, B, attribute, lev
     frequencies_by_bin = get_frequencies_by_bin(blocks, students, time_coords, B, shortest = shortest_seq_length, longest = longest_seq_length)
 
     cleaned_frequencies = Counter()
-    for attr,level in [(attribute,level1),(attribute,level2)]:
-        students_in_group = get_students(attr,level)
+    levels = [level1,level2]
+    if level3: levels.append(level3)
+    for level in levels:
+        students_in_group = get_students(attribute,level)
         N = int(cut_off*len(students_in_group))
         blocks, time_coords =  get_blocks_withTime_new(df, students_in_group, category_column, start=False, ignore=ignore, remove_actions = remove_actions)
         #find all sequences to consider for analysis, given that they have been used by enough students
@@ -505,5 +491,21 @@ def get_sequence_use_by_timebin(df, students, category_column, B, attribute, lev
         counts_frequencies = Counter({f:sum([ 1 if f in freq else 0 for freq in frequencies.values()]) for f in list(sum(frequencies.values(),Counter()))})
         cleaned_frequencies += remove_rare_frequencies(counts_frequencies, N)    
     
-    counts = count_use_per_group_per_bin(cleaned_frequencies, frequencies_by_bin, B, attribute, level1, level2)
+    counts = count_use_per_group_per_bin(cleaned_frequencies, frequencies_by_bin, B, attribute, level1, level2, level3 = level3)
     return counts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
