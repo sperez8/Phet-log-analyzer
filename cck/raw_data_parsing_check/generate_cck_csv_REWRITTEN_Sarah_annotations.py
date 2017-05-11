@@ -29,10 +29,12 @@ import re
 """
 
 source = "parser_log_user_pause.txt"
+#use parser_log_user_pause_a2_94792123.txt for testing script. it also has accompanying screencapture and RTA: "Thurs PM" folder
 
 f_out_actions_withpause = open("phet_cck_user_actions+sophistication_WITHPAUSE_more_circuit_info.txt", 'w')
 # f_out_actions_nopause = open("phet_cck_user_actions+sophistication_NOPAUSE.csv", 'w')
 
+#headers for printing to new parsed file
 header = ["Activity", "student", "Time Stamp", "Family", "Family_tool", "Family_default", "Family_both", "Action", "Component", "Outcome"]
 header += ["#circuits","#circuits_w_battery", "#loops", "#components","#battery", "#circuitSwitch", "#grabBagResistor", "#lightBulb", "#resistor", "#seriesAmmeter"]
 header += ["current_is_circuit","current_#loops", "current_#components", "current_#battery", "current_#circuitSwitch", "current_#grabBagResistor", "current_#lightBulb", "current_#resistor", "current_#seriesAmmeter", "non_default_resistor_values"]
@@ -74,7 +76,7 @@ def find_a_current_component(line):
 def count_loops(G):
     count = 0
     for cycle in nx.cycle_basis(graph):
-        if any([True for node in cycle if "wire" not in node]):
+        if any([True for node in cycle if "wire" not in node]): #if it's a loop of only wires, don't count it
             count += 1
     return count
 
@@ -336,8 +338,9 @@ for index, line in enumerate(lines):
         else:
             continue
 
+    #Parse testing instrument
     if "'connectionFormed', 'connections = " in line and "connections = junction" not in line: #for voltmeter
-        component = line.split(",")[5].replace("'connections = branch: ", "").replace("'", "").replace(" ", "")
+        component = line.split(",")[5].replace("'connections = branch: ", "").replace("'", "").replace(" ", "") #result is component = 'voltmeter'
     if "'connectionFormed', 'component = " in line: #for ammeter
         component = line.split("\\n")[0].split(",")[5].replace("'component = ", "").replace(" ", "")
     if "Test,startMeasure,seriesAmmeter" in line: #for series ammeter
@@ -363,7 +366,7 @@ for index, line in enumerate(lines):
     if "pause" in line:
         if line.startswith("pause"):
             #t = long(line.split(",")[0].split("<")[1])
-            t = previous_t+1 #gets the previous time of a user action (not an ignore action)
+            t = previous_t+1 #gets the previous time of a user action (not an ignore action) and add a millisecond
             stuff_to_write = True
             family = "pause"
             family_t = "pause" 
