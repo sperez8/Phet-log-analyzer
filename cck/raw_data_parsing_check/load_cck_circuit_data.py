@@ -41,7 +41,7 @@ with open(source) as f:
 
         #We get a list of edges as tuples
         edges = [e.split('+') for e in raw_edges.split(',')]
-        edges = [(e[0],e[1]) for e in edges if e != ['']]
+        edges = [(e[0],e[1]) for e in edges if e != ['']]  #check if e isempty for when there is no edges
 
         #We get a dictionary of resistor values
         resistorValues = [pair.split('=') for pair in raw_resistorValues.strip('\n').split(',')]
@@ -53,6 +53,12 @@ with open(source) as f:
         G=nx.Graph()
         G.add_nodes_from(nodes)
         G.add_edges_from(edges)
+
+        # #use this to test
+        # print student, timestamp, action, component, nodes, edges, resistorValues
+        # if i>10:
+        #     sys.exit()
+        # i+=1
 
         #then we can do something with it :)
 

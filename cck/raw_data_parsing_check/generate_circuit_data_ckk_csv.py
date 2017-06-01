@@ -22,7 +22,7 @@ f_out_graphs = open("phet_cck_circuit_data.txt", 'w')
 # f_out_actions_nopause = open("phet_cck_user_actions+sophistication_NOPAUSE.csv", 'w')
 
 #headers for printing to new parsed file
-header = ["Activity", "student", "Time Stamp", "Action", "Component", "Nodes", "Edges", "ResistorValues"]
+header = ["student", "Time Stamp", "Action", "Component", "Nodes", "Edges", "ResistorValues"]
 
 f_out_graphs.write("\t".join(header) + "\n")
 
@@ -281,7 +281,7 @@ previous_t = None
 
 #We copmbine activity 2 and 3 data but cap to 25 minutes
 
-MAX_TIME = 25*60*1000
+MAX_TIME = 25*60
 i=0
 for index, line in enumerate(lines):
     if "current_file" in line: #new file data
@@ -319,7 +319,7 @@ for index, line in enumerate(lines):
         continue
 
     # timestamp = long(line.split(",")[0][1:])
-    t = long(line.split(",")[0][1:])
+    t = long(line.split(",")[0][1:])/1000.0
     pre = min_time
     min_time = min(min_time,t)
     timestamp = t - min_time
@@ -330,14 +330,18 @@ for index, line in enumerate(lines):
     #Also, graphs are outputted for any event where either the circuit/graph
     # was changed (including non structural changes such as a change is resistance)
     # or the graph was measured using a voltmeter or ammeter
-    if action == "endMeasure":
-        continue
+    if action == 'reset':
+        G=nx.Graph()
+        resistorValues = {}
+    # if action == "endMeasure":
+    #     continue
     if action == 'startMeasure' and outcome != 'deliberate_measure':
         continue
 
-    if action =='organizeWorkspace':
-        continue
-    if action != 'startMeasure' and set(G.nodes()) == set(previous_G.nodes()) and set(G.edges()) == set(previous_G.edges()) and resistorValues == previous_resistorValues:
+    #Note there are some 'organizeWorkspace' actions that change the circuit, mostly remove components.
+
+    # if action != 'startMeasure' and set(G.nodes()) == set(previous_G.nodes()) and set(G.edges()) == set(previous_G.edges()) and resistorValues == previous_resistorValues:
+    if action != 'startMeasure' and set(G.nodes()) == set(previous_G.nodes()) and nx.is_isomorphic(G, previous_G) and resistorValues == previous_resistorValues:    
         continue
 
     previous_G = G.copy()
