@@ -16,10 +16,7 @@ import sys
 import re
 
 source = "parser_log_user_pause.txt"
-#use parser_log_user_pause_a2_94792123.txt for testing script. it also has accompanying screencapture and RTA: "Thurs PM" folder
-
 f_out_graphs = open("phet_cck_circuit_data.txt", 'w')
-# f_out_actions_nopause = open("phet_cck_user_actions+sophistication_NOPAUSE.csv", 'w')
 
 #headers for printing to new parsed file
 header = ["student", "Time Stamp", "Action", "Component", "Nodes", "Edges", "ResistorValues"]
