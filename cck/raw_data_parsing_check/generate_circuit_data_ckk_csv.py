@@ -48,13 +48,6 @@ def find_a_current_component(line):
         except:
             return None
 
-# def count_loops(G):
-#     count = 0
-#     for cycle in nx.cycle_basis(graph):
-#         if any([True for node in cycle if "wire" not in node]): #if it's a loop of only wires, don't count it
-#             count += 1
-#     return count
-
 DEFAULT_RESISTOR_VALUE = 10.0
 resistor_regex = re.compile("value = [0-9]{0,3}\.[0-9]{1,2}")
 
