@@ -484,7 +484,7 @@ def get_sequence_use_by_timebin(df, students, category_column, B, attribute, lev
     if level3: levels.append(level3)
     for level in levels:
         students_in_group = get_students(attribute,level)
-        N = int(cut_off*len(students_in_group))
+        N = int(math.ceil(cut_off*len(students_in_group)))
         blocks, time_coords =  get_blocks_withTime_new(df, students_in_group, category_column, start=False, ignore=ignore, remove_actions = remove_actions)
         #find all sequences to consider for analysis, given that they have been used by enough students
         frequencies = get_frequencies(blocks, shortest = shortest_seq_length, longest = longest_seq_length)
