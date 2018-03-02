@@ -17,8 +17,8 @@ elif os.name == 'nt':
 else:
     raise Exception('OS not recognized. I\'m confused.')
     
-df = pd.read_csv(data_path + 'MATCHING_phet_cck_user_actions+sophistication_WITHPAUSE_anonymized_DONT_TOUCH_ME.txt')
-df_scores = pd.read_csv(data_path + 'MATCHING_phet_cck_user_data_anonymized.txt')
+df = pd.read_csv(data_path + 'phet_cck_user_actions+sophistication_WITHPAUSE_more_circuit_info_with_perfect_pre.txt')
+df_scores = pd.read_csv(data_path + 'MATCHING_phet_cck_user_data_anonymized_with_perfect_pre.txt')
 df["student"] = df["student"].astype('category')
 df_scores["student"] = df_scores["student"].astype('category')
 df["Family"]=df["Family"].str.capitalize()
