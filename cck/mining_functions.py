@@ -50,7 +50,7 @@ def calc_entropy(data,axesnum=None):
         return entropy_both
         raise Exception("Invalid value for argument: axesnum can be 0,1 or None ")
 
-def calc_infogain(data,B,axesnum=None):
+def calc_infogain(data,B,axesnum=None,ignore_first_time_bin=False):
     ''' 
     This function calculates the information gain of 2D numpy array. By default, it does not ignore one of the axis.
     
@@ -60,6 +60,9 @@ def calc_infogain(data,B,axesnum=None):
     If 0, then information gain along axis=0 of data is calculated, i.e. for arrangement over time segments over all groups
     If 1, then information gain for arrangement over groups over all time is calculated.
     '''
+    if ignore_first_time_bin:
+        B = B-1
+        data = data[:,1:]
     max_order_data = np.array([[1.0 for i in range(B)] for j in range(data.shape[0])])
     entropy = calc_entropy(data,axesnum)
     if axesnum == 0 or axesnum == 1 or axesnum == None:
