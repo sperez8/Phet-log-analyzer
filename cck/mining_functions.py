@@ -366,7 +366,7 @@ def get_bins_per_student(students,time_coords, B):
     
     Arguments:
         students: list with student ids to generate bins for
-        B: the number of time bins (typically 5)
+        B: the number of time bins (typically 4)
         
     returns:
         action_bins = {student_1_id: [ (0,index_action_2nd_bin) , (index_action_2nd_bin,index_action_3rd_bin),... ]}    
@@ -469,6 +469,39 @@ def count_use_per_group_per_bin(allfrequencies, frequencies_by_bin, B, attribute
                         raise Exception("Student not found in groups:{0}".format(student))
                     counts[seq][group][b] += 1
     return counts
+
+# def count_use_per_group_per_bin_ignore_first_time_bin(allfrequencies, frequencies_by_bin, B, attribute, level1, level2, level3 = None):
+#     '''
+#     '''
+#     sequences = allfrequencies.keys()
+    
+#     student_group_1 = get_students(attribute, level1)
+#     student_group_2 = get_students(attribute, level2)
+#     if level3:
+#         student_group_3 = get_students(attribute, level3)
+#         number_of_groups = 3
+#     else:
+#         number_of_groups = 2
+
+#     count_students = {seq : [set() for n in range(number_of_groups)] for seq in sequences} #initialize empty array for each sequence
+    
+#     for student,f_by_bin in frequencies_by_bin.iteritems():
+#         for b,counter in enumerate(f_by_bin): 
+#             if b == 0:
+#                 continue
+#             for seq in counter: 
+#                 if seq in sequences:
+#                     if student in student_group_1: 
+#                         group = 0
+#                     elif student in student_group_2: 
+#                         group = 1
+#                     elif level3 and student in student_group_3:
+#                         group = 2
+#                     else:
+#                         raise Exception("Student not found in groups:{0}".format(student))
+#                     count_students[seq][group].add(student)
+#     counts = {seq:np.array([[len(students) for students in students_by_groups]]).T for seq,students_by_groups in count_students.iteritems()}
+#     return counts
 
 def get_sequence_use_by_timebin(df, students, category_column, B, attribute, level1, level2, shortest_seq_length, longest_seq_length, cut_off,level3 = None, remove_actions = [],ignore=['I']):
     '''
