@@ -191,13 +191,14 @@ def get_non_blocks(df, students, add_spaces = False, ignore = [], start = True):
             blocks[student] += block
     return blocks
 
-
-def get_frequencies(blocks, shortest=3, longest=11):
-    frequencies = {student:Counter() for student in blocks.keys()}
-    for student,sequence in blocks.iteritems():
-        for seq_length in range(shortest, longest+1):  # loops through different possible sequence lengths
-            frequencies[student] += Counter(sequence[i:i+seq_length] for i in range(len(sequence)-seq_length-1))  # counts string matches for every string of the current length
-    return frequencies
+# DEPRECATED - please find updated function in mining_functions.py
+# def get_frequencies(blocks, shortest=3, longest=11):
+#     print "WARNING THIS IS THE OLD FUNCTION, PLEASE USE THE ONE IN MINING_FUNCTIONS.PY NOT FUNCTIONS.PY"
+#     frequencies = {student:Counter() for student in blocks.keys()}
+#     for student,sequence in blocks.iteritems():
+#         for seq_length in range(shortest, longest+1):  # loops through different possible sequence lengths
+#             frequencies[student] += Counter(sequence[i:i+seq_length] for i in range(len(sequence)-seq_length-1))  # counts string matches for every string of the current length
+#     return frequencies
 
 def remove_rare_frequencies(frequencies, N):
     new_frequencies = copy.copy(frequencies)
