@@ -400,7 +400,26 @@ def get_frequencies_without_first_time_bin(frequencies_by_bin,students_in_group)
     return {student:sum(bins[1:], Counter()) for student,bins in frequencies_by_bin.iteritems() if student in students_in_group}
 
     
-def get_sequence_use_by_timebin(df, students, category_column, B, attribute, level1, level2, shortest_seq_length, longest_seq_length, cut_off,level3 = None, remove_actions = [],ignore=['I'],ignore_first_time_bin=False):
+def get_frequencies_without_first_time_bin(frequencies_by_bin,students_in_group):
+    '''
+    Takes frequencies of sequencies by time bins and removes the first time bin.
+    Then sums the frequency per sequence per student overall.
+    Return this information for only relevant students
+    
+    Arguments:
+        frequencies_by_bin = {student: [list of Counters for each bin]}
+                           = {student1: [ Counter{'TPT':3, 'CPT':5...}, Counter{},... ],  ...}
+        students_in_group = list of students for whom to return this data
+        
+    returns:
+        {student1: Counter{'TPT':5, ...},  ...}
+    '''
+    return {student:sum(bins[1:], Counter()) for student,bins in frequencies_by_bin.iteritems() if student in students_in_group}
+
+
+def get_sequence_use_by_timebin(df, students, category_column, B, attribute,
+            level1, level2, shortest_seq_length, longest_seq_length, cut_off,level3 = None,
+            remove_actions = [],ignore=['I'],ignore_first_time_bin=False):
     '''
     '''
     
@@ -421,10 +440,9 @@ def get_sequence_use_by_timebin(df, students, category_column, B, attribute, lev
         blocks, time_coords =  get_blocks_withTime_new(df, students_in_group, category_column, start=False, ignore=ignore, remove_actions = remove_actions)
         #find all sequences to consider for analysis, given that they have been used by enough students
         if ignore_first_time_bin:
-            frequencies =  get_frequencies_without_first_time_bin(frequencies_by_bin,students_in_group)
+            frequencies =  get_frequencies_without_first_time_bin(frequencies_by_bin,students_in_group)           
         else:
             frequencies = get_frequencies(blocks, shortest = shortest_seq_length, longest = longest_seq_length)
-        ## number of students who used freq Counter{'TPT':5,...}
         counts_frequencies = Counter({f:sum([ 1 if f in freq else 0 for freq in frequencies.values()]) for f in list(sum(frequencies.values(),Counter()))})
         cleaned_frequencies += remove_rare_frequencies(counts_frequencies, N)    
     
