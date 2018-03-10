@@ -213,68 +213,6 @@ converter =  {"Construct" : "C",
 "Test_simple_voltmeter_not" : "Tsvn",
     }
 
-# def get_blocks_withTime_new(df, students, category_column, as_list = True, ignore = [], start = False):
-#     '''gets blocks of sequences for a list of students
-#     From the column "Family", "Family_tool", "Family_default" or "Family_both" in the dataframe, each action family is converted to a string in
-#     the format with at least one capitalized character: 'C', or 'Cccc'.
-#     To facilitate sequence mining. The sequence is exported as a list:
-#     ['Ta', 'C','Tb',.....].
-    
-#     Arguments:
-#         students: list with student ids to generate blocks for
-#         category_column: the column of the dataframe from which cetagories are taken from
-#         as_list: by default true. returns sequences as a list of strings instead of a single string
-#         ignore: list of actions to ignore
-#         start: if we want a start action to find the first sequence of action of every student   
-    
-#     returns:
-#      blocks = {student_1_id: ['Ta', 'C','Tb',.....], student_2_id: [...]}    
-#      time_coords = {student_1_id: [(start_of_action_1, duration), (start_of_action_2, duration),...], student_2_id: [...]}    
-#     '''
-#     def convert(action):
-#         return converter[action]
-    
-#     if start:
-#         blocks = {student:'S' for student in students}
-#     else:
-#         blocks = {student:'' for student in students}
-
-#     time_coords = {student:[] for student in students}
-#     for student in students:
-#         sequence =  list(df[df['student']==student][category_column])
-#         time_stamps =  list(df[df['student']==student]['Time Stamp'])
-#         time_stamps = (time_stamps - min(time_stamps))/1000.  #human readable seconds
-#         time_coord=[]  #coordinate array for broken bar plot, takes array of (start time, duration)
-#         p = re.compile(r'([A-Z][a-z]{0,3})\1*')  #this regex finds all action blocks of length 1+
-#         #print ''.join([convert(action) for action in sequence])
-#         #print time_stamps
-#         #use finditer to return a sequence of matches as an iterator
-#         previous_end = 0
-#         for match in p.finditer(''.join([convert(action) for action in sequence if convert(action) not in ignore])):
-#             ind = match.span()  #this gives start and end of matched block
-#             #for matches of action denoted by more than 1 letter, need to correct the span
-#             ind = (previous_end, previous_end + (ind[1]-ind[0])/len(set(match.group())))
-#             #save the end time of one action as the start action of the next
-#             previous_end = ind[1]
-#             #print match.group(), ind
-#             if ind[1] >= len(time_stamps):  #block location offset from real index by 1
-#                 duration = time_stamps[ind[1]-1] - time_stamps[ind[0]]  #time duration of block
-#                 #print time_stamps[ind[1]-1], time_stamps[ind[0]]  #time duration of block
-#             else:
-#                 duration = time_stamps[ind[1]] - time_stamps[ind[0]]
-#                 #print time_stamps[ind[1]] , time_stamps[ind[0]]
-#             time_coord.append((time_stamps[ind[0]],duration))
-#             #print match.group(), match.span(), duration
-#         #actual regex that converts block of similar actions to just one action
-#         block = re.sub(r'([A-Z][a-z]{0,3})\1+', r'\1',''.join([convert(action) for action in sequence if convert(action) not in ignore]))
-#         if as_list:            
-#             list_block = block[0] + ''.join([' ' + c if c.isupper() else c for c in block[1:]])
-#             blocks[student] = list_block.split(' ')
-#             time_coords[student] = time_coord
-#         else:
-#             blocks[student] += block
-#             time_coords[student] = time_coord
-#     return blocks, time_coords
 
 def get_blocks_withTime_new(df, students, category_column, as_list = True, ignore = [], start = False, remove_actions = []):
     '''gets blocks of sequences for a list of students
@@ -366,7 +304,7 @@ def get_bins_per_student(students,time_coords, B):
     
     Arguments:
         students: list with student ids to generate bins for
-        B: the number of time bins (typically 5)
+        B: the number of time bins (typically 4)
         
     returns:
         action_bins = {student_1_id: [ (0,index_action_2nd_bin) , (index_action_2nd_bin,index_action_3rd_bin),... ]}    
@@ -386,31 +324,6 @@ def get_bins_per_student(students,time_coords, B):
         action_bins[student] = [(action_indices[i],action_indices[i+1]) for i in range(0,B)]
 
     return action_bins
-
-# def get_frequencies_by_bin(blocks, students, time_coords, B,shortest=3, longest=11):
-#     '''
-#     Given blocks of actions and a range of sequence lengths, we can find the frequency of sequence
-#     use within each bin.
-    
-#     Arguments:
-#         blocks: blocked sequences for each student
-#         action_bins
-#         shortest: length of shortest possible mined sequence
-#         longest: length of longest possible mined sequence
-        
-#     returns:
-#         frequencies = {student: [list of Counters for each bin]}
-#                     = {student1: [ Counter{'TPT':3, 'CPT':5...}, Counter{},... ],  ...}
-#     '''
-#     action_bins = get_bins_per_student(students, time_coords,B)
-#     frequencies = {student:[Counter() for i in range(B)] for student in blocks.keys()}        
-#     for student,sequence in blocks.iteritems():
-#         for seq_length in range(shortest, longest+1):  # loops through different possible sequence lengths
-#             for j,(start_action,end_action) in enumerate(action_bins[student]): 
-#                 #since we want to find sequence THAT START in bin, we remove the parts of the sequence that fall in previous bins
-#                 portion_of_sequence = sequence[start_action:end_action+seq_length-1]
-#                 frequencies[student][j] += Counter(''.join(portion_of_sequence[i:i+seq_length]) for i in range(end_action-start_action))  # counts string matches for every string of the current length
-#     return frequencies
 
 
 def get_frequencies_by_bin(blocks, students, time_coords, B,shortest=3, longest=11):
@@ -470,7 +383,43 @@ def count_use_per_group_per_bin(allfrequencies, frequencies_by_bin, B, attribute
                     counts[seq][group][b] += 1
     return counts
 
-def get_sequence_use_by_timebin(df, students, category_column, B, attribute, level1, level2, shortest_seq_length, longest_seq_length, cut_off,level3 = None, remove_actions = [],ignore=['I']):
+def get_frequencies_without_first_time_bin(frequencies_by_bin,students_in_group):
+    '''
+    Takes frequencies of sequencies by time bins and removes the first time bin.
+    Then sums the frequency per sequence per student overall.
+    Return this information for only relevant students
+    
+    Arguments:
+        frequencies_by_bin = {student: [list of Counters for each bin]}
+                           = {student1: [ Counter{'TPT':3, 'CPT':5...}, Counter{},... ],  ...}
+        students_in_group = list of students for whom to return this data
+        
+    returns:
+        {student1: Counter{'TPT':5, ...},  ...}
+    '''
+    return {student:sum(bins[1:], Counter()) for student,bins in frequencies_by_bin.iteritems() if student in students_in_group}
+
+    
+def get_frequencies_without_first_time_bin(frequencies_by_bin,students_in_group):
+    '''
+    Takes frequencies of sequencies by time bins and removes the first time bin.
+    Then sums the frequency per sequence per student overall.
+    Return this information for only relevant students
+    
+    Arguments:
+        frequencies_by_bin = {student: [list of Counters for each bin]}
+                           = {student1: [ Counter{'TPT':3, 'CPT':5...}, Counter{},... ],  ...}
+        students_in_group = list of students for whom to return this data
+        
+    returns:
+        {student1: Counter{'TPT':5, ...},  ...}
+    '''
+    return {student:sum(bins[1:], Counter()) for student,bins in frequencies_by_bin.iteritems() if student in students_in_group}
+
+
+def get_sequence_use_by_timebin(df, students, category_column, B, attribute,
+            level1, level2, shortest_seq_length, longest_seq_length, cut_off,level3 = None,
+            remove_actions = [],ignore=['I'],ignore_first_time_bin=False):
     '''
     '''
     
@@ -490,7 +439,10 @@ def get_sequence_use_by_timebin(df, students, category_column, B, attribute, lev
         N = int(math.ceil(cut_off*len(students_in_group)))
         blocks, time_coords =  get_blocks_withTime_new(df, students_in_group, category_column, start=False, ignore=ignore, remove_actions = remove_actions)
         #find all sequences to consider for analysis, given that they have been used by enough students
-        frequencies = get_frequencies(blocks, shortest = shortest_seq_length, longest = longest_seq_length)
+        if ignore_first_time_bin:
+            frequencies =  get_frequencies_without_first_time_bin(frequencies_by_bin,students_in_group)           
+        else:
+            frequencies = get_frequencies(blocks, shortest = shortest_seq_length, longest = longest_seq_length)
         counts_frequencies = Counter({f:sum([ 1 if f in freq else 0 for freq in frequencies.values()]) for f in list(sum(frequencies.values(),Counter()))})
         cleaned_frequencies += remove_rare_frequencies(counts_frequencies, N)    
     
