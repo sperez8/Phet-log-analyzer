@@ -1,0 +1,96 @@
+---
+title: "single action analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+library(tidyverse)
+library(reshape2)
+library(ggplot2)
+library(heplots)
+#library(sjstats)
+```
+
+```{r}
+#import data
+df <- read.table("single_actions_counts_allBlocked.csv", sep = ",", header = TRUE)
+df = df[df$group != 'HL', ]
+df
+```
+
+```{r}
+df1 <- subset(df, select = -c(T1) )
+df1 <- subset(df1, select = -c(T2) )
+df1 <- subset(df1, select = -c(Tm) )
+df1 <- melt(df1, measure.vars=c("C","P", "T"), variable.name="episodes", value.name="counts")
+df1 %>%
+  group_by(episodes, group) %>%
+  summarise(mean = mean(counts), stddev = sd(counts), N = n())
+```
+
+```{r}
+df.manova <- manova(cbind(C, P, T) ~ group, data = df)
+print(summary(df.manova, test='Wilks'))
+print(etasq(df.manova))
+
+print(summary.aov(df.manova))
+TukeyHSD(aov(C ~ group, data=df))
+
+a  = aov(C ~ group, data=df)
+print(etasq(a))
+
+
+ggplot(df, aes(x=group, y=C)) + 
+  geom_boxplot(fill='gray') +
+  labs(title="Counts of C episodes per group", x="Groups", y="Raw counts") +
+  theme_classic() 
+```
+
+```{r}
+df.manovaT <- manova(cbind(T1, T2, Tm) ~ group, data = df)
+print(summary(df.manovaT, test='Wilks'))
+print(etasq(df.manovaT))
+
+print(summary.aov(df.manovaT))
+TukeyHSD(aov(Tm ~ group, data=df))
+
+a  = aov(Tm ~ group, data=df)
+print(etasq(a))
+
+ggplot(df, aes(x=group, y=Tm)) + 
+  geom_boxplot(fill='gray') +
+  labs(title="Counts of Tm episodes per group", x="Groups", y="Raw counts") +
+  theme_classic() 
+```
+```{r}
+#import data
+df2 <- read.table("single_actions_counts_onlyCPBlocked.csv", sep = ",", header = TRUE)
+df2 = df2[df2$group != 'HL', ]
+df2
+```
+```{r}
+df2.manova <- manova(cbind(C, P, T) ~ group, data = df2)
+print(summary(df2.manova))
+print(summary.aov(df2.manova))
+TukeyHSD(aov(C ~ group, data=df))
+
+ggplot(df2, aes(x=group, y=C)) + 
+  geom_boxplot(fill='gray') +
+  labs(title="Counts of C action use per group", x="Groups", y="Raw counts") +
+  theme_classic() 
+```
+```{r}
+df2.manovaT <- manova(cbind(T1, T2, Tm) ~ group, data = df2)
+print(summary(df2.manovaT))
+print(summary.aov(df2.manovaT))
+#TukeyHSD(aov(Tm ~ group, data=df2))
+
+ggplot(df2, aes(x=group, y=Tm)) + 
+  geom_boxplot(fill='gray') +
+  labs(title="Counts of action use per group", x="Groups", y="Raw counts") +
+  theme_classic() 
+```
+
