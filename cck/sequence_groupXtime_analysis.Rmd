@@ -1,0 +1,44 @@
+---
+title: "glmm_sequence_time_analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+library(lme4)
+library(ggplot2)
+```
+
+```{r}
+df <- read.table("tops_both_groupXtime_sequences_2.csv", sep = ",", header = TRUE)
+#df <- read.table("tops_group_groupXtime_sequences_2.csv", sep = ",", header = TRUE)
+df$sid <- factor(df$sid)
+df$timebin <- factor(df$timebin)
+head(df)
+
+```
+
+```{r}
+print(length(unique(df$sid)))
+print(length(unique(df$sequence)))
+print(unique(df$sequence))
+print(length(unique(df$group)))
+```
+```{r}
+seq = 'CTcPTcP'
+df2 = df[df$sequence == seq, ]
+aggregate(use ~ group*timebin, df2, sum)
+```
+
+```{r}
+seq = 'CTbPC'
+df2 = df[df$sequence == seq, ]
+m <- glmer(use ~ group*timebin + (1|sid) , data = df2, family = binomial, control=glmerControl(optimizer='bobyqa'))
+# Summarize the results of the logistic regression
+print(summary(m))
+#print(coefficients(m))
+```
+
+
