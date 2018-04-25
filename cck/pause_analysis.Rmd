@@ -58,12 +58,14 @@ df2 %>%
 boxplot(df2[df2$Group == "1", ]$counts ~ df2[df2$Group == "1", ]$subsequent, main="blabh title", xlab="subsequent", ylab="counts")
 ```
 ```{r}
-df2[df2$Group != "0", ]
-pausecounts.aov <- with(df2[df2$Group != "0", ],
+#looking at NOT HH
+df2[df2$Group != "2", ]
+pausecounts.aov <- with(df2[df2$Group != "2", ],
                    aov(counts ~ previous * subsequent  +
                        Error(Studentid / (previous * subsequent)))
 )
 summary(pausecounts.aov)
+
 #model.tables(pausecounts.aov, 'means',se=T)
 ```
 
@@ -81,7 +83,7 @@ boxplot(df1$counts ~ df1$seq, main="Overall pause sequences", xlab="seq", ylab="
 ```
 
 ```{r}
-boxplot(df1[df1$Group == "0", ]$counts ~ df1[df1$Group == "0", ]$seq, main="LL pause sequences", xlab="seq", ylab="counts")
+boxplot(df1[df1$Group == "2", ]$counts ~ df1[df1$Group == "2", ]$seq, main="HH pause sequences", xlab="seq", ylab="counts")
 ```
 ```{r}
 data_summary <- function(x) {
