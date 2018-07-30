@@ -1,0 +1,106 @@
+---
+title: "Pause Analysis"
+output: html_pause_analysis_notebook
+---
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(reshape2)
+library(ggplot2)
+```
+
+Load data.
+
+```{r}
+df <- read.table("pause_counts_TPT_for_SPSS_analysis_with_HH.txt", sep = ",", header = TRUE)
+#filter(df, Studentid == "82224125")
+#df[!(df$Studentid=="82224125"),]
+```
+
+```{r}
+df %>%
+  group_by(Group) %>% 
+  summarise(mean_TPT = mean(TPT),
+           mean_TPC = mean(TPC),
+           mean_CPC = mean(CPC),
+           mean_CPT = mean(CPT),
+           mean_Pause = mean(Num.P))
+```
+
+```{r}
+df1 <- melt(df, measure.vars=c("TPT","TPC", "CPC","CPT"), variable.name="seq", value.name="counts")
+df2 <- separate(df1, seq, c('previous', 'subsequent'), sep="P")
+df2 <- subset(df2, select = -c(Num.P) )
+df2 <- within(df2, {
+  Studentid   <- factor(Studentid)
+  previous <- factor(previous)
+  subsequent <- factor(subsequent)
+})
+filter(df2, Studentid == "19930112")
+```
+
+```{r}
+pausecounts.aov <- with(df2[df2$Group == "2", ],
+                   aov(counts ~ previous * subsequent +
+                       Error(Studentid / (previous * subsequent)))
+)
+summary(pausecounts.aov)
+```
+```{r}
+df2 %>%
+  filter(Group == '2') %>%
+    group_by(subsequent) %>%
+  summarise(mean_counts = mean(counts))
+  
+```
+
+```{r}
+boxplot(df2[df2$Group == "1", ]$counts ~ df2[df2$Group == "1", ]$subsequent, main="blabh title", xlab="subsequent", ylab="counts")
+```
+```{r}
+#looking at NOT HH
+df2[df2$Group != "2", ]
+pausecounts.aov <- with(df2[df2$Group != "2", ],
+                   aov(counts ~ previous * subsequent  +
+                       Error(Studentid / (previous * subsequent)))
+)
+summary(pausecounts.aov)
+
+#model.tables(pausecounts.aov, 'means',se=T)
+```
+
+```{r}
+df %>%
+  summarise(mean_TPT = mean(TPT),
+           mean_TPC = mean(TPC),
+           mean_CPC = mean(CPC),
+           mean_CPT = mean(CPT),
+           mean_Pause = mean(Num.P))
+```
+
+```{r}
+boxplot(df1$counts ~ df1$seq, main="Overall pause sequences", xlab="seq", ylab="counts")
+```
+
+```{r}
+boxplot(df1[df1$Group == "2", ]$counts ~ df1[df1$Group == "2", ]$seq, main="HH pause sequences", xlab="seq", ylab="counts")
+```
+```{r}
+data_summary <- function(x) {
+   m <- mean(x)
+   ymin <- m-sd(x)
+   ymax <- m+sd(x)
+   return(c(y=m,ymin=ymin,ymax=ymax))
+}
+p <- ggplot(df1[df1$Group == "2", ], aes(x=seq, y=counts)) + 
+  geom_violin(trim=FALSE, fill='gray') +
+  labs(title="Pause sequences for LL", x="Sequence", y="Normalized counts") +
+  geom_boxplot(width=0.05) +
+  theme_classic()
+p
+#p + geom_dotplot(binaxis='y', stackdir='center', dotsize=1) + stat_summary(fun.data=data_summary, mult=1, geom="pointrange", color="red")
+```
+
+
+
+

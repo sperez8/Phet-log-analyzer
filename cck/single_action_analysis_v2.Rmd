@@ -1,0 +1,137 @@
+---
+title: "single action analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+library(tidyverse)
+#library(reshape2)
+library(ggplot2)
+library(heplots)
+library(RColorBrewer)
+#library(sjstats)
+```
+
+```{r}
+#import data
+df <- read.table("single_actions_counts_allBlocked.csv", sep = ",", header = TRUE)
+#get rid of HL students
+#df = df[df$group != 'HL', ]
+df
+```
+
+```{r}
+# create a new column to isolate L_ vs H_ students
+df <- df %>% 
+  mutate(
+    incoming_groups = case_when(
+      group == "LH" ~ "L",
+      group == "LL" ~ "L",
+      group == "HH" ~ "H",
+      group == "HL" ~ "H"
+    )
+  )
+df
+```
+```{r}
+dfT <- df %>% 
+  select(T1, T2, Tm, group, incoming_groups) %>% 
+  melt(measure.vars=c("T1","T2", "Tm"), variable.name="episodes", value.name="counts")
+
+dfA <- df %>% 
+  select(C, P, T, group, incoming_groups) %>% 
+  melt(measure.vars=c("C","P", "T"), variable.name="episodes", value.name="counts")
+```
+
+```{r}
+dfT %>% 
+  group_by(episodes, incoming_groups) %>% 
+  summarise(mean = mean(counts), stddev = sd(counts), N = n())
+
+dfA %>% 
+  group_by(episodes, incoming_groups) %>% 
+  summarise(mean = mean(counts), stddev = sd(counts), N = n())
+```
+```{r}
+df.manova <- manova(cbind(C, P, T) ~ incoming_groups, data = df)
+print(summary(df.manova, test='Wilks'))
+#print(etasq(df.manova))
+#print(summary.aov(df.manova))
+#TukeyHSD(aov(C ~ group, data=df))
+#a  = aov(C ~ group, data=df)
+#print(etasq(a))
+
+
+ggplot(dfA, aes(x=episodes, y=counts, fill=incoming_groups)) + 
+  geom_boxplot(alpha=0.7) +
+  labs(title="Counts of different experimental episodes per incoming knowledge group", x="Experimental episode", y="Raw counts") +
+  theme_bw() +
+  scale_fill_brewer(palette = "Dark2")
+```
+
+```{r}
+df.manova <- manova(cbind(T1, T2, Tm) ~ incoming_groups, data = df)
+print(summary(df.manova, test='Wilks'))
+print(etasq(df.manova))
+print(summary.aov(df.manova))
+print(etasq(aov(Tm ~ incoming_groups, data=df)))
+
+
+ggplot(dfT, aes(x=episodes, y=counts, fill=incoming_groups)) + 
+  geom_boxplot(alpha=0.7) +
+  labs(title="Counts of different testing episodes per incoming knowledge group", x="Testing episode complexity", y="Raw counts") +
+  theme_bw() +
+  scale_fill_brewer(palette = "Dark2") 
+```
+
+```{r}
+dfnov <- df %>% 
+  filter(group == "LH" | group == "LL")
+dfAnov <- dfA %>%
+  filter(group == "LH" | group == "LL")
+dfTnov <- dfT %>%
+  filter(group == "LH" | group == "LL")
+```
+
+```{r}
+dfTnov %>% 
+  group_by(episodes, group) %>% 
+  summarise(mean = mean(counts), stddev = sd(counts), N = n())
+
+dfAnov %>% 
+  group_by(episodes, group) %>% 
+  summarise(mean = mean(counts), stddev = sd(counts), N = n())
+```
+
+```{r}
+df.manova <- manova(cbind(C, P, T) ~ group, data = dfnov)
+print(summary(df.manova, test='Wilks'))
+print(etasq(df.manova))
+print(summary.aov(df.manova))
+print(etasq(aov(C ~ group, data=dfnov)))
+
+
+ggplot(dfAnov, aes(x=episodes, y=counts, fill=group)) + 
+  geom_boxplot(alpha=0.7) +
+  labs(title="Counts of different experimental episodes per novice groups", x="Experimental episodes", y="Raw counts") +
+  theme_bw() +
+  scale_fill_brewer(palette = "Dark2") 
+```
+
+```{r}
+df.manova <- manova(cbind(T1, T2, Tm) ~ group, data = dfnov)
+print(summary(df.manova, test='Wilks'))
+#print(etasq(df.manova))
+#print(summary.aov(df.manova))
+#print(etasq(aov(C ~ group, data=dfnov)))
+
+
+ggplot(dfTnov, aes(x=episodes, y=counts, fill=group)) + 
+  geom_boxplot(alpha=0.7) +
+  labs(title="Counts of different testing episodes per novice groups", x="Testing episode complexity", y="Raw counts") +
+  theme_bw() +
+  scale_fill_brewer(palette = "Dark2") 
+```
