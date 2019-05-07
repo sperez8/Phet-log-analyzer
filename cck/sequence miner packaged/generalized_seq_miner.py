@@ -1,4 +1,6 @@
-''' This script was created by Sarah Perez, July 2018, in collaboration with Ido Roll and Jonathan Massey-Allard.
+''' This script was created by Sarah Perez, July 2018, in collaboration with Ido Roll and Jonathan Massey-Allard
+Under the GNU GPL v3: https://choosealicense.com/licenses/gpl-3.0/
+
 It contains all the functions needed to run a sequence miner
 and find interesting sequences of actions given how they are used differently over time and by two groups of students.
 See below for a step by step example.
@@ -16,7 +18,7 @@ def remove_rare_frequencies(frequencies, N):
                 del new_frequencies[k]
     return new_frequencies
 
-def count_use_per_group_per_bin(allfrequencies, frequencies_by_bin, num_bins, attribute, level1, level2, level3 = None):
+def count_use_per_group_per_bin(allfrequencies, frequencies_by_bin, num_bins, attribute, level1, level2):
     '''
     '''
     sequences = allfrequencies.keys()
@@ -36,37 +38,35 @@ def count_use_per_group_per_bin(allfrequencies, frequencies_by_bin, num_bins, at
                         group = 0
                     elif student in student_group_2: 
                         group = 1
-                    elif level3 and student in student_group_3:
-                        group = 2
                     else:
                         raise Exception("Student not found in groups:{0}".format(student))
                     counts[seq][group][b] += 1
     return counts
 
 
-def get_frequencies(blocks, shortest=3, longest=11):
+def get_frequencies(action_seqs, shortest=3, longest=11):
     '''For each student, given a range of sequence legnths, count how many times students perform each sequence
     Arguments:
-        blocks: blocked sequences for each student
+        action_seqs: sequences of actions for each student
         shortest: length of shortest possible mined sequence
         longest: length of longest possible mined sequence
         
     returns:
         frequencies: {student1: Counter{'TPT':3, 'CPT':5...}, ...}
     '''
-    frequencies = {student:Counter() for student in blocks.keys()}
-    for student,sequence in blocks.iteritems():
+    frequencies = {student:Counter() for student in action_seqs.keys()}
+    for student,sequence in action_seqs.iteritems():
         for seq_length in range(shortest, longest+1):  # loops through different possible sequence lengths
             frequencies[student] += Counter(''.join(sequence[i:i+seq_length]) for i in range(len(sequence)-seq_length+1))  # counts string matches for every string of the current length
     return frequencies
 
 
-def get_sequence_use_by_timebin(blocks, time_coords, students_by_attribute, num_bins, attribute,
+def get_sequence_use_by_timebin(action_seqs, time_coords, students_by_attribute, num_bins, attribute,
             level1, level2, shortest_seq_length, longest_seq_length, cut_off):
     '''
 
-    blocks = {student_1_id: ['Ta', 'C','Tb',.....], student_2_id: [...]}    
-    time_coords = {student_1_id: [(start_of_action_1, duration), (start_of_action_2, duration),...], student_2_id: [...]}    
+    action_seqs = {student_1_id: ['T', 'A', 'C',.....], student_2_id: [...]}    
+    time_coords = {student_1_id: [(start_of_action_1, duration_of_action_1), (start_of_action_2, duration_of_action_2),...], student_2_id: [...]}    
     '''
     
     # print """Getting sequence use over {3} time bins for {0} students split by {1}. 
@@ -74,7 +74,7 @@ def get_sequence_use_by_timebin(blocks, time_coords, students_by_attribute, num_
     # in each group and overall.""".format(len(students),attribute,int(cut_off*100),num_bins)
 
     #get all seqs per student per time bin        
-    frequencies_by_bin = get_frequencies_by_bin(blocks, time_coords, num_bins, shortest = shortest_seq_length, longest = longest_seq_length)
+    frequencies_by_bin = get_frequencies_by_bin(action_seqs, time_coords, num_bins, shortest = shortest_seq_length, longest = longest_seq_length)
 
     cleaned_frequencies = Counter()
     levels = [level1,level2]
@@ -82,11 +82,11 @@ def get_sequence_use_by_timebin(blocks, time_coords, students_by_attribute, num_
     for level in levels:
         students_in_group = students_by_attribute[level]
         N = int(math.ceil(cut_off*len(students_in_group)))
-        blocks = {student: block for student, block in blocks.iteritems() if student in students_in_group}
+        action_seqs = {student: action_seq for student, action_seq in action_seqs.iteritems() if student in students_in_group}
         time_coords = {student: time_coord for student, time_coord in time_coords.iteritems() if student in students_in_group}
 
         #find all sequences to consider for analysis, given that they have been used by enough students
-        frequencies = get_frequencies(blocks, shortest = shortest_seq_length, longest = longest_seq_length)
+        frequencies = get_frequencies(action_seqs, shortest = shortest_seq_length, longest = longest_seq_length)
         counts_frequencies = Counter({f:sum([ 1 if f in freq else 0 for freq in frequencies.values()]) for f in list(sum(frequencies.values(),Counter()))})
         cleaned_frequencies += remove_rare_frequencies(counts_frequencies, N)    
     
@@ -120,13 +120,13 @@ def get_bins_per_student(time_coords, num_bins):
 
     return action_bins
 
-def get_frequencies_by_bin(blocks, time_coords, num_bins,shortest=2, longest=10):
+def get_frequencies_by_bin(action_seqs, time_coords, num_bins,shortest=2, longest=10):
     '''
-    Given blocks of actions and a range of sequence lengths, we can find the frequency of sequence
+    Given action_seqs of actions and a range of sequence lengths, we can find the frequency of sequence
     use within each bin.
     
     Arguments:
-        blocks: sequences for each student
+        action_seqs: sequences for each student
         action_bins
         shortest: length of shortest possible mined sequence
         longest: length of longest possible mined sequence
@@ -136,8 +136,8 @@ def get_frequencies_by_bin(blocks, time_coords, num_bins,shortest=2, longest=10)
                     = {student1: [ Counter{'TPT':3, 'CPT':5...}, Counter{},... ],  ...}
     '''
     action_bins = get_bins_per_student(time_coords,num_bins)
-    frequencies = {student:[Counter() for i in range(num_bins)] for student in blocks.keys()}        
-    for student,sequence in blocks.iteritems():
+    frequencies = {student:[Counter() for i in range(num_bins)] for student in action_seqs.keys()}        
+    for student,sequence in action_seqs.iteritems():
         for seq_length in range(shortest, longest+1):  # loops through different possible sequence lengths
             for j,(start_action,end_action) in enumerate(action_bins[student]): 
                 if start_action == None: start_action = 0
@@ -234,7 +234,13 @@ level2 = 'failed'
 # Here are each students sequence of actions. For each action in a sequence, we store the time coordinate and duration of that action.
 # Thus students have different number of actions and different duration of activities.
 # While time doesn't matter for sequence mining, it matters when splitting the student activities into time bins of equal legnth of time (per student)
-blocks = {'Alice':"BCBCBC",
+
+
+    # action_seqs = {student_1_id: ['ABCDEF',.....], student_2_id: [...]}    where A,B,C,D,E,F are different actions done sequentially
+    # time_coords = {student_1_id: [(start_of_action_1, duration_of_action_1), (start_of_action_2, duration_of_action_2),...], student_2_id: [...]}    
+
+
+action_seqs = {'Alice':"BCBCBC",
           'Bob':"ABCA",
           'Charles':"ABCCBC",
           'Danielle':"CCBCBC"}
@@ -250,6 +256,7 @@ longest_seq_length = 5
 
 # for mining sequences in large groups, we want to make sure we find interesting sequences that have been done by a minimum number of people.
 # Thus we use a cut off of 0.3-0.5 to only analyze sequences done by at least 30-50% of students within a group.
+# Thus the groups can have slightly different sizes though.
 # For our example we have few students so we set the cut off to 0.
 cut_off = 0
 
@@ -258,19 +265,19 @@ cut_off = 0
 # Note that a sequence is considered within a time bin if it's first action (but not necessarily it's last) is in the time bin
 # Thus the last time bin will tend to contain only short sequences and less sequences.
 
-freqs = get_frequencies_by_bin(blocks,time_coords, 2, shortest=shortest_seq_length, longest=longest_seq_length)
+freqs = get_frequencies_by_bin(action_seqs,time_coords, 2, shortest=shortest_seq_length, longest=longest_seq_length)
 for student,freq in freqs.iteritems():
     print student
     for time_bin, seq_freqs in enumerate(freq):
         print time_bin, seq_freqs
 
 # The code below finds, for each sequence, the number of students in each group that used that sequence at least once in that time bin
-# For instance, for the sequence 'BCB': array([[ .2,  1.],[ 1.,  0.]]), it was used by 2 of the students in the "passed" group in the first half of their activity.
-seq_use = get_sequence_use_by_timebin(blocks, time_coords, students_by_attribute, num_bins, attribute,
+# For instance, for the sequence 'BCB': array([[ .2,  1.],[ 1.,  0.]]), it was used at least once by 2 of the students in the "passed" group in the first half of their activity.
+seq_use = get_sequence_use_by_timebin(action_seqs, time_coords, students_by_attribute, num_bins, attribute,
             level1, level2, shortest_seq_length, longest_seq_length, cut_off)
 
 ## Now we can calculate the information gain of this sequence over groups in time. In other words, high information gain sequences
-# are used differently over time by groups while low information gain sequences are used almost randomly by groups over time.
+# are used differently over time by groups while low information gain sequences are used closer to randomly by groups over time.
 print rank_sequences(seq_use,num_bins)
 
 
